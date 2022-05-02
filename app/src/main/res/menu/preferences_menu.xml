@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+        <item
+            android:id="@+id/action_admin"
+            android:title="Administrar"
+            app:showAsAction="never"
+
+            />
+        <item
+            android:id="@+id/action_superAdmin"
+            android:title="Super Administrar"
+            app:showAsAction="never"
+            />
+
+
+
+
+
+
+</menu>

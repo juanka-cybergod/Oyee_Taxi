@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:id="@+id/user_registration2"
+    tools:context=".ui.userRegistration.activity.UserRegistrationActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:lines="1"
+        android:text="Número de Teléfono"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/llPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_app_title">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconCheckable="true"
+            app:endIconDrawable="@drawable/ic_cancel_24"
+            app:endIconMode="custom"
+            app:helperText="Por favor ingrese su Número de Móvil (8 Dígitos)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+53 "
+                android:inputType="number"
+                android:maxLength="8"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/sendCodeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_gender_tab_selector"
+            android:button="@null"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="Solicitar código"
+            android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/clImageView"
+        android:layout_width="0dp"
+        android:layout_height="239dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_code_verification" />
+
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:id="@+id/llCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llPhone">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvCode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconCheckable="true"
+            app:endIconDrawable="@drawable/ic_paste"
+            app:endIconMode="custom"
+            app:helperText="Recibirá un mensaje con el código (6 Dígitos)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_sms"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Código de Verificación "
+                android:inputType="number"
+                android:maxLength="6"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+    <Button
+        android:enabled="true"
+        android:id="@+id/continueButton"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_margin="32dp"
+        android:text="Continuar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

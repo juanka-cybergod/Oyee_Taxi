@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_control_panel_navegation"
+    app:startDestination="@id/userControlPanelFragmentMain">
+
+
+    <fragment
+        android:id="@+id/userControlPanelFragmentMain"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.ControlPanelFragmentMain"
+        android:label="user_control_panel_fragment_main"
+        tools:layout="@layout/user_control_panel_fragment_main" >
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_provincesFragment3"
+            app:destination="@id/provincesFragment3" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_userControlPanelFragmentEditProfile"
+            app:destination="@id/userControlPanelFragmentEditProfile" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_userControlPanelFragmentEditSecurity"
+            app:destination="@id/userControlPanelFragmentEditSecurity" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_userControlPanelFragmentEditVerification"
+            app:destination="@id/userControlPanelFragmentEditVerification" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_self"
+            app:destination="@id/userControlPanelFragmentMain" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_vehicleControlPanelFragmentEdit"
+            app:destination="@id/vehicleControlPanelFragmentEdit" />
+        <action
+            android:id="@+id/action_userControlPanelFragmentMain_to_vehicleListControlPanelFragment"
+            app:destination="@id/vehicleListControlPanelFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/provincesFragment3"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.ProvincesFragment"
+        android:label="fragment_provinces"
+        tools:layout="@layout/fragment_provinces" />
+    <dialog
+        android:id="@+id/userControlPanelFragmentEditProfile"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.user.UserControlPanelFragmentEditProfile"
+        android:label="UserControlPanelFragmentEditProfile"
+        tools:layout="@layout/user_control_panel_fragment_edit_profile"
+        />
+
+    <dialog
+        android:id="@+id/userControlPanelFragmentEditSecurity"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.user.UserControlPanelFragmentEditSecurity"
+        android:label="UserControlPanelFragmentEditSecurity"
+        tools:layout="@layout/user_control_panel_fragment_edit_security"
+        />
+    <dialog
+        android:id="@+id/userControlPanelFragmentEditVerification"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.user.UserControlPanelFragmentEditVerification"
+        android:label="UserControlPanelFragmentEditVerification"
+        tools:layout="@layout/user_control_panel_fragment_edit_verification"
+        />
+    <dialog
+        android:id="@+id/vehicleControlPanelFragmentEdit"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentEdit"
+        android:label="vehicle_control_panel_fragment_edit"
+        tools:layout="@layout/vehicle_control_panel_fragment_edit" />
+    <fragment
+        android:id="@+id/vehicleListControlPanelFragment"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentList"
+        android:label="vehicle_list_control_panel"
+        tools:layout="@layout/vehicle_control_panel_fragment_list" >
+        <action
+            android:id="@+id/action_vehicleListControlPanelFragment_to_vehicleControlPanelFragmentEdit"
+            app:destination="@id/vehicleControlPanelFragmentEdit" />
+        <action
+            android:id="@+id/action_vehicleListControlPanelFragment_to_vehicleControlPanelFragmentEditVerification"
+            app:destination="@id/vehicleControlPanelFragmentEditVerification" />
+
+    </fragment>
+    <dialog
+        android:id="@+id/vehicleControlPanelFragmentEditVerification"
+        android:name="com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentEditVerification"
+        android:label="VehicleControlPanelFragmentEditVerification"
+        tools:layout="@layout/vehicle_control_panel_fragment_edit_verification"
+        >
+    </dialog>
+
+
+</navigation>

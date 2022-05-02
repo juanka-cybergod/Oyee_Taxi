@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "88392996929",
+    "project_id": "oyeetaxi",
+    "storage_bucket": "oyeetaxi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88392996929:android:e1f983ebae928ce46a4ec0",
+        "android_client_info": {
+          "package_name": "com.cybergod.oyeetaxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88392996929-c3pro57t35g015q9llhfd55naiga63nr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cybergod.oyeetaxi",
+            "certificate_hash": "6829bde70a04871b229add63370cd3ec24ec8b83"
+          }
+        },
+        {
+          "client_id": "88392996929-b61cgrlugmthm1m4ofgg4cqg6p7ot0vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-RR9g5RXCj7a5vH_D5jrjiaArp_yZcW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88392996929-b61cgrlugmthm1m4ofgg4cqg6p7ot0vc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preferences_navegation"
+    app:startDestination="@id/preferencesFragment">
+
+
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.PreferencesFragment"
+        android:label="PreferencesFragment"
+        tools:layout="@layout/fragment_preferences_main"
+        />
+    <fragment
+        android:id="@+id/administrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.AdministrationFragment"
+        android:label="AdministrationFragment"
+        tools:layout="@layout/fragment_administration"
+
+        />
+    <action android:id="@+id/action_go_to_administrationFragment"
+        app:destination="@id/administrationFragment"/>
+
+</navigation>

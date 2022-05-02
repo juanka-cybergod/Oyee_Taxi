@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    tools:context=".ui.main.activity.MainActivity"
+    android:theme="@style/Theme.OyeeTaxi"
+    android:background="@color/colorCrema"
+    android:padding="2dp"
+    >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llTipoVehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="10dp"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTipoVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Tipo Vehiculo"
+            android:textAlignment="textStart"
+            android:textSize="18sp"
+
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescripcionTipoVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:maxLines="3"
+            android:textAlignment="textStart"
+            android:textStyle="italic"
+            android:textSize="12sp"
+            android:hint="Este Tipo de Vehiculo es para Transportar pasajeros, tiene una capacidad de x pasajeros etc"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

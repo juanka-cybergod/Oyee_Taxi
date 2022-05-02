@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.cybergod.oyeetaxi.ui.main.fragments.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_provincesFragment"
+            app:destination="@id/provincesFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_vehicleDetailFragment"
+            app:destination="@id/vehicleDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_viajeFragment"
+            app:destination="@id/viajeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.cybergod.oyeetaxi.ui.main.fragments.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.cybergod.oyeetaxi.ui.main.fragments.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <dialog
+        android:id="@+id/provincesFragment"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.ProvincesFragment"
+        android:label="fragment_provinces"
+        tools:layout="@layout/fragment_provinces" />
+    <dialog
+        android:id="@+id/vehicleDetailFragment"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.VehicleDetailFragment"
+        android:label="fragment_vehicle_detail"
+        tools:layout="@layout/fragment_vehicle_detail" >
+        <action
+            android:id="@+id/action_vehicleDetailFragment_self"
+            app:destination="@id/vehicleDetailFragment" />
+        <argument
+            android:name="vehicleId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_vehicleDetailFragment_to_valoracionFragment"
+            app:destination="@id/valoracionFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/viajeFragment"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.ViajeFragment"
+        android:label="fragment_viaje"
+        tools:layout="@layout/fragment_viaje" />
+    <dialog
+        android:id="@+id/valoracionFragment"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.ValoracionFragment"
+        android:label="ValoracionFragment"
+        tools:layout="@layout/fragment_valoracion" />
+
+
+</navigation>

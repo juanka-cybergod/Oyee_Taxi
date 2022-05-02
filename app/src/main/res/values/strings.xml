@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Oyee Taxi</string>
+    <string name="apklog">OyeeTaxiLog</string>
+
+    <string name="please_click_back_again_to_exit">Presione otra vez para Salir</string>
+    <string name="title_activity_main">Oyee Taxi!</string>
+    <string name="title_home">Mapa</string>
+    <string name="title_dashboard">Viajes</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_permissions">Permissions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alow_and_continue">Permitir y Continuar</string>
+    <string name="localization_permission_description">Bienvenido a Oyee Taxi. Para conseguir que la aplicación funcione de manera correcta primero necesitamos acceso a la Ubicación. De otra manera no será posible continuar y brindarle nuestros servicios. Gracias por Preferirnos</string>
+    <string name="storage_permission_description">Además Oyee Taxi necesita acceder al almacenamiento del telefono para guardar los datos de la aplicación. Es indispensable que acceda para continuar. Gracias y a disfrutar</string>
+    <string name="permission_required">Permiso Requerido</string>
+    <string name="notificationServiceTitle">Recogidas más rápidas y viajes mas seguros</string>
+    <string name="notificationServiceText">"Mientras usas Oyee Taxi tu ubicación se obtiene de manera cifrada para que los viajes sean precisos y seguros"</string>
+    <string name="no_vehicles_aviables_for_now">No existen vehículos disponibles por el momento</string>
+    <string name="registro_message_start_screen">Bienvenido a Oyee Taxi. Tu aplicación preferida para viajar por Cuba, a continuación te guiaremos en el proceso de registro. Comencemos !</string>
+    <string name="cliente_type_message">Como pasajero podrá viajar rápidamente asi como agendar sus viajes con nuestros conductores, los honorarios del servicio recibido será acordado entre las dos partes en la propia aplicación. También si lo desea más adelante podrá aplicar para ser Conductor, unicamente completando las formalidades.</string>
+    <string name="conductor_type_message">Como conductor el uso de la aplicación es gratuita por un período de tiempo, luego de generar veneficios comenzarán los pagos de las mensualidades para mejorar el sistema y su mantenimiento, los honorarios por el servicio prestado a los clientes serán acordados entre las dos partes y además podrá recibir todos los servicios como pasajero.</string>
+    <string name="personal_information">Información personal</string>
+    <string name="remember_credentials">Recordar mis credenciales</string>
+    <string name="continue_">CONTINUAR</string>
+    <string name="finalizar_">FINALIZAR REGISTO</string>
+    <string name="apply">APLICAR</string>
+    <string name="send_viaje">SOLICITAR VIAJE</string>
+    <string name="cancel">CANCELAR</string>
+    <string name="fail_server_conection">Falló la conexión con el Servidor</string>
+    <string name="fail_internet_conection">Verifique su conexión a Internet</string>
+    <string name="number_validation_is_disable">La Validacion de números está deshabilitada por el momento</string>
+    <string name="fail_server_comunication">Falló la comunicación con el Servidor :(</string>
+    <string name="server_fail_to_sent_email">El servidor no pudo enviarle el código de verificación a su dirección de correo, por favor intentelo mas adelante. Si el problema persiste contacte con soporte. Gracias por usar nuestros servicios</string>
+    <string name="incorrect_password">Contraseña incorrecta</string>
+    <string name="user_not_found">Usuario no encontrado</string>
+    <string name="user_temporary_disabled">Usuario deshabilitado temporalmente</string>
+    <string name="user_disabled">Usuario Deshabilitado</string>
+    <string name="reason">Motivo </string>
+    <string name="message">Mensaje </string>
+    <string name="updating_user">Actualizando Usuario ...</string>
+    <string name="updating_vehicle">Actualizando Vehiculo ...</string>
+    <string name="image_sussefuctly_selected">Imágen seleccionada satisfactoriamente</string>
+    <string name="please_come_back_and_select_vahicle_type">Por favor regrese y seleccione el tipo de vehículo</string>
+    <string name="vehicle_sussefuctly_registered">Vehiculo registrado satisfactoriamente</string>
+    <string name="finishing_vahicle_registration">Finalizando Registro del Vehiculo ...</string>
+    <string name="vehiculo_actualizado_satisfactoriamente">Vehiculo Actualizado Satisfactoriamente</string>
+    <string name="error_al_actualizar_vehiculo">Error al Intentar Actualizar el Vehiculo</string>
+    <string name="boton_vehiculo_activo_true">Vehículo\nActivo</string>
+    <string name="boton_vehiculo_activo_false">Vehículo\nInactivo</string>
+    <string name="user_sussefuctly_updated">Usuario Actualizado Satisfactoriamente</string>
+    <string name="user_update_fail">Error al Intentar Actualizar el Usuario</string>
+    <string name="agendar_mi_viaje"> Agendar mi viaje </string>
+    <string name="agendado"> </string>
+    <string name="forget_my_password">Olvidé mi contraseña</string>
+    <string name="verification_code_sent">El código de verificación fué enviado satisfactoriamente a su dirección de correo personal registrada en Oyee Taxi. Para restablecer su contraseña revise la bandeja de entrada y siga las instrucciones</string>
+
+
+    <string name="downloading">Descargando...</string>
+    <string name="title_file_download">APK is downloading</string>
+    <string name="storage_access_required">Acceso al almacenamiento requerido para comenzar la descarga de la actualización</string>
+    <string name="storage_permission_denied">El acceso al almacenamiento fué denegado</string>
+    <string name="ok">OK</string>
+    <string name="downloading_update">Descargando actualización ...</string>
+    <string name="finishing">Finalizando ...</string>
+    <string name="update_done">Descarga completada</string>
+    <string name="error_try_again">Falló la descarga. Intentelo nuevamente</string>
+    <string name="verify_number">Verificando su número ...</string>
+    <string name="user_already_exist">Ya existe un usuario con ese número de teléfono</string>
+    <string name="found_no_vehicles">Usted aún no tiene vehículos</string>
+    <string name="vehicle_register_fail">Ha ocurrido un error al intentar registrar el vehículo</string>
+    <string name="user_register_fail">Ha ocurrido un error al intentar registrar el usuario</string>
+    <string name="no_vehicles_type_available">No hay Tipos de Vehículos Disponibles en este Momento</string>
+    <string name="no_provinces_availables">No hay Provincias Disponibles en este Momento</string>
+    <string name="user_registered_secces">Usuario registrado satisfactoriamente</string>
+
+
+
+    <!--    NORMAL,HYBRID,TERRAIN,SATELLITE,NONE,RETRO,SILVER,NIGHT-->
+    <string-array name="map_styles_items">
+        <item>Oye Taxi</item>
+        <item>Normal</item>
+        <item>Obscuro</item>
+        <item>Retro</item>
+        <item>Satélite</item>
+        <item>Terreno</item>
+        <item>Híbrido</item>
+    </string-array>
+
+
+</resources>

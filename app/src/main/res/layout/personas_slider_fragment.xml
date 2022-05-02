@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:theme="@style/Theme.OyeeTaxi"
+    android:padding="0dp"
+    android:paddingBottom="16dp"
+    >
+
+    <TextView
+        android:layout_marginTop="2dp"
+        android:id="@+id/tvCantidadPasajeros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="Pasajeros"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ramotion.fluidslider.FluidSlider
+        android:id="@+id/fluidSliderPasajeros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_color="@color/yellow_primary"
+        app:bar_text_color="@color/colorPrimary"
+        app:bubble_color="@color/white"
+        app:bubble_text_color="@color/colorPrimary"
+        app:duration="400"
+        app:end_text=""
+        app:initial_position="0.01"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:size="normal"
+        app:start_text="" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

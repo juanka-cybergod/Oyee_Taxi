@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+
+>
+
+
+    <LinearLayout
+        android:background="@color/colorSnackBarSuccess"
+        android:visibility="visible"
+        android:id="@+id/llHomeError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:text="No hay vehículos disponibles por el momento"
+                android:id="@+id/tvHomeErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:padding="7dp"
+
+                >
+
+
+            </TextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llHomeError"
+        >
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llHomeError"
+            tools:context=".ui.MainActivity" />
+
+    </FrameLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llHomeError"
+        android:background="@drawable/drawable_round_corner_background"
+        android:layout_margin="12dp"
+        android:padding="3dp"
+
+        >
+<!--        android:elevation="5dp"-->
+<!--        android:outlineProvider="bounds"-->
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imagePerfil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="3dp"
+            >
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                android:id="@+id/material_search_bar"
+                style="@style/MaterialSearchBarLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:mt_hint="A dónde quieres ir"
+                app:mt_placeholderColor="@color/casiBlanco"
+                app:mt_placeholder="Oyee Taxi !!"
+                app:mt_maxSuggestionsCount="5"
+                app:mt_navIconEnabled="true"
+                app:mt_navIconTint="@color/yellow_primary"
+                app:mt_searchIconUseTint="true"
+                app:mt_searchIconTint="@color/yellow_primary"
+                app:mt_speechMode="false"
+
+
+                />
+
+        </LinearLayout>
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imagePerfil"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="2dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_user"
+            app:civ_border_color="@color/yellow_primary"
+            app:civ_border_width="1dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="@color/yellow_primary"
+            app:civ_shadow_radius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_user" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

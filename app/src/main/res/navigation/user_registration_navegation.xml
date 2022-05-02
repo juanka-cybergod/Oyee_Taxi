@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_registration_navegation"
+    app:startDestination="@id/userRegistrationFragment1">
+
+    <fragment
+        android:id="@+id/userRegistrationFragment1"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment1"
+        android:label="user_registration_fragment_1"
+        tools:layout="@layout/user_registration_fragment_1" >
+
+
+        <action
+            android:id="@+id/action_userRegistrationFragment1_to_userRegistrationFragment2byFirebase"
+            app:destination="@id/userRegistrationFragment2byFirebase"
+            app:popUpTo="@id/userRegistrationFragment1"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_userRegistrationFragment1_to_userRegistrationFragment2byTwilio"
+            app:destination="@id/userRegistrationFragment2byTwilio"
+            app:popUpTo="@id/userRegistrationFragment1"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/userRegistrationFragment2byFirebase"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment2byFirebase"
+        android:label="user_registration_fragment_2"
+        tools:layout="@layout/user_registration_fragment_2" >
+
+        <action
+            android:id="@+id/action_userRegistrationFragment2_to_userRegistrationFragment3"
+            app:destination="@id/userRegistrationFragment3"
+            app:popUpTo="@id/userRegistrationFragment2byFirebase"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/userRegistrationFragment2byTwilio"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment2byTwilio"
+        android:label="user_registration_fragment_2_by_Twilio"
+        tools:layout="@layout/user_registration_fragment_2" >
+
+        <action
+            android:id="@+id/action_userRegistrationFragment2byTwilio_to_userRegistrationFragment3"
+            app:destination="@id/userRegistrationFragment3"
+            app:popUpTo="@id/userRegistrationFragment2byTwilio"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/userRegistrationFragment3"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment3"
+        android:label="user_registration_fragment_3"
+        tools:layout="@layout/user_registration_fragment_3" >
+
+
+        <action
+            android:id="@+id/action_userRegistrationFragment3_to_userRegistrationFragment4"
+            app:destination="@id/userRegistrationFragment4" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/userRegistrationFragment4"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment4"
+        android:label="user_registration_fragment_4"
+        tools:layout="@layout/user_registration_fragment_4" >
+
+        <action
+            android:id="@+id/action_userRegistrationFragment4_to_provincesFragment2"
+            app:destination="@id/provincesFragment2" />
+        <action
+            android:id="@+id/action_userRegistrationFragment4_to_userRegistrationFragment5"
+            app:destination="@id/userRegistrationFragment5" />
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/provincesFragment2"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.ProvincesFragment"
+        android:label="fragment_provinces"
+        tools:layout="@layout/fragment_provinces" />
+
+    <fragment
+        android:id="@+id/userRegistrationFragment5"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment5"
+        android:label="user_registration_fragment_5"
+        tools:layout="@layout/user_registration_fragment_5" >
+        <action
+            android:id="@+id/action_userRegistrationFragment5_to_userRegistrationFragment6"
+            app:destination="@id/userRegistrationFragment6" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRegistrationFragment6"
+        android:name="com.cybergod.oyeetaxi.ui.userRegistration.fragments.UserRegistrationFragment6"
+        android:label="user_registration_fragment_6"
+        tools:layout="@layout/user_registration_fragment_6" />
+
+
+</navigation>

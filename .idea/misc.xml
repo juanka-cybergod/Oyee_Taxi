@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android-Plataforms/SDK/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable-v24/drawable_gender_tab_selector.xml" value="0.22" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable-v24/drawable_gender_tab_text_color_selector.xml" value="0.3345" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable-v24/drawable_round_corner_background.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.138" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_air.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_baseline_car_crash_24.xml" value="0.25" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_baseline_edit_location_24.xml" value="0.201" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_baseline_update_24.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_call.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_camion_32.xml" value="0.242" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_car_edit_32.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_circulacion.xml" value="0.205" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_close.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_equipage.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_equipaje.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_ida.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_ida_y_regreso.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_image_select.xml" value="0.201" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_location.xml" value="0.2525" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_motor_24.xml" value="0.242" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_paste.xml" value="0.3345" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_person_32.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_refresh.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_sms.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi_32.xml" value="0.242" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_verified.xml" value="0.226" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_login.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_maps.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_permissions.xml" value="0.3484375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_preferences.xml" value="0.54375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_recovery_password.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_splash.xml" value="0.24728260869565216" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/custom_info_window.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_bottom_progress.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_progress.xml" value="0.75" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_administration.xml" value="0.39921875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_dashboard.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_maps.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_password_recovery.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permisions.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permission_localization.xml" value="0.5" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permission_storage.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_preferences_main.xml" value="0.45625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_provinces.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_restore_password.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_simple_user_detail.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_update_application.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_valoracion.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicle_detail.xml" value="1.5" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_type.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_viaje.xml" value="0.5532503457814661" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_descripcion_actualizacion.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_imagen_tipo_vehiculo.xml" value="0.75" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_map_style.xml" value="0.3421875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_provincia.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_tipo_vehiculo.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehiculo.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/month_year_picker_dialog.xml" value="0.41796875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/permisions_fragment.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/personas_slider_fragment.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/provincia_item.xml" value="0.2359375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/recycler_provincias_item.xml" value="0.2359375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/tipo_vehiculo_item.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_activity.xml" value="0.67" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_profile.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_security.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_verification.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_main.xml" value="0.75" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_egistration_fragment_1.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_activity.xml" value="0.35185185185185186" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_1.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_2.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_3.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_4.xml" value="0.328335832083958" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_5.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_6.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_control_panel_fragment_edit.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_control_panel_fragment_edit_verification.xml" value="0.3140625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_control_panel_fragment_list.xml" value="0.3140625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_list_control_panel.xml" value="0.30885416666666665" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_registration_activity.xml" value="0.26666666666666666" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_registration_fragment_1.xml" value="0.25" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_registration_fragment_2.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/vehicle_registration_fragment_3.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/year_picker_dialog.xml" value="0.41796875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/bottom_nav_menu.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/map_types_menu.xml" value="0.14" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_map_types.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_provinces.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_service.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_test.xml" value="0.246875" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/preferences_menu.xml" value="0.54375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.206" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.206" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/xml/file_provider_paths.xml" value="0.3625" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/xml/network_security_config.xml" value="0.13722826086956522" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,197 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    //id 'com.google.protobuf' version "0.8.12" //ProtoBuf
+    id 'com.google.gms.google-services' //firebase
+    id 'org.jetbrains.kotlin.plugin.serialization' //Serialization
+
+}
+
+
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.cybergod.oyeetaxi"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+
+
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2' //**
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2' //**
+//    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+//    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-native-mt'
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+
+    // Maps SDK Utility Library
+    implementation 'com.google.maps.android:maps-utils-ktx:3.3.0'
+    // Maps Places
+    implementation 'com.google.android.libraries.places:places:2.6.0'
+//    implementation 'com.google.android.libraries.places:places:2.5.0'
+
+
+    //Fused Location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+
+    //Dagger - Hil
+    implementation 'com.google.dagger:hilt-android:2.40.5'
+    kapt 'com.google.dagger:hilt-compiler:2.40.5'
+
+    // Easy Permissions by https://github.com/vmadalin/easypermissions-ktx
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
+    // Google Easy by Permissions https://github.com/googlesamples/easypermissions
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
+    //Lottie Animation Dependencia para Animaciones https://github.com/airbnb/lottie-android
+    implementation 'com.airbnb.android:lottie:4.2.2'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    //implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    //Paging
+    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    //CircularImageView
+    implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
+    //SMS OTP Automatic Code  Read Google Api
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Firebase Authentication library
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //SplashScreen api
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02' //**
+    //implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
+    //Datastore Preferences
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+
+    //Proto Datastore
+    implementation 'androidx.datastore:datastore-core:1.0.0'
+//    implementation 'com.google.protobuf:protobuf-javalite:3.14.0'
+//    implementation 'org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2'
+
+
+
+    //Material SearchBar Android
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
+    //implementation 'com.github.vanpra:materialbar:0.0.2'
+
+    //Fluid Slider Bar Android https://github.com/Ramotion/fluid-slider-android
+    implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
+
+    //AndroidAppUpdateLibrary https://github.com/Piashsarker/AndroidAppUpdateLibrary
+    implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.4'
+
+    //Google Directions Library https://github.com/jd-alexander/Google-Directions-Android
+    /* TODO Otras URL Utiles
+    https://www.wingsquare.com/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android/
+    https://stackoverflow.com/questions/22535264/how-to-draw-route-directions-from-a-marker-to-another-one-googlemaps-v2-androi
+    https://stackoverflow.com/questions/16262837/how-to-draw-route-in-google-maps-api-v2-from-my-location
+    https://stackoverflow.com/questions/48724677/draw-route-between-two-address
+    https://stackoverflow.com/questions/40562312/android-google-maps-draw-a-path-between-two-points/40563930#40563930
+    https://stackoverflow.com/questions/14444228/android-how-to-draw-route-directions-google-maps-api-v2-from-current-location-t/17007360#17007360
+    https://stackoverflow.com/questions/47492459/how-do-i-draw-a-route-along-an-existing-road-between-two-points
+    https://www.geeksforgeeks.org/how-to-generate-route-between-two-locations-in-google-map-in-android/
+
+     */
+    //implementation 'com.github.jd-alexander:library:1.1.0'
+
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.10.0"
+//    }
+//
+//    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+//    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+//    // for more information.
+//    generateProtoTasks {
+//        all().each { task ->
+//            task.builtins {
+//                java {
+//                    option 'lite'
+//                }
+//            }
+//        }
+//    }
+//}
+//
+

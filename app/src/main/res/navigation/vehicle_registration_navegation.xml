@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vehicle_registration_navegation"
+    app:startDestination="@id/vehicleRegistrationFragment1">
+
+    <fragment
+        android:id="@+id/vehicleRegistrationFragment1"
+        android:name="com.cybergod.oyeetaxi.ui.vehicleRegistration.fragments.VehicleRegistrationFragment1"
+        android:label="vehicle_registration_fragment_1"
+        tools:layout="@layout/vehicle_registration_fragment_1" >
+        <action
+            android:id="@+id/action_vehicleRegistrationFragment1_to_vehicleTypeFragment"
+            app:destination="@id/vehicleTypeFragment" />
+        <action
+            android:id="@+id/action_vehicleRegistrationFragment1_to_vehicleRegistrationFragment2"
+            app:destination="@id/vehicleRegistrationFragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/vehicleTypeFragment"
+        android:name="com.cybergod.oyeetaxi.ui.dilogs.fragments.VehicleTypeFragment"
+        android:label="fragment_vehicles_type"
+        tools:layout="@layout/fragment_vehicles_type" />
+    <fragment
+        android:id="@+id/vehicleRegistrationFragment2"
+        android:name="com.cybergod.oyeetaxi.ui.vehicleRegistration.fragments.VehicleRegistrationFragment2"
+        android:label="vehicle_registration_fragment_2"
+        tools:layout="@layout/vehicle_registration_fragment_2" >
+        <action
+            android:id="@+id/action_vehicleRegistrationFragment2_to_vehicleRegistrationFragment3"
+            app:destination="@id/vehicleRegistrationFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleRegistrationFragment3"
+        android:name="com.cybergod.oyeetaxi.ui.vehicleRegistration.fragments.VehicleRegistrationFragment3"
+        android:label="vehicle_registration_fragment_3"
+        tools:layout="@layout/vehicle_registration_fragment_3" />
+
+
+</navigation>

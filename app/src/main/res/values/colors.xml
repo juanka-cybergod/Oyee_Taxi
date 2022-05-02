@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="yellow_light">#ffd54f</color>
+    <color name="yellow_primary">#ffca28</color>
+    <color name="yellow_secondary">#ffca28</color>
+<!--    c79a00-->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="casiBlanco">#F0EEEE</color>
+    <color name="casiRojo">#EF9A9A</color>
+    <color name="casiAmarillo">#F6DE91</color>
+
+    <color name="transparente">#001B1A1A</color>
+    <color name="gris">#1B1A1A</color>
+    <color name="colorCrema">#6C6B6B</color>
+    <color name="red">#F44336</color>
+    <color name="blue">#3F51B5</color>
+
+    <color name="colorSnackBarSuccess">#8BC34A</color>
+    <color name="colorSnackBarError">#F72400</color>
+    <color name="rojoObscuro">#A51A03</color>
+    <color name="water_color">#F6D97D</color>
+
+<!--    "color": "#c9c9c9"-->
+<!--    "color": "#9e9e9e"-->
+
+
+</resources>

@@ -3,7 +3,6 @@ package com.cybergod.oyeetaxi.ui.preferences.activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -31,16 +30,9 @@ class PreferencesActivity : BaseActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-
-
         setContentView(binding.root)
 
-
-
-
     }
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,12 +49,8 @@ class PreferencesActivity : BaseActivity() {
 
                 if (!isCurrentFragment(R.id.administrationFragment)) {
                     navController.navigate(R.id.action_go_to_administrationFragment)
-                }// else Toast.makeText(this,"es el mismo fragment",Toast.LENGTH_SHORT).show()
+                }
 
-
-
-
-                //navController.navigate(R.id.action_Localization_Fragment_to_Storage_Fragment2)
                 true
             }
             R.id.action_superAdmin -> {
@@ -78,7 +66,6 @@ class PreferencesActivity : BaseActivity() {
 
 
     private fun isCurrentFragment(destinationFragment:Int):Boolean {
-        //R.id.preferencesFragment
         val fragment = supportFragmentManager.findFragmentById(R.id.navPreferencesFragment)
         return NavHostFragment.findNavController(fragment!!).currentDestination?.id == destinationFragment
     }

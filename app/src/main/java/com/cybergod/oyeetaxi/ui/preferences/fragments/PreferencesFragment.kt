@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentPreferencesMainBinding
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
@@ -28,7 +29,8 @@ import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionString
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -79,7 +81,6 @@ class PreferencesFragment : BaseFragment() {
 
         setupMapStyleObserver()
 
-        updateConfigurationObserver()
 
     }
 
@@ -98,41 +99,50 @@ class PreferencesFragment : BaseFragment() {
         })
     }
 
-    private fun updateConfigurationObserver(){
 
-        splashViewModel.updateConfiguration.observe(viewLifecycleOwner, Observer { updateConfiguration ->
+
+    private fun getAvailableUpdates() {
+        lifecycleScope.launch (Dispatchers.Main){
+
+            val updateConfiguration = splashViewModel.getAvailableUpdate()
+
             if (updateConfiguration != null ){
                 if (updateConfiguration.available == true) {
 
                     if (getAppVersionInt() < updateConfiguration.version?:1){
 
-                        launchUpdateApplicationFragment()
+
+                            launchUpdateApplicationFragment()
+
 
                     } else {
-                        Toast.makeText(requireContext(),"Su aplicación está actualizada",Toast.LENGTH_SHORT).show()
+                        //noUpdateAndContinue()
+                        Toast.makeText(requireContext(),"Su aplicación está actualizada", Toast.LENGTH_SHORT).show()
                     }
 
 
 
                 } else {
+                    //noUpdateAndContinue()
                     Toast.makeText(requireContext(),"Actualizaciones desactivadas temporalmente",Toast.LENGTH_SHORT).show()
+
                 }
 
             }  else {
-                Toast.makeText(requireContext(),"Falló la conexion con el Servidor para obtener actualizacions",Toast.LENGTH_SHORT).show()
+                //noUpdateAndContinue()
+                Toast.makeText(requireContext(),"Falló la conexion con el Servidor para obtener actualizacions", Toast.LENGTH_SHORT).show()
             }
 
-        })
 
 
-
+        }
     }
 
 
     private fun setupOnClickListener() {
 
         binding.btnComprobarActualizacions.setOnClickListener {
-            splashViewModel.getUpdateConfiguration()
+            getAvailableUpdates()
         }
 
 

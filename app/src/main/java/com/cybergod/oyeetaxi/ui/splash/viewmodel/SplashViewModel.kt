@@ -4,6 +4,8 @@ import androidx.lifecycle.*
 import com.cybergod.oyeetaxi.api.model.configuration.UpdateConfiguracion
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
+import com.cybergod.oyeetaxi.utils.UtilsGlobal
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,15 +20,14 @@ class SplashViewModel @Inject constructor(
     ) : ViewModel() {
 
 
-    val userRegistred = dataStorageRepository.readUserRegistred.asLiveData()
+    val userRegistered = dataStorageRepository.readUserRegistred.asLiveData()
     val rememberAppUpdateAfterDate = dataStorageRepository.readRememberAppUpdateAfterDate.asLiveData()
     val readMapStyle = dataStorageRepository.readMapStyle.asLiveData()
 
 
+    var omitActualization:Boolean = false
 
-    var omitirActualizacion:Boolean = false
-
-    val updateConfiguration : MutableLiveData<UpdateConfiguracion> = MutableLiveData()
+    var updateConfiguration : MutableLiveData<UpdateConfiguracion?>  = MutableLiveData()
 
     val continueNow : MutableLiveData<Boolean> = MutableLiveData<Boolean>( null)
 
@@ -42,14 +43,10 @@ class SplashViewModel @Inject constructor(
 //    }
 
 
-    fun getUpdateConfiguration(){
-
-        viewModelScope.launch(Dispatchers.IO) {
-            updateConfiguration.postValue(
-                configurationRepository.getUpdateConfiguration()
-            )
-        }
-
+    suspend fun getAvailableUpdate():UpdateConfiguracion?{
+        val updateConfig = configurationRepository.getUpdateConfiguration()
+        updateConfiguration.postValue(updateConfig)
+        return updateConfig
     }
 
 

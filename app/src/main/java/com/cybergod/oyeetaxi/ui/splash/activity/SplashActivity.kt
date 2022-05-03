@@ -4,8 +4,10 @@ package com.cybergod.oyeetaxi.ui.splash.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.cybergod.oyeetaxi.databinding.ActivitySplashBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.UpdateApplicationFragment
 import com.cybergod.oyeetaxi.ui.login.activity.LoginActivity
@@ -13,10 +15,13 @@ import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.splash.viewmodel.SplashViewModel
 import com.cybergod.oyeetaxi.ui.userRegistration.activity.UserRegistrationActivity
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
-import com.cybergod.oyeetaxi.utils.UtilsGlobal.isGooglePlayServicesAvailable
+import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isGooglePlayServicesAvailable
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentDate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @SuppressLint("CustomSplashScreen")
@@ -39,8 +44,11 @@ class SplashActivity : BaseActivity() {
         setContentView(binding.root)
 
 
+
+
         if (isGooglePlayServicesAvailable(this) ) {
             setupObservers()
+            getAvailableUpdates()
         } else {
             //finish()
         }
@@ -59,14 +67,14 @@ class SplashActivity : BaseActivity() {
 
         })
 
-        viewModel.userRegistred.observe(this, Observer {
+        viewModel.userRegistered.observe(this, Observer {
         })
 
         viewModel.rememberAppUpdateAfterDate.observe(this, Observer { lastDate ->
             if (!lastDate.isNullOrEmpty()) {
-                viewModel.omitirActualizacion = lastDate == getCurrentDate()
+                viewModel.omitActualization = lastDate == getCurrentDate()
             } else
-                viewModel.omitirActualizacion = false
+                viewModel.omitActualization = false
         })
 
         viewModel.continueNow.observe(this, Observer {
@@ -75,57 +83,54 @@ class SplashActivity : BaseActivity() {
             }
         })
 
-        viewModel.updateConfiguration.observe(this, Observer { updateConfiguration ->
+
+    }
+
+    private fun getAvailableUpdates() {
+
+
+        lifecycleScope.launch (Dispatchers.Main){
+
+            val updateConfiguration = viewModel.getAvailableUpdate()
             if (updateConfiguration != null ){
                 if (updateConfiguration.available == true) {
 
                     if (getAppVersionInt() < updateConfiguration.version?:1){
 
-                        if (updateConfiguration.forceUpdate == false && viewModel.omitirActualizacion) {
-
+                        if (updateConfiguration.forceUpdate == false && viewModel.omitActualization) {
                             noUpdateAndContinue()
-
                         } else {
-
                             launchUpdateApplicationFragment()
-
                         }
 
-
-
-
                     } else {
-                        //Toast.makeText(this,"Aplicación Actualizada",Toast.LENGTH_SHORT).show()
                         noUpdateAndContinue()
+                        //Toast.makeText(requireContext(),"Su aplicación está actualizada", Toast.LENGTH_SHORT).show()
                     }
 
 
 
                 } else {
-                    //Toast.makeText(this,"Actualizaciones Desactivadas Temporalmente",Toast.LENGTH_SHORT).show()
                     noUpdateAndContinue()
+                    //Toast.makeText(requireContext(),"Actualizaciones desactivadas temporalmente",Toast.LENGTH_SHORT).show()
+
                 }
 
             }  else {
-                //Toast.makeText(this,"Falló la conexion con el Servidor para obtener actualizacions",Toast.LENGTH_SHORT).show()
                 noUpdateAndContinue()
+                //Toast.makeText(requireContext(),"Falló la conexion con el Servidor para obtener actualizacions", Toast.LENGTH_SHORT).show()
             }
 
-        })
-
-        viewModel.getUpdateConfiguration()
 
 
+
+        }
     }
-
-
-
-
 
 
     private fun noUpdateAndContinue(){
 
-        val userAlreadyRegitered = viewModel.userRegistred.value
+        val userAlreadyRegitered = viewModel.userRegistered.value
 
         if (userAlreadyRegitered == false) {
             launchUserRegistrationActivity()

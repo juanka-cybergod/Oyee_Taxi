@@ -3,6 +3,7 @@ package com.cybergod.oyeetaxi.ui.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
@@ -608,6 +610,35 @@ object UtilsUI {
 
 
 
+    fun Context.showMessageDialogForResult( funResult: (okSelected:Boolean)  -> Unit   ,title: String?=null, message :String?=null, icon:Int?=null) {
+
+        val alertDialog = AlertDialog.Builder(this).apply {
+            icon?.let {
+                this.setIcon(it)
+            }
+            title?.let {
+                this.setTitle(it)
+            }
+            message?.let {
+                this.setMessage(message)
+            }
+            this.setNegativeButton("Cancelar"){ dialogInterface, _ ->
+                dialogInterface.cancel()
+                funResult(false)
+
+            }
+            this.setPositiveButton("Continuar"){ dialogInterface , a ->
+                dialogInterface.dismiss()
+                funResult(true)
+            }
+
+            }.create()
+
+
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
+    }
 
 
 

@@ -22,10 +22,12 @@ class AdministrationViewModel @Inject constructor(
 
 
     val serverConfiguration : MutableLiveData<Configuracion> = MutableLiveData<Configuracion>()
+    val updatedConfiguracion : MutableLiveData<Configuracion?> = MutableLiveData<Configuracion?>()
 
     fun getServerConfiguration(){
 
         viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             serverConfiguration.postValue(
                 configurationRepository.getConfiguration()
             )
@@ -38,12 +40,15 @@ class AdministrationViewModel @Inject constructor(
 
             delay(1000)
 
-            val updatedConfiguracion =  configurationRepository.updateConfiguration(
+            val config = configurationRepository.updateConfiguration(
                 Configuracion(
                     servidorActivoClientes = active
                 )
             )
-            updatedConfiguracion?.let {
+            updatedConfiguracion.postValue(
+                config
+            )
+            config?.let {
                 serverConfiguration.postValue(it)
             }
 

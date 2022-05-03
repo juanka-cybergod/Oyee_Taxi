@@ -1,7 +1,7 @@
 package com.cybergod.oyeetaxi.api.repository
 
-
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
+import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.api.model.configuration.UpdateConfiguracion
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
@@ -114,7 +114,66 @@ class ConfigurationRepository @Inject constructor(private val retroServiceInterf
 
 
 
+    suspend fun getConfiguration():Configuracion? {
 
+        handleRequest {
+            retroServiceInterface.getConfiguration()
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+
+        return null
+
+
+    }
+
+    suspend fun updateConfiguration(configuracion: Configuracion): Configuracion? {
+
+
+        handleRequest {
+            retroServiceInterface.updateConfiguration(configuracion)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+
+        return null
+
+
+    }
 
 
 }

@@ -9,12 +9,30 @@
     >
 
 
+    <com.airbnb.lottie.LottieAnimationView
+
+        android:id="@+id/animationView"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="infinity-loop.json"
+        app:lottie_loop="true"
+        app:lottie_speed="1.6" />
+
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
-        android:scrollbars="none"
 
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +43,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/llNombre"
+                android:id="@+id/llServerActivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,30 +65,31 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switch1"
+                    android:id="@+id/switchServerActive"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
-                    android:text="Servidor Activo para Clientes"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="@string/server_active_for_clients"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv1"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:padding="4dp"
+
+
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:padding="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:text="@string/disable_server_for_clients_description"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv1"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/iv1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </LinearLayout>

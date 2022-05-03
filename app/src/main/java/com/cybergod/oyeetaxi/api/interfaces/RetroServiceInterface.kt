@@ -99,6 +99,13 @@ interface RetroServiceInterface {
     @GET(URL_BASE_CONFIGURACION + "getUpdateConfiguration")
     suspend fun getUpdateConfiguration(): Response<UpdateConfiguracion>
 
+    @GET(URL_BASE_CONFIGURACION + "getConfiguration")
+    suspend fun getConfiguration(): Response<Configuracion>
+
+    @PUT(URL_BASE_CONFIGURACION + "updateConfiguration")
+    suspend fun updateConfiguration(@Body configuracion :Configuracion): Response<Configuracion>
+
+
     //TODO TWILIO SMS ***************************************************************
     @GET(URL_BASE_SMS + "sendSMSTest")
     suspend fun sendSMSTest(@Query("phoneNumber") userPhone: String): Response<String>

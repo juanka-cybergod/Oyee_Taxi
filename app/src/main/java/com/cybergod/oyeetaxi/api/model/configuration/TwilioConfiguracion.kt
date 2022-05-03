@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TwilioConfiguracion(
-     val account_sid: String? = null,
-     val auth_token: String? = null,
-     val trial_number: String? = null,
-     val remaningCredit: Double? = 0.0,
-     val smsCost: Double? = 0.0,
+     var account_sid: String? = null,
+     var auth_token: String? = null,
+     var trial_number: String? = null,
+     var remaningCredit: Double? = null,//0.0
+     var smsCost: Double? = null,//0.0
     ): Parcelable

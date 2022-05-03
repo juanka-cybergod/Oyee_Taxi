@@ -74,6 +74,9 @@
     <string name="no_provinces_availables">No hay Provincias Disponibles en este Momento</string>
     <string name="user_registered_secces">Usuario registrado satisfactoriamente</string>
     <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión.Deberá usar esta opción con propósitos administrativos muy específicos</string>
+    <string name="server_active_for_clients">Servidor activo para clientes</string>
+    <string name="star_sesion">Iniciando sesión ...</string>
+    <string name="updatin_server_configuration">Guardando configuración en servidor ...</string>
 
 
     <!--    NORMAL,HYBRID,TERRAIN,SATELLITE,NONE,RETRO,SILVER,NIGHT-->

@@ -32,17 +32,6 @@ class SplashViewModel @Inject constructor(
     val continueNow : MutableLiveData<Boolean> = MutableLiveData<Boolean>( null)
 
 
-//    fun getUpdateConfiguration(){
-//
-//        viewModelScope.launch(Dispatchers.IO) {
-//            updateConfiguration.postValue(
-//                configurationRepository.getUpdateConfiguration()
-//            )
-//        }
-//
-//    }
-
-
     suspend fun getAvailableUpdate():UpdateConfiguracion?{
         val updateConfig = configurationRepository.getUpdateConfiguration()
         updateConfiguration.postValue(updateConfig)

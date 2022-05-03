@@ -38,6 +38,8 @@ object Constants {
     const val URL_BASE_SMS="sms/"
     const val URL_BASE_VALORACION="valoraciones/"
 
+    const val DEFAULT_CONFIG = "default"
+
 
     //TODO RESPONSE_CODES
     const val RESPONSE_CODE_CREATED = 201

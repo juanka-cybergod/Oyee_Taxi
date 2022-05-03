@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class UpdateConfiguracion(
 
 
-    val available: Boolean? = true,
+    val available: Boolean? = null,
     val version: Int? = null,
     val versionString: String? = null,
     val fileSize: String? = null,

@@ -213,13 +213,13 @@ class LoginActivity : BaseActivity() {
 
     private fun login() {
 
-        showProgressDialog("Iniciando sesión ...")
+        showProgressDialog(getString(R.string.star_sesion))
 
 
 
          lifecycleScope.launch {
 
-            delay(1500)
+            delay(1000)
              viewModel.login(mUsuario,mPassword)
 
         }

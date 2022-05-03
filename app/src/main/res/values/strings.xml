@@ -73,7 +73,7 @@
     <string name="no_vehicles_type_available">No hay Tipos de Vehículos Disponibles en este Momento</string>
     <string name="no_provinces_availables">No hay Provincias Disponibles en este Momento</string>
     <string name="user_registered_secces">Usuario registrado satisfactoriamente</string>
-
+    <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión.Deberá usar esta opción con propósitos administrativos muy específicos</string>
 
 
     <!--    NORMAL,HYBRID,TERRAIN,SATELLITE,NONE,RETRO,SILVER,NIGHT-->

@@ -16,8 +16,6 @@ data class Configuracion(
     val servidorActivoClientes: Boolean? = true,
     @SerializedName("servidorActivoAdministradores")
     val servidorActivoAdministradores: Boolean? = true,
-    @SerializedName("versionMinimaAppCliente")
-    val versionMinimaAppCliente:Int? = 0,
     @SerializedName("twilioConfiguracion")
     val twilioConfiguracion: TwilioConfiguracion?= null,
     @SerializedName("smsProvider")

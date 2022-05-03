@@ -51,6 +51,9 @@ data class Usuario(
     val usuarioVerificacion: UsuarioVerificacion? = null,
     @SerializedName("valoracion")
     val valoracion: Float? = null,
+    @SerializedName("mensaje")
+    val mensaje: String? = null,
+
     ):Parcelable
 
 

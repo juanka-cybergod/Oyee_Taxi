@@ -36,7 +36,7 @@ class ProtoDataStorageRepository @Inject constructor(
             loginRespuestaProtoDataStore.copy(
                 usuarioEncontrado = loginRespuesta.usuarioEncontrado ?: false,
                 contrasenaCorrecta = loginRespuesta.contrasenaCorrecta ?: false,
-                mensajeBienvenida  = loginRespuesta.mensajeBienvenida ?: "",
+                mensaje  = loginRespuesta.mensaje ?: "",
                 usuario = loginRespuesta.usuario ?: Usuario(),
                 vehiculoActivo = loginRespuesta.vehiculoActivo ?: VehiculoResponse(),
             )

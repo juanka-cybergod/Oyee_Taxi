@@ -36,7 +36,7 @@
     <string name="user_not_found">Usuario no encontrado</string>
     <string name="user_temporary_disabled">Usuario deshabilitado temporalmente</string>
     <string name="user_disabled">Usuario Deshabilitado</string>
-    <string name="reason">Motivo </string>
+    <string name="reason">Motivo :</string>
     <string name="message">Mensaje </string>
     <string name="updating_user">Actualizando Usuario ...</string>
     <string name="updating_vehicle">Actualizando Vehiculo ...</string>

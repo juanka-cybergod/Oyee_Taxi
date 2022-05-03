@@ -95,33 +95,44 @@ class LoginActivity : BaseActivity() {
 
             hideProgressDialog()
 
+
+
             if (loginRespusta != null) {
 
                 if (loginRespusta.usuarioEncontrado != false) {
                     if (loginRespusta.contrasenaCorrecta != false) {
-                        if (loginRespusta.usuario?.habilitado!= false) {
+                        if (loginRespusta.servidorActivo != false) {
+                            if (loginRespusta.usuario?.habilitado!= false) {
+                                if (!loginRespusta.mensaje.isNullOrEmpty()) {
+                                    showMensajeBienvenida(getString(R.string.message),loginRespusta.mensaje)
+                                } else {
+                                    iniciarSesion()
+                                }
 
-                            if (!loginRespusta.mensajeBienvenida.isNullOrEmpty()) {
-                                showMensajeBienvenida(getString(R.string.message),loginRespusta.mensajeBienvenida)
                             } else {
-                                iniciarSesion()
+
+                                if (!loginRespusta.usuario.mensaje.isNullOrEmpty()) {
+                                    simpleAlertDialog(
+                                        getString(R.string.user_disabled),
+                                        getString(R.string.reason) + loginRespusta.usuario.mensaje)
+                                } else {
+                                    showSnackBar(
+                                        getString(R.string.user_temporary_disabled),
+                                        true,
+                                    )
+                                }
+
                             }
 
                         } else {
-
-                            if (!loginRespusta.mensajeBienvenida.isNullOrEmpty()) {
-                                simpleAlertDialog(
-                                    getString(R.string.user_disabled),
-                                    getString(R.string.reason) + loginRespusta.mensajeBienvenida)
-                            } else {
-                                showSnackBar(
-                                    getString(R.string.user_temporary_disabled),
-                                    true,
-                                )
-                            }
-
+                            //servidor desactivado
+                            simpleAlertDialog("Servicio desactivado","Motivo: ${loginRespusta.mensaje?:"Desconocido"}, intente iniciar sesión mas tarde, disculpe las molestias ocacionadas")
                         }
-                    } else {
+
+
+                    }
+
+                    else {
                         binding.tvPassword.error = getString(R.string.incorrect_password)
                         binding.tvForgetPassword.visibility = View.VISIBLE
                     }

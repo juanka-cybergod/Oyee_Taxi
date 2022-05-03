@@ -12,7 +12,8 @@ data class LoginRespuesta(
 
     val usuarioEncontrado :Boolean? = null,
     val contrasenaCorrecta: Boolean? = null,
-    val mensajeBienvenida : String? = null,
+    var servidorActivo: Boolean? = null,
+    val mensaje : String? = null,
     val usuario: Usuario? = null,
     val vehiculoActivo: VehiculoResponse? = null,
 

@@ -17,6 +17,10 @@ data class Configuracion(
     val servidorActivoClientes: Boolean? = null,
     @SerializedName("servidorActivoAdministradores")
     val servidorActivoAdministradores: Boolean? = null,
+    @SerializedName("motivoServidorInactivoClientes")
+    val motivoServidorInactivoClientes: String? = null,
+    @SerializedName("motivoServidorInactivoAdministradores")
+    val motivoServidorInactivoAdministradores: String? = null,
     @SerializedName("twilioConfiguracion")
     val twilioConfiguracion: TwilioConfiguracion?= null,
     @SerializedName("smsProvider")

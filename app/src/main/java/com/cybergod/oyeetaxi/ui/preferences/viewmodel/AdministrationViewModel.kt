@@ -27,7 +27,7 @@ class AdministrationViewModel @Inject constructor(
     fun getServerConfiguration(){
 
         viewModelScope.launch(Dispatchers.IO) {
-            delay(1000)
+            //delay(1000)
             serverConfiguration.postValue(
                 configurationRepository.getConfiguration()
             )
@@ -35,14 +35,15 @@ class AdministrationViewModel @Inject constructor(
 
     }
 
-    fun setServerActiveForClients(active: Boolean) {
+    fun setServerActiveForClients(active: Boolean,motivo:String?=null) {
         viewModelScope.launch(Dispatchers.IO) {
 
             delay(1000)
 
             val config = configurationRepository.updateConfiguration(
                 Configuracion(
-                    servidorActivoClientes = active
+                    servidorActivoClientes = active,
+                    motivoServidorInactivoClientes = motivo
                 )
             )
             updatedConfiguracion.postValue(

@@ -4,11 +4,14 @@ package com.cybergod.oyeetaxi.ui.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.net.Uri
+import android.text.InputType
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,10 +25,15 @@ import com.cybergod.oyeetaxi.api.model.MetodoPago
 import com.cybergod.oyeetaxi.api.model.Usuario
 import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
+import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout.END_ICON_CLEAR_TEXT
 import java.lang.Exception
 
 
@@ -608,8 +616,46 @@ object UtilsUI {
     }
 
 
+    private lateinit var textInputBinding: TextInputBinding
+    fun Activity.showInputTextMessage(funResult: (okSelected:Boolean,motivo:String?)  -> Unit ,title: String?=null,hint: String?=null,helperText:String?=null, message :String?=null, icon:Int?=null ){
+
+        val builder = MaterialAlertDialogBuilder(this).apply {
+
+            textInputBinding = TextInputBinding.inflate(layoutInflater).apply {
+                hint?.let {
+                    this.textInputLayout.hint = it
+                }
+                helperText?.let {
+                    this.textInputLayout.helperText = it
+                }
+                message?.let {
+                    this.textInputLayout.editText?.setText(it)
+                }
+                icon?.let {
+                    this.textInputLayout.setStartIconDrawable(it)}
+
+            }
+
+            this.setView(textInputBinding.root)
+
+            title?.let {
+               this.setTitle(it)
+            }
+
+            this.setPositiveButton("Continuar", DialogInterface.OnClickListener { _, _ ->
+                    val text = textInputBinding.textInputLayout.editText?.text.toString().trim()
+                    funResult(true,text)
+
+                })
+            this.setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialog, _ -> dialog.cancel() })
 
 
+
+        }
+
+        builder.show()
+
+    }
     fun Context.showMessageDialogForResult( funResult: (okSelected:Boolean)  -> Unit   ,title: String?=null, message :String?=null, icon:Int?=null) {
 
         val alertDialog = AlertDialog.Builder(this).apply {

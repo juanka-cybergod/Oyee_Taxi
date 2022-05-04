@@ -13,6 +13,7 @@ import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -142,13 +143,30 @@ class AdministrationFragment : BaseFragment() {
             .setPositiveButton("Continuar"){ dialogInterface , _ ->
                 dialogInterface.dismiss()
 
-                showProgressDialog(getString(R.string.updatin_server_configuration))
-                viewModel.setServerActiveForClients(active)
+                when (active) {
+                    true -> {
+                        changeServerActiveForClientsStatus(true,"")
+                    }
+                    false -> {
+                        requireActivity().showInputTextMessage(
+                            //{ day, month, year -> binding.tvFechaNacimiento.setOnDateSelected(day, month, year)}
+                            funResult =  {ok,motivo, -> changeServerActiveForClientsStatusFalse(ok,motivo)},
+                            title = "Motivo Desactivación",
+                            hint = "",
+                            helperText = "Se notificará a los usuarios al intentar iniciar sesión con este mensaje",
+                            message = "",
+                            icon = R.drawable.ic_note
+                        )
+                    }
+                }
+
+
+//                showProgressDialog(getString(R.string.updatin_server_configuration))
+//                viewModel.setServerActiveForClients(active)
 
             }
             .setNegativeButton("Cancelar"){ dialogInterface, _ ->
                 dialogInterface.cancel()
-
             }
 
         val alertDialog: AlertDialog = builder.create()
@@ -157,12 +175,19 @@ class AdministrationFragment : BaseFragment() {
 
 
 
-
-
-
-
-
     }
+
+    private fun changeServerActiveForClientsStatusFalse(ok:Boolean,motivo:String?=null) {
+        if (ok) {
+            changeServerActiveForClientsStatus(false, motivo)
+        }
+    }
+
+    private fun changeServerActiveForClientsStatus(active:Boolean,motivo:String?=null){
+        showProgressDialog(getString(R.string.updatin_server_configuration))
+        viewModel.setServerActiveForClients(active,motivo)
+    }
+
 
 
 }

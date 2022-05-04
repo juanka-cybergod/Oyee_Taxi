@@ -94,15 +94,11 @@ class PlacesControl  {
                 Log.d(TAG,"Place Found = $fetchPlaceResponse")
 
                 fetchPlaceResponse.place.latLng?.let { location ->
-                    //TODO Añadir Marcador Mobible
+                    //Añadir Marcador Mobible
                     markerControl.addDefaultMarker(""+fetchPlaceResponse.place.address,location)
-
-                    //TODO Ir a Lugar
+                    //Ir a Lugar
                     cameraControl.animateCameraTo(location)
-
                 }
-
-
 
         }
             .addOnFailureListener { e : Exception->

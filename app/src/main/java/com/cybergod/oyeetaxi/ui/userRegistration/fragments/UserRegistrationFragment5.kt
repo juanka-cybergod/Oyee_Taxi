@@ -38,22 +38,13 @@ class UserRegistrationFragment5 : BaseFragment() {
 
         loadTempDatafromViewModel()
 
-
-        //TODO escucha el Click en boton continar
         binding.continueButton.setOnClickListener {
             if (verifyUserData()) {
                 goToNextFragment()
             }
         }
 
-        //TODO QUITAR
-        binding.continueButton.setOnLongClickListener {
-            goToNextFragment()
-            true
-        }
 
-
-        //TODO Escuchar cuando cambie el estado del checkbox
         binding.checkboxRememberPassword.setOnClickListener {
             val checkboxCheckState : Boolean = (it as CheckBox).isChecked
             viewModel.recordarPassword.postValue(checkboxCheckState)
@@ -66,7 +57,7 @@ class UserRegistrationFragment5 : BaseFragment() {
 
     private fun loadTempDatafromViewModel() {
 
-        //Imagen de Perfil
+
         binding.imagePerfil.loadImagePerfilFromURI(viewModel.imagenPerfilURI.value)
 
         if (viewModel.conductor.value == true) {
@@ -89,8 +80,6 @@ class UserRegistrationFragment5 : BaseFragment() {
         val mPassword2 = binding.tvPassword2.editText!!.text.trim().toString()
 
         return when {
-
-            //contaseña vacia
             TextUtils.isEmpty(mPassword1.trim { it <= ' ' }) -> {
                 showSnackBar(
                     "Por favor introduzca una contraseña",
@@ -98,7 +87,6 @@ class UserRegistrationFragment5 : BaseFragment() {
                 )
                 false
             }
-            //contaseña incomleta
             mPassword1.length < 6 -> {
                 showSnackBar(
                     "La contraseña deberá tener más de 6 caracteres",
@@ -106,7 +94,6 @@ class UserRegistrationFragment5 : BaseFragment() {
                 )
                 false
             }
-            //verificacion de contaseña vacia
             TextUtils.isEmpty(mPassword2.trim { it <= ' ' }) -> {
                 showSnackBar(
                     "Por favor verifique su contraseña",
@@ -114,7 +101,6 @@ class UserRegistrationFragment5 : BaseFragment() {
                 )
                 false
             }
-            //no coinciden las contraseñas
            mPassword1 != mPassword2 -> {
                 showSnackBar(
                     "La verificación de la contraseña no coincide",
@@ -124,11 +110,7 @@ class UserRegistrationFragment5 : BaseFragment() {
             }
 
             else -> {
-
                 viewModel.password.postValue(mPassword1)
-
-
-
                 true
             }
 

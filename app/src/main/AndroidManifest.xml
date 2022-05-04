@@ -26,10 +26,10 @@
         android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" /> <!-- TODO Google Map APIKEY -->
+            android:value="${MAPS_API_KEY}" /> <!-- Google Map APIKEY -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" /> <!-- TODO Chequear que este Actualizado GooglePlayServices para Cargar los Mapas -->
+            android:value="@integer/google_play_services_version" /> <!-- Para Chequear que este Actualizado GooglePlayServices para Cargar los Mapas -->
         <activity
             android:name=".ui.splash.activity.SplashActivity"
             android:exported="true"

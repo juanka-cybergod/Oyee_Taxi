@@ -40,7 +40,6 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoClimatizado
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoVerificacionImage
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -77,7 +76,7 @@ class ControlPanelFragmentMain : BaseFragment() {
 
         setupUserDetailsObserver()
 
-        setupvehicleDetailsObserver()
+        setupVehicleDetailsObserver()
 
         setupUserUpdatedSussesObserver()
 
@@ -96,13 +95,6 @@ class ControlPanelFragmentMain : BaseFragment() {
 
     private fun setupOnClickListener(){
 
-
-        //TODO Borrar
-        binding.imagePerfil.setOnLongClickListener {
-            userControlViewModel.updateCurrentUserAndActiveVehicleGlobalVariables()
-            true
-        }
-
         binding.buttonSolicitarModoCondutor.setOnClickListener {
             launchVehicleRegisterActivity()
         }
@@ -114,8 +106,6 @@ class ControlPanelFragmentMain : BaseFragment() {
         binding.imageViewSelect2.setOnClickListener {
             openImageChooser(SelectImageFor.ImagenFrontalVehiculo)
         }
-
-
 
         binding.buttonEditarPerfil.setOnClickListener {
             findNavController().navigate(R.id.action_userControlPanelFragmentMain_to_userControlPanelFragmentEditProfile,Bundle().apply {
@@ -159,7 +149,7 @@ class ControlPanelFragmentMain : BaseFragment() {
                 })
             } else {
                 showSnackBar(
-                    "Usted no tiene vehículos activos",
+                    getString(R.string.no_vehicles_actives),
                     true
                 )
             }
@@ -192,8 +182,6 @@ class ControlPanelFragmentMain : BaseFragment() {
         ActivityResultCallback {
             it?.let { uri ->
 
-
-
                 if (selectImageFor == SelectImageFor.ImagenPerfil) {
 
                     (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.updating_user))
@@ -205,22 +193,6 @@ class ControlPanelFragmentMain : BaseFragment() {
 
                     )
                 }
-
-//                if (selectImageFor == SelectImageFor.ImagenFrontalVehiculo) {
-//
-//                    (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.updating_vehicle))
-//
-//                    vehicleControlViewModel.uploadFileImagenFrontalCurrentVehiculo(
-//                        file =  requireContext().prepareImageCompressAndGetFile(uri),
-//                        id = currentVehicleActive.value?.id!!,
-//                        fileType = TipoFichero.VEHICULO_FRONTAL
-//                    )
-//
-//
-//                }
-
-
-
 
         }
         }
@@ -283,10 +255,6 @@ class ControlPanelFragmentMain : BaseFragment() {
 
                    userControlViewModel.updateCurrentUserAndActiveVehicleGlobalVariables()
 
-//                   showSnackBar(
-//                       getString(R.string.user_sussefuctly_updated),
-//                       false
-//                   )
                } else {
                    showSnackBar(
                        getString(R.string.user_update_fail),
@@ -361,35 +329,8 @@ class ControlPanelFragmentMain : BaseFragment() {
 
     }
 
-//    private fun setupImagenVehiculoURLUpdatedSussessObserver(){
-//
-//        vehicleControlViewModel.imagenFrontalCurrentVehiculoURL.observe(viewLifecycleOwner, Observer { imagenFrontalCurrentVehiculoURL ->
-//            if (!imagenFrontalCurrentVehiculoURL.isNullOrEmpty()) {
-//                vehicleControlViewModel.updateVehicleById(
-//                    Vehiculo(
-//                        imagenFrontalPublicaURL = imagenFrontalCurrentVehiculoURL
-//                    ),
-//                    vehiculoId = currentVehicleActive.value?.id!!
-//                )
-//            } else {
-//
-//                (requireActivity() as BaseActivity).hideProgressDialog()
-//
-//                showSnackBar(
-//                    getString(R.string.fail_server_comunication),
-//                    true
-//                )
-//
-//
-//            }
-//
-//        })
-//
-//    }
-
-
     @SuppressLint("SetTextI18n")
-    private fun setupvehicleDetailsObserver(){
+    private fun setupVehicleDetailsObserver(){
 
         currentVehicleActive.observe(viewLifecycleOwner, Observer { vehicleDetails ->
 
@@ -461,7 +402,6 @@ class ControlPanelFragmentMain : BaseFragment() {
                 //Edad
                 binding.tvEdad.text = "Edad ${getAge(usuario.fechaDeNacimiento!!)} años"
                 //y Antiguedad
-                //binding.tvAntiguedad.text = "${getLounges(usuario.fechaDeRegistro!!)} días en Oyee Taxi"
                 binding.tvAntiguedad.text = timePassedFromDateString(usuario.fechaDeRegistro!!)
                 //Provincia
                 binding.buttonProvincia.text = "Provincia\n${usuario.provincia?.nombre}"
@@ -472,7 +412,6 @@ class ControlPanelFragmentMain : BaseFragment() {
                     binding.buttonSolicitarModoCondutor.visibility = View.GONE
                     binding.clDriverPanel.visibility = View.VISIBLE
 
-                    //TODO Tratar de Cargar los Datos del Vehiculo Activo y si aun no tiene un vehiculo alertar para que lo agregue
 
                     //Modo Condutor o Modo Pasajero
                     usuario.modoCondutor?.let {
@@ -513,7 +452,6 @@ class ControlPanelFragmentMain : BaseFragment() {
 
     private fun launchVehicleRegisterActivity() {
         lifecycleScope.launch {
-            delay(100)
             startActivity(
                 Intent(requireActivity(),
                     VehicleRegistrationActivity::class.java)

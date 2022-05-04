@@ -48,19 +48,14 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
     ): View {
 
 
-        //TODO Inflar la Vista
         _binding = FragmentVehiclesTypeBinding.inflate(inflater, container, false)
 
-        //TODO Inicializar el ViewModel
         viewModel = ViewModelProvider(this)[VehicleTypeViewModel::class.java]
 
-        //TODO Inicializa el ReciclerView
         initRecyclerView()
 
-        //TODO Preparar el ViewModel para Escuchar los Vehiculos
         setupVehicleTypesObserver()
 
-        //TODO Escucha el Click sobre el Boton Para Cerrar el Dialogo
         binding.btnOK.setOnClickListener {
             dismiss()
         }
@@ -74,22 +69,17 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
 
 
 
-    //TODO Inicializa el RecylreyView
     private fun initRecyclerView(){
-
-        // Recyclerview
-        recyclerViewAdapter = VehicleTypeListAdapter(requireContext(),requireActivity(),binding.root,this)
+        recyclerViewAdapter = VehicleTypeListAdapter(this)
         recyclerView = binding.recylerViewTiposVehiculos
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
 
     }
 
-    //TODO Preparar el ViewModel para Escuchar los Vehiculos
+
     private fun setupVehicleTypesObserver(){
 
-        //Observar vehicleList
-        //Otro Metodo ->viewModel.getAllVehiclesObserver()(this, Observer {
         viewModel.tipoVehiculoList.observe(viewLifecycleOwner, Observer {
 
             if (it != null) {
@@ -129,11 +119,6 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
         viewModel.getAllVehicleTypes()
 
 
-
-
-
-
-
         vehicleTypeSelected.observe(this, Observer {
 
             (requireActivity() as Communicator).passVehicleTypeSelected(vehicleTypeSelected.value!!)
@@ -145,13 +130,7 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
 
 
 
-
-
-
     }
 
 
-    override fun dismiss() {
-        super.dismiss()
-    }
 }

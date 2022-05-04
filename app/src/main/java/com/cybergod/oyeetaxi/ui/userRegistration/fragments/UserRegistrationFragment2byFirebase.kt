@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
@@ -57,8 +58,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
     private lateinit var phoneNumber:String
 
 
-
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
     val viewModel: UserRegistrationViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -66,51 +65,39 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-        //TODO Prepara el Binding
         _binding = UserRegistrationFragment2Binding.inflate(inflater, container, false)
 
-
-        //TODO Preparar la Vista Inicial
         binding.llPhone.visibility = View.VISIBLE
         binding.llCode.visibility = View.INVISIBLE
 
 
-        //TODO Crear una Instancia para Firebase Auth
+        //Crear una Instancia para Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
 
 
-        //TODO Setup sPhoneAuthProvider Callback
+        //Setup sPhoneAuthProvider Callback
         setupPhoneAuthProvider()
 
-        // TODO Preparar el Observer 1 Sola Vez
+        // Preparar el Observer 1 Sola Vez
         setupObserver()
 
-        //TODO Boton Enviar y Re Enviar Codigo setOnClickListener
+        //Boton Enviar y Re Enviar Codigo setOnClickListener
         binding.sendCodeButton.setOnClickListener {
 
         val requiereVerifyIfUserAlreadyExist  = true
 
-
             if (verifyData()) {
-
                 if (requiereVerifyIfUserAlreadyExist) {
-                    //Verificar que no exista ya un usuario con ese numero de telefono en el Servidor
-
                     showProgressDialog(getString(R.string.verify_number))
-
-
                     viewModel.isUserExistByPhone(phoneNumber)
-
                 } else {
                     sendPhoneNumberVerification(forceResendToken)
                 }
-
             }
 
         }
 
-        //TODO Boton Verificar Codigo y Continuar setOnClickListener
+        //Boton Verificar Codigo y Continuar setOnClickListener
         binding.continueButton.setOnClickListener {
 
             val verificationCode: String = binding.tvCode.editText!!.text.trim().toString()
@@ -147,12 +134,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
         }
 
-        //TODO Quitar esta Linea Solo para Pruebas
-        binding.continueButton.setOnLongClickListener{
-            viewModel.telefonoMovil.postValue("+5353208579")
-            goToNextFragment()
-            true
-        }
 
         binding.tvCode.setEndIconOnClickListener {
             requireView().hideKeyboard()
@@ -166,11 +147,10 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
         }
 
 
-        //TODO Preparar el la Api que leera los Mensajes para Autocompletar el Codigo OTP
+        //Preparar el la Api que leera los Mensajes para Autocompletar el Codigo OTP
         setupReadSmsCodeVerificationApi()
 
 
-        //TODO Retornar la Vista
         return  binding.root
     }
 
@@ -183,7 +163,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
         val mPhoneNumber = binding.tvPhone.editText!!.text.trim().toString()
 
         return when {
-            //mPhoneNumber
             TextUtils.isEmpty(mPhoneNumber.trim { it <= ' ' }) -> {
                 showSnackBar(
                     "Por favor introduzca su su número de teléfono",
@@ -191,7 +170,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
                 )
                 false
             }
-            //mPhoneNumber
             mPhoneNumber.length != 8 -> {
                 showSnackBar(
                     "Por favor introduzca un número de teléfono válido",
@@ -200,23 +178,11 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
                 false
             }
             else -> {
-
                 phoneNumber = CONTRY_CODE + mPhoneNumber
                 true
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -253,12 +219,10 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
     }
 
     private fun goToNextFragment(){
-
             findNavController().navigate(R.id.action_userRegistrationFragment2_to_userRegistrationFragment3)
-
     }
 
-    //TODO Preparar el PhoneAuthProvider Callback
+
     private fun setupPhoneAuthProvider() {
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
 
@@ -278,7 +242,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
 
                 Log.d(TAG_CLASS_NAME,"VerificationFailed causa : ${e.message} \n codigo : ${e.hashCode()}")
-
 
             }
 
@@ -300,31 +263,22 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
                 hideProgressDialog()
 
-                // Toast.makeText(requireContext(),"Código de Verificación Enviado",Toast.LENGTH_LONG).show()
                 Log.d(TAG_CLASS_NAME,"onCodeSent : Código de Verificación Enviado (verificationId=$verificationId)")
 
-                //Deshabilitar el Campo de Telefono
                 binding.tvPhone.isEnabled = false
 
-                //Mostrar el Helper
                 binding.tvPhone.helperText  = "Código de verificación enviado satisfactoriamente"
 
-                //Modtrar el Campo para ingresar el Codigo de Verificacion
                 binding.llCode.visibility = View.VISIBLE
 
-
-                //Corutina de Conteo Regresivo para Re Encviar el Codigo
-                val coroutine : CoroutineScope = CoroutineScope(Dispatchers.IO)
-                coroutine.launch(Dispatchers.Main) {
+                lifecycleScope.launch(Dispatchers.Main) {
 
                     binding.sendCodeButton.isEnabled = false
-
-                    var i:Int = 10
+                    var i = 10
                     while (i > 0) {
                         delay(1000L)
                         i--
                         binding.sendCodeButton.setText("Volver a solicitar código en $i segundos")
-
                     }
                     binding.sendCodeButton.text = "Solicitar código"
                     binding.sendCodeButton.isEnabled = true
@@ -340,7 +294,7 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
     private fun sendPhoneNumberVerification(forceResendToken :PhoneAuthProvider.ForceResendingToken?) {
 
-            showProgressDialog("Verificando su número de teléfono ...")
+            showProgressDialog(getString(R.string.cheking_phone_number))
 
             if (forceResendToken != null) {
                 resendPhoneNumberToVerification(phoneNumber ,forceResendToken)
@@ -365,7 +319,6 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
     private fun resendPhoneNumberToVerification(phone: String, token: PhoneAuthProvider.ForceResendingToken? ){
 
-
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(phone)
             .setTimeout(60L,TimeUnit.SECONDS)
@@ -379,16 +332,13 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
     private fun verifyPhoneNumberWithCode(verificationId:String?, code:String){
 
-        showProgressDialog("Verificando su código ...")
-
+        showProgressDialog(getString(R.string.cheking_your_code))
         val credential = PhoneAuthProvider.getCredential(verificationId!!,code)
-
         singInwithPhoneAuthCredention(credential)
 
     }
 
     private fun singInwithPhoneAuthCredention(credential: PhoneAuthCredential) {
-
 
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener {
@@ -396,24 +346,15 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
                 hideProgressDialog()
 
                 val phone = firebaseAuth.currentUser?.phoneNumber
-
                 phoneVerifiedOK = "$phone"
-
                 viewModel.telefonoMovil.postValue(phoneVerifiedOK)
-
-               // Toast.makeText(requireContext(), "Sesion Iniciada con el Número : $phone",Toast.LENGTH_LONG).show()
                 Log.d(TAG_CLASS_NAME,"Sesion Iniciada con el Número : $phone".toString())
 
-                //TODO Guardar Su Numero de Telefono para que no tenga que Hacer la Verificacion si Cierra la App
-                // y Continuar con el Proceso de Registro
-
+                //TODO Guardar Su Numero de Telefono para que no tenga que Hacer la Verificacion si Cierra la App y Continuar con el Proceso de Registro
                 goToNextFragment()
-
 
                 //Cerrar Sesion
                 firebaseAuth.signOut()
-
-
 
             }
             .addOnFailureListener{e->
@@ -421,15 +362,12 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
                 if (e.message.toString().contains("is invalid",true)) {
                     showSnackBar(
-                        "El Código de Verificación es Incorrecto",
+                        getString(R.string.verification_code_is_incorrect),
                         true
                     )
-                    //Toast.makeText(requireContext(),"El Código de Verificación es Incorrecto",Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(requireContext(),e.message,Toast.LENGTH_LONG).show()
                 }
-
-
 
                 Log.d(TAG_CLASS_NAME,e.message.toString())
             }
@@ -442,11 +380,7 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
             Log.d("Hash" , AppSignatureHashHelper(requireContext()).appSignatures.toString())
         }
 
-
-
-
         startUserConsent()
-
 
         // Init Sms Retriever >>>>
         initSmsListener()
@@ -496,36 +430,11 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
     }
 
 
-
-
-
-
     private fun startUserConsent(){
         val client = SmsRetriever.getClient(requireActivity())
         client.startSmsUserConsent(null)
 
     }
-
-
-
-
-
-//    // TODO Nuevo petodo para StartActivityForResult
-//    var someActivityResultLauncher = registerForActivityResult(
-//        StartActivityForResult()
-//    ) { result ->
-//        if (result.resultCode == Activity.RESULT_OK && result.resultCode == REQUEST_USER_CONSENT && result.data != null ) {
-//           //doSomeOperations()
-//            val message = result.data!!.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
-//            getOtpFromMessage(message)
-//
-//
-//        }
-//    }
-
-
-
-
 
 
 

@@ -268,26 +268,26 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
 
             if (listVehiculoResponse != null) {
 
-                //TODO Buscar y quitar los Marcadores que ya no son vehiculos Disponibles
+                //Buscar y quitar los Marcadores que ya no son vehiculos Disponibles
                 markerControl.removeUnaviableVehiclesFromMapMarker(listVehiculoResponse)
 
 
                 if (listVehiculoResponse.isNotEmpty()) {
 
-                    //TODO Alerta al View Model para quitar mensaje de que no hay vehiculos disponibles
+                    //Alerta al View Model para quitar mensaje de que no hay vehiculos disponibles
                     homeViewModel.isVehiclesAviables.postValue(true)
 
                     listVehiculoResponse.forEach { vehiculo ->
 
-                        //TODO Evita Mostrar el Vehiculo perteneciente al propio usuario si este es Conductor
+                        // Evita Mostrar el Vehiculo perteneciente al propio usuario si este es Conductor
                         if (currentUserActive.value?.id != vehiculo.usuario?.id) {
 
-                            //TODO Actualizar los Marcadores en el Mapa en Tiempo Real (ADD/UPDATE)
+                            //Actualizar los Marcadores en el Mapa en Tiempo Real (ADD/UPDATE)
                             if (hashMapMarkers.value?.containsKey(vehiculo.id) == true) {
-                                //TODO Actualiza el Marcador
+                                //Actualiza el Marcador
                                 markerControl.updateVehicleMarker(vehiculo)
                             } else {
-                                //TODO Añade el nuevo Marcador
+                                //Añade el nuevo Marcador
                                 markerControl.addVehicleMarker(vehiculo)
                             }
 
@@ -421,19 +421,16 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
 
     @SuppressLint("PotentialBehaviorOverride")
     private fun setupMapOnClicksListeners() {
-        //Click Evento en Mapa
+
         map.setOnMapClickListener {
             // toastText("Seleccione vehículo para ver Detalles")
             //markerControl.addDefaultMarker("Default",map,it,this)
             //pauseMapClearForUpdate = false
-
         }
 
-        //LongClick Evento en Mapa
-        map.setOnMapLongClickListener {
-            //TODO Añadir Marcador de Auto al Hacer Long Click
-             //markerControl.addDefaultMarker("",mapViewModel.map,it,)
 
+        map.setOnMapLongClickListener {
+             //markerControl.addDefaultMarker("",mapViewModel.map,it,)
         }
 
         //Poner a Trabajor los Eventos de Toque ETC y Establece los Click Listener para el Mapa
@@ -445,8 +442,6 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
     private fun goToProvinceOneTime() {
 
         if (!homeViewModel.aleadyRuned) {
-
-            //TODO HACER Llevar la Camara a la Provincia de Cada Cual
                 currentUserActive.value?.provincia?.ubicacion?.let { location ->
                     cameraControl.goToUbicacionInicialProvincia( location)
                 }

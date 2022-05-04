@@ -11,23 +11,23 @@ import com.google.android.gms.maps.model.Marker
 
 object GlobalVariables {
 
-    //TODO NETWORK
+    //NETWORK
     var isServerAvailable: MutableLiveData<Boolean> = MutableLiveData<Boolean>(true)
     var NetworkErrorFound:MutableLiveData<Boolean> = MutableLiveData()
     var NetworkErrorMessaje : String = ""
 
-    //TODO Maps
+    //Maps
     lateinit var map: GoogleMap
 
-    //TODO Maps Markers
+    //Maps Markers
     var hashMapMarkers: MutableLiveData<HashMap<String, Marker>> = MutableLiveData(HashMap())
 
-    //TODO Maps Objects
+    //Maps Objects
 
     var userLocationMarker : Marker? = null
     var userLocationCircle : Circle? = null
 
-    //TODO CURRENT CACHE
+    //CURRENT CACHE
     val currentUserActive: MutableLiveData<Usuario> = MutableLiveData<Usuario>()
     val currentVehicleActive: MutableLiveData<VehiculoResponse> = MutableLiveData<VehiculoResponse>()
     var currentMapStyle: TypeAndStyle.MapStyle = TypeAndStyle.MapStyle.SILVER

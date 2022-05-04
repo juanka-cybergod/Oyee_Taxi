@@ -18,14 +18,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserRegistrationFragment3 : BaseFragment() {
 
-
-
     private var _binding: UserRegistrationFragment3Binding? = null
     private val binding get() = _binding!!
 
-    //private lateinit var viewModel: UserRegistrationViewModel
 
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
     val viewModel: UserRegistrationViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -66,9 +62,6 @@ class UserRegistrationFragment3 : BaseFragment() {
         }
 
 
-
-
-        //TODO Carga la Imagen Frontal si ya estaba Pre Seleccionada y los Datos ya Definidos
         loadTempDatafromViewModel()
 
 
@@ -91,9 +84,6 @@ class UserRegistrationFragment3 : BaseFragment() {
         }
 
     }
-
-
-
 
 
     private fun setUserTypeSelected() {

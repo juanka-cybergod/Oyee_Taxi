@@ -8,7 +8,9 @@
     <string name="title_dashboard">Viajes</string>
     <string name="title_notifications">Notificaciones</string>
     <string name="title_permissions">Permissions</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alow_and_continue">Permitir y Continuar</string>
     <string name="localization_permission_description">Bienvenido a Oyee Taxi. Para conseguir que la aplicación funcione de manera correcta primero necesitamos acceso a la Ubicación. De otra manera no será posible continuar y brindarle nuestros servicios. Gracias por Preferirnos</string>
@@ -77,6 +79,10 @@
     <string name="server_active_for_clients">Servidor activo para clientes</string>
     <string name="star_sesion">Iniciando sesión ...</string>
     <string name="updatin_server_configuration">Guardando configuración en servidor ...</string>
+    <string name="no_vehicles_actives">Usted no tiene vehículos activos</string>
+    <string name="cheking_phone_number">Verificando su número de teléfono ...</string>
+    <string name="cheking_your_code">Verificando su código ...</string>
+    <string name="verification_code_is_incorrect">El Código de Verificación es Incorrecto</string>
 
 
     <!--    NORMAL,HYBRID,TERRAIN,SATELLITE,NONE,RETRO,SILVER,NIGHT-->

@@ -134,7 +134,7 @@ class MainActivity : BaseActivity(), Communicator {
     }
 
     override fun passVehicleTypeSelected(vehicleType: TipoVehiculo) {
-        TODO("Not yet implemented")
+        //
     }
 
 

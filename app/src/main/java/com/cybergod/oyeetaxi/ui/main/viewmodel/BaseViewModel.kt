@@ -32,13 +32,13 @@ open class BaseViewModel : ViewModel() {
     @Inject
     lateinit var vehicleRepo: VehicleRepository
 
-    //TODO Desde ConnectivityManager
+    //Desde ConnectivityManager
 
 
 
     fun registerConectionsObservers(lifecycleOwner: LifecycleOwner,context:Context){
 
-        //TODO Observar el Estado de la Conexion
+        //Observar el Estado de la Conexion
         connectionManager.isNetworkAvilableObserver.observe(lifecycleOwner, Observer { networkAviable ->
             if (!networkAviable) {
                 NetworkErrorFound.postValue(true)

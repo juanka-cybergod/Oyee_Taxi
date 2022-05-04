@@ -34,8 +34,6 @@ class UserRegistrationActivity : BaseActivity(),  Communicator {
     }
 
 
-
-    // TODO Step 10: Override the onBackPressed function and call the double back press function created in the base activity.
     override fun onBackPressed() {
 
         val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_user_registration)
@@ -58,40 +56,13 @@ class UserRegistrationActivity : BaseActivity(),  Communicator {
     override fun passProvinceSelected(province: Provincia) {
         val viewModel = ViewModelProvider(this)[UserRegistrationViewModel::class.java]
         viewModel.provincia.postValue( province )
-        //Toast.makeText(this,data, Toast.LENGTH_SHORT).show()
+
     }
 
     override fun passVehicleTypeSelected(vehicleType: TipoVehiculo) {
-        TODO("Not yet implemented")
+        //
     }
 
 
 }
 
-
-/*
-    //progress Dialog
-    private lateinit var progressDialog: ProgressDialog
-    private fun setupProgressDialog() {
-        progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Por favor espere")
-        progressDialog.setCanceledOnTouchOutside(false)
-        progressDialog.setMessage("Subiendo imagen a Servidor")
-
-    }
-
-    override fun onProggressUpdate(porcentage: Int) {
-        val viewModel = ViewModelProvider(this)[UserRegistrationViewModel::class.java]
-
-        if (porcentage == 100) {
-            binding.pv.visibility = View.INVISIBLE
-           // Toast.makeText(this,"llego a $porcentage",Toast.LENGTH_SHORT).show()
-        } else {
-            binding.pv.visibility = View.VISIBLE
-        }
-
-        binding.pv.progress = porcentage
-
-
-    }
- */

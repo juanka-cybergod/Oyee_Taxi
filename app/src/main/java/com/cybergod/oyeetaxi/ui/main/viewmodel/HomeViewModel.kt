@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
 
 
 
-    //TODO Variables para Controlar la Actualizacion de los Vehiculos en el Mapa
+    //Variables para Controlar la Actualizacion de los Vehiculos en el Mapa
     var stopMapVehicleUpdate : Boolean = false
     var coroutine : CoroutineScope = CoroutineScope(Dispatchers.IO)
 

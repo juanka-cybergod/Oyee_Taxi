@@ -3,7 +3,7 @@ package com.cybergod.oyeetaxi.utils
 
 object Constants {
 
-    //TODO API
+    //API
         //Telefono 192.168.137.1
         //EMulador
     fun getHttpProtocol(useSSL:Boolean):String{
@@ -41,15 +41,15 @@ object Constants {
     const val DEFAULT_CONFIG = "default"
 
 
-    //TODO RESPONSE_CODES
+    //RESPONSE_CODES
     const val RESPONSE_CODE_CREATED = 201
     const val RESPONSE_CODE_OK = 200
     const val RESPONSE_CODE_NOT_FOUND = 404
 
-    //TODO API
+    //API
     const val Authorization = "Authorization"
 
-    //TODO Permission
+    //Permission
     const val PERMISSION_LOCATION_REQUEST_CODE = 1
     const val PERMISSION_STORAGE_REQUEST_CODE = 2
     const val PERMISSION_BACKGROUND_LOCATION_REQUEST_CODE = 3
@@ -60,7 +60,7 @@ object Constants {
 
 
 
-    //TODO General
+    //General
     const val DELAY_VEHICLES_UPDATE = 5000L
     const val KEY_VEHICLE_ID = "KEY_VEHICLE_ID"
     const val KEY_VEHICLE_RESPONSE = "KEY_VEHICLE_RESPONSE"
@@ -69,7 +69,7 @@ object Constants {
 
 
 
-    //TODO TRACKER SERVICE
+    //TRACKER SERVICE
     const val ACTION_SERVICE_START = "ACTION_SERVICE_START"
     const val ACTION_SERVICE_STOP = "ACTION_SERVICE_STOP"
     const val NOTIFICATION_CHANEL_ID = "TRACKER_NOTIFICATION_ID"

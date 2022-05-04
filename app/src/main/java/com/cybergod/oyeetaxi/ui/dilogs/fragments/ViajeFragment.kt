@@ -272,7 +272,7 @@ class ViajeFragment : BottomSheetDialogFragment() {
     private fun initRecyclerView(){
 
         // Recyclerview
-        recyclerViewAdapter = ImageVehicleTypeListAdapter(requireContext(),requireActivity(),binding.root,this)
+        recyclerViewAdapter = ImageVehicleTypeListAdapter(this)
         recyclerView = binding.recylerViewTiposVehiculos
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)

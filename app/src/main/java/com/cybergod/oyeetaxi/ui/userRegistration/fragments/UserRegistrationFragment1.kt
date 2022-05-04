@@ -20,12 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserRegistrationFragment1 : BaseFragment() {
 
-
-
     private var _binding: UserRegistrationFragment1Binding? = null
     private val binding get() = _binding!!
 
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
     val viewModel: UserRegistrationViewModel by activityViewModels()
 
 
@@ -40,8 +37,6 @@ class UserRegistrationFragment1 : BaseFragment() {
 
 
         viewModel.userRegistered.observe(viewLifecycleOwner, Observer { userAlreadyRegitered ->
-
-            //Toast.makeText(requireContext(),"$userAlreadyRegitered",Toast.LENGTH_LONG).show()
 
             if (userAlreadyRegitered == true) {
                 binding.cancelButton.visibility = View.GONE
@@ -94,7 +89,7 @@ class UserRegistrationFragment1 : BaseFragment() {
 
 
 
-    fun launchLoginActivity(){
+    private fun launchLoginActivity(){
 
         startActivity(
             Intent(requireActivity(),

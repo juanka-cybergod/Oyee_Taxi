@@ -156,7 +156,7 @@ dependencies {
     implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.4'
 
     //Google Directions Library https://github.com/jd-alexander/Google-Directions-Android
-    /* TODO Otras URL Utiles
+    /* Otras URL Utiles
     https://www.wingsquare.com/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android/
     https://stackoverflow.com/questions/22535264/how-to-draw-route-directions-from-a-marker-to-another-one-googlemaps-v2-androi
     https://stackoverflow.com/questions/16262837/how-to-draw-route-in-google-maps-api-v2-from-my-location

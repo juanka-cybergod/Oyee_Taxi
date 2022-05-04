@@ -28,7 +28,7 @@ class UserControlPanelFragmentEditProfile: BottomSheetDialogFragment()  {
     private var _binding: UserControlPanelFragmentEditProfileBinding? = null
     private val binding get() = _binding!!
 
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
+
     val viewModel: UserControlPanelViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -38,18 +38,11 @@ class UserControlPanelFragmentEditProfile: BottomSheetDialogFragment()  {
 
         _binding = UserControlPanelFragmentEditProfileBinding.inflate(inflater, container, false)
 
-        //this.isCancelable=false
-
-
         loadUserDetails()
-
 
         setupOnClickListener()
 
-
-
         return  binding.root
-
 
     }
 
@@ -65,11 +58,9 @@ class UserControlPanelFragmentEditProfile: BottomSheetDialogFragment()  {
     private fun setupOnClickListener() {
 
 
-
-
         binding.etFechaNacimiento.setOnClickListener {
             requireView().hideKeyboard()
-            val datePicker: DatePickerFragment = DatePickerFragment({ day, month, year -> binding.tvFechaNacimiento.setOnDateSelected(day, month, year)},binding.etFechaNacimiento.text.toString(),true,false)
+            val datePicker = DatePickerFragment({ day, month, year -> binding.tvFechaNacimiento.setOnDateSelected(day, month, year)},binding.etFechaNacimiento.text.toString(), setMaxDate = true, setMinDate = false)
             datePicker
                 .show(parentFragmentManager,"datePicker")
         }
@@ -121,30 +112,23 @@ class UserControlPanelFragmentEditProfile: BottomSheetDialogFragment()  {
 
         return when {
 
-
-            //nombre
-
             TextUtils.isEmpty(mNombre.trim { it <= ' ' }) -> {
                 binding.tvNombre.error = "Por favor introduzca su nombre completo"
                 false
 
             }
-            //apellidos
             TextUtils.isEmpty(mApellidos.trim { it <= ' ' }) -> {
                 binding.tvApellidos.error = "Por favor introduzca sus apellidos"
                 false
             }
-            //los 2 apellidos
             mApellidos.wordCount() < 2 -> {
                 binding.tvApellidos.error = "Por favor introduzca su segundo apellido"
                 false
             }
-            //correo electronico
             !mCorreo.isValidEmail() -> {
                 binding.tvCorreo.error = "Por favor introduzca una dirección válida de correo"
                 false
             }
-            //fecha de nacimiento
             TextUtils.isEmpty(mfechaNacimiento.trim { it <= ' ' }) -> {
                 binding.tvCorreo.error = "Por favor introduzca su fecha de nacimiento"
                 false
@@ -155,17 +139,6 @@ class UserControlPanelFragmentEditProfile: BottomSheetDialogFragment()  {
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 

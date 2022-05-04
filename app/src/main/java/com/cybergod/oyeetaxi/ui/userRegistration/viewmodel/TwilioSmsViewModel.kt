@@ -3,7 +3,6 @@ package com.cybergod.oyeetaxi.ui.userRegistration.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
-import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class TwilioSmsViewModel @Inject constructor(
     private val configurationRepository: ConfigurationRepository,
-    private val dataStoreRepository: DataStorageRepository,
 ) : BaseViewModel(){
 
 
@@ -31,18 +29,6 @@ class TwilioSmsViewModel @Inject constructor(
 
 
     }
-
-
-
-
-
-
-//    fun vehicleRegisterSuccess(success:Boolean){
-//        viewModelScope.launch {
-//            //TODO Guardar en DataStore el ID del Vehiculo Activo que tiene el usuario para que actualice su ubicacion
-//            dataStoreRepository.saveCurrentVehicle(idVehiculo)
-//        }
-//    }
 
 
 

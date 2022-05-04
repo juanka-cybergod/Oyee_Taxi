@@ -51,12 +51,6 @@ class UserRegistrationFragment4 : BaseFragment() {
            }
         }
 
-        //TODO QUITAR
-        binding.continueButton.setOnLongClickListener {
-            goToNextFragment()
-            true
-        }
-
         binding.imageViewSelect.setOnClickListener {
             requireView().hideKeyboard()
             openImageChooser()

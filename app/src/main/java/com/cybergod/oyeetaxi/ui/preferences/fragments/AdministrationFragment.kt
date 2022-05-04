@@ -149,7 +149,6 @@ class AdministrationFragment : BaseFragment() {
                     }
                     false -> {
                         requireActivity().showInputTextMessage(
-                            //{ day, month, year -> binding.tvFechaNacimiento.setOnDateSelected(day, month, year)}
                             funResult =  {ok,motivo, -> changeServerActiveForClientsStatusFalse(ok,motivo)},
                             title = "Motivo Desactivación",
                             hint = "",

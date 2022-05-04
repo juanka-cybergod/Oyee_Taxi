@@ -22,14 +22,10 @@ class UserControlPanelActivity : BaseActivity() , Communicator {
 
     private lateinit var binding: UserControlPanelActivityBinding
 
-
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
     val viewModel: UserControlPanelViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
         binding = UserControlPanelActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,17 +34,6 @@ class UserControlPanelActivity : BaseActivity() , Communicator {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-    // TODO Step 10: Override the onBackPressed function and call the double back press function created in the base activity.
     override fun onBackPressed() {
 
         val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_user_control_panel_navegation)
@@ -77,7 +62,7 @@ class UserControlPanelActivity : BaseActivity() , Communicator {
     }
 
     override fun passVehicleTypeSelected(vehicleType: TipoVehiculo) {
-        TODO("Not yet implemented")
+        //
     }
 
 

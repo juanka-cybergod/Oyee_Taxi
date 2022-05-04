@@ -24,7 +24,7 @@ import retrofit2.http.*
 
 interface RetroServiceInterface {
 
-    //TODO USUARIOS ***********************************************************
+    /** USUARIOS ***********************************************************/
 
     @GET(URL_BASE_USUARIOS + "getUserById={id}")
     suspend fun getUserById( @Path("id") id : String ): Response<Usuario>
@@ -51,19 +51,12 @@ interface RetroServiceInterface {
     suspend fun verifyOTPCodeToRestorePassword(@Query("idUsuario") idUsuario: String,@Query("otpCode") otpCode: String): Response<Boolean>
 
 
-    //TODO VEHICULOS ***********************************************************
-//    @GET(URL_BASE_VEHICULOS + "getAllVehicles")
-//    fun getAllVehicles(): Call<ArrayList<Vehiculo>>
-//
-//    @GET(URL_BASE_VEHICULOS + "getVehicleById={id}")
-//    fun getVehicleById( @Path("id") id : String ): Call<Vehiculo>
-
+    /** VEHICULOS ***********************************************************/
     @GET(URL_BASE_VEHICULOS + "getAllVehiclesFromUserId={id}")
     suspend fun getAllVehiclesFromUserId( @Path("id") id : String ): Response<ArrayList<VehiculoResponse>>
 
     @GET(URL_BASE_VEHICULOS + "getAvailableVehicles")
     suspend fun getAvailableVehicles(): Response<ArrayList<VehiculoResponse>>
-
 
     @GET(URL_BASE_VEHICULOS + "getActiveVehicleByUserId={id}")
     suspend fun getActiveVehicleByUserId( @Path("id") id : String ): Response<VehiculoResponse>
@@ -79,17 +72,17 @@ interface RetroServiceInterface {
 
 
 
-    //TODO TIPO VEHICULOS ***********************************************************
+    /** TIPO VEHICULOS ***********************************************************/
     @GET(URL_BASE_TIPO_VEHICULOS + "getAllVehiclesType")
     suspend fun getAllVehiclesType(): Response<ArrayList<TipoVehiculo>>
 
 
-    //TODO PROVINCIAS ***********************************************************
+    /** PROVINCIAS ***********************************************************/
     @GET(URL_BASE_PROVINCIAS + "getAllProvinces")
     suspend fun getAllProvinces(): Response<ArrayList<Provincia>>
 
 
-    //TODO CONFIGURACION ***********************************************************
+    /** CONFIGURACION ***********************************************************/
     @GET(URL_BASE_CONFIGURACION + "isServerActive")
     suspend fun isServerActive(): Response<Boolean>
 
@@ -106,23 +99,23 @@ interface RetroServiceInterface {
     suspend fun updateConfiguration(@Body configuracion :Configuracion): Response<Configuracion>
 
 
-    //TODO TWILIO SMS ***************************************************************
+    /** TWILIO SMS ***********************************************************/
     @GET(URL_BASE_SMS + "sendSMSTest")
     suspend fun sendSMSTest(@Query("phoneNumber") userPhone: String): Response<String>
 
 
-    //TODO UPLOAD IMAGENES *********************************************************
+    /** UPPLOAD FILES ***********************************************************/
 
     @Multipart
     @POST(URL_BASE_FICHEROS + "uploadSingleFileByType")
     suspend fun uploadSingleFile(@Part file: MultipartBody.Part, @Part("id") id: String, @Part("fileType") fileType: TipoFichero) : Response<FicherosRespuesta>
 
-    //TODO VIAJES  ***************************************************************
+    /** VIAJES ***********************************************************/
     @POST(URL_BASE_VIAJES + "addViaje")
     suspend fun addViaje(@Body viaje: Viaje): Response<Viaje>
 
 
-    // TODO VALORACIONES *********************************************************
+    /** VALORACIONES ***********************************************************/
 
     @GET(URL_BASE_VALORACION + "getValorationByUsersId")
     suspend fun getValorationByUsersId(@Query("idUsuarioValora") idUsuarioValora: String, @Query("idUsuarioValorado") idUsuarioValorado: String): Response<Valoracion>

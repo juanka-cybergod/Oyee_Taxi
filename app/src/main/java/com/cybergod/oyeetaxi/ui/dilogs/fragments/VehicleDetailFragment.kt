@@ -2,17 +2,15 @@ package com.cybergod.oyeetaxi.ui.dilogs.fragments
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsManager
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
@@ -36,9 +34,9 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setUsuarioVerificacionImage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoClimatizado
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoVerificacionImage
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.logD
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.textfield.TextInputEditText
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,13 +48,10 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
     private var _binding: FragmentVehicleDetailBinding? = null
     private val binding get() = _binding!!
 
-    //viewModels
     lateinit var viewModel: VehicleDetailsViewModel
     private val viewModelHome: HomeViewModel by activityViewModels()
 
-    //private lateinit var vehicleOK: VehiculoResponse
     private var vehicleOK: MutableLiveData<VehiculoResponse> = MutableLiveData<VehiculoResponse>()
-    private var smsText = ""
 
 
     override fun onCreateView(
@@ -74,18 +69,13 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
             if (vehicleId.isNotEmpty()){
 
-                //Preparar el Observer para Escuchar los Detalles de Vehiculos
                 setupVehicleDetailObserverFromHomeViewModel(vehicleId)
 
-                //Prepara el Observer para Actualizar las Distancias entre vehiculos
                 setupCalculateDistancesObserver()
 
             }
         }
 
-
-
-        //Escucha el Click sobre el Boton Para Cerrar el Dialogo
         binding.btnClose.setOnClickListener {
             dismiss()
         }
@@ -95,7 +85,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
 
 
-    //TODO Pintar la Vista
+    //Pintar la Vista
     private fun paintVehicle(){
 
         //Imagen Perfil
@@ -139,7 +129,6 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
 
 
-
     private fun setupOnClickListener() {
         //Btn Enviar SMS
         binding.btnSms.setOnClickListener {
@@ -178,51 +167,75 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         }
     }
 
-    private fun sendSmsToPhone(phoneNumber:String,message:String){
-        try {
-            val sentPI: PendingIntent = PendingIntent.getBroadcast(requireContext(), 0, Intent("SMS_SENT"), 0)
-            SmsManager.getDefault().sendTextMessage(phoneNumber, null,  "Cliente de " + requireContext().getString(R.string.app_name) + " dice : $message", sentPI, null)
-            Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.value?.usuario?.nombre}",Toast.LENGTH_LONG).show()
-        }catch (e: Exception){
-            Toast.makeText(requireContext(),"Error al intentar enviar el mensaje de texto",Toast.LENGTH_LONG).show()
-            logD(requireActivity(),"sendSmsToPhoneError=$e")
+
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    private fun sendSmsToPhone(send:Boolean, message:String?){
+        if (send) {
+
+            if (message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(),"Mensaje no enviado porque estaba en blanco",Toast.LENGTH_LONG).show()
+            } else {
+
+                val phoneNumber:String = vehicleOK.value?.usuario?.telefonoMovil!!
+                val sentPI: PendingIntent = PendingIntent.getBroadcast(requireContext(), 0, Intent("SMS_SENT"), 0)
+
+                try {
+
+
+                    SmsManager.getDefault().sendTextMessage(phoneNumber, null,  "Cliente de " + requireContext().getString(R.string.app_name) + " dice : $message", sentPI, null)
+                    Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.value?.usuario?.nombre}",Toast.LENGTH_LONG).show()
+                }catch (e: Exception){
+
+
+                    try {
+                        val smsManager: SmsManager? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requireContext().getSystemService(SmsManager::class.java)}  else null
+
+                        smsManager?.sendTextMessage(phoneNumber, null,  "Cliente de " + requireContext().getString(R.string.app_name) + " dice : $message", sentPI, null)
+                        Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.value?.usuario?.nombre}",Toast.LENGTH_LONG).show()
+
+
+
+                    } catch (e: Exception) {
+
+                        Toast.makeText(requireContext(),"Error al intentar enviar el mensaje de texto",Toast.LENGTH_LONG).show()
+                        logD(requireActivity(),"sendSmsToPhoneError=$e")
+
+                    }
+
+
+
+
+                }
+            }
+
         }
+
 
     }
 
+
+
     private fun callPhone(phoneNumber:String) {
-        val intent = Intent(Intent.ACTION_CALL);
+        val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:${phoneNumber}")
         startActivity(intent)
     }
 
     private fun showDialogSendSMS(){
-        val builder: AlertDialog.Builder =AlertDialog.Builder(requireContext())
-        builder.setTitle("SMS a Conductor")
 
-        val input = TextInputEditText(requireContext())
-
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setHint("Introduzca su Mensaje")
-
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
-        // Set up the buttons
-        //builder.setPositiveButton("Enviar", DialogInterface.OnClickListener { dialog, which ->
-        builder.setPositiveButton("Enviar", DialogInterface.OnClickListener { _, _ ->
-            // Here you get get input text from the Edittext
-            smsText = input.text.toString()
-            if (!smsText.trim().isEmpty()) {
-                sendSmsToPhone(vehicleOK.value?.usuario?.telefonoMovil!!,smsText)
-            } else {
-                Toast.makeText(requireContext(),"Mensaje no enviado porque estaba en blanco",Toast.LENGTH_LONG).show()
-            }
+        requireActivity().showInputTextMessage(
+            funResult =  {ok,texto, -> sendSmsToPhone(ok,texto)},
+            title = "SMS a Conductor",
+            hint = "Introduzca su mensaje de texto",
+            helperText = "Es posible que se apliquen cargos a su cuenta móvil por valor de un mensaje",
+            message = "",
+            icon = R.drawable.ic_sms,
+            buttonConfirmText = "Enviar"
+        )
 
 
-        })
-        builder.setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialog, _ -> dialog.cancel() })
-
-        builder.show()
     }
 
     private fun setupCalculateDistancesObserver() {
@@ -242,9 +255,8 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
     }
 
     private fun reCalculateDistances(){
-        //Distancia entre usuario y vehiculo
         if (currentUserActive.value?.ubicacion != null && vehicleOK.value?.usuario?.ubicacion != null) {
-            binding.tvDistanceBetween.text = "Vehículo a ${calculateTheDistance(currentUserActive.value?.ubicacion,vehicleOK.value?.usuario?.ubicacion)  } Km de su posición"
+            "Vehículo a ${calculateTheDistance(currentUserActive.value?.ubicacion,vehicleOK.value?.usuario?.ubicacion)  } Km de su posición".also { binding.tvDistanceBetween.text = it }
 
         } else binding.tvDistanceBetween.text = ""
     }
@@ -253,14 +265,12 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
     private fun setupVehicleDetailObserverFromHomeViewModel(vehicleId: String){
 
 
-        //TODO Cargar los valores de ese vehiculo inmediatamente  desde el 1er momento
         viewModelHome.vehicleList.value?.find {  item -> item.id.equals(vehicleId,true) }?.let { vehiculoResponse ->
             vehicleOK.value = vehiculoResponse
             paintVehicle()
         }
 
 
-        //TODO Observar para Actualizar si hay cambios OnLine
         viewModelHome.vehicleList.observe(viewLifecycleOwner, Observer { listaVehiculos ->
 
             if (!listaVehiculos.isNullOrEmpty()) {

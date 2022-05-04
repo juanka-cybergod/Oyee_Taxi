@@ -1,7 +1,5 @@
 package com.cybergod.oyeetaxi.ui.dilogs.adapters
 
-import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +11,13 @@ import com.cybergod.oyeetaxi.ui.dilogs.fragments.ProvincesFragment
 
 
 class ProvinciasListAdapter (
-    private val context: Context,
-    private val activity: Activity,
-    private val view : View,
+//    private val context: Context,
+//    private val activity: Activity,
+//    private val view : View,
     private val provincesFragment: ProvincesFragment,
 ) : RecyclerView.Adapter<ProvinciasListAdapter.MyViewHolder>() {
 
-    //private var provinciasList = emptyList<Provincia>()
+
     private var provinciasList: List<Provincia> = emptyList<Provincia>()
 
     fun setProvinciasList(provinciasListFromData : List<Provincia> ){
@@ -40,22 +38,14 @@ class ProvinciasListAdapter (
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        //TODO Nuevo Metodo Binding para Cargar las Vistas dentro de los Adapters
-        val bindig = ItemProvinciaBinding.bind(itemView)
 
+        private val bindig = ItemProvinciaBinding.bind(itemView)
 
         fun bind(provincia:Provincia, provincesFragment: ProvincesFragment) {
             bindig.tvProvinciaNombre.text = provincia.nombre
+
             bindig.tvProvinciaNombre.setOnClickListener {
-
-
-                //Cerrar
-                //provincesFragment.dismiss()
-
-
                 provincesFragment.provinceSelected.postValue(provincia)
-
-
 
             }
 

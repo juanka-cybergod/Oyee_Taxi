@@ -617,7 +617,7 @@ object UtilsUI {
 
 
     private lateinit var textInputBinding: TextInputBinding
-    fun Activity.showInputTextMessage(funResult: (okSelected:Boolean,motivo:String?)  -> Unit ,title: String?=null,hint: String?=null,helperText:String?=null, message :String?=null, icon:Int?=null ){
+    fun Activity.showInputTextMessage(funResult: (okSelected:Boolean, returnText:String?)  -> Unit, title: String?=null, hint: String?=null, helperText:String?=null, message :String?=null, icon:Int?=null, buttonConfirmText:String?="Continuar" ){
 
         val builder = MaterialAlertDialogBuilder(this).apply {
 
@@ -642,7 +642,7 @@ object UtilsUI {
                this.setTitle(it)
             }
 
-            this.setPositiveButton("Continuar", DialogInterface.OnClickListener { _, _ ->
+            this.setPositiveButton(buttonConfirmText, DialogInterface.OnClickListener { _, _ ->
                     val text = textInputBinding.textInputLayout.editText?.text.toString().trim()
                     funResult(true,text)
 

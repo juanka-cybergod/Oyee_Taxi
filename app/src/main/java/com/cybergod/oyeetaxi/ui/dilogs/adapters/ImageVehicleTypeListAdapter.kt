@@ -1,7 +1,5 @@
 package com.cybergod.oyeetaxi.ui.dilogs.adapters
 
-import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +13,9 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.vehiculoSeleccionado
 
 
 class ImageVehicleTypeListAdapter (
-    private val context: Context,
-    private val activity: Activity,
-    private val view : View,
+//    private val context: Context,
+//    private val activity: Activity,
+//    private val view : View,
     private val viajeFragment: ViajeFragment,
 ) : RecyclerView.Adapter<ImageVehicleTypeListAdapter.MyViewHolder>() {
 
@@ -42,9 +40,8 @@ class ImageVehicleTypeListAdapter (
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        //TODO Nuevo Metodo Binding para Cargar las Vistas dentro de los Adapters
-        val binding = ItemImagenTipoVehiculoBinding.bind(itemView)
 
+        val binding = ItemImagenTipoVehiculoBinding.bind(itemView)
 
         fun bind(tipoVehiculo:TipoVehiculo, viajeFragment: ViajeFragment) {
 

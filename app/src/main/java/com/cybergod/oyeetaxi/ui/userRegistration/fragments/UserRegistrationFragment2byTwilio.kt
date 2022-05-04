@@ -41,19 +41,14 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
     private var intentFilter: IntentFilter? = null
     private var smsReceiver: SMSReceiver? = null
 
-
     private var _binding: UserRegistrationFragment2Binding? = null
     private val binding get() = _binding!!
-
-
 
     private lateinit var phoneVerifiedOK:String
     private lateinit var phoneNumber:String
 
-
-    //TODO Prepara el View model para que se alcanzable desde todos los Fragments con una solo instancia
     val viewModel: UserRegistrationViewModel by activityViewModels()
-    val twilioModel: TwilioSmsViewModel by activityViewModels()
+    private val twilioModel: TwilioSmsViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -61,26 +56,18 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-        //TODO Prepara el Binding
         _binding = UserRegistrationFragment2Binding.inflate(inflater, container, false)
 
-
-        //TODO Preparar la Vista Inicial
         binding.llPhone.visibility = View.VISIBLE
         binding.llCode.visibility = View.INVISIBLE
 
 
-        //TODO Boton Enviar y Re Enviar Codigo setOnClickListener
         binding.sendCodeButton.setOnClickListener {
-
             if (verifyData()) {
                 sendPhoneNumberVerification()
             }
-
         }
 
-        //TODO Boton Verificar Codigo y Continuar setOnClickListener
         binding.continueButton.setOnClickListener {
 
             val verificationCode: String = binding.tvCode.editText!!.text.trim().toString()
@@ -108,9 +95,8 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
                    } else {
 
                         lifecycleScope.launch {
-                            showProgressDialog("Verificando su código ...")
-
-                            delay(2000L)
+                            showProgressDialog(getString(R.string.cheking_your_code))
+                            delay(1000L)
                             verifyPhoneNumberWithCode(twilioModel.otpCode.value,verificationCode)
                         }
 
@@ -126,12 +112,6 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         }
 
 
-        //TODO Quitar esta Linea Solo para Pruebas
-        binding.continueButton.setOnLongClickListener{
-            viewModel.telefonoMovil.postValue("+5353208579")
-            goToNextFragment()
-            true
-        }
 
         binding.tvCode.setEndIconOnClickListener {
             requireView().hideKeyboard()
@@ -144,14 +124,11 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
             binding.tvPhone.editText?.setText("")
         }
 
-        // TODO Preparar el Observer 1 Sola Vez
         setupObserver()
 
-        //TODO Preparar el la Api que leera los Mensajes para Autocompletar el Codigo OTP
+        //Preparar el la Api que leera los Mensajes para Autocompletar el Codigo OTP
         setupReadSmsCodeVerificationApi()
 
-
-        //TODO Retornar la Vista
         return  binding.root
     }
 
@@ -287,21 +264,15 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
 
 
         if (verificationId == code) {
-
             viewModel.telefonoMovil.postValue(phoneVerifiedOK)
-
             Log.d(TAG_CLASS_NAME,"El Código de Verificación es Correcto")
-
             goToNextFragment()
-
         } else {
-
             showSnackBar(
-                "El Código de Verificación es Incorrecto",
+                getString(R.string.verification_code_is_incorrect),
                 true
             )
-
-            Log.d(TAG_CLASS_NAME,"El Código de Verificación es Incorrecto")
+            Log.d(TAG_CLASS_NAME,getString(R.string.verification_code_is_incorrect))
 
         }
 
@@ -312,18 +283,9 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
 
 
     private fun sendPhoneNumberVerification() {
-
         showProgressDialog( getString(R.string.verify_number),)
-
-        //Verificar que no exista ya un usuario con ese numero de telefono en el Servidor
         viewModel.isUserExistByPhone(phoneNumber)
-
     }
-
-
-
-
-
 
 
 

@@ -15,7 +15,7 @@ import com.vmadalin.easypermissions.EasyPermissions
 
 
 object Permissions {
-    //TODO LocationPermission
+    //LocationPermission
     fun hasLocationPermission(context: Context) =
         EasyPermissions.hasPermissions(
             context,
@@ -30,7 +30,7 @@ object Permissions {
         )
     }
 
-    //TODO StoragePermission
+    //StoragePermission
     fun hasStoragePermission(context: Context) =
         EasyPermissions.hasPermissions(
             context,
@@ -45,7 +45,7 @@ object Permissions {
         )
     }
 
-    //TODO CallPermission
+    //CallPermission
     fun hasCallPhonePermission(context: Context) =
         EasyPermissions.hasPermissions(
             context,
@@ -61,7 +61,7 @@ object Permissions {
     }
 
 
-    //TODO SMSPermission
+    //SMSPermission
     fun hasSendSmsPermission(context: Context) =
         EasyPermissions.hasPermissions(
             context,
@@ -78,7 +78,7 @@ object Permissions {
 
 
 
-    //TODO WHRITE EXTERNAL StoragePermission
+    //WHRITE EXTERNAL StoragePermission
     fun hasWriteExternalStoragePermission(context: Context) =
         EasyPermissions.hasPermissions(
             context,
@@ -95,12 +95,7 @@ object Permissions {
 
 
 
-
-
-    /**TODO
-     * Requerir este permiso para obtener la ubicacion permanente cuando se use la aplicacion en modo Taxista Solo si lo Desea el Usuario
-     */
-    //TODO BackgroundLocationPermission
+    //BackgroundLocationPermission
     fun hasBackgroundLocationPermission(context: Context):Boolean{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ) {
             return EasyPermissions.hasPermissions(

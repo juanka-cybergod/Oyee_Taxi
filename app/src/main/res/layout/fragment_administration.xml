@@ -123,6 +123,25 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+                <com.google.android.material.button.MaterialButton
+
+                    android:id="@+id/btnConfigurarSmsProvider"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:text=" Configurar este Proveedor "
+                    android:elevation="0dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_settings_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tfSmsProvider" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -145,7 +164,7 @@
                     android:drawableTint="@color/black"
                     android:lines="2"
                     android:maxLines="3"
-                    android:text="Proveedor  \nMi Perfil"
+                    android:text="Configurar  \nProveedor SMS"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="10sp"

@@ -78,11 +78,12 @@
     <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión.Deberá usar esta opción con propósitos administrativos muy específicos</string>
     <string name="server_active_for_clients">Servidor activo para clientes</string>
     <string name="star_sesion">Iniciando sesión ...</string>
-    <string name="updatin_server_configuration">Guardando configuración en servidor ...</string>
+    <string name="appling_server_configuration">Aplicando cambios en el servidor ...</string>
     <string name="no_vehicles_actives">Usted no tiene vehículos activos</string>
     <string name="cheking_phone_number">Verificando su número de teléfono ...</string>
     <string name="cheking_your_code">Verificando su código ...</string>
     <string name="verification_code_is_incorrect">El Código de Verificación es Incorrecto</string>
+    <string name="not_configurable_provider">Este proveedor no es configurable</string>
 
 
     <!--    NORMAL,HYBRID,TERRAIN,SATELLITE,NONE,RETRO,SILVER,NIGHT-->

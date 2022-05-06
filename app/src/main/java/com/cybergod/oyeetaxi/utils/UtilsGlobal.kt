@@ -18,6 +18,7 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.material.textfield.TextInputLayout
+import com.oyeetaxi.cybergod.Modelos.SmsProvider
 import java.lang.reflect.Method
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -323,7 +324,12 @@ object UtilsGlobal {
         Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: $logText")
     }
 
+    fun smsProviderFromString(smsProviderString:String?):SmsProvider{
+        return SmsProvider.valueOf(
+            smsProviderString?:SmsProvider.TWILIO.name
+        )
 
+    }
 
 
 

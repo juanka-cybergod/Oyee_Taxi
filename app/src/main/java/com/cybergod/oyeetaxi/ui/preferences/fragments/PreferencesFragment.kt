@@ -130,7 +130,7 @@ class PreferencesFragment : BaseFragment() {
 
             }  else {
                 //noUpdateAndContinue()
-                Toast.makeText(requireContext(),"Falló la conexion con el Servidor para obtener actualizacions", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.fail_server_comunication), Toast.LENGTH_SHORT).show()
             }
 
 

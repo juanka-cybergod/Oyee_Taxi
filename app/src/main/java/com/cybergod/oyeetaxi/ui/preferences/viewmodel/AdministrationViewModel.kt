@@ -2,12 +2,11 @@ package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
 
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.model.Configuracion
+import com.cybergod.oyeetaxi.api.model.configuration.TwilioConfiguracion
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
-import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.oyeetaxi.cybergod.Modelos.SmsProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -95,6 +94,22 @@ class AdministrationViewModel @Inject constructor(
 
             )
         }
+    }
+
+    fun setServerTwilioConfiguration(newTwilioConfiguracion: TwilioConfiguracion) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            refreshThisConfiguration(
+                configurationRepository.updateConfiguration(
+                    Configuracion(
+                        twilioConfiguracion = newTwilioConfiguracion,
+                    )
+                )
+            )
+        }
+
+
+
     }
 
 }

@@ -2,28 +2,23 @@ package com.cybergod.oyeetaxi.ui.preferences.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
-import com.cybergod.oyeetaxi.maps.Utils
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
-import com.cybergod.oyeetaxi.ui.dilogs.fragments.PasswordRecoveryFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
-import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.smsProviderFromString
 import com.oyeetaxi.cybergod.Modelos.SmsProvider
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +30,7 @@ class AdministrationFragment : BaseFragment() {
     private var _binding: FragmentAdministrationBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: AdministrationViewModel by viewModels()
+    private val viewModel: AdministrationViewModel by activityViewModels()
 
 
 
@@ -137,6 +132,22 @@ class AdministrationFragment : BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setupOnClickListener() {
 
+        binding.btnConfigurarSmsProvider.setOnClickListener {
+            when (smsProviderFromString(binding.tvSmsProvider.text.toString())) {
+                SmsProvider.TWILIO -> {
+                    launchTwillioConfigurationFragment()
+                }
+                else -> {
+                    showSnackBar(
+                        getString(R.string.not_configurable_provider),
+                        false
+                    )
+                }
+            }
+
+
+        }
+
         binding.tvSmsProvider.setOnClickListener {
             binding.tvSmsProvider.showDropDownMenuFix(viewModel.arrayAdapter)
         }
@@ -152,9 +163,7 @@ class AdministrationFragment : BaseFragment() {
 
         binding.tvSmsProvider.setOnItemClickListener { adapterView, view, position, id ->
 
-            selectedSmsProvider = SmsProvider.valueOf(
-                adapterView.getItemAtPosition(position).toString()
-            )
+            selectedSmsProvider = smsProviderFromString(adapterView.getItemAtPosition(position).toString())
 
             binding.tvSmsProvider.setText(viewModel.serverConfiguration.value?.smsProvider?.name,false)
 
@@ -180,7 +189,7 @@ class AdministrationFragment : BaseFragment() {
     private lateinit var selectedSmsProvider : SmsProvider
     private fun setServerSmsProvider(ok:Boolean) {
         if (ok) {
-            showProgressDialog(getString(R.string.updatin_server_configuration))
+            showProgressDialog(getString(R.string.appling_server_configuration))
             viewModel.setServerSmsProvider(selectedSmsProvider)
         }
 
@@ -249,7 +258,7 @@ class AdministrationFragment : BaseFragment() {
     }
 
     private fun changeServerActiveForClientsStatus(active:Boolean,motivo:String?=null){
-        showProgressDialog(getString(R.string.updatin_server_configuration))
+        showProgressDialog(getString(R.string.appling_server_configuration))
         viewModel.setServerActiveForClients(active,motivo)
     }
 
@@ -259,7 +268,7 @@ class AdministrationFragment : BaseFragment() {
 
 
     private fun launchTwillioConfigurationFragment(){
-        val dialogPersonas = PasswordRecoveryFragment()
+        val dialogPersonas = TwillioConfigurationFragment()
         dialogPersonas.show(requireActivity().supportFragmentManager,"twillioConfigurationFragment")
     }
 

@@ -36,67 +36,88 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvPassword1"
+                android:id="@+id/tvAccount_sid"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:endIconCheckable="true"
                 app:endIconMode="none"
                 app:helperText=" "
+                android:hint="Account_sid"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_alert_24">
+                app:startIconDrawable="@drawable/ic_person_32">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint=""
                     android:inputType="text"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
-            android:padding="0dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llPassword1">
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvPassword2"
+                android:id="@+id/tvAuth_token"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:endIconCheckable="true"
-                app:endIconMode="none"
+                app:endIconMode="password_toggle"
+                android:hint="Auth_token"
                 app:helperText=" "
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_alert_24">
+                app:startIconDrawable="@drawable/ic_key"
+
+                >
 
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint=""
-                    android:inputType="text"
+                    android:inputType="textPassword"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvTrial_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconCheckable="true"
+                app:endIconMode="none"
+                android:hint="Service_number"
+                app:helperText=" "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_phone">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:inputType="phone"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
 
         </LinearLayout>

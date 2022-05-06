@@ -126,7 +126,13 @@ class LoginActivity : BaseActivity() {
 
                         } else {
                             //servidor desactivado
-                            simpleAlertDialog("Servicio desactivado","Motivo: ${loginRespusta.mensaje?:"Desconocido"}, intente iniciar sesión mas tarde, disculpe las molestias ocacionadas")
+                            loginRespusta.mensaje.let {
+                                val motivo = if (it.isNullOrEmpty()) {
+                                    "Desconocido"
+                                } else { loginRespusta.mensaje }
+                                simpleAlertDialog("Servicio desactivado","Motivo: $motivo, intente iniciar sesión mas tarde, disculpe las molestias ocacionadas")
+                            }
+
                         }
 
 

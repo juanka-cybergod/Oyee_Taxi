@@ -202,7 +202,7 @@ class ControlPanelFragmentMain : BaseFragment() {
 
     private fun showUserModeDialog(modoConductor:Boolean) {
 
-        var title :String = "Activar el modo "
+        var title  = "Activar el modo "
         val text :String
         val icon:Int
         if (modoConductor) {
@@ -238,9 +238,9 @@ class ControlPanelFragmentMain : BaseFragment() {
 
     }
 
-    private fun changeUserMode(modoConductor:Boolean){
+    private fun changeUserMode(modeConductor:Boolean){
         (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.updating_user))
-        userControlViewModel.updateUser(Usuario(modoCondutor = modoConductor))
+        userControlViewModel.updateUser(Usuario(modoCondutor = modeConductor))
     }
 
 

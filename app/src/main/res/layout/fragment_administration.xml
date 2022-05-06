@@ -40,20 +40,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/llServerActivo"
+                android:id="@+id/clServerActivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
-                android:padding="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/climageView">
+                android:layout_margin="8dp"
+                >
 
 
                 <ImageView
@@ -82,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
+                    android:layout_margin="12dp"
                     android:text="@string/disable_server_for_clients_description"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +89,106 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clSmsProviderConfiguration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="8dp"
+                >
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfSmsProvider"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:helperText="Proveedor del servicio de mensajeria usado para enviar los códigos de verificación a los clientes para activar sus cuantas"
+                    app:startIconDrawable="@drawable/ic_sms"
+                    >
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/tvSmsProvider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Proveedor de SMS"
+                        android:inputType="none"
+                        android:textSize="14sp"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/clServerConfig1"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonSmsProvider"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_edit_person_32"
+                    android:drawableTint="@color/black"
+                    android:lines="2"
+                    android:maxLines="3"
+                    android:text="Proveedor  \nMi Perfil"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonProvincia"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_location_32"
+                    android:drawableTint="@color/black"
+                    android:lines="2"
+                    android:maxLines="3"
+                    android:text="Provincia\n "
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonUsuarioVerificacion"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_verified_32"
+                    android:drawableTint="@color/black"
+                    android:lines="2"
+                    android:maxLines="3"
+                    android:text="Verificación\n "
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </LinearLayout>
 

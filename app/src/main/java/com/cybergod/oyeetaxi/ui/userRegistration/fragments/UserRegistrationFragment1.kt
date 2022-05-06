@@ -62,7 +62,7 @@ class UserRegistrationFragment1 : BaseFragment() {
                 SmsProvider.TWILIO-> {
                     findNavController().navigate(R.id.action_userRegistrationFragment1_to_userRegistrationFragment2byTwilio)
                 }
-                SmsProvider.DISABLE-> {
+                SmsProvider.DESHABILITADO-> {
                     showSnackBar(getString(
                         R.string.number_validation_is_disable),
                         true,

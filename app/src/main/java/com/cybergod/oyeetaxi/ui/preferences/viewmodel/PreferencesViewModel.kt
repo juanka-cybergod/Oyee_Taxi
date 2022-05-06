@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PreferencesViewModel @Inject constructor(
-    private val configurationRepository: ConfigurationRepository,
     private val dataStorageRepository: DataStorageRepository,
 ) : BaseViewModel() {
 

@@ -69,7 +69,7 @@ class ProvincesFragment : BottomSheetDialogFragment() {
 
     private fun initRecyclerView(){
 
-        recyclerViewAdapter = ProvinciasListAdapter(requireContext(),requireActivity(),binding.root,this)
+        recyclerViewAdapter = ProvinciasListAdapter(this)
         recyclerView = binding.recylerViewProvincias
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
@@ -132,10 +132,4 @@ class ProvincesFragment : BottomSheetDialogFragment() {
 
     }
 
-
-
-
-    override fun dismiss() {
-        super.dismiss()
-    }
 }

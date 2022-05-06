@@ -9,6 +9,8 @@ import android.util.Base64
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.cybergod.oyeetaxi.BuildConfig
 import com.cybergod.oyeetaxi.R
@@ -25,6 +27,12 @@ import java.util.*
 object UtilsGlobal {
 
     private const val TAG = "UtilsGlobal"
+
+    fun AutoCompleteTextView.showDropDownMenuFix(adapter: ArrayAdapter<String>?) {
+        if (this.text.isNotEmpty()){
+            adapter?.filter?.filter(null)
+        }
+    }
 
     fun Context.isGooglePlayServicesAvailable(activity: Activity): Boolean {
         val GPS_ERROR_DIALOG_REQUEST = 9001

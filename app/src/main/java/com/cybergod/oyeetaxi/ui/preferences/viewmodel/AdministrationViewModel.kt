@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.model.Configuracion
+import com.cybergod.oyeetaxi.api.model.configuration.EmailConfiguracion
 import com.cybergod.oyeetaxi.api.model.configuration.TwilioConfiguracion
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
@@ -27,7 +28,10 @@ class AdministrationViewModel @Inject constructor(
 
 
     val smsProviderItems : MutableList<String> = getSmsProviderList()
-    lateinit var arrayAdapter : ArrayAdapter<String>
+    lateinit var smsArrayAdapter : ArrayAdapter<String>
+
+    lateinit var protocolItems:Array<String>
+    lateinit var protocolArrayAdapter : ArrayAdapter<String>
 
 
     private fun getSmsProviderList(): MutableList<String>{
@@ -110,6 +114,18 @@ class AdministrationViewModel @Inject constructor(
 
 
 
+    }
+
+    fun setServerEmailConfiguration(emailConfiguracion: EmailConfiguracion) {
+        viewModelScope.launch(Dispatchers.IO) {
+            refreshThisConfiguration(
+                configurationRepository.updateConfiguration(
+                    Configuracion(
+                        emailConfiguracion = emailConfiguracion,
+                    )
+                )
+            )
+        }
     }
 
 }

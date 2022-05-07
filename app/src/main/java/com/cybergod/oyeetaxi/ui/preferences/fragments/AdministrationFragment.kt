@@ -13,6 +13,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.EmailConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
@@ -57,7 +58,7 @@ class AdministrationFragment : BaseFragment() {
 
 
     private fun setupSmSProviderListAdapter(){
-        viewModel.arrayAdapter =  ArrayAdapter(
+        viewModel.smsArrayAdapter =  ArrayAdapter(
             requireActivity(),
             R.layout.item_map_style,
             viewModel.smsProviderItems
@@ -70,7 +71,7 @@ class AdministrationFragment : BaseFragment() {
     private fun fillTexViewSmSProviderList() {
 
         binding.tvSmsProvider.setAdapter(
-            viewModel.arrayAdapter
+            viewModel.smsArrayAdapter
         )
         binding.tfSmsProvider.clearFocus()
     }
@@ -148,8 +149,13 @@ class AdministrationFragment : BaseFragment() {
 
         }
 
+        binding.btnConfigurarEmailProvider.setOnClickListener{
+            launchEmailConfigurationFragment()
+        }
+
+
         binding.tvSmsProvider.setOnClickListener {
-            binding.tvSmsProvider.showDropDownMenuFix(viewModel.arrayAdapter)
+            binding.tvSmsProvider.showDropDownMenuFix(viewModel.smsArrayAdapter)
         }
 
 
@@ -268,10 +274,15 @@ class AdministrationFragment : BaseFragment() {
 
 
     private fun launchTwillioConfigurationFragment(){
-        val dialogPersonas = TwillioConfigurationFragment()
-        dialogPersonas.show(requireActivity().supportFragmentManager,"twillioConfigurationFragment")
+        val dialog = TwillioConfigurationFragment()
+        dialog.show(requireActivity().supportFragmentManager,"twillioConfigurationFragment")
     }
 
+
+    private fun launchEmailConfigurationFragment(){
+        val dialog = EmailConfigurationFragment()
+        dialog.show(requireActivity().supportFragmentManager,"emailConfigurationFragment")
+    }
 
 }
 

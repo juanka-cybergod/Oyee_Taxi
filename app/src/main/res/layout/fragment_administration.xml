@@ -79,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:layout_margin="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
                     android:text="@string/disable_server_for_clients_description"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -99,16 +100,17 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+
+                    android:paddingRight="2dp"
                     android:id="@+id/tfSmsProvider"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:helperText=""
+                    app:layout_constraintEnd_toStartOf="@+id/btnConfigurarSmsProvider"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:helperText="Proveedor del servicio de mensajeria usado para enviar los códigos de verificación a los clientes para activar sus cuantas"
-                    app:startIconDrawable="@drawable/ic_sms"
-                    >
+                    app:startIconDrawable="@drawable/ic_sms">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/tvSmsProvider"
@@ -116,7 +118,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Proveedor de SMS"
                         android:inputType="none"
-                        android:textSize="14sp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+
                         />
 
 
@@ -124,22 +127,81 @@
 
 
                 <com.google.android.material.button.MaterialButton
-
                     android:id="@+id/btnConfigurarSmsProvider"
                     style="@style/Widget.Material3.Button.IconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_marginBottom="3dp"
                     android:backgroundTint="@color/casiBlanco"
-                    android:text=" Configurar este Proveedor "
                     android:elevation="0dp"
+                    android:text="@string/config_sms_provider"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
                     app:icon="@drawable/ic_settings_24"
                     app:iconGravity="textStart"
                     app:iconTint="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:padding="4dp"
+                    android:text="Proveedor del servicio de mensajeria usado para enviar los códigos de verificación a los clientes para activar sus cuantas"
+
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    app:layout_constraintEnd_toEndOf="@+id/btnConfigurarSmsProvider"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tfSmsProvider" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clEmailConfiguration"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="horizontal"
+                android:layout_margin="8dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:padding="4dp"
+                    android:text="@string/email_server_provider_description"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnConfigurarEmailProvider" />
+
+                <com.google.android.material.button.MaterialButton
+
+                    android:id="@+id/btnConfigurarEmailProvider"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:elevation="0dp"
+                    android:text="@string/config_email_provider"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_email"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

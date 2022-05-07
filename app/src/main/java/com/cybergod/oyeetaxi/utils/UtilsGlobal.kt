@@ -331,6 +331,9 @@ object UtilsGlobal {
 
     }
 
+    fun String.isEmpty():Boolean{
+       return TextUtils.isEmpty(this.trim { it <= ' ' })
+    }
 
 
 

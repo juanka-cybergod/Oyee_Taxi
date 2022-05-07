@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class EmailConfiguracion(
 
-    val serviceEmail: String? = null,
+    //val serviceEmail: String? = null,
     val host: String? = null,
     val port: Int? = null,
     val username: String? = null,

@@ -180,6 +180,44 @@ object UtilsUI {
     }
 
 
+    fun View.setButtonVisibilityIcon(active:Boolean){
+
+        val button = (this as MaterialButton)
+
+        val ico = when (active){
+            true -> R.drawable.ic_visibility_on_24
+            false -> R.drawable.ic_visibility_off_24
+        }
+
+        button.setIconResource(ico)
+
+
+
+        when (active) {
+            true -> {
+                button.setBackgroundColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.white,
+                        null
+                    )
+                )
+            }
+            false -> {
+                button.setBackgroundColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.white,
+                        null
+                    )
+                )
+            }
+        }
+
+
+    }
+
+
     fun View.setButtonActive(active:Boolean,text: String?){
 
         val button = (this as MaterialButton)
@@ -217,7 +255,7 @@ object UtilsUI {
     }
 
 
-    fun View.vehiculoSeleccionado(seleccionado:Boolean){
+    fun View.itemRecyclerViewSeleccionado(seleccionado:Boolean){
 
         val tipoVehiculo = (this as ConstraintLayout)
         when (seleccionado) {
@@ -516,6 +554,21 @@ object UtilsUI {
                 //.diskCacheStrategy(DiskCacheStrategy.NONE)
                 //.skipMemoryCache(true)
                 .placeholder(R.drawable.ic_front_vehicle)
+                .into((this as ImageView))
+        }
+
+    }
+
+    fun View.loadImageRedSocialFromURL(relativeURL:String?) {
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .fitCenter()
+                .circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(R.drawable.ic_empty_social_network)
                 .into((this as ImageView))
         }
 

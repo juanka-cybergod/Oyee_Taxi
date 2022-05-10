@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.model.Configuracion
+import com.cybergod.oyeetaxi.api.model.SocialConfiguracion
 import com.cybergod.oyeetaxi.api.model.configuration.EmailConfiguracion
 import com.cybergod.oyeetaxi.api.model.configuration.TwilioConfiguracion
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
@@ -122,6 +123,18 @@ class AdministrationViewModel @Inject constructor(
                 configurationRepository.updateConfiguration(
                     Configuracion(
                         emailConfiguracion = emailConfiguracion,
+                    )
+                )
+            )
+        }
+    }
+
+    fun setServerSocialConfiguration(socialConfiguracion: SocialConfiguracion) {
+        viewModelScope.launch(Dispatchers.IO) {
+            refreshThisConfiguration(
+                configurationRepository.updateConfiguration(
+                    Configuracion(
+                        socialConfiguracion = socialConfiguracion,
                     )
                 )
             )

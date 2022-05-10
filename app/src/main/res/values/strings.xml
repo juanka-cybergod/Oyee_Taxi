@@ -85,9 +85,11 @@
     <string name="verification_code_is_incorrect">El Código de Verificación es Incorrecto</string>
     <string name="not_configurable_provider">Este proveedor no es configurable</string>
     <string name="email_server_provider_description">Aquí puedes configura el proveedor que gestiona el envío de automático de correos electrónicos a los clientes</string>
+    <string name="email_social_network_description">Aquí puedes dar visibilidad a todas tus redes</string>
     <string name="config_email_provider">  Configuración del Proveedor de Correos</string>
     <string name="config_sms_provider">  Configurar</string>
-
+    <string name="config_social_network">  Configuración de Redes Sociales</string>
+    <string name="select_social_network_to_modify">Seleccione la red social que desea modificar</string>
 
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>

@@ -9,7 +9,7 @@ import com.cybergod.oyeetaxi.api.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.ItemImagenTipoVehiculoBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ViajeFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.vehiculoSeleccionado
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.itemRecyclerViewSeleccionado
 
 
 class ImageVehicleTypeListAdapter (
@@ -49,9 +49,9 @@ class ImageVehicleTypeListAdapter (
 
                 //Seleccionado desde el viewModel
                 if (viajeFragment.viewModel.tiposVehiculoSeleccionados.value?.containsKey(tipoVehiculo.tipoVehiculo.toString()) == true) {
-                    binding.llTipoVehiculo.vehiculoSeleccionado(true)
+                    binding.llTipoVehiculo.itemRecyclerViewSeleccionado(true)
                 } else {
-                    binding.llTipoVehiculo.vehiculoSeleccionado(false)
+                    binding.llTipoVehiculo.itemRecyclerViewSeleccionado(false)
                 }
 
                 //Imagen
@@ -67,10 +67,10 @@ class ImageVehicleTypeListAdapter (
 
                     if (viajeFragment.viewModel.tiposVehiculoSeleccionados.value?.containsKey(tipoVehiculo.tipoVehiculo.toString()) == false) {
                         viajeFragment.viewModel.tiposVehiculoSeleccionados.value?.put(tipoVehiculo.tipoVehiculo.toString(),tipoVehiculo)
-                        binding.llTipoVehiculo.vehiculoSeleccionado(true)
+                        binding.llTipoVehiculo.itemRecyclerViewSeleccionado(true)
                     } else {
                         viajeFragment.viewModel.tiposVehiculoSeleccionados.value?.remove(tipoVehiculo.tipoVehiculo.toString())
-                        binding.llTipoVehiculo.vehiculoSeleccionado(false)
+                        binding.llTipoVehiculo.itemRecyclerViewSeleccionado(false)
                     }
 
                 }

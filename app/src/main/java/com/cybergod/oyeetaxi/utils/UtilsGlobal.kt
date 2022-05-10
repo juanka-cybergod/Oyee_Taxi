@@ -1,5 +1,6 @@
 package com.cybergod.oyeetaxi.utils
 
+import android.R.string
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -23,6 +24,7 @@ import java.lang.reflect.Method
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 @SuppressLint("SimpleDateFormat")
 object UtilsGlobal {
@@ -334,6 +336,21 @@ object UtilsGlobal {
     fun String.isEmpty():Boolean{
        return TextUtils.isEmpty(this.trim { it <= ' ' })
     }
+
+
+
+//    fun dkndjk(){
+//        val url: string =
+//            "https://api.twilio.com/2010-04-01/Accounts/" + accountSid.toString() + "/Balance.json"
+//        val client = WebClient()
+//        client.Credentials = NetworkCredential(accountSid, authToken)
+//        val responseString: string = client.DownloadString(url)
+//
+//        val responseObject: dynamic = JsonConvert.DeserializeObject<`object`>(responseString)
+//        var accountBalance: Double = java.lang.Double.Parse(responseObject.get("balance").Value)
+//        accountBalance = Math.Round(accountBalance, 2)
+//    }
+
 
 
 

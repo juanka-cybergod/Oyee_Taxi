@@ -14,6 +14,7 @@ import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EmailConfigurationFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
@@ -153,6 +154,10 @@ class AdministrationFragment : BaseFragment() {
             launchEmailConfigurationFragment()
         }
 
+        binding.btnConfigurarRedesSociales.setOnClickListener {
+            launchSocialConfigurationFragment()
+        }
+
 
         binding.tvSmsProvider.setOnClickListener {
             binding.tvSmsProvider.showDropDownMenuFix(viewModel.smsArrayAdapter)
@@ -283,6 +288,12 @@ class AdministrationFragment : BaseFragment() {
         val dialog = EmailConfigurationFragment()
         dialog.show(requireActivity().supportFragmentManager,"emailConfigurationFragment")
     }
+
+    private fun launchSocialConfigurationFragment(){
+        val dialog = SocialConfigurationFragment()
+        dialog.show(requireActivity().supportFragmentManager,"socialConfigurationFragment")
+    }
+
 
 }
 

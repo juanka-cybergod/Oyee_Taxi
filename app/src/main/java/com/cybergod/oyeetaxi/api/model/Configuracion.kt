@@ -29,6 +29,8 @@ data class Configuracion(
     val emailConfiguracion: EmailConfiguracion? = null,
     @SerializedName("updateConfiguracion")
     val updateConfiguracion: UpdateConfiguracion? = null,
+    @SerializedName("socialConfiguracion")
+    val socialConfiguracion: SocialConfiguracion? = null,
 
 
     ): Parcelable

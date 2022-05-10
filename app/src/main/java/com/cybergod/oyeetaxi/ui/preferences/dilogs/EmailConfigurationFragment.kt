@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.configuration.EmailConfiguracion
-import com.cybergod.oyeetaxi.databinding.FragmentEmailConfigurationBinding
+import com.cybergod.oyeetaxi.databinding.DialogConfigurationEmailBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class EmailConfigurationFragment : BottomSheetDialogFragment() {
 
-        private var _binding: FragmentEmailConfigurationBinding? = null
+        private var _binding: DialogConfigurationEmailBinding? = null
         private val binding get() = _binding!!
 
 
@@ -30,7 +30,7 @@ class EmailConfigurationFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentEmailConfigurationBinding.inflate(inflater, container, false)
+        _binding = DialogConfigurationEmailBinding.inflate(inflater, container, false)
 
 
         setupProtocolListAdapter()

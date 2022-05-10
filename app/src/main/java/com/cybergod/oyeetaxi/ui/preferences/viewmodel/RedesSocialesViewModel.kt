@@ -14,7 +14,7 @@ class RedesSocialesViewModel @Inject constructor(
    // private val dataStorageRepository: DataStorageRepository,
 ) : BaseViewModel() {
 
-    lateinit var newSocialConfiguracion: SocialConfiguracion
+    var newSocialConfiguracion: SocialConfiguracion = SocialConfiguracion()
     var redSocialSeleccionada:MutableLiveData<RedSocial> = MutableLiveData<RedSocial>()
 
 

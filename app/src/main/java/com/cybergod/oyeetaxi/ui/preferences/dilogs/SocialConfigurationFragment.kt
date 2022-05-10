@@ -77,13 +77,13 @@ class SocialConfigurationFragment : BottomSheetDialogFragment() {
 
 
                     tvSocialLink.editText?.setText(redSocial.url)
-                    tvSocialLink.hint = "Link a ${redSocial.nombre}"
+                    tvSocialLink.hint = redSocial.nombre
+                    tvHelperText.text = redSocial.ayuda ?: ""
 
-                    redSocial.disponible?.let{ redSocialDisponible ->
 
-                        btnVisibilidad.setButtonVisibilityIcon(redSocialDisponible)
+                    btnVisibilidad.setButtonVisibilityIcon(redSocial.disponible?:true)
 
-                    }
+
 
 
 

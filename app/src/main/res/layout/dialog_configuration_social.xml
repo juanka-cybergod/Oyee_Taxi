@@ -150,7 +150,7 @@
             android:id="@+id/clRedesSociales"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
@@ -162,11 +162,10 @@
             <ScrollView
                 android:id="@+id/scrollView2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="58dp"
                 android:fillViewport="true"
                 android:orientation="horizontal"
                 android:scrollbars="none"
-                app:layout_constraintBottom_toTopOf="@+id/clRedSocialDetail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -203,16 +202,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="invisible"
+
                 android:id="@+id/clRedSocialDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVisibilidad"
@@ -223,7 +220,7 @@
                     android:textSize="13sp"
                     app:icon="@drawable/ic_visibility_on_24"
                     app:iconTint="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvSocialLink"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -234,18 +231,15 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Link"
+                    android:hint=""
                     app:endIconCheckable="true"
                     app:endIconDrawable="@drawable/ic_save_24"
                     app:endIconMode="custom"
-                    app:helperText=""
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btnVisibilidad"
-                    app:startIconDrawable="@drawable/ic_link_24"
+                    app:layout_constraintTop_toTopOf="parent"
 
-                    >
-
+                    app:startIconDrawable="@drawable/ic_link_24">
 
                     <com.google.android.material.textfield.TextInputEditText
 
@@ -255,11 +249,22 @@
                         android:hint=""
                         android:inputType="text"
                         android:text=""
-                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/tvHelperText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSocialLink" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -271,6 +276,10 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 
     </LinearLayout>

@@ -35,6 +35,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoClimatizado
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoVerificacionImage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
+import com.cybergod.oyeetaxi.utils.Intents.launchIntentCallPhone
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.logD
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vmadalin.easypermissions.EasyPermissions
@@ -149,7 +150,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         binding.btnCall.setOnClickListener {
 
             if (Permissions.hasCallPhonePermission(this.requireContext())){
-                callPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
+                requireContext().launchIntentCallPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
             } else {
                 Permissions.requestCallPhonePermission(this)
             }
@@ -217,11 +218,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
 
 
-    private fun callPhone(phoneNumber:String) {
-        val intent = Intent(Intent.ACTION_CALL)
-        intent.data = Uri.parse("tel:${phoneNumber}")
-        startActivity(intent)
-    }
+
 
     private fun showDialogSendSMS(){
 
@@ -335,7 +332,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
         when (requestCode) {
             PERMISSION_CALL_PHONE_REQUEST_CODE -> {
-                callPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
+                requireContext().launchIntentCallPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
             }
             PERMISSION_SEND_SMS_REQUEST_CODE -> {
                 showDialogSendSMS()

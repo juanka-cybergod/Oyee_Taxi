@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
@@ -133,6 +134,11 @@ class AdministrationFragment : BaseFragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupOnClickListener() {
+
+        binding.btnProvincesAdministration.setOnClickListener {
+            findNavController().navigate(R.id.action_go_to_provincesAdministrationFragment)
+        }
+
 
         binding.btnConfigurarSmsProvider.setOnClickListener {
             when (smsProviderFromString(binding.tvSmsProvider.text.toString())) {

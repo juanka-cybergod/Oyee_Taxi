@@ -47,8 +47,6 @@ class RedesSocialesListAdapterForClients (
 
                 binding.icoRedSocial.loadImageRedSocialFromURL(redSocial.ico)
 
-                binding.tvNombre.text = redSocial.nombre
-
                 redSocial.url?.let {  link ->
 
                     binding.container.setOnClickListener {

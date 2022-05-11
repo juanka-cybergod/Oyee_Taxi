@@ -56,8 +56,6 @@ class RedesSocialesListAdapter (
 
                 binding.icoRedSocial.loadImageRedSocialFromURL(redSocial.ico)
 
-                binding.tvNombre.text = redSocial.nombre
-
                 binding.container.setOnClickListener {
                     socialConfigurationFragment.viewModelRedesSociales.redSocialSeleccionada.postValue(redSocial)
                 }

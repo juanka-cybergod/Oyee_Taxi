@@ -47,19 +47,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_phone" />
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tvPhone"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="4dp"-->
-<!--                    android:text=""-->
-<!--                    android:textAlignment="textStart"-->
-<!--                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/icoStart1"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                    android:background="@drawable/ic_phone" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPhone"
@@ -134,7 +122,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_email_send_24" />
+                    android:background="@drawable/ic_email_send_24" />
 
 <!--                <TextView-->
 <!--                    android:layout_marginStart="4dp"-->
@@ -185,20 +173,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_web_24" />
-
-<!--                <TextView-->
-<!--                    android:layout_marginStart="4dp"-->
-<!--                    android:id="@+id/tvWeb"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Sitio Web"-->
-<!--                    android:textAlignment="textStart"-->
-<!--                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/icoStart3"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                    android:background="@drawable/ic_web_24"
+                    />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnWeb"

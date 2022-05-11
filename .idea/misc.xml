@@ -58,6 +58,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permission_storage.xml" value="0.246875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_preferences_main.xml" value="0.6962962962962963" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_provinces.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_provinces_administration.xml" value="0.41953125" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_restore_password.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_simple_user_detail.xml" value="0.246875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_twillio_configuration.xml" value="0.54375" />
@@ -70,6 +71,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_imagen_tipo_vehiculo.xml" value="0.75" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_map_style.xml" value="0.3421875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_provincia.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_provincia_edit.xml" value="0.5465116279069767" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_red_social.xml" value="1.1058823529411765" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_tipo_vehiculo.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehiculo.xml" value="0.33" />

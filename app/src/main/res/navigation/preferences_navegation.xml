@@ -5,6 +5,11 @@
     android:id="@+id/preferences_navegation"
     app:startDestination="@id/preferencesFragment">
 
+    <action android:id="@+id/action_go_to_administrationFragment"
+        app:destination="@id/administrationFragment"/>
+
+    <action android:id="@+id/action_go_to_provincesAdministrationFragment"
+        app:destination="@id/provincesAdministrationFragment"/>
 
     <fragment
         android:id="@+id/preferencesFragment"
@@ -19,7 +24,11 @@
         tools:layout="@layout/fragment_administration"
 
         />
-    <action android:id="@+id/action_go_to_administrationFragment"
-        app:destination="@id/administrationFragment"/>
+    <fragment
+        android:id="@+id/provincesAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment"
+        android:label="ProvincesAdministrationFragment"
+        tools:layout="@layout/fragment_provinces_administration"
+        />
 
 </navigation>

@@ -190,7 +190,7 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
 
     }
 
-        @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupVehiclesListObserver(){
 
         //Observar vehicleList

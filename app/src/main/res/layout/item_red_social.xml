@@ -5,7 +5,6 @@
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".ui.main.activity.MainActivity"
     android:theme="@style/Theme.OyeeTaxi"
     android:padding="2dp"
     >
@@ -16,7 +15,6 @@
         android:layout_height="52dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
-        android:background="@color/white"
         >
 
         <com.mikhaellopez.circularimageview.CircularImageView
@@ -28,22 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_empty_social_network" />
-
-        <TextView
-            android:visibility="invisible"
-            android:id="@+id/tvNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Red Social"
-            android:textColor="@color/colorPrimary"
-            android:textSize="6.5sp"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icoRedSocial" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

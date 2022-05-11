@@ -2,30 +2,25 @@ package com.cybergod.oyeetaxi.ui.preferences.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentPreferencesMainBinding
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
-import com.cybergod.oyeetaxi.maps.Utils
 import com.cybergod.oyeetaxi.maps.Utils.getMapStyleByName
 import com.cybergod.oyeetaxi.maps.Utils.getStyleNameByMapStyle
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.UpdateApplicationFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialSupportFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
 import com.cybergod.oyeetaxi.ui.splash.viewmodel.SplashViewModel
-import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
-import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionString
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,15 +66,18 @@ class PreferencesFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun loadData() {
+
+
+
         binding.tvVersion.text = "Versión ${getAppVersionString()}"
-
-
+        viewModel.getServerConfiguration()
 
     }
 
     private fun setupObservers() {
 
         setupMapStyleObserver()
+
 
 
     }
@@ -141,10 +139,27 @@ class PreferencesFragment : BaseFragment() {
 
     private fun setupOnClickListener() {
 
+
+        binding.btnRedesSociales.setOnClickListener {
+
+            val socialConfiguration = viewModel.serverConfiguration.value?.socialConfiguracion
+
+            if ( socialConfiguration != null) {
+                if (socialConfiguration.disponible == true) {
+                    launchSocialSupportFragment()
+                } else {
+                    Toast.makeText(requireContext(),getString(R.string.not_abailable_for_the_moment), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(),getString(R.string.fail_server_comunication), Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
+
         binding.btnComprobarActualizacions.setOnClickListener {
             getAvailableUpdates()
         }
-
 
 
         binding.tvEstilosMapa.setOnItemClickListener { adapterView, view, position, id ->
@@ -211,6 +226,13 @@ class PreferencesFragment : BaseFragment() {
             dialogUpdateApplication.show(requireActivity().supportFragmentManager,"updateApplicationFragment")
         }
 
+    }
+
+    private val socialSupportFragment = SocialSupportFragment()
+    private fun launchSocialSupportFragment(){
+        if (!socialSupportFragment.isVisible) {
+            socialSupportFragment.show(requireActivity().supportFragmentManager,"socialSupportFragment")
+        }
     }
 
 

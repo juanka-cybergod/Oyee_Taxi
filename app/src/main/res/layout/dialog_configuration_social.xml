@@ -191,6 +191,7 @@
 
             <TextView
                 android:id="@+id/textView2"
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/select_social_network_to_modify"
@@ -202,7 +203,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-
+                android:background="@color/white"
                 android:id="@+id/clRedSocialDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,7 +222,7 @@
                     app:icon="@drawable/ic_visibility_on_24"
                     app:iconTint="@color/black"
                     app:layout_constraintBottom_toBottomOf="@+id/tvSocialLink"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -231,20 +232,20 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint=""
+                    android:hint="Link"
                     app:endIconCheckable="true"
                     app:endIconDrawable="@drawable/ic_save_24"
                     app:endIconMode="custom"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btnVisibilidad"
+                    app:layout_constraintEnd_toStartOf="@+id/btnVisibilidad"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_link_24"
 
-                    app:startIconDrawable="@drawable/ic_link_24">
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
-
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@color/white"
                         android:hint=""
                         android:inputType="text"

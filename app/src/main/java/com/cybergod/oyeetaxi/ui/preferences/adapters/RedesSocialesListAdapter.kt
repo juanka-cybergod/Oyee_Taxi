@@ -63,22 +63,6 @@ class RedesSocialesListAdapter (
                 }
 
                 binding.container.setOnLongClickListener {
-
-
-                    //socialConfigurationFragment.requireContext().launchIntentOpenWebURL("https://www.google.com")
-
-                    //socialConfigurationFragment.requireContext().launchIntentOpenInstagram("cuellarperezjuancarlos")
-                    //socialConfigurationFragment.requireContext().launchIntentToOpenFacebook("juancarlos.cuellarperez.71")
-                    //socialConfigurationFragment.requireContext().launchIntentOpenWhatsapp("+5353208579")
-                    //socialConfigurationFragment.requireContext().launchIntentOpenYoutube("EDteam")
-
-                    //socialConfigurationFragment.requireContext().launchIntentOpenTwitter("@CyberGodJC")
-
-                    //socialConfigurationFragment.requireContext().launchIntentOpenLinkedIn("juan-carlos-cyber-god")
-                    //socialConfigurationFragment.requireContext().launchIntentOpenSendEmailTo("jjuancarlos@gmail.com")
-
-
-
                     true
                 }
 

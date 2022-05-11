@@ -90,6 +90,7 @@
     <string name="config_sms_provider">  Configurar</string>
     <string name="config_social_network">  Configuración de Redes Sociales</string>
     <string name="select_social_network_to_modify">Seleccione la red social que desea modificar</string>
+    <string name="not_abailable_for_the_moment">No disponible por el momento</string>
 
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>

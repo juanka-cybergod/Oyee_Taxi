@@ -45,27 +45,46 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRedesSociales"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:backgroundTint="@color/white"
+            android:text="  Redes Sociales y soperte de Oyee Taxi"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:icon="@drawable/ic_social_24"
+            app:iconGravity="textStart"
+            app:iconTint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/btnComprobarActualizacions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clAppVersion"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:padding="6dp"
+            android:paddingBottom="8dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnComprobarActualizacions"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            >
+            app:layout_constraintTop_toTopOf="@+id/btnComprobarActualizacions">
 
             <TextView
-                android:layout_marginBottom="2dp"
                 android:id="@+id/tvAppName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
                 android:text="@string/app_name"
                 android:textSize="13sp"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@+id/tvVersion"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -85,7 +104,7 @@
 
             android:id="@+id/btnComprobarActualizacions"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:backgroundTint="@color/white"
@@ -96,7 +115,8 @@
             app:iconGravity="textStart"
             app:iconTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clAppVersion" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

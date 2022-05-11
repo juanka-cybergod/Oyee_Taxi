@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
@@ -18,7 +19,11 @@ import com.cybergod.oyeetaxi.ui.preferences.adapters.RedesSocialesListAdapter
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.RedesSocialesViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
+import com.cybergod.oyeetaxi.utils.Intents.launchRedSocialIntent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class SocialConfigurationFragment : BottomSheetDialogFragment() {
@@ -63,6 +68,7 @@ class SocialConfigurationFragment : BottomSheetDialogFragment() {
             if (it == null) {
                 with(binding) {
                     clRedSocialDetail.visibility = View.INVISIBLE
+
                 }
 
 
@@ -154,6 +160,16 @@ class SocialConfigurationFragment : BottomSheetDialogFragment() {
 
 
 
+    private fun openSocialLink(ok:Boolean){
+
+        if (ok) {
+            requireContext().launchRedSocialIntent(
+                viewModelRedesSociales.redSocialSeleccionada.value?.nombre,
+                binding.tvSocialLink.editText?.text.toString()
+            )
+        }
+
+    }
 
 
 
@@ -172,7 +188,32 @@ class SocialConfigurationFragment : BottomSheetDialogFragment() {
                closeThisBottomSheetDialogFragment()
            }
 
+           tvSocialLink.setStartIconOnClickListener {
+               if (binding.tvSocialLink.editText?.text.toString().isNotEmpty()) {
+                   requireContext().showMessageDialogForResult(
+                       funResult = {ok -> openSocialLink(ok)},
+                       title = "Comprobar este link",
+                       message = "Desea probar si el link funciona correctamente para ${viewModelRedesSociales.redSocialSeleccionada.value?.nombre} antes de guardar",
+                       icon = R.drawable.ic_alert_24
+
+                   )
+               } else {
+                   //Toast.makeText(requireContext(),"",Toast.LENGTH_LONG).show()
+                    tvSocialLink.error = "El link está vacio"
+                    lifecycleScope.launch() {
+                        delay(1000)
+                        tvSocialLink.isErrorEnabled = false
+                    }
+
+               }
+
+
+           }
+
            tvSocialLink.setEndIconOnClickListener {
+
+
+
                viewModelRedesSociales.newSocialConfiguracion.redesSociales?.let { listaRedesSociales ->
 
                    val mutableListaRedesSociales = listaRedesSociales.toMutableList()
@@ -188,6 +229,9 @@ class SocialConfigurationFragment : BottomSheetDialogFragment() {
 
 
                }
+
+
+
            }
 
            btnVisibilidad.setOnClickListener {

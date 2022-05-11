@@ -1,12 +1,16 @@
 package com.cybergod.oyeetaxi.utils
 
+import android.app.Person
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.provider.ContactsContract
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.cybergod.oyeetaxi.api.model.SocialConfiguracion
 
 
 object Intents {
@@ -105,15 +109,21 @@ object Intents {
     }
 
     fun Context.launchIntentOpenLinkedIn(userId:String){
-        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("linkedin://$userId"))
-        val packageManager: PackageManager = this.packageManager
-        val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-        if (list.isEmpty()) {
-            intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/in/$userId"))
-                //Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/profile/view?id=you"))
+
+        var intent: Intent? = null
+        try {
+            this.packageManager.getPackageInfo("com.linkedin.android", 0)
+            intent = Intent(Intent.ACTION_VIEW, Uri.parse("linkedin://$userId"))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            this.startActivity(intent)
+        } catch (e: PackageManager.NameNotFoundException) {
+            Toast.makeText(this, " LinkedIn no esta instalado en tu telefono ", Toast.LENGTH_SHORT)
+                .show()
+            e.printStackTrace()
+            intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/in/$userId"))
+            this.startActivity(intent)
         }
-        this.startActivity(intent)
+
     }
 
     fun Context.launchIntentOpenSendEmailTo(email:String){
@@ -132,6 +142,64 @@ object Intents {
 
     }
 
+
+
+    fun Context.launchIntentSendSMS(phoneNumber: String){
+        /* PROBAR ESTOS EN CASO DE Q ESTE NO FUNCIONE
+        Uri uri = Uri.parse("smsto:YOUR_SMS_NUMBER");
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra("sms_body", "The SMS text");
+        startActivity(intent);
+         */
+        /* OTRO
+        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+        smsIntent.setType("vnd.android-dir/mms-sms");
+        smsIntent.putExtra("address","your desired phoneNumber");
+        smsIntent.putExtra("sms_body","your desired message");
+        smsIntent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(smsIntent);
+         */
+        val intent =Intent(Intent.ACTION_VIEW, Uri.fromParts("sms",phoneNumber,null))
+        this.startActivity(intent)
+    }
+
+
+
+    fun Context.launchIntentToAddContact(socialConfiguracion: SocialConfiguracion) {
+        val intent = Intent(Intent.ACTION_INSERT)
+        intent.type = ContactsContract.Contacts.CONTENT_TYPE
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, "Oyee_Taxi Soporte")
+        intent.putExtra(ContactsContract.Intents.Insert.COMPANY, "Oyee Taxi")
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, socialConfiguracion.phone?:"")
+        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, socialConfiguracion.email?:"")
+        this.startActivity(intent)
+    }
+
+
+    fun Context.launchRedSocialIntent(redSocial:String?, idUsuario:String){
+
+        redSocial?.let {
+
+            when(redSocial.trim().lowercase()) {
+                "facebook" -> { launchIntentToOpenFacebook(idUsuario) }
+                "instagram" -> { launchIntentOpenInstagram(idUsuario) }
+                "whatsapp" -> { launchIntentOpenWhatsapp(idUsuario) }
+                "youtube" -> { launchIntentOpenYoutube(idUsuario) }
+                "twitter" -> { launchIntentOpenTwitter(idUsuario) }
+                "linkedin" -> { launchIntentOpenLinkedIn(idUsuario) }
+                else -> {
+                    if (redSocial.contains("http",true)) {
+                        launchIntentOpenWebURL(idUsuario)
+                    } else {
+                        //nada con que abrir
+                    }
+                }
+            }
+
+        }
+
+
+    }
 
 
 }

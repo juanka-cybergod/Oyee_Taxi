@@ -1,5 +1,6 @@
 package com.cybergod.oyeetaxi.ui.preferences.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import com.cybergod.oyeetaxi.databinding.ItemProvinciaEditBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -27,7 +30,7 @@ class ProvincesEditListAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_provincia_edit,parent,false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_provincia_edit,parent,false),provincesAdministrationFragment)
     }
 
     override fun getItemCount(): Int {
@@ -41,20 +44,45 @@ class ProvincesEditListAdapter (
 
 
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View,private val provincesAdministrationFragment:ProvincesAdministrationFragment): RecyclerView.ViewHolder(itemView){
         val binding = ItemProvinciaEditBinding.bind(itemView)
 
 
+
+        @SuppressLint("SetTextI18n")
         fun bind(provincia:Provincia, provincesAdministrationFragment: ProvincesAdministrationFragment) {
 
             with(binding) {
 
                 tvProvinciaNombreID.text = provincia.nombre
+                tvDetalles.text = "Latidud: ${provincia.ubicacion?.latitud}\n" +
+                                  "Longitud: ${provincia.ubicacion?.longitud}\n" +
+                                  "Altura: ${provincia.ubicacion?.alturaMapa}"
 
                 btnVisible.setButtonVisibilityIcon(provincia.visible?:true)
 
                 btnVisible.setOnClickListener {
-                    changeProvinceVisibility(provincesAdministrationFragment,provincia)
+
+                    provinceSelected = provincia
+                    val title:String
+                    val message:String
+                    val ico:Int
+                    if (provincia.visible == true) {
+                        title="Ocultar Provincia"
+                        message="Desea ocultar Provincia ${provincia.nombre} para que no sea seleccionable por los clientes por el momento"
+                        ico=R.drawable.ic_visibility_off_24
+                    } else {
+                        title="Mostrar Provincia"
+                        message="Desea volver a mostrar Provincia ${provincia.nombre} para que sea visible y seleccionable por los clientes"
+                        ico=R.drawable.ic_visibility_on_24
+                    }
+                    provincesAdministrationFragment.requireContext().showMessageDialogForResult(
+                        funResult = {ok -> changeProvinceVisibilityOK(ok)},
+                        title = title,
+                        message = message,
+                        icon = ico
+                    )
+
 
                 }
 
@@ -65,15 +93,24 @@ class ProvincesEditListAdapter (
 
         }
 
-        private fun changeProvinceVisibility(provincesAdministrationFragment:ProvincesAdministrationFragment,provincia: Provincia) {
+        private lateinit var provinceSelected:Provincia
+        private fun changeProvinceVisibilityOK(ok:Boolean){
+            if (ok) {
+                changeProvinceVisibility()
+            }
+        }
+
+        private fun changeProvinceVisibility() {
 
             provincesAdministrationFragment.lifecycleScope.launch {
 
                 (provincesAdministrationFragment.requireActivity() as BaseActivity).showProgressDialog("Actualizando provincia ...")
 
+                delay(1000L)
+
                 val provinciaChanged = provincesAdministrationFragment.viewModel.setProvinceVisibility(
-                    nombreProvincia = provincia.nombre?:"",
-                    visible = !provincia.visible!!
+                    nombreProvincia = provinceSelected.nombre?:"",
+                    visible = !provinceSelected.visible!!
                 )
 
                 (provincesAdministrationFragment.requireActivity() as BaseActivity).hideProgressDialog()

@@ -83,6 +83,9 @@ interface RetroServiceInterface {
     @GET(URL_BASE_PROVINCIAS + "getAllProvinces")
     suspend fun getAllProvinces(): Response<ArrayList<Provincia>>
 
+    @GET(URL_BASE_PROVINCIAS + "getAvailableProvinces")
+    suspend fun getAvailableProvinces(): Response<ArrayList<Provincia>>
+
     @PUT(URL_BASE_PROVINCIAS + "updateProvince")
     suspend fun updateProvince(@Body provincia: Provincia):Response<Provincia>
 

@@ -20,7 +20,7 @@ class ProvincesViewModel @Inject constructor(private val repository: ProvincesRe
 
             viewModelScope.launch(Dispatchers.IO) {
                 provincesList.postValue(
-                    repository.getAllProvinces()
+                    repository.getAvailableProvinces()
                 )
 
 

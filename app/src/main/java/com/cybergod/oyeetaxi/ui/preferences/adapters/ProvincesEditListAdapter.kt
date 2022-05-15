@@ -3,11 +3,16 @@ package com.cybergod.oyeetaxi.ui.preferences.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.databinding.ItemProvinciaEditBinding
+import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
+import kotlinx.coroutines.launch
 
 
 class ProvincesEditListAdapter (
@@ -46,14 +51,41 @@ class ProvincesEditListAdapter (
 
                 tvProvinciaNombreID.text = provincia.nombre
 
+                btnVisible.setButtonVisibilityIcon(provincia.visible?:true)
+
                 btnVisible.setOnClickListener {
-                    provincesAdministrationFragment.viewModel.getAllProvinces()
+                    changeProvinceVisibility(provincesAdministrationFragment,provincia)
+
                 }
 
 
             }
 
 
+
+        }
+
+        private fun changeProvinceVisibility(provincesAdministrationFragment:ProvincesAdministrationFragment,provincia: Provincia) {
+
+            provincesAdministrationFragment.lifecycleScope.launch {
+
+                (provincesAdministrationFragment.requireActivity() as BaseActivity).showProgressDialog("Actualizando provincia ...")
+
+                val provinciaChanged = provincesAdministrationFragment.viewModel.setProvinceVisibility(
+                    nombreProvincia = provincia.nombre?:"",
+                    visible = !provincia.visible!!
+                )
+
+                (provincesAdministrationFragment.requireActivity() as BaseActivity).hideProgressDialog()
+
+                if (provinciaChanged == null) {
+                    (provincesAdministrationFragment.requireActivity() as BaseActivity).showSnackBar(
+                        provincesAdministrationFragment.getString(R.string.fail_server_comunication),
+                        true
+                    )
+                }
+
+            }
 
         }
 

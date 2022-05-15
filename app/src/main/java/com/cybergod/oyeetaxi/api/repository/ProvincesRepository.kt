@@ -14,6 +14,36 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
     private val className = this.javaClass.simpleName?:"ClaseDesconocida"
 
 
+    suspend fun getAvailableProvinces():List<Provincia>?   {
+
+        UtilsApi.handleRequest {
+            retroServiceInterface.getAvailableProvinces()
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                    response.body()?.toList() ?: emptyList()
+                } else  null
+
+            } else null
+
+        }
+
+        return null
+
+    }
+
+
+
     suspend fun getAllProvinces():List<Provincia>?   {
 
         UtilsApi.handleRequest {

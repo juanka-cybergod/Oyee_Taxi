@@ -44,15 +44,15 @@ class ProvincesAdministrationViewModel @Inject constructor(
     private fun updateProvincesList(updatedProvince: Provincia) {
 
         provincesList.value?.toMutableList()?.let { listaProvincia ->
+            val nuevaListaProvinces = ArrayList<Provincia>()
             listaProvincia.forEach { provincia ->
-                val nuevaListaProvinces = ArrayList<Provincia>()
                 if (provincia.nombre.equals(updatedProvince.nombre)) {
                     nuevaListaProvinces.add(updatedProvince)
                 } else {
                     nuevaListaProvinces.add(provincia)
                 }
-                provincesList.postValue(nuevaListaProvinces.sortedBy { provincia.nombre  })
             }
+            provincesList.postValue(nuevaListaProvinces)
         }
 
     }

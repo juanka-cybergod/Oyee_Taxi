@@ -17,5 +17,7 @@ data class Ubicacion(
     val rotacion:Int? = 0,
     @SerializedName("direccion")
     val direccion:String? = null,
+    @SerializedName("alturaMapa")
+    var alturaMapa:Int? = null
 ):Parcelable
 

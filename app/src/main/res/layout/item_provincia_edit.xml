@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:lines="3"
                 android:maxLines="4"
-                android:textColor="@color/colorCrema"
+                android:textColor="@color/casiBlancoObscuro"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 android:text="Latitud: XX.XXXXXXX\nLongitud: XX.XXXXXXX  \nAltura: 8 "

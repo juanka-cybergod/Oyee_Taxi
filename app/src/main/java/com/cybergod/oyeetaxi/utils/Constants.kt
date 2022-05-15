@@ -35,7 +35,6 @@ object Constants {
     const val URL_BASE_VIAJES = "viajes/"
     const val URL_BASE_CONFIGURACION= "configuracion/"
     const val URL_BASE_FICHEROS="ficheros/"
-    const val URL_BASE_SMS="sms/"
     const val URL_BASE_VALORACION="valoraciones/"
 
     const val DEFAULT_CONFIG = "default"

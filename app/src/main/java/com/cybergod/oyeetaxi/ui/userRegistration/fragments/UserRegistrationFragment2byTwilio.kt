@@ -21,7 +21,6 @@ import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.userRegistration.broadcast.SMSReceiver
 import com.cybergod.oyeetaxi.ui.userRegistration.utils.AppSignatureHashHelper
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
-import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.TwilioSmsViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.utils.Constants.CONTRY_CODE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.pasteFromClipBoard
@@ -48,7 +47,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
     private lateinit var phoneNumber:String
 
     val viewModel: UserRegistrationViewModel by activityViewModels()
-    private val twilioModel: TwilioSmsViewModel by activityViewModels()
+
 
 
     override fun onCreateView(
@@ -97,7 +96,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
                         lifecycleScope.launch {
                             showProgressDialog(getString(R.string.cheking_your_code))
                             delay(1000L)
-                            verifyPhoneNumberWithCode(twilioModel.otpCode.value,verificationCode)
+                            verifyPhoneNumberWithCode(viewModel.otpCode.value,verificationCode)
                         }
 
 
@@ -168,7 +167,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
 
     private fun setupObserver() {
         //observar el resultado de si es creado satisfactoriamente el usuario
-        twilioModel.otpCode.observe( viewLifecycleOwner, Observer { otpCode ->
+        viewModel.otpCode.observe( viewLifecycleOwner, Observer { otpCode ->
 
                 hideProgressDialog()
 
@@ -197,7 +196,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
                 } else {
 
                     //si no existe comenzar la verificacion
-                    twilioModel.twilioPhoneAuthentication(phoneNumber)
+                    viewModel.twilioPhoneAuthentication(phoneNumber)
 
                 }
 
@@ -219,7 +218,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         phoneVerifiedOK = phoneNumber
 
         // Toast.makeText(requireContext(),"Código de Verificación Enviado",Toast.LENGTH_LONG).show()
-        Log.d(TAG_CLASS_NAME,"onCodeSent : Código de Verificación Enviado (verificationId=${twilioModel.otpCode.value})")
+        Log.d(TAG_CLASS_NAME,"onCodeSent : Código de Verificación Enviado (verificationId=${viewModel.otpCode.value})")
 
 
         //Deshabilitar el Campo de Telefono

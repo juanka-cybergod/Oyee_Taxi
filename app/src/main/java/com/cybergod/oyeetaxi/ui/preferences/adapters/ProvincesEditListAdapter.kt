@@ -1,17 +1,12 @@
 package com.cybergod.oyeetaxi.ui.preferences.adapters
 
-
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.ItemProvinciaEditBinding
-import com.cybergod.oyeetaxi.databinding.ItemVehiculoBinding
-import com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentList
 import com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment
 
 
@@ -42,7 +37,6 @@ class ProvincesEditListAdapter (
 
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        //Nuevo Metodo Binding para Cargar las Vistas dentro de los Adapters
         val binding = ItemProvinciaEditBinding.bind(itemView)
 
 
@@ -51,6 +45,10 @@ class ProvincesEditListAdapter (
             with(binding) {
 
                 tvProvinciaNombreID.text = provincia.nombre
+
+                btnVisible.setOnClickListener {
+                    provincesAdministrationFragment.viewModel.getAllProvinces()
+                }
 
 
             }

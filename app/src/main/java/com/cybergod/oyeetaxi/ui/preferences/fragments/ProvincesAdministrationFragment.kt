@@ -28,7 +28,7 @@ class ProvincesAdministrationFragment : BaseFragment() {
     private lateinit var recyclerViewAdapter : ProvincesEditListAdapter
 
 
-    private val viewModel: ProvincesAdministrationViewModel by viewModels()
+    val viewModel: ProvincesAdministrationViewModel by viewModels()
 
 
     override fun onCreateView(

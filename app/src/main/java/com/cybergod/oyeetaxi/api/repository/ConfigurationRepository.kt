@@ -25,6 +25,7 @@ class ConfigurationRepository @Inject constructor(private val retroServiceInterf
 
     }
 
+
     suspend fun getSmsProvider():SmsProvider?   {
 
         handleRequest {
@@ -54,34 +55,6 @@ class ConfigurationRepository @Inject constructor(private val retroServiceInterf
 
     }
 
-    suspend fun sendSMS(userPhone: String):String?   {
-
-        handleRequest {
-            retroServiceInterface.sendSMSTest(userPhone)
-        }?.let { response ->
-
-            return if (response.isSuccessful) {
-
-                logResponse(
-                    className = className,
-                    metodo = object {}.javaClass.enclosingMethod!!,
-                    responseCode = response.code(),
-                    responseHeaders = response.headers().toString(),
-                    responseBody = response.body().toString()
-                )
-
-                if (response.code() == Constants.RESPONSE_CODE_OK && !response.body().isNullOrEmpty()) {
-                    response.body()
-                } else  null
-
-            } else null
-
-        }
-
-
-        return null
-
-    }
 
     suspend fun getUpdateConfiguration():UpdateConfiguracion?   {
 
@@ -111,7 +84,6 @@ class ConfigurationRepository @Inject constructor(private val retroServiceInterf
         return null
 
     }
-
 
 
     suspend fun getConfiguration():Configuracion? {
@@ -144,6 +116,7 @@ class ConfigurationRepository @Inject constructor(private val retroServiceInterf
 
     }
 
+    
     suspend fun updateConfiguration(configuracion: Configuracion): Configuracion? {
 
 

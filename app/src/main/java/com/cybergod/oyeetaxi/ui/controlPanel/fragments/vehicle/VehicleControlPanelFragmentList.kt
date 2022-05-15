@@ -1,6 +1,5 @@
 package com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -182,7 +181,6 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
     }
 
     private fun initRecyclerView(){
-        // Recyclerview
         recyclerViewAdapter = VehiculosListAdapter(requireContext(),requireActivity(),binding.root,this)
         recyclerView = binding.recylerViewVehiculos
         recyclerView.adapter = recyclerViewAdapter
@@ -190,11 +188,9 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private fun setupVehiclesListObserver(){
 
-        //Observar vehicleList
-        //Otro Metodo ->viewModel.getAllVehiclesObserver()(this, Observer {
         viewModel.vehiclesList.observe(viewLifecycleOwner, Observer {
 
             if (it != null) {

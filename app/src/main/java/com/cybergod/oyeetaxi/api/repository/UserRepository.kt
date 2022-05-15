@@ -9,6 +9,7 @@ import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
+import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_CREATED
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.passwordEncode
@@ -199,6 +200,36 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
         return null
 
 
+
+    }
+
+
+    suspend fun requestOTPCodeToSMS(userPhone: String):String?   {
+
+        handleRequest {
+            retroServiceInterface.requestOTPCodeToSMSTest(userPhone)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == Constants.RESPONSE_CODE_OK && !response.body().isNullOrEmpty()) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+
+        return null
 
     }
 

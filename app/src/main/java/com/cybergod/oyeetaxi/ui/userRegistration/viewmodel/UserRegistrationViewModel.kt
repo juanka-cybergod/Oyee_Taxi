@@ -34,6 +34,20 @@ class UserRegistrationViewModel @Inject constructor(
 
     val userRegistered = dataStoreRepository.readUserRegistred.asLiveData()
 
+    val otpCode: MutableLiveData<String> = MutableLiveData<String>()
+
+
+    fun twilioPhoneAuthentication(userPhone: String){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            otpCode.postValue(
+                userRepository.requestOTPCodeToSMS(userPhone)
+            )
+        }
+
+
+    }
+
     var smsProvider : MutableLiveData<SmsProvider> = MutableLiveData<SmsProvider>(SmsProvider.FIREBASE)
     init {
 

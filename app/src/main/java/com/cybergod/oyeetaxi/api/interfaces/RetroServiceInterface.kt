@@ -10,7 +10,6 @@ import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_CONFIGURACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_FICHEROS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_PROVINCIAS
-import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_SMS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_TIPO_VEHICULOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_USUARIOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VALORACION
@@ -40,6 +39,9 @@ interface RetroServiceInterface {
 
     @GET(URL_BASE_USUARIOS + "userExistByPhone")
     suspend fun userExistByPhone(@Query("userPhone") userPhone: String): Response<Boolean>
+
+    @GET(URL_BASE_USUARIOS + "requestOTPCodeToSMSTest") //requestOTPCodeToSMS **Usar en Release
+    suspend fun requestOTPCodeToSMSTest(@Query("phoneNumber") userPhone: String): Response<String>
 
     @PUT(URL_BASE_USUARIOS + "updateUserLocationById")
     suspend fun updateUserLocationById(@Query("idUsuario") idUsuario: String,@Body ubicacion: Ubicacion) : Response<Boolean>
@@ -81,6 +83,9 @@ interface RetroServiceInterface {
     @GET(URL_BASE_PROVINCIAS + "getAllProvinces")
     suspend fun getAllProvinces(): Response<ArrayList<Provincia>>
 
+    @PUT(URL_BASE_PROVINCIAS + "updateProvince")
+    suspend fun updateProvince(@Body provincia: Provincia):Response<Provincia>
+
 
     /** CONFIGURACION ***********************************************************/
     @GET(URL_BASE_CONFIGURACION + "isServerActive")
@@ -97,11 +102,6 @@ interface RetroServiceInterface {
 
     @PUT(URL_BASE_CONFIGURACION + "updateConfiguration")
     suspend fun updateConfiguration(@Body configuracion :Configuracion): Response<Configuracion>
-
-
-    /** TWILIO SMS ***********************************************************/
-    @GET(URL_BASE_SMS + "sendSMSTest")
-    suspend fun sendSMSTest(@Query("phoneNumber") userPhone: String): Response<String>
 
 
     /** UPPLOAD FILES ***********************************************************/

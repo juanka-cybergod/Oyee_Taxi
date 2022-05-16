@@ -8,7 +8,7 @@
     android:paddingTop="0dp"
     tools:context=".ui.controlPanel.activity.UserControlPanelActivity"
     android:theme="@style/Theme.OyeeTaxi"
-    android:padding="8dp"
+    android:padding="4dp"
     >
 
 
@@ -78,8 +78,8 @@
             android:id="@+id/btnEditarUbicacion"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_marginRight="16dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:backgroundTint="@color/white"
             android:textSize="13sp"
             app:icon="@drawable/ic_location_edit"
@@ -93,8 +93,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVisible"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginRight="8dp"
             android:backgroundTint="@color/white"
             android:textSize="13sp"

@@ -198,7 +198,7 @@ object UtilsUI {
                 button.setBackgroundColor(
                     ResourcesCompat.getColor(
                         resources,
-                        R.color.white,
+                        R.color.casiAmarillo,
                         null
                     )
                 )
@@ -207,7 +207,7 @@ object UtilsUI {
                 button.setBackgroundColor(
                     ResourcesCompat.getColor(
                         resources,
-                        R.color.white,
+                        R.color.casiRojo,
                         null
                     )
                 )

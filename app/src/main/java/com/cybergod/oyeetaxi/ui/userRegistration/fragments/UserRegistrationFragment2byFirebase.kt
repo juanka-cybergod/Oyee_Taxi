@@ -23,6 +23,7 @@ import com.cybergod.oyeetaxi.ui.userRegistration.utils.AppSignatureHashHelper
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.utils.Constants.CONTRY_CODE
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.pasteFromClipBoard
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.firebase.FirebaseException
@@ -110,7 +111,7 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
                 )
             } else {
 
-                if (verificationCode.isEmpty()) {
+                if (verificationCode.isEmptyTrim()) {
                         showSnackBar(
                             "Por favor introduzca el código de verificación",
                             true,

@@ -4,16 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.databinding.FragmentProvincesAdministrationBinding
+import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.ProvincesEditListAdapter
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.ProvincesAdministrationViewModel
+import com.cybergod.oyeetaxi.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,7 +35,7 @@ class ProvincesAdministrationFragment : BaseFragment() {
     private lateinit var recyclerViewAdapter : ProvincesEditListAdapter
 
 
-    val viewModel: ProvincesAdministrationViewModel by viewModels()
+    val viewModel: ProvincesAdministrationViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -64,11 +71,30 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
         setupProvincesListObserver()
 
+        setupProvinceAddedOrUpdated()
+
+    }
+
+    private fun setupProvinceAddedOrUpdated() {
+        viewModel.provincesAddedOrUpdated.observe(viewLifecycleOwner, Observer {
+
+            (requireActivity() as BaseActivity).hideProgressDialog()
+            if (it == null) {
+                showSnackBar(
+                    getString(R.string.fail_server_comunication),
+                    true
+                )
+            } else {
+
+            }
+        })
     }
 
 
     private fun setupProvincesListObserver(){
         viewModel.provincesList.observe(viewLifecycleOwner, Observer {
+
+
 
             if (it != null) {
 
@@ -122,8 +148,19 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
     private fun setupOnClickListener() {
 
+        with (binding) {
+            buttonAddProvince.setOnClickListener {
+                launchAddUpdateProvinceFragment()
+            }
+        }
+
+    }
 
 
+    private fun launchAddUpdateProvinceFragment() {
+        findNavController().navigate(R.id.action_go_to_addUpdateProvinceFragment,Bundle().apply {
+
+        })
     }
 
     override fun onResume() {
@@ -134,12 +171,6 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
     private fun updateProvincesList(){
         viewModel.getAllProvinces()
-    }
-
-
-    private fun launchTwillioConfigurationFragment(){
-        val dialog = TwillioConfigurationFragment()
-        dialog.show(requireActivity().supportFragmentManager,"twillioConfigurationFragment")
     }
 
 

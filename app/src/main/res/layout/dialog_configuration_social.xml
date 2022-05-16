@@ -203,7 +203,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@color/white"
+
                 android:id="@+id/clRedSocialDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVisibilidad"
                     style="@style/Widget.Material3.Button.IconButton"
-                    android:layout_width="45dp"
+                    android:layout_width="48dp"
                     android:layout_height="45dp"
                     android:backgroundTint="@color/casiBlanco"
                     android:textSize="13sp"

@@ -21,6 +21,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.simpleAlertDialog
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -78,7 +79,7 @@ class LoginActivity : BaseActivity() {
         }
 
         binding.tvPassword.editText?.addTextChangedListener {
-            if (it.toString().trim().isEmpty()){
+            if (it.toString().isEmptyTrim()){
                 //binding.tvPassword.isEndIconCheckable = true
                         binding.tvPassword.endIconMode = END_ICON_PASSWORD_TOGGLE
             }

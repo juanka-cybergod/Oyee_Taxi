@@ -12,6 +12,7 @@ import com.cybergod.oyeetaxi.api.model.configuration.EmailConfiguracion
 import com.cybergod.oyeetaxi.databinding.DialogConfigurationEmailBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -138,23 +139,23 @@ class EmailConfigurationFragment : BottomSheetDialogFragment() {
 
         return when {
 
-            mHost.isEmpty() -> {
+            mHost.isEmptyTrim() -> {
                 binding.tvHost.error = " "
                 false
             }
-            mPort.isEmpty() -> {
+            mPort.isEmptyTrim() -> {
                 binding.tvPort.error = " "
                 false
             }
-            mUsername.isEmpty() -> {
+            mUsername.isEmptyTrim() -> {
                 binding.tvEmailUsername.error = "Por favor introduzca el email de servicio"
                 false
             }
-            mPassword.isEmpty() -> {
+            mPassword.isEmptyTrim() -> {
                 binding.tvEmailPassword.error = "Por favor introduzca el token de acceso al servicio"
                 false
             }
-            mTansportProtocol.isEmpty() -> {
+            mTansportProtocol.isEmptyTrim() -> {
                 binding.tfTansportProtocol.error = "Por favor introduzca el protocolo"
                 false
             }

@@ -1,6 +1,5 @@
 package com.cybergod.oyeetaxi.utils
 
-import android.R.string
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -193,7 +192,7 @@ object UtilsGlobal {
 
     fun String.wordCount(): Int {
         val trimmedStr = this.trim()
-        return if (trimmedStr.isEmpty()) {
+        return if (trimmedStr.isEmptyTrim()) {
             0
         } else {
             trimmedStr.split("\\s+".toRegex()).size
@@ -333,8 +332,30 @@ object UtilsGlobal {
 
     }
 
-    fun String.isEmpty():Boolean{
+    fun String.isEmptyTrim():Boolean{
        return TextUtils.isEmpty(this.trim { it <= ' ' })
+    }
+
+    fun String.isValidLatitude():Boolean{
+        val double :Double
+        try {
+            double = this.toDouble()
+        } catch (nfe: NumberFormatException) {
+            return false
+        }
+
+        return !(double < -90 || double > 90)
+    }
+
+    fun String.isValidLongitude():Boolean{
+        val double :Double
+        try {
+            double = this.toDouble()
+        } catch (nfe: NumberFormatException) {
+            return false
+        }
+
+        return !(double < -180 || double > 180)
     }
 
 

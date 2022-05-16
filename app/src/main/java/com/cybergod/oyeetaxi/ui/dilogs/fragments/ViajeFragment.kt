@@ -27,6 +27,7 @@ import com.cybergod.oyeetaxi.utils.UtilsGlobal.onTimeSelected
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonActive
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonActiveYellow
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setMetodoPagoButton
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -363,7 +364,7 @@ class ViajeFragment : BottomSheetDialogFragment() {
         builder.setPositiveButton("Aplicar", DialogInterface.OnClickListener { _, _ ->
 
             val text = input.text.toString()
-            if (!text.trim().isEmpty()) {
+            if (!text.isEmptyTrim()) {
                 viewModel.detallesAdicionales.postValue(text)
             } else {
                 viewModel.detallesAdicionales.postValue(null)
@@ -408,7 +409,7 @@ class ViajeFragment : BottomSheetDialogFragment() {
         builder.setPositiveButton("Aplicar", DialogInterface.OnClickListener { _, _ ->
 
             val text = input.text.toString()
-            if (!text.trim().isEmpty()) {
+            if (!text.isEmptyTrim()) {
                 viewModel.pesoEquipaje.postValue(text)
             } else {
                 viewModel.pesoEquipaje.postValue(null)

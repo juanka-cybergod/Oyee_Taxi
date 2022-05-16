@@ -11,6 +11,9 @@
     <action android:id="@+id/action_go_to_provincesAdministrationFragment"
         app:destination="@id/provincesAdministrationFragment"/>
 
+    <action android:id="@+id/action_go_to_addUpdateProvinceFragment"
+        app:destination="@id/addUpdateProvinceFragment"/>
+
     <fragment
         android:id="@+id/preferencesFragment"
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.PreferencesFragment"
@@ -29,6 +32,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment"
         android:label="ProvincesAdministrationFragment"
         tools:layout="@layout/fragment_provinces_administration"
+        />
+    <dialog
+        android:id="@+id/addUpdateProvinceFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.AddUpdateProvinceFragment"
+        android:label="AddUpdateProvinceFragment"
+        tools:layout="@layout/dialog_addupdate_province"
         />
 
 </navigation>

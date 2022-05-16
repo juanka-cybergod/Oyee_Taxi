@@ -7,6 +7,7 @@ import com.cybergod.oyeetaxi.api.repository.ProvincesRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class ProvincesAdministrationViewModel @Inject constructor(
     ) :  BaseViewModel() {
 
     var provincesList: MutableLiveData<List<Provincia>> = MutableLiveData()
-
+    var provincesAddedOrUpdated: MutableLiveData<Provincia?> = MutableLiveData()
 
     fun getAllProvinces(){
 
@@ -57,6 +58,7 @@ class ProvincesAdministrationViewModel @Inject constructor(
 
     }
 
+
     suspend fun setProvinceVisibility(nombreProvincia: String,visible:Boolean) :Provincia?{
         return updateProvince(
             Provincia(
@@ -68,8 +70,30 @@ class ProvincesAdministrationViewModel @Inject constructor(
 
 
 
+    fun setProvinceLocation(provincia: Provincia) {
+        viewModelScope.launch(Dispatchers.IO) {
 
+            delay(1000L)
 
+            provincesAddedOrUpdated.postValue(
+                updateProvince(
+                    provincia
+                )
+            )
+        }
+    }
 
+    fun addProvince(provincia: Provincia) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            delay(1000L)
+
+            val addedProvince = provincesRepository.addProvince(provincia)
+            provincesAddedOrUpdated.postValue(addedProvince)
+            addedProvince?.let {
+                getAllProvinces()
+            }
+        }
+    }
 
 }

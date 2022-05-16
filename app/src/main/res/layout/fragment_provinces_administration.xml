@@ -57,7 +57,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_margin="16dp"
-        android:id="@+id/buttonAddVehicle"
+        android:id="@+id/buttonAddProvince"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

@@ -4,8 +4,11 @@ package com.cybergod.oyeetaxi.api.repository
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.api.utils.UtilsApi
+import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_CREATED
+import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
 import javax.inject.Inject
 
 
@@ -16,7 +19,7 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
 
     suspend fun getAvailableProvinces():List<Provincia>?   {
 
-        UtilsApi.handleRequest {
+        handleRequest {
             retroServiceInterface.getAvailableProvinces()
         }?.let { response ->
 
@@ -30,7 +33,7 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
                     responseBody = response.body().toString()
                 )
 
-                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                if (response.code() == RESPONSE_CODE_OK) {
                     response.body()?.toList() ?: emptyList()
                 } else  null
 
@@ -42,11 +45,9 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
 
     }
 
-
-
     suspend fun getAllProvinces():List<Provincia>?   {
 
-        UtilsApi.handleRequest {
+        handleRequest {
             retroServiceInterface.getAllProvinces()
         }?.let { response ->
 
@@ -60,7 +61,7 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
                     responseBody = response.body().toString()
                 )
 
-                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                if (response.code() == RESPONSE_CODE_OK) {
                     response.body()?.toList() ?: emptyList()
                 } else  null
 
@@ -74,7 +75,7 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
 
     suspend fun updateProvince(province:Provincia):Provincia?   {
 
-        UtilsApi.handleRequest {
+        handleRequest {
             retroServiceInterface.updateProvince(province)
         }?.let { response ->
 
@@ -88,7 +89,7 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
                     responseBody = response.body().toString()
                 )
 
-                if (response.code() == Constants.RESPONSE_CODE_OK) {
+                if (response.code() == RESPONSE_CODE_OK) {
                     response.body()
                 } else  null
 
@@ -100,6 +101,33 @@ class ProvincesRepository @Inject constructor(private val retroServiceInterface:
 
     }
 
+    suspend fun addProvince(province:Provincia):Provincia?   {
+
+        handleRequest {
+            retroServiceInterface.addProvince(province)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+        return null
+
+    }
 
 
 

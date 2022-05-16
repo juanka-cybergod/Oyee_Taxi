@@ -89,6 +89,8 @@ interface RetroServiceInterface {
     @PUT(URL_BASE_PROVINCIAS + "updateProvince")
     suspend fun updateProvince(@Body provincia: Provincia):Response<Provincia>
 
+    @POST(URL_BASE_PROVINCIAS + "addProvince")
+    suspend fun addProvince(@Body provincia: Provincia):Response<Provincia>
 
     /** CONFIGURACION ***********************************************************/
     @GET(URL_BASE_CONFIGURACION + "isServerActive")

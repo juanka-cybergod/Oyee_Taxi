@@ -8,43 +8,63 @@
     android:paddingTop="0dp"
     tools:context=".ui.main.activity.MainActivity"
     android:theme="@style/Theme.OyeeTaxi"
-    android:background="@color/colorCrema"
-    android:padding="2dp"
+    android:background="@color/yellow_primary"
+    android:padding="1dp"
     >
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+
+        android:background="@color/white"
+        android:id="@+id/imageTipoVehiculo"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_margin="0dp"
+        android:src="@drawable/ic_front_vehicle"
+        app:civ_border_color="@color/yellow_primary"
+        app:civ_border_width="1dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="@color/yellow_primary"
+        app:civ_shadow_radius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_front_vehicle" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/llTipoVehiculo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/white"
-        android:padding="10dp"
-        >
-        <androidx.appcompat.widget.AppCompatTextView
+        android:orientation="vertical"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageTipoVehiculo"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
             android:id="@+id/tvTipoVehiculo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:text="Tipo Vehiculo"
             android:textAlignment="textStart"
-            android:textSize="18sp"
-
+            android:textSize="16sp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescripcionTipoVehiculo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:hint="Linea 1\nLinea 2 \nLinea 3\nLínea 4"
+            android:maxLines="4"
             android:text=""
-            android:maxLines="3"
             android:textAlignment="textStart"
-            android:textStyle="italic"
-            android:textSize="12sp"
-            android:hint="Este Tipo de Vehiculo es para Transportar pasajeros, tiene una capacidad de x pasajeros etc"
-            />
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textSize="11sp"
+            android:textStyle="italic" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

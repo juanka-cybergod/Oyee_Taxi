@@ -45,7 +45,7 @@ class ImageVehicleTypeListAdapter (
 
         fun bind(tipoVehiculo:TipoVehiculo, viajeFragment: ViajeFragment) {
 
-            if (tipoVehiculo.seleccionable!!) {
+
 
                 //Seleccionado desde el viewModel
                 if (viajeFragment.viewModel.tiposVehiculoSeleccionados.value?.containsKey(tipoVehiculo.tipoVehiculo.toString()) == true) {
@@ -78,8 +78,6 @@ class ImageVehicleTypeListAdapter (
 
 
 
-
-            }
 
 
 

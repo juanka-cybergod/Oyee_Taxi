@@ -3,7 +3,10 @@ package com.cybergod.oyeetaxi.api.repository
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
 import com.cybergod.oyeetaxi.api.utils.UtilsApi
+import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
+import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
 import javax.inject.Inject
 
 
@@ -14,13 +17,13 @@ class VehicleTypeRepository @Inject constructor(private val retroServiceInterfac
 
     suspend fun getAllVehicleTypes():List<TipoVehiculo>?   {
 
-            UtilsApi.handleRequest {
+            handleRequest {
                 retroServiceInterface.getAllVehiclesType()
             }?.let { response ->
 
                 return if (response.isSuccessful) {
 
-                    UtilsApi.logResponse(
+                    logResponse(
                         className = className,
                         metodo = object {}.javaClass.enclosingMethod!!,
                         responseCode = response.code(),
@@ -28,7 +31,7 @@ class VehicleTypeRepository @Inject constructor(private val retroServiceInterfac
                         responseBody = response.body().toString()
                     )
 
-                    if (response.code() == Constants.RESPONSE_CODE_OK) {
+                    if (response.code() == RESPONSE_CODE_OK) {
                         response.body()?.toList() ?: emptyList()
                     } else  null
 
@@ -41,6 +44,64 @@ class VehicleTypeRepository @Inject constructor(private val retroServiceInterfac
 
     }
 
+
+    suspend fun getAvailableVehiclesType():List<TipoVehiculo>?   {
+
+            handleRequest {
+                retroServiceInterface.getAvailableVehiclesType()
+            }?.let { response ->
+
+                return if (response.isSuccessful) {
+
+                    logResponse(
+                        className = className,
+                        metodo = object {}.javaClass.enclosingMethod!!,
+                        responseCode = response.code(),
+                        responseHeaders = response.headers().toString(),
+                        responseBody = response.body().toString()
+                    )
+
+                    if (response.code() == RESPONSE_CODE_OK) {
+                        response.body()?.toList() ?: emptyList()
+                    } else  null
+
+                } else null
+
+            }
+
+
+            return null
+
+    }
+
+    suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo):TipoVehiculo?   {
+
+        handleRequest {
+            retroServiceInterface.updateVehicleType(tipoVehiculo)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+
+        return null
+
+    }
 
 
 

@@ -78,6 +78,12 @@ interface RetroServiceInterface {
     @GET(URL_BASE_TIPO_VEHICULOS + "getAllVehiclesType")
     suspend fun getAllVehiclesType(): Response<ArrayList<TipoVehiculo>>
 
+    @GET(URL_BASE_TIPO_VEHICULOS + "getAvailableVehiclesType")
+    suspend fun getAvailableVehiclesType(): Response<ArrayList<TipoVehiculo>>
+
+    @PUT(URL_BASE_TIPO_VEHICULOS + "updateVehicleType")
+    suspend fun updateVehicleType(@Body tipoVehiculo: TipoVehiculo):Response<TipoVehiculo>
+
 
     /** PROVINCIAS ***********************************************************/
     @GET(URL_BASE_PROVINCIAS + "getAllProvinces")

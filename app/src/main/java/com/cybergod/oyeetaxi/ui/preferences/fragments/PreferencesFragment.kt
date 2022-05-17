@@ -161,7 +161,6 @@ class PreferencesFragment : BaseFragment() {
             getAvailableUpdates()
         }
 
-
         binding.tvEstilosMapa.setOnItemClickListener { adapterView, view, position, id ->
 
             val selectedMapStyle = getMapStyleByName(

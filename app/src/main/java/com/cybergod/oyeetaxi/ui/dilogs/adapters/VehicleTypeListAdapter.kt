@@ -8,6 +8,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.ItemTipoVehiculoBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.VehicleTypeFragment
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
 
 
 class VehicleTypeListAdapter (
@@ -50,6 +51,7 @@ class VehicleTypeListAdapter (
                 bindig.tvDescripcionTipoVehiculo.text = tipoVehiculo.descripcion
 
 
+                bindig.imageTipoVehiculo.loadImageVehiculoFrontalFromURL(tipoVehiculo.imagenVehiculoURL)
 
                 bindig.llTipoVehiculo.setOnClickListener {
                     vehicleTypeFragment.vehicleTypeSelected.postValue(tipoVehiculo)

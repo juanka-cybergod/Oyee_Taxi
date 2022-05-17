@@ -3,7 +3,6 @@ package com.cybergod.oyeetaxi.ui.dilogs.fragments
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsManager
@@ -22,7 +21,7 @@ import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleDetailsViewModel
 import com.cybergod.oyeetaxi.ui.main.viewmodel.HomeViewModel
 import com.cybergod.oyeetaxi.ui.permissions.utils.Permissions
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_ID
-import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.Constants.PERMISSION_CALL_PHONE_REQUEST_CODE
 import com.cybergod.oyeetaxi.utils.Constants.PERMISSION_SEND_SMS_REQUEST_CODE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
@@ -161,7 +160,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         binding.imageUsuario.setOnClickListener {
             vehicleOK.value?.let {
                 findNavController().navigate(R.id.action_vehicleDetailFragment_to_valoracionFragment,Bundle().apply {
-                    putParcelable(KEY_VEHICLE_RESPONSE,it)
+                    putParcelable(KEY_VEHICLE_RESPONSE_PARCELABLE,it)
                 })
 
             }

@@ -14,7 +14,6 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.FragmentVehiclesTypeBinding
 import com.cybergod.oyeetaxi.ui.dilogs.adapters.VehicleTypeListAdapter
-import com.cybergod.oyeetaxi.ui.main.viewmodel.HomeViewModel
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleTypeViewModel
 import com.cybergod.oyeetaxi.ui.interfaces.Communicator
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
@@ -38,9 +37,7 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
     val vehicleTypeSelected : MutableLiveData<TipoVehiculo> = MutableLiveData()
 
 
-
-    val viewModelHome: HomeViewModel by activityViewModels()
-    val UserRegistrationViewModel: UserRegistrationViewModel by activityViewModels()
+    val userRegistrationViewModel: UserRegistrationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,7 +113,7 @@ class VehicleTypeFragment : BottomSheetDialogFragment() {
 
         })
 
-        viewModel.getAllVehicleTypes()
+        viewModel.getAvailableVehiclesType()
 
 
         vehicleTypeSelected.observe(this, Observer {

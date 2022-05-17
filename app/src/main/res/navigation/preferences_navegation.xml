@@ -8,11 +8,13 @@
     <action android:id="@+id/action_go_to_administrationFragment"
         app:destination="@id/administrationFragment"/>
 
-    <action android:id="@+id/action_go_to_provincesAdministrationFragment"
-        app:destination="@id/provincesAdministrationFragment"/>
-
     <action android:id="@+id/action_go_to_addUpdateProvinceFragment"
-        app:destination="@id/addUpdateProvinceFragment"/>
+        app:destination="@id/addUpdateProvinceFragment"
+        />
+
+    <action android:id="@+id/action_go_to_addUpdateVehiclesTypesFragment"
+        app:destination="@id/addUpdateVehicleTypeFragment"
+        />
 
     <fragment
         android:id="@+id/preferencesFragment"
@@ -26,7 +28,14 @@
         android:label="AdministrationFragment"
         tools:layout="@layout/fragment_administration"
 
-        />
+        >
+        <action
+            android:id="@+id/action_administrationFragment_to_provincesAdministrationFragment"
+            app:destination="@id/provincesAdministrationFragment" />
+        <action
+            android:id="@+id/action_administrationFragment_to_vehiclesTypeAdministrationFragment"
+            app:destination="@id/vehiclesTypeAdministrationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment"
@@ -38,6 +47,18 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.AddUpdateProvinceFragment"
         android:label="AddUpdateProvinceFragment"
         tools:layout="@layout/dialog_addupdate_province"
+        />
+    <fragment
+        android:id="@+id/vehiclesTypeAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesTypeAdministrationFragment"
+        android:label="VehiclesTypeAdministrationFragment"
+        tools:layout="@layout/fragment_vehicles_types_administration"
+        />
+    <dialog
+        android:id="@+id/addUpdateVehicleTypeFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.AddUpdateVehicleTypeFragment"
+        android:label="AddUpdateVehicleTypeFragment"
+        tools:layout="@layout/dialog_add_update_vehicle_type"
         />
 
 </navigation>

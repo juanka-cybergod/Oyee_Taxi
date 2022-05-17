@@ -15,11 +15,11 @@ class VehicleTypeViewModel @Inject constructor(private val vehicleTypeRepository
     var tipoVehiculoList: MutableLiveData<List<TipoVehiculo>> = MutableLiveData()
 
 
-    fun getAllVehicleTypes(){
+    fun getAvailableVehiclesType(){
 
             viewModelScope.launch {
                 tipoVehiculoList.postValue(
-                    vehicleTypeRepository.getAllVehicleTypes()
+                    vehicleTypeRepository.getAvailableVehiclesType()
                 )
 
 

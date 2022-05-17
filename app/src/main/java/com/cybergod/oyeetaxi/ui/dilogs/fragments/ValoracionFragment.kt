@@ -14,7 +14,7 @@ import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentValoracionBinding
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.ValoracionViewModel
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +44,7 @@ class ValoracionFragment : DialogFragment(), RatingBar.OnRatingBarChangeListener
         binding.clMain.visibility = View.INVISIBLE
 
         //Obtener el VehiculoResponse pasado por Argumentos
-        requireArguments().getParcelable<VehiculoResponse>(KEY_VEHICLE_RESPONSE)?.let { vehiculoResponse ->
+        requireArguments().getParcelable<VehiculoResponse>(KEY_VEHICLE_RESPONSE_PARCELABLE)?.let { vehiculoResponse ->
 
 
             binding.userRatingBar.onRatingBarChangeListener = this

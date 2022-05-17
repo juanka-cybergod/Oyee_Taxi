@@ -99,7 +99,7 @@ object UtilsUI {
     }
 
 
-    fun Activity.simpleAlertDialog(title: String,text: String){
+    fun Context.simpleAlertDialog(title: String,text: String){
         val builder = AlertDialog.Builder(this)
         builder
             .setTitle(title)
@@ -198,7 +198,7 @@ object UtilsUI {
                 button.setBackgroundColor(
                     ResourcesCompat.getColor(
                         resources,
-                        R.color.casiAmarillo,
+                        R.color.white,
                         null
                     )
                 )

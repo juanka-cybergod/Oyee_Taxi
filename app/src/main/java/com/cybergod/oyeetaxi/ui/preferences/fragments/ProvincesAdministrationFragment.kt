@@ -84,8 +84,6 @@ class ProvincesAdministrationFragment : BaseFragment() {
                     getString(R.string.fail_server_comunication),
                     true
                 )
-            } else {
-
             }
         })
     }

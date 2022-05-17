@@ -21,7 +21,8 @@
             android:id="@+id/action_userRegistrationFragment1_to_userRegistrationFragment2byTwilio"
             app:destination="@id/userRegistrationFragment2byTwilio"
             app:popUpTo="@id/userRegistrationFragment1"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
 

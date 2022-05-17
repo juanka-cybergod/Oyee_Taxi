@@ -18,10 +18,10 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.VehicleRegistrationFragment1Binding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURI
 import com.cybergod.oyeetaxi.ui.vehicleRegistration.viewmodel.VehicleRegistrationViewModel
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURI
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception

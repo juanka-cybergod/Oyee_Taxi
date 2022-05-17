@@ -135,71 +135,77 @@ class AdministrationFragment : BaseFragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setupOnClickListener() {
 
-        binding.btnProvincesAdministration.setOnClickListener {
-            findNavController().navigate(R.id.action_go_to_provincesAdministrationFragment)
-        }
+        with (binding) {
+
+            btnVehiclesTypesAdministration.setOnClickListener {
+                findNavController().navigate(R.id.action_administrationFragment_to_vehiclesTypeAdministrationFragment)
+            }
+
+            btnProvincesAdministration.setOnClickListener {
+                findNavController().navigate(R.id.action_administrationFragment_to_provincesAdministrationFragment)
+            }
 
 
-        binding.btnConfigurarSmsProvider.setOnClickListener {
-            when (smsProviderFromString(binding.tvSmsProvider.text.toString())) {
-                SmsProvider.TWILIO -> {
-                    launchTwillioConfigurationFragment()
+            btnConfigurarSmsProvider.setOnClickListener {
+                when (smsProviderFromString(binding.tvSmsProvider.text.toString())) {
+                    SmsProvider.TWILIO -> {
+                        launchTwillioConfigurationFragment()
+                    }
+                    else -> {
+                        showSnackBar(
+                            getString(R.string.not_configurable_provider),
+                            false
+                        )
+                    }
                 }
-                else -> {
-                    showSnackBar(
-                        getString(R.string.not_configurable_provider),
-                        false
+
+
+            }
+
+            btnConfigurarEmailProvider.setOnClickListener{
+                launchEmailConfigurationFragment()
+            }
+
+            btnConfigurarRedesSociales.setOnClickListener {
+                launchSocialConfigurationFragment()
+            }
+
+
+            tvSmsProvider.setOnClickListener {
+                binding.tvSmsProvider.showDropDownMenuFix(viewModel.smsArrayAdapter)
+            }
+
+
+            switchServerActive.setOnCheckedChangeListener { button, boolean ->
+                if (boolean != viewModel.serverConfiguration.value?.servidorActivoClientes) {
+                    showMessageDialogSetServerActiveForClients(boolean)
+                    binding.switchServerActive.isChecked = !binding.switchServerActive.isChecked
+                }
+
+            }
+
+            tvSmsProvider.setOnItemClickListener { adapterView, view, position, id ->
+
+                selectedSmsProvider = smsProviderFromString(adapterView.getItemAtPosition(position).toString())
+
+                binding.tvSmsProvider.setText(viewModel.serverConfiguration.value?.smsProvider?.name,false)
+
+                if (selectedSmsProvider != viewModel.serverConfiguration.value?.smsProvider ) {
+
+                    requireContext().showMessageDialogForResult(
+                        funResult =  {ok -> setServerSmsProvider(ok)},
+                        title = "Proveedor de Mensajeria",
+                        message = "Desea cambiar el proveedor del servicio de mensajeria usado para enviar los códigos de verificación a los clientes para activar sus cuantas",
+                        icon = R.drawable.ic_warning_24
                     )
+
                 }
-            }
 
 
-        }
-
-        binding.btnConfigurarEmailProvider.setOnClickListener{
-            launchEmailConfigurationFragment()
-        }
-
-        binding.btnConfigurarRedesSociales.setOnClickListener {
-            launchSocialConfigurationFragment()
-        }
-
-
-        binding.tvSmsProvider.setOnClickListener {
-            binding.tvSmsProvider.showDropDownMenuFix(viewModel.smsArrayAdapter)
-        }
-
-
-        binding.switchServerActive.setOnCheckedChangeListener { button, boolean ->
-           if (boolean != viewModel.serverConfiguration.value?.servidorActivoClientes) {
-               showMessageDialogSetServerActiveForClients(boolean)
-               binding.switchServerActive.isChecked = !binding.switchServerActive.isChecked
-           }
-
-        }
-
-        binding.tvSmsProvider.setOnItemClickListener { adapterView, view, position, id ->
-
-            selectedSmsProvider = smsProviderFromString(adapterView.getItemAtPosition(position).toString())
-
-            binding.tvSmsProvider.setText(viewModel.serverConfiguration.value?.smsProvider?.name,false)
-
-            if (selectedSmsProvider != viewModel.serverConfiguration.value?.smsProvider ) {
-
-                requireContext().showMessageDialogForResult(
-                    funResult =  {ok -> setServerSmsProvider(ok)},
-                    title = "Proveedor de Mensajeria",
-                    message = "Desea cambiar el proveedor del servicio de mensajeria usado para enviar los códigos de verificación a los clientes para activar sus cuantas",
-                    icon = R.drawable.ic_warning_24
-                )
 
             }
 
-
-
         }
-
-
 
     }
 

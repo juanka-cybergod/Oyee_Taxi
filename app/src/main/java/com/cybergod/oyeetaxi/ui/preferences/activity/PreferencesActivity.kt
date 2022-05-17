@@ -47,7 +47,7 @@ class PreferencesActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.action_admin -> {
 
-                if (!isCurrentFragment(R.id.administrationFragment)) {
+                if (isCurrentFragment(R.id.preferencesFragment )) {
                     navController.navigate(R.id.action_go_to_administrationFragment)
                 }
 

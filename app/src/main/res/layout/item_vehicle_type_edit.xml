@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:theme="@style/Theme.OyeeTaxi"
+    android:padding="4dp"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/clVehiculoActivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/casiBlanco"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="8dp"
+        >
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+
+            android:id="@+id/imageTipoVehiculo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_front_vehicle"
+            app:civ_border_color="@color/yellow_primary"
+            app:civ_border_width="2dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="@color/yellow_primary"
+            app:civ_shadow_radius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_front_vehicle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/imageTipoVehiculo"
+            app:layout_constraintTop_toTopOf="@+id/imageTipoVehiculo">
+
+
+            <TextView
+                android:id="@+id/tvTipoVehiculoNombreID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="Tipo Veículo"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvCuotaMensualActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="Cuota mensual : 0 CUP"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                app:layout_constraintStart_toStartOf="@+id/tvTipoVehiculoNombreID"
+                app:layout_constraintTop_toBottomOf="@+id/tvTipoVehiculoNombreID" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:textSize="13sp"
+            app:icon="@drawable/ic_edit_48"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInfo"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:icon="@drawable/ic_note"
+            app:iconGravity="textStart"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTypeCarga"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_carga"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTypePasajeros"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_peoples_32"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRequireVerification"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_verified"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVisibleForClients"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_visibility_on_24"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

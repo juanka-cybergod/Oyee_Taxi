@@ -12,6 +12,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentUsersAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapter
+import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapterNew
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,8 +25,8 @@ class UsersAdministrationFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private lateinit var recyclerView:RecyclerView
-    private lateinit var recyclerViewAdapter : UsersEditListAdapter
-
+//    private lateinit var recyclerViewAdapter : UsersEditListAdapter
+private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
     val viewModel: UsersAdministrationViewModel by activityViewModels()
 
@@ -51,7 +52,8 @@ class UsersAdministrationFragment : BaseFragment() {
 
 
     private fun initRecyclerView(){
-        recyclerViewAdapter = UsersEditListAdapter(this)
+//        recyclerViewAdapter = UsersEditListAdapter(this)
+        recyclerViewAdapter = UsersEditListAdapterNew(this)
         recyclerView = binding.recylerViewUsers
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
@@ -96,8 +98,10 @@ class UsersAdministrationFragment : BaseFragment() {
                 if (it.isNotEmpty()) {
 
                     it.plus(it)
-                    recyclerViewAdapter.setUsersList(it)
-                    recyclerViewAdapter.notifyDataSetChanged()
+//                    recyclerViewAdapter.setUsersList(it)
+//                    recyclerViewAdapter.notifyDataSetChanged()
+
+                    recyclerViewAdapter.differ.submitList(it)
 
 
                 } else {

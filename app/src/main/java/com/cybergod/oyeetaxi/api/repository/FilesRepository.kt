@@ -5,7 +5,8 @@ import android.util.Log
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.model.TipoFichero
 import com.cybergod.oyeetaxi.api.utils.UploadRequestBody
-import com.cybergod.oyeetaxi.api.utils.UtilsApi
+import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
+import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import okhttp3.MultipartBody
 import java.io.File
 import javax.inject.Inject
@@ -25,13 +26,13 @@ class FilesRepository @Inject constructor(private val retroServiceInterface: Ret
 
 
 
-            UtilsApi.handleRequest {
+            handleRequest {
                 retroServiceInterface.uploadSingleFile(multiPartFile,id,tipoFichero)
             }?.let { response ->
 
                 return if (response.isSuccessful) {
 
-                    UtilsApi.logResponse(
+                    logResponse(
                         className = className,
                         metodo = object {}.javaClass.enclosingMethod!!,
                         responseCode = response.code(),

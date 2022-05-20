@@ -137,6 +137,10 @@ class AdministrationFragment : BaseFragment() {
 
         with (binding) {
 
+            btnUsersAdministration.setOnClickListener {
+                findNavController().navigate(R.id.action_administrationFragment_to_usersAdministrationFragment)
+            }
+
             btnVehiclesTypesAdministration.setOnClickListener {
                 findNavController().navigate(R.id.action_administrationFragment_to_vehiclesTypeAdministrationFragment)
             }

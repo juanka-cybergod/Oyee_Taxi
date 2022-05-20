@@ -25,6 +25,9 @@ interface RetroServiceInterface {
 
     /** USUARIOS ***********************************************************/
 
+    @GET(URL_BASE_USUARIOS + "getAllUsers")
+    suspend fun getAllUsers(): Response<ArrayList<Usuario>>
+
     @GET(URL_BASE_USUARIOS + "getUserById={id}")
     suspend fun getUserById( @Path("id") id : String ): Response<Usuario>
 

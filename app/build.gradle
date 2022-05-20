@@ -169,6 +169,13 @@ dependencies {
      */
     //implementation 'com.github.jd-alexander:library:1.1.0'
 
+    //TouchImageView Zoom for Android https://github.com/MikeOrtiz/TouchImageView
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.1.1'
+
+    //TouchImageView Zoom for Android ????
+//    implementation 'io.github.imablanco:zoomy:1.1.0'
+//    implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
+
 }
 
 kapt {

@@ -165,9 +165,22 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
             }
         }
+
+        //Viajar con este Conductor
+        binding.btnViajar.setOnClickListener {
+            crearViaje()
+        }
+
+        //
     }
 
 
+    private fun crearViaje(){
+        findNavController().navigate(R.id.action_vehicleDetailFragment_to_viajeFragment,Bundle().apply {
+            //putString(KEY_VEHICLE_ID,vehicleId)
+        })
+        //dismiss()
+    }
 
     @SuppressLint("UnspecifiedImmutableFlag")
     private fun sendSmsToPhone(send:Boolean, message:String?){

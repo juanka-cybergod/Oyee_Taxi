@@ -10,7 +10,6 @@ import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import com.cybergod.oyeetaxi.utils.Constants
-import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_CREATED
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.passwordEncode
 import javax.inject.Inject
@@ -19,6 +18,32 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(private val retroServiceInterface: RetroServiceInterface) {
 
     private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+
+    suspend fun getAllUsers() : List<Usuario>?  {
+
+        handleRequest {
+            retroServiceInterface.getAllUsers()
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object{}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    response.body()?.toList()
+                } else  null
+            } else null
+
+        }
+
+        return null
+    }
 
 
     suspend fun getUserById(userId: String) : Usuario?  {
@@ -67,7 +92,7 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
                     responseBody = response.body().toString()
                 )
 
-                if (response.code() == RESPONSE_CODE_CREATED) {
+                if (response.code() == RESPONSE_CODE_OK) {
                     response.body()
                     true
                 } else false

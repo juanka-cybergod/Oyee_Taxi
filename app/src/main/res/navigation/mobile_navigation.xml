@@ -53,6 +53,10 @@
         <action
             android:id="@+id/action_vehicleDetailFragment_to_valoracionFragment"
             app:destination="@id/valoracionFragment" />
+        <action
+            android:id="@+id/action_vehicleDetailFragment_to_viajeFragment"
+            app:destination="@id/viajeFragment"
+            app:popUpTo="@id/vehicleDetailFragment" />
     </dialog>
     <dialog
         android:id="@+id/viajeFragment"

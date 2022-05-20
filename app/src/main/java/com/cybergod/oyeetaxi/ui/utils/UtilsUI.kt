@@ -527,6 +527,22 @@ object UtilsUI {
 
     }
 
+    fun View.loadImageToZoomFromURL(relativeURL:String?) {
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .fitCenter()
+                //.circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(R.drawable.blank_background)
+                .into((this as ImageView))
+
+        }
+
+    }
+
     fun View.loadImagePerfilFromURI(uri: Uri?) {
 
         if (uri != null )  {

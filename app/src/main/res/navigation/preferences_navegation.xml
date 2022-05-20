@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_administrationFragment_to_vehiclesTypeAdministrationFragment"
             app:destination="@id/vehiclesTypeAdministrationFragment" />
+        <action
+            android:id="@+id/action_administrationFragment_to_usersAdministrationFragment"
+            app:destination="@id/usersAdministrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"
@@ -59,6 +62,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.AddUpdateVehicleTypeFragment"
         android:label="AddUpdateVehicleTypeFragment"
         tools:layout="@layout/dialog_add_update_vehicle_type"
+        />
+    <fragment
+        android:id="@+id/usersAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment"
+        android:label="UsersAdministrationFragment"
+        tools:layout="@layout/fragment_users_administration"
         />
 
 </navigation>

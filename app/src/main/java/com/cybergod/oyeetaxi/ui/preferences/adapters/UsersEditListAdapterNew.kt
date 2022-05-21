@@ -101,15 +101,15 @@ class UsersEditListAdapterNew (
         private val imageViewFragment = ImageViewFragment()
         private fun launchImageViewFragment(imageURL:String?) {
 
-            imageURL?.let {
+            if (imageURL.isNullOrEmpty()) {
+                return
+            }
 
-                if (!imageViewFragment.isVisible) {
-                    val args = Bundle()
-                    args.putString("imageURL", imageURL)
-                    imageViewFragment.arguments = args
-                    imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment")
-                }
-
+            if (!imageViewFragment.isVisible) {
+                val args = Bundle()
+                args.putString("imageURL", imageURL)
+                imageViewFragment.arguments = args
+                imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment")
             }
 
 

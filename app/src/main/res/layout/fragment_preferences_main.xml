@@ -9,18 +9,40 @@
     >
 
 
+        <com.google.android.material.appbar.AppBarLayout
+
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.MyApplication.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                app:titleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+                app:title="Mis Preferencias"
+                app:navigationIcon="@drawable/ic_settings_24"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_margin="18dp"
         android:id="@+id/tfEstilosMapa"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        app:helperText="Seleccione el estilo de su preferencia "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:helperText="Seleccione el estilo de su preferencia "
-        app:startIconDrawable="@drawable/ic_map_24"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:startIconDrawable="@drawable/ic_map_24">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/tvEstilosMapa"

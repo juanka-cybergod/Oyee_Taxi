@@ -67,7 +67,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permisions.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permission_localization.xml" value="0.5" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_permission_storage.xml" value="0.246875" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_preferences_main.xml" value="0.6962962962962963" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_preferences_main.xml" value="0.5" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_provinces.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_provinces_administration.xml" value="0.41953125" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_restore_password.xml" value="0.22447916666666667" />
@@ -127,6 +127,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_service.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/menu_test.xml" value="0.246875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/preferences_menu.xml" value="0.54375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/menu/search_menu.xml" value="0.415625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.206" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.206" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/xml/file_provider_paths.xml" value="0.3625" />

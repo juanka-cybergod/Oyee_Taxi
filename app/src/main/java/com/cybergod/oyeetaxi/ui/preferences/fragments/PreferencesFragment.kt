@@ -2,19 +2,21 @@ package com.cybergod.oyeetaxi.ui.preferences.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentPreferencesMainBinding
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
 import com.cybergod.oyeetaxi.maps.Utils.getMapStyleByName
 import com.cybergod.oyeetaxi.maps.Utils.getStyleNameByMapStyle
+import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.UpdateApplicationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialSupportFragment
@@ -49,6 +51,9 @@ class PreferencesFragment : BaseFragment() {
 
         _binding = FragmentPreferencesMainBinding.inflate(inflater, container, false)
 
+        (requireActivity() as BaseActivity).setSupportActionBar(binding.toolbar)
+
+        setHasOptionsMenu(true)
 
         setupMapStyleListAdapter()
 
@@ -233,6 +238,47 @@ class PreferencesFragment : BaseFragment() {
             socialSupportFragment.show(requireActivity().supportFragmentManager,"socialSupportFragment")
         }
     }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.preferences_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+        return when (item.itemId) {
+            R.id.action_admin -> {
+
+                //if (isCurrentFragment(R.id.preferencesFragment )) {
+                    findNavController().navigate(R.id.action_go_to_administrationFragment)
+                //}
+
+                true
+            }
+            R.id.action_superAdmin -> {
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+
+
+
+//    private fun isCurrentFragment(destinationFragment:Int):Boolean {
+//        val fragment = supportFragmentManager.findFragmentById(R.id.navPreferencesFragment)
+//        return NavHostFragment.findNavController(fragment!!).currentDestination?.id == destinationFragment
+//    }
+
+
 
 
 }

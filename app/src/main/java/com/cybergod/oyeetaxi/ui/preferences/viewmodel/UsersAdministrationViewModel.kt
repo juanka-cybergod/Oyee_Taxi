@@ -12,17 +12,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersAdministrationViewModel @Inject constructor(
-    private val updatedVehicleType: UserRepository
+    private val UserRepository: UserRepository
     ) :  BaseViewModel() {
 
     var usersList: MutableLiveData<List<Usuario>> = MutableLiveData()
     var vehicleTypeAddedOrUpdated: MutableLiveData<Usuario?> = MutableLiveData()
 
-    fun getAllVehicleTypes(){
+    var usuariosCurrentPage = 1
+
+    fun getUsersPaginated(text:String=""){
 
             viewModelScope.launch(Dispatchers.IO) {
                 usersList.postValue(
-                    updatedVehicleType.getAllUsers()
+                   // UserRepository.getAllUsers()
+                    UserRepository.searchUsersPaginated(
+                        nombre_apellidos_correo_telefono=text,
+                        page = usuariosCurrentPage
+                    )
                 )
 
 

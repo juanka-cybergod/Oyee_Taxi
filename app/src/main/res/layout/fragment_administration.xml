@@ -8,6 +8,28 @@
 
     >
 
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MyApplication.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            app:title="Administrar Servidor"
+            app:titleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:navigationIcon="@drawable/ic_settings_24"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.airbnb.lottie.LottieAnimationView
 
@@ -17,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:lottie_autoPlay="true"
         app:lottie_fileName="infinity-loop.json"
         app:lottie_loop="true"
@@ -28,29 +50,26 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:fillViewport="true"
 
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp"
-            >
+            android:padding="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clServerActivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="8dp"
-                >
+                android:orientation="horizontal">
 
 
                 <ImageView
@@ -78,9 +97,9 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
+                    android:padding="4dp"
                     android:text="@string/disable_server_for_clients_description"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,18 +113,17 @@
                 android:id="@+id/clSmsProviderConfiguration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="8dp"
-                >
+                android:orientation="horizontal">
 
 
                 <com.google.android.material.textfield.TextInputLayout
 
-                    android:paddingRight="2dp"
                     android:id="@+id/tfSmsProvider"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:paddingRight="2dp"
                     app:helperText=""
                     app:layout_constraintEnd_toStartOf="@+id/btnConfigurarSmsProvider"
                     app:layout_constraintStart_toStartOf="parent"
@@ -158,17 +176,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/tfSmsProvider" />
 
 
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clEmailConfiguration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="8dp"
-                >
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"
@@ -200,8 +215,7 @@
                     app:iconTint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -210,9 +224,8 @@
                 android:id="@+id/clSocialConfiguration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="8dp"
-                >
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView3"
@@ -244,12 +257,10 @@
                     app:iconTint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -257,8 +268,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                >
+                android:weightSum="3">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVehiclesTypesAdministration"

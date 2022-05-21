@@ -209,7 +209,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
     override fun onSearchConfirmed(text: CharSequence?) {
 
         Toast.makeText(requireContext(),text.toString(),Toast.LENGTH_LONG).show()
-        crearViaje()
+        //crearViaje()
     }
 
     override fun onButtonClicked(buttonCode: Int) {

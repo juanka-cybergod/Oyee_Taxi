@@ -1,24 +1,28 @@
 package com.cybergod.oyeetaxi.ui.preferences.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.Handler
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentUsersAdministrationBinding
+import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
-import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapter
 import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapterNew
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class UsersAdministrationFragment : BaseFragment() {
+class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener {
 
 
     private var _binding: FragmentUsersAdministrationBinding? = null
@@ -41,6 +45,9 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
         initRecyclerView()
 
+        (requireActivity() as BaseActivity).setSupportActionBar(binding.toolbar)
+
+        setHasOptionsMenu(true)
 
         setupObservers()
 
@@ -148,8 +155,61 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
     }
 
     private fun updateUsersList(){
-        viewModel.getAllVehicleTypes()
+        viewModel.getUsersPaginated()
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+        val menuItem: MenuItem = menu.findItem(R.id.action_search)
+        val searchView :SearchView = menuItem.actionView as SearchView
+        searchView.queryHint = "Buscar ..."
+        searchView.setOnQueryTextListener(this)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_search -> {
+
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+
+    private var job: Job? = null
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        job?.cancel()
+        job = MainScope().launch {
+            delay(500L)
+            viewModel.getUsersPaginated(query?:"")
+        }
+
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        job?.cancel()
+        job = MainScope().launch {
+            delay(500L)
+            viewModel.getUsersPaginated(newText?:"")
+        }
+        return false
+    }
+
+
+
+
 
 
 

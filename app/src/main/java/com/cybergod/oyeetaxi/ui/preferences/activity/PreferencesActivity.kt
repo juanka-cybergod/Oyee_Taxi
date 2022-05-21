@@ -28,47 +28,47 @@ class PreferencesActivity : BaseActivity() {
 
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
 
-        setSupportActionBar(binding.toolbar)
+//        setSupportActionBar(binding.toolbar)
 
         setContentView(binding.root)
 
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.preferences_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        navController = findNavController(R.id.navPreferencesFragment)
-
-        return when (item.itemId) {
-            R.id.action_admin -> {
-
-                if (isCurrentFragment(R.id.preferencesFragment )) {
-                    navController.navigate(R.id.action_go_to_administrationFragment)
-                }
-
-                true
-            }
-            R.id.action_superAdmin -> {
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
-    }
-
-
-
-
-    private fun isCurrentFragment(destinationFragment:Int):Boolean {
-        val fragment = supportFragmentManager.findFragmentById(R.id.navPreferencesFragment)
-        return NavHostFragment.findNavController(fragment!!).currentDestination?.id == destinationFragment
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.preferences_menu, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//        navController = findNavController(R.id.navPreferencesFragment)
+//
+//        return when (item.itemId) {
+//            R.id.action_admin -> {
+//
+//                if (isCurrentFragment(R.id.preferencesFragment )) {
+//                    navController.navigate(R.id.action_go_to_administrationFragment)
+//                }
+//
+//                true
+//            }
+//            R.id.action_superAdmin -> {
+//                true
+//            }
+//            else -> {
+//                super.onOptionsItemSelected(item)
+//            }
+//        }
+//    }
+//
+//
+//
+//
+//    private fun isCurrentFragment(destinationFragment:Int):Boolean {
+//        val fragment = supportFragmentManager.findFragmentById(R.id.navPreferencesFragment)
+//        return NavHostFragment.findNavController(fragment!!).currentDestination?.id == destinationFragment
+//    }
 
 
 

@@ -20,7 +20,7 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
     private val className = this.javaClass.simpleName?:"ClaseDesconocida"
 
 
-    suspend fun searchUsersPaginated(page:Int=1,nombre_apellidos_correo_telefono:String="") : List<Usuario>?  {
+    suspend fun searchUsersPaginated(page:Int=1,nombre_apellidos_correo_telefono:String="",totalPages:MutableLiveData<Int>) : List<Usuario>?  {
 
         handleRequest {
             retroServiceInterface.searchUsersPaginated(
@@ -40,7 +40,9 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
                 )
 
                 if (response.code() == RESPONSE_CODE_OK) {
+                    totalPages.postValue(response.body()?.totalPages)
                     response.body()?.content?.toList()
+
                 } else  null
             } else null
 

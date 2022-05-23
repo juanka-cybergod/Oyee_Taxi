@@ -5,20 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Usuario
 import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
+import com.cybergod.oyeetaxi.utils.UtilsGlobal
 
 
 class UsersEditListAdapterNew (
     private val usersAdministrationFragment: UsersAdministrationFragment,
 ) : RecyclerView.Adapter<UsersEditListAdapterNew.MyViewHolder>() {
+
 
     private val differCallback = object : DiffUtil.ItemCallback<Usuario>(){
         override fun areItemsTheSame(oldItem: Usuario, newItem: Usuario): Boolean {
@@ -26,13 +31,21 @@ class UsersEditListAdapterNew (
         }
 
         override fun areContentsTheSame(oldItem: Usuario, newItem: Usuario): Boolean {
-            return oldItem == newItem
+            return oldItem.nombre + oldItem.apellidos == newItem.nombre + newItem   .apellidos
         }
-
-
     }
 
     val differ = AsyncListDiffer(this,differCallback)
+
+
+//    private var currentUserList:List<Usuario> = emptyList<Usuario>()
+//
+//    fun setData(newUserList:List<Usuario>) {
+//        val diffUtil = myDiffUtil(currentUserList,newUserList)
+//        val diffResult = DiffUtil.calculateDiff(diffUtil)
+//        diffResult.dispatchUpdatesTo(this)
+//        currentUserList = newUserList
+//    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -41,10 +54,12 @@ class UsersEditListAdapterNew (
 
     override fun getItemCount(): Int {
        return differ.currentList.size
+//        return  currentUserList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
+        // holder.bind(currentUserList[position])
         holder.bind(differ.currentList[position])
     }
 
@@ -53,7 +68,7 @@ class UsersEditListAdapterNew (
 
     class MyViewHolder(itemView: View,private val usersAdministrationFragment:UsersAdministrationFragment): RecyclerView.ViewHolder(itemView){
 
-        val binding = ItemUserEditBinding.bind(itemView)
+        private val binding = ItemUserEditBinding.bind(itemView)
         private lateinit var usuarioSelected:Usuario
 
 
@@ -63,12 +78,28 @@ class UsersEditListAdapterNew (
             with(binding) {
 
                 tvNombreUsuario.text = "${usuario.nombre} ${usuario.apellidos}"
+                tvTelefonoMovil.text = "${usuario.id}"
 
-                imageUsuario.loadImagePerfilFromURL(usuario.imagenPerfilURL)
+                if (!usuario.imagenPerfilURL.isNullOrEmpty()) {
 
-                imageUsuario.setOnClickListener {
-                    launchImageViewFragment(usuario.imagenPerfilURL)
+                    imageUsuario.loadImagePerfilFromURL(usuario.imagenPerfilURL)
+                    imageUsuario.setOnClickListener {
+                        launchImageViewFragment(usuario.imagenPerfilURL)
+                    }
+
+                } else {
+                    Glide.with(binding.imageUsuario)
+                        .load(R.drawable.ic_user)
+                        .fitCenter()
+                        .circleCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                 }
+
+
+
+
+
 //
 //                tvTipoVehiculoNombreID.text = tipoVehiculo.tipoVehiculo
 //                tvCuotaMensualActual.text = "Cuota mensual : ${tipoVehiculo.cuotaMensual} CUP"
@@ -100,10 +131,6 @@ class UsersEditListAdapterNew (
 
         private val imageViewFragment = ImageViewFragment()
         private fun launchImageViewFragment(imageURL:String?) {
-
-            if (imageURL.isNullOrEmpty()) {
-                return
-            }
 
             if (!imageViewFragment.isVisible) {
                 val args = Bundle()

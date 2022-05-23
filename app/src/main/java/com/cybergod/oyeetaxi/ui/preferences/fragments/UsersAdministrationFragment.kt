@@ -1,11 +1,12 @@
 package com.cybergod.oyeetaxi.ui.preferences.fragments
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
+import android.widget.AbsListView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
@@ -14,6 +15,7 @@ import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapterNew
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener {
+class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
 
     private var _binding: FragmentUsersAdministrationBinding? = null
@@ -32,7 +34,8 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 //    private lateinit var recyclerViewAdapter : UsersEditListAdapter
 private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
-    val viewModel: UsersAdministrationViewModel by activityViewModels()
+//    val viewModel: UsersAdministrationViewModel by activityViewModels()
+    lateinit var  viewModel: UsersAdministrationViewModel
 
 
     override fun onCreateView(
@@ -40,8 +43,10 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
         savedInstanceState: Bundle?
     ): View {
 
+
         _binding = FragmentUsersAdministrationBinding.inflate(inflater, container, false)
 
+        viewModel = ViewModelProvider(this)[UsersAdministrationViewModel::class.java]
 
         initRecyclerView()
 
@@ -51,75 +56,98 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
         setupObservers()
 
-        getUsers1stTime()
-
 
         return  binding.root
     }
 
 
+
+
+
+
+    private val myScrollListener = object : RecyclerView.OnScrollListener(){
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                viewModel.isScrolling = true
+            }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val primeraPosicionVisibleItem = layoutManager.findFirstVisibleItemPosition()
+            val cantidadDeItemsVisibles = layoutManager.childCount
+            val cantidadTotalDeItems = layoutManager.itemCount
+            val noEstaCargando = !viewModel.isLoading.value!!
+            val noEstaEnLaUtlimaPagina = !viewModel.isLastPage
+            val esLaUltimaItem = primeraPosicionVisibleItem + cantidadDeItemsVisibles >= cantidadTotalDeItems
+            //val noEstaAlPrincipio = primeraPosicionVisibleItem >= 0
+            val elTotalEsMasQueLasItemsRequeridas = cantidadTotalDeItems >= QUERRY_PAGE_SIZE
+            //val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && noEstaAlPrincipio && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
+            val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
+
+
+//            Log.d("searchUsersPaginated","onScrolled()")
+//            Log.d("searchUsersPaginated","primeraPosicionVisibleItem=$primeraPosicionVisibleItem")
+//            Log.d("searchUsersPaginated","cantidadDeItemsVisibles=$cantidadDeItemsVisibles")
+//            Log.d("searchUsersPaginated","cantidadTotalDeItems=$cantidadTotalDeItems")
+//            Log.d("searchUsersPaginated","noEstaCargando=$noEstaCargando")
+//            Log.d("searchUsersPaginated","noEstaEnLaUtlimaPagina=$noEstaEnLaUtlimaPagina")
+//            Log.d("searchUsersPaginated","esLaUltimaItem=$esLaUltimaItem")
+//            //Log.d("searchUsersPaginated","noEstaAlPrincipio=$noEstaAlPrincipio")
+//            Log.d("searchUsersPaginated","elTotalEsMasQueLasItemsRequeridas=$elTotalEsMasQueLasItemsRequeridas")
+//            Log.d("searchUsersPaginated","deberiaPaginar=$deberiaPaginar")
+
+            if (deberiaPaginar) {
+                viewModel.getUsersPaginated()
+                viewModel.isScrolling = false
+            }
+        }
+    }
+
+
     private fun initRecyclerView(){
-//        recyclerViewAdapter = UsersEditListAdapter(this)
         recyclerViewAdapter = UsersEditListAdapterNew(this)
         recyclerView = binding.recylerViewUsers
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
+        recyclerView.addOnScrollListener(myScrollListener)
     }
 
 
     private fun setupObservers() {
 
+        setupIsLoadingObserver()
+
         setupVehiclesTypesListObserver()
 
-        //setupProvinceAddedOrUpdated()
 
     }
-//
-//    private fun setupProvinceAddedOrUpdated() {
-//        viewModel.vehicleTypeAddedOrUpdated.observe(viewLifecycleOwner, Observer {
-//
-//            (requireActivity() as BaseActivity).hideProgressDialog()
-//            if (it == null) {
-//                requireActivity().showSnackBar(
-//                    getString(R.string.fail_server_comunication),
-//                    true
-//                )
-//            }
-//
-//        })
-//
-//    }
-//
-//
+
+    private fun setupIsLoadingObserver() {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            with (binding) {
+                val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
+                isLoadingAnimation.visibility = visibility
+            }
+        })
+    }
+
+
     private fun setupVehiclesTypesListObserver(){
         viewModel.usersList.observe(viewLifecycleOwner, Observer {
 
+            viewModel.isLoading.postValue(false)
 
 
             if (it != null) {
 
-                binding.animationView.visibility = View.INVISIBLE
-                binding.scrollView2.visibility = View.VISIBLE
+                recyclerViewAdapter.differ.submitList(it)
+                //recyclerViewAdapter.setData(it)
 
 
-                if (it.isNotEmpty()) {
-
-                    it.plus(it)
-//                    recyclerViewAdapter.setUsersList(it)
-//                    recyclerViewAdapter.notifyDataSetChanged()
-
-                    recyclerViewAdapter.differ.submitList(it)
-
-
-                } else {
-
-                    showSnackBar(
-                        getString(R.string.no_users_available),
-                        false
-                    )
-
-
-                }
+                viewModel.isLastPage = viewModel.getPage > viewModel.totalPages.value!!
 
 
             } else {
@@ -137,28 +165,6 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
     }
 
-
-    private fun getUsers1stTime(){
-        binding.animationView.visibility = View.VISIBLE
-        binding.scrollView2.visibility = View.INVISIBLE
-
-        updateUsersList()
-    }
-
-
-
-
-    override fun onResume() {
-        super.onResume()
-        updateUsersList()
-
-    }
-
-    private fun updateUsersList(){
-        viewModel.getUsersPaginated()
-    }
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
         val menuItem: MenuItem = menu.findItem(R.id.action_search)
@@ -168,8 +174,6 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
         super.onCreateOptionsMenu(menu, inflater)
     }
-
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -192,26 +196,35 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
         job?.cancel()
         job = MainScope().launch {
             delay(500L)
-            viewModel.getUsersPaginated(query?:"")
-        }
-
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        job?.cancel()
-        job = MainScope().launch {
-            delay(500L)
-            viewModel.getUsersPaginated(newText?:"")
+            search(query)
         }
         return false
     }
 
+    override fun onQueryTextChange(query: String?): Boolean {
+
+            job?.cancel()
+            job = MainScope().launch {
+                delay(500L)
+                search(query)
+            }
+
+        return false
+    }
 
 
+    private fun search(text:String?) {
+            //recyclerViewAdapter.setData(emptyList())
+            viewModel.getPage=1
+            viewModel.textSearch = text?:""
+            viewModel.getUsersPaginated()
+    }
 
-
-
+    override fun onClose(): Boolean {
+        Toast.makeText(requireContext(),"PASO",Toast.LENGTH_LONG).show()
+        search(null)
+        return false
+    }
 
 
 }

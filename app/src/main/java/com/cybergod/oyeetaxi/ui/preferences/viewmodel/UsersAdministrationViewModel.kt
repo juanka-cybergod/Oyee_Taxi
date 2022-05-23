@@ -7,6 +7,7 @@ import com.cybergod.oyeetaxi.api.repository.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,24 +16,60 @@ class UsersAdministrationViewModel @Inject constructor(
     private val UserRepository: UserRepository
     ) :  BaseViewModel() {
 
-    var usersList: MutableLiveData<List<Usuario>> = MutableLiveData()
-    var vehicleTypeAddedOrUpdated: MutableLiveData<Usuario?> = MutableLiveData()
 
-    var usuariosCurrentPage = 1
+    var usersList: MutableLiveData<List<Usuario>?> = MutableLiveData()
+    var totalPages: MutableLiveData<Int> = MutableLiveData()
 
-    fun getUsersPaginated(text:String=""){
+    var getPage = 1
+    var textSearch = ""
+
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    var isLastPage = false
+    var isScrolling = false
+
+
+    init {
+        getUsersPaginated()
+    }
+
+    fun getUsersPaginated(){
+
+            isLoading.postValue(true)
 
             viewModelScope.launch(Dispatchers.IO) {
-                usersList.postValue(
-                   // UserRepository.getAllUsers()
-                    UserRepository.searchUsersPaginated(
-                        nombre_apellidos_correo_telefono=text,
-                        page = usuariosCurrentPage
+
+                delay(1000)
+
+                val listaUsuariosObtenidos = UserRepository.searchUsersPaginated(
+                        nombre_apellidos_correo_telefono=textSearch,
+                        page = getPage,
+                        totalPages = totalPages
                     )
-                )
+                    //.also {it.let {getPage++}}
 
 
-        }
+
+                if (getPage == 1 ) {
+                    usersList.postValue(listaUsuariosObtenidos)
+                } else {
+                    val listaUsuariosAnteriores = usersList.value?.toMutableList()
+                    listaUsuariosAnteriores?.addAll(listaUsuariosObtenidos ?: emptyList())
+                    usersList.postValue(listaUsuariosAnteriores?.toList())
+                }
+
+                if (!listaUsuariosObtenidos.isNullOrEmpty()) {
+                    getPage++
+                }
+
+//                if (usersList.value == null || usersList.value?.isEmpty() == true ) {
+//                    usersList.postValue(listaUsuariosObtenidos)
+//                } else {
+//                    val listaUsuariosAnteriores = usersList.value?.toMutableList()
+//                    listaUsuariosAnteriores?.addAll(listaUsuariosObtenidos ?: emptyList())
+//                    usersList.postValue(listaUsuariosAnteriores?.toList())
+//                }
+
+            }
 
 
     }

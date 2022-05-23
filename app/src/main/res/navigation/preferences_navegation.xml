@@ -37,7 +37,8 @@
             app:destination="@id/vehiclesTypeAdministrationFragment" />
         <action
             android:id="@+id/action_administrationFragment_to_usersAdministrationFragment"
-            app:destination="@id/usersAdministrationFragment" />
+            app:destination="@id/usersAdministrationFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"

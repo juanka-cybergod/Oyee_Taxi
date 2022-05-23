@@ -8,6 +8,7 @@ import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.model.userPaginated.UsuariosPaginados
+import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_CONFIGURACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_FICHEROS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_PROVINCIAS
@@ -31,14 +32,14 @@ interface RetroServiceInterface {
 
     @GET(URL_BASE_USUARIOS + "getAllUsersPaginated")
     suspend fun getAllUsersPaginated(
-        @Query("size") size: Int = 5,
+        @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
         @Query("sort") sort: String = "nombre",
     ): Response<UsuariosPaginados>
 
     @GET(URL_BASE_USUARIOS + "searchUsersPaginated")
     suspend fun searchUsersPaginated(
-        @Query("size") size: Int = 10,
+        @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
         @Query("sort") sort: String = "nombre",
         @Query("search") search: String = "",

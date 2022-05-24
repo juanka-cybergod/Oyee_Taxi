@@ -17,6 +17,9 @@ import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVerificacionEstado
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 
 
@@ -31,7 +34,7 @@ class UsersEditListAdapterNew (
         }
 
         override fun areContentsTheSame(oldItem: Usuario, newItem: Usuario): Boolean {
-            return oldItem.nombre + oldItem.apellidos == newItem.nombre + newItem   .apellidos
+            return oldItem.toString() == newItem.toString()
         }
     }
 
@@ -78,22 +81,22 @@ class UsersEditListAdapterNew (
             with(binding) {
 
                 tvNombreUsuario.text = "${usuario.nombre} ${usuario.apellidos}"
-                tvTelefonoMovil.text = "${usuario.id}"
+                tvCorreo.text = "${usuario.correo}"
+                tvTelefonoMovil.text = "${usuario.telefonoMovil}"
+                //tvTipoUsuario.text = if (usuario.conductor==true) {"Conductor"} else {"Pasajero"}
+                btnCondutor.setTipoClienteConductor(usuario.conductor)
+                btnDisabledUser.visibility = if (usuario.habilitado==false) {View.VISIBLE} else {View.GONE}
+                btnAdminOrSuperAdmin.visibility = if (usuario.administrador==true || usuario.superAdministrador==true  ) {View.VISIBLE} else {View.GONE}
+                btnVerificado.setVerificacionEstado(usuario.usuarioVerificacion)
+
+
+
+                imageUsuario.loadImagePerfilFromURLNoCache(usuario.imagenPerfilURL)
 
                 if (!usuario.imagenPerfilURL.isNullOrEmpty()) {
-
-                    imageUsuario.loadImagePerfilFromURL(usuario.imagenPerfilURL)
                     imageUsuario.setOnClickListener {
                         launchImageViewFragment(usuario.imagenPerfilURL)
                     }
-
-                } else {
-                    Glide.with(binding.imageUsuario)
-                        .load(R.drawable.ic_user)
-                        .fitCenter()
-                        .circleCrop()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
                 }
 
 

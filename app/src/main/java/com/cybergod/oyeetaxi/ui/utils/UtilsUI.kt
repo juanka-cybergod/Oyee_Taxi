@@ -6,16 +6,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.net.Uri
-import android.text.InputType
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
@@ -24,6 +21,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.MetodoPago
 import com.cybergod.oyeetaxi.api.model.Usuario
 import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
@@ -31,9 +29,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.material.textfield.TextInputLayout.END_ICON_CLEAR_TEXT
 import java.lang.Exception
 
 
@@ -117,10 +112,65 @@ object UtilsUI {
 
 
 
+    fun View.setTipoClienteConductor(conductor: Boolean?){
+
+        val button = (this as MaterialButton)
+
+
+        when (conductor) {
+            true -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_driver_user,null)
+                //button.text = "Conductor"
+            }
+            else -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_client_user,null)
+                //button.text = "Pasajero"
+            }
+        }
+
+
+    }
+
+
+    fun View.setVerificacionEstado(usuarioVerificacion: UsuarioVerificacion?){
+
+        val button = (this as MaterialButton)
+
+        button.visibility = View.VISIBLE
+
+        //Verificacion de Usuario
+        if (usuarioVerificacion?.verificado == true) {
+            //Verificado OK
+            button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+            button.setIconTintResource(R.color.casiBlancoObscuro)
+
+        } else {
+            if (usuarioVerificacion?.imagenIdentificaionURL.isNullOrEmpty() || usuarioVerificacion?.identificacion.isNullOrEmpty()) {
+                //No Llenada
+                button.visibility = View.GONE
+            } else {
+                //Pendiente a Aprobar
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+                button.setIconTintResource(R.color.casiRojo)
+            }
+
+        }
+
+//
+//        when (verificacion?.verificado?:false ) {
+//            true -> {
+//                //button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+//                button.setIconTintResource(R.color.casiBlancoObscuro)
+//            }
+//            else -> {
+//                //button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+//                button.setIconTintResource(R.color.casiRojo)
+//            }
+//        }
 
 
 
-
+    }
 
 
     fun View.setMetodoPagoButton(metodoPago: MetodoPago){
@@ -519,6 +569,29 @@ object UtilsUI {
                 .fitCenter()
                 .circleCrop()
                 //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(R.drawable.ic_user)
+                .into((this as ImageView))
+
+        }
+
+    }
+
+
+    fun View.loadImagePerfilFromURLNoCache(relativeURL:String?) {
+
+//        (this as ImageView).visibility = View.INVISIBLE
+//        (this as ImageView).visibility = View.VISIBLE
+        (this as ImageView).setImageResource(R.drawable.ic_user)
+
+
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .fitCenter()
+                .circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 //.skipMemoryCache(true)
                 .placeholder(R.drawable.ic_user)
                 .into((this as ImageView))

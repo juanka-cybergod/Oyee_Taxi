@@ -38,7 +38,7 @@ object Constants {
     const val URL_BASE_VALORACION="valoraciones/"
 
     const val DEFAULT_CONFIG = "default"
-    const val QUERRY_PAGE_SIZE = 8
+    const val QUERRY_PAGE_SIZE = 12
 
 
     //RESPONSE_CODES

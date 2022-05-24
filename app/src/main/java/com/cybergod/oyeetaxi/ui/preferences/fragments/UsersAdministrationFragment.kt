@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,10 +33,10 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
     private lateinit var recyclerView:RecyclerView
 //    private lateinit var recyclerViewAdapter : UsersEditListAdapter
-private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
+    private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
-//    val viewModel: UsersAdministrationViewModel by activityViewModels()
-    lateinit var  viewModel: UsersAdministrationViewModel
+    val viewModel: UsersAdministrationViewModel by activityViewModels()
+//    lateinit var  viewModel: UsersAdministrationViewModel
 
 
     override fun onCreateView(
@@ -46,7 +47,7 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
         _binding = FragmentUsersAdministrationBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this)[UsersAdministrationViewModel::class.java]
+        //viewModel = ViewModelProvider(this)[UsersAdministrationViewModel::class.java]
 
         initRecyclerView()
 
@@ -191,11 +192,12 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
 
     private var job: Job? = null
+    private var findTime = 1000L
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         job?.cancel()
         job = MainScope().launch {
-            delay(500L)
+            delay(findTime)
             search(query)
         }
         return false
@@ -205,7 +207,7 @@ private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
 
             job?.cancel()
             job = MainScope().launch {
-                delay(500L)
+                delay(findTime)
                 search(query)
             }
 

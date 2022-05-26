@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.api.model.TipoFichero
 import com.cybergod.oyeetaxi.api.model.Ubicacion
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
 import com.cybergod.oyeetaxi.api.repository.FilesRepository
 import com.cybergod.oyeetaxi.api.utils.UploadRequestBody

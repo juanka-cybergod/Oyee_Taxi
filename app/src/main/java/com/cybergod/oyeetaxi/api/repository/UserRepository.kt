@@ -4,9 +4,10 @@ package com.cybergod.oyeetaxi.api.repository
 import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.model.Ubicacion
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
+import com.cybergod.oyeetaxi.api.model.usuario.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import com.cybergod.oyeetaxi.utils.Constants
@@ -20,12 +21,13 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
     private val className = this.javaClass.simpleName?:"ClaseDesconocida"
 
 
-    suspend fun searchUsersPaginated(page:Int=1,nombre_apellidos_correo_telefono:String="",totalPages:MutableLiveData<Int>) : List<Usuario>?  {
+    suspend fun searchUsersPaginatedWithFilter(page:Int=1, nombre_apellidos_correo_telefono:String="", userFilterOptions: UserFilterOptions?=null, totalPages:MutableLiveData<Int>) : List<Usuario>?  {
 
         handleRequest {
-            retroServiceInterface.searchUsersPaginated(
+            retroServiceInterface.searchUsersPaginatedWithFilter(
                 search = nombre_apellidos_correo_telefono,
-                page = page - 1
+                page = page - 1,
+                userFilterOptions = userFilterOptions,
             )
         }?.let { response ->
 

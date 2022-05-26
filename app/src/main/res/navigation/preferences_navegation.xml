@@ -6,7 +6,8 @@
     app:startDestination="@id/preferencesFragment">
 
     <action android:id="@+id/action_go_to_administrationFragment"
-        app:destination="@id/administrationFragment"/>
+        app:destination="@id/administrationFragment"
+        />
 
     <action android:id="@+id/action_go_to_addUpdateProvinceFragment"
         app:destination="@id/addUpdateProvinceFragment"
@@ -15,6 +16,14 @@
     <action android:id="@+id/action_go_to_addUpdateVehiclesTypesFragment"
         app:destination="@id/addUpdateVehicleTypeFragment"
         />
+
+
+    <action android:id="@+id/action_go_to_searchFilterUserFragment"
+        app:destination="@id/searchFilterUserFragment"
+        />
+
+
+
 
     <fragment
         android:id="@+id/preferencesFragment"
@@ -69,6 +78,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment"
         android:label="UsersAdministrationFragment"
         tools:layout="@layout/fragment_users_administration"
+        />
+    <dialog
+        android:id="@+id/searchFilterUserFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.SearchFilterUserFragment"
+        android:label="SearchFilterUserFragment"
+        tools:layout="@layout/dialog_filter_user"
         />
 
 </navigation>

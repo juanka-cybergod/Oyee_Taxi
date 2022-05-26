@@ -1,7 +1,9 @@
-package com.cybergod.oyeetaxi.api.model
+package com.cybergod.oyeetaxi.api.model.usuario
 
 
 import android.os.Parcelable
+import com.cybergod.oyeetaxi.api.model.Provincia
+import com.cybergod.oyeetaxi.api.model.Ubicacion
 import com.google.gson.annotations.SerializedName
 import com.cybergod.oyeetaxi.api.model.verification.UsuarioVerificacion
 import kotlinx.parcelize.Parcelize
@@ -34,7 +36,7 @@ data class Usuario(
     @SerializedName("otpCode")
     var otpCode:String?=null,
     @SerializedName("provincia")
-    var provincia:Provincia? = null,
+    var provincia: Provincia? = null,
     @SerializedName("fechaDeNacimiento")
     var fechaDeNacimiento:String? = null,
     @SerializedName("fechaDeRegistro")

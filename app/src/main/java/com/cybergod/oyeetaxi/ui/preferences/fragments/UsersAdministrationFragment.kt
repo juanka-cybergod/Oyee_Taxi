@@ -8,14 +8,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.api.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.FragmentUsersAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapterNew
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -25,7 +30,7 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener {
 
 
     private var _binding: FragmentUsersAdministrationBinding? = null
@@ -181,7 +186,10 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
         return when (item.itemId) {
             R.id.action_search -> {
-
+                true
+            }
+            R.id.action_filter -> {
+                launchSearchFilterUserFragment()
                 true
             }
             else -> {
@@ -216,16 +224,20 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
 
     private fun search(text:String?) {
-            //recyclerViewAdapter.setData(emptyList())
             viewModel.getPage=1
             viewModel.textSearch = text?:""
             viewModel.getUsersPaginated()
     }
 
-    override fun onClose(): Boolean {
-        Toast.makeText(requireContext(),"PASO",Toast.LENGTH_LONG).show()
-        search(null)
-        return false
+
+
+
+    private fun launchSearchFilterUserFragment() {
+        findNavController().navigate(R.id.action_go_to_searchFilterUserFragment,
+            Bundle().apply {
+                putParcelable(KEY_USER_FILTER_OPTIONS,viewModel.userFilterOptions)
+            }
+        )
     }
 
 

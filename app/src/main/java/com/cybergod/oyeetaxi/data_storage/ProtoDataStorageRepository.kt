@@ -2,7 +2,7 @@ package com.cybergod.oyeetaxi.data_storage
 
 import android.util.Log
 import androidx.datastore.core.DataStore
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import kotlinx.coroutines.CoroutineScope

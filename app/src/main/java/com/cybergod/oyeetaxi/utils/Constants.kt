@@ -38,7 +38,7 @@ object Constants {
     const val URL_BASE_VALORACION="valoraciones/"
 
     const val DEFAULT_CONFIG = "default"
-    const val QUERRY_PAGE_SIZE = 12
+    const val QUERRY_PAGE_SIZE = 10
 
 
     //RESPONSE_CODES
@@ -67,6 +67,8 @@ object Constants {
     const val KEY_VEHICLE_PARCELABLE = "KEY_VEHICLE_PARCELABLE"
     const val KEY_PROVINCE_PARCELABLE = "KEY_PROVINCE_PARCELABLE"
     const val KEY_VEHICLE_TYPE_PARCELABLE = "KEY_VEHICLE_TYPE_PARCELABLE"
+    const val KEY_USER_FILTER_OPTIONS = "KEY_USER_FILTER_OPTIONS"
+
 
     const val CONTRY_CODE = "+53"
 

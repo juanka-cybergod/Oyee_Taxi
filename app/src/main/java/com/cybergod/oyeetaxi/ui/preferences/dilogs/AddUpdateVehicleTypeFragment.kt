@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
@@ -17,7 +15,6 @@ import com.cybergod.oyeetaxi.databinding.DialogAddUpdateVehicleTypeBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesTypesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_TYPE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

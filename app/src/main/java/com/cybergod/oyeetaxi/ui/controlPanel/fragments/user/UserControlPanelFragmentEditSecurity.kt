@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.databinding.UserControlPanelFragmentEditSecurityBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.UserControlPanelViewModel

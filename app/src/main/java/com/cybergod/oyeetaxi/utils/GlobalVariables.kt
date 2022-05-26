@@ -1,7 +1,7 @@
 package com.cybergod.oyeetaxi.utils
 
 import androidx.lifecycle.MutableLiveData
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
 import com.google.android.gms.maps.GoogleMap

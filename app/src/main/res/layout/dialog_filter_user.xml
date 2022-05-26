@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTop"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="Filtrar Usuarios"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClose"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+
+            android:layout_margin="2dp"
+            android:textSize="13sp"
+            app:icon="@drawable/ic_close"
+            app:iconTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clTop">
+
+
+        <LinearLayout
+
+            android:id="@+id/llProvinceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            android:padding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/climageView">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVisibleForClients"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_driver_user"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchConductores"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Conductores"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnVisibleForClients"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTransportePasajeros"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_disable_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchDeshabilitados"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Deshabilitados"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnTransportePasajeros"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTransporteCarga"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_settings_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchAdministradores"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Administradores"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnTransporteCarga"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRequiereVerificacion"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_verified"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchVerificacionPendiente"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Verificación pendiente"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnRequiereVerificacion"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:visibility="gone"
+                    android:id="@+id/rg_user_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switchVerificacionPendiente">
+
+
+                    <RadioButton
+                        android:id="@+id/rb_verificacionPendiente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_gender_tab_selector"
+                        android:button="@null"
+                        android:checked="false"
+                        android:drawableLeft="@drawable/ic_verified_32"
+                        android:drawableTint="@color/casiRojo"
+                        android:gravity="center"
+                        android:textAlignment="textStart"
+                        android:text="Pendiente"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                        android:textStyle="normal" />
+
+                    <RadioButton
+                        android:id="@+id/rb_verificacionCompletada"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_gender_tab_selector"
+                        android:button="@null"
+                        android:checked="false"
+                        android:drawableLeft="@drawable/ic_verified_32"
+                        android:drawableTint="@color/colorCasiVerde"
+                        android:gravity="center"
+                        android:textAlignment="textStart"
+                        android:text="Completada"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                        android:textStyle="normal" />
+
+                </RadioGroup>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginTop="8dp"
+                android:id="@+id/btnApply"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="13dp"
+                android:backgroundTint="@color/yellow_light"
+                android:text="Aplicar"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                app:iconGravity="textStart"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/btnComprobarActualizacions"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -2,7 +2,8 @@ package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.repository.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,9 +17,10 @@ class UsersAdministrationViewModel @Inject constructor(
     private val UserRepository: UserRepository
     ) :  BaseViewModel() {
 
-
     var usersList: MutableLiveData<List<Usuario>?> = MutableLiveData()
     var totalPages: MutableLiveData<Int> = MutableLiveData()
+
+    var userFilterOptions : UserFilterOptions? = UserFilterOptions()
 
     var getPage = 1
     var textSearch = ""
@@ -40,14 +42,12 @@ class UsersAdministrationViewModel @Inject constructor(
 
                 delay(1000)
 
-                val listaUsuariosObtenidos = UserRepository.searchUsersPaginated(
+                val listaUsuariosObtenidos = UserRepository.searchUsersPaginatedWithFilter(
                         nombre_apellidos_correo_telefono=textSearch,
                         page = getPage,
-                        totalPages = totalPages
+                        totalPages = totalPages,
+                        userFilterOptions = userFilterOptions,
                     )
-                    //.also {it.let {getPage++}}
-
-
 
                 if (getPage == 1 ) {
                     usersList.postValue(listaUsuariosObtenidos)
@@ -61,19 +61,15 @@ class UsersAdministrationViewModel @Inject constructor(
                     getPage++
                 }
 
-//                if (usersList.value == null || usersList.value?.isEmpty() == true ) {
-//                    usersList.postValue(listaUsuariosObtenidos)
-//                } else {
-//                    val listaUsuariosAnteriores = usersList.value?.toMutableList()
-//                    listaUsuariosAnteriores?.addAll(listaUsuariosObtenidos ?: emptyList())
-//                    usersList.postValue(listaUsuariosAnteriores?.toList())
-//                }
 
             }
 
 
     }
-//
+
+
+
+
 //    private suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo):TipoVehiculo?{
 //
 //        val updatedVehicleType = vehicleTypeRepository.updateVehicleType(tipoVehiculo)

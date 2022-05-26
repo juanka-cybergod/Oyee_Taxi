@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.databinding.UserControlPanelActivityBinding
 import com.cybergod.oyeetaxi.ui.interfaces.Communicator
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

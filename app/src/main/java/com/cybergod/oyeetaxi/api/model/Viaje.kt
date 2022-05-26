@@ -1,6 +1,7 @@
 package com.cybergod.oyeetaxi.api.model
 
 import android.os.Parcelable
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
@@ -17,7 +18,7 @@ data class Viaje(
     var estado:ViajeEstado? = ViajeEstado.PENDIENTE,
 
     @SerializedName("usuario")
-    var usuario :Usuario? = null,
+    var usuario : Usuario? = null,
 
     @SerializedName("paraTiposVehiculos")
     var paraTiposVehiculos : List<TipoVehiculo>? = null,

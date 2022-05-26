@@ -4,7 +4,7 @@ package com.cybergod.oyeetaxi.ui.passwordRecovery.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.repository.UserRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository

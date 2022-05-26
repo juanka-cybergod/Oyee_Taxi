@@ -1,7 +1,7 @@
 package com.cybergod.oyeetaxi.api.model.userPaginated
 
 
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.google.gson.annotations.SerializedName
 
 data class UsuariosPaginados(

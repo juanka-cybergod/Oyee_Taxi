@@ -13,6 +13,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/drawable_gender_tab_selector.xml" value="0.1935" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/drawable_gender_tab_text_color_selector.xml" value="0.1935" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/drawable_round_corner_background.xml" value="0.1935" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic__filter_24.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic__warning_24.xml" value="0.223" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_air.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_alert_24.xml" value="0.211" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi_32.xml" value="0.242" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_type.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_vehicle_type.xml" value="0.211" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_vehicle_type_32.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_verified.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/text.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/activity_login.xml" value="0.5" />
@@ -61,6 +63,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_bottom_progress.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_configuration_email.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_configuration_social.xml" value="0.5" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_filter_user.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_image_view.xml" value="0.41953125" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_progress.xml" value="0.75" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_social_soporte.xml" value="0.54375" />
@@ -94,7 +97,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_provincia_edit.xml" value="0.5465116279069767" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_red_social.xml" value="1.1058823529411765" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_tipo_vehiculo.xml" value="2.0" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_user_edit.xml" value="1.0" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_user_edit.xml" value="0.67" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehicle_type_edit.xml" value="0.67" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehiculo.xml" value="0.67" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/month_year_picker_dialog.xml" value="0.41796875" />

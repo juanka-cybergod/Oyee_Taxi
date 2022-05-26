@@ -3,7 +3,7 @@ package com.cybergod.oyeetaxi.api.model.response
 
 import android.os.Parcelable
 import com.cybergod.oyeetaxi.api.model.TipoVehiculo
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.api.model.verification.VehiculoVerificacion
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable

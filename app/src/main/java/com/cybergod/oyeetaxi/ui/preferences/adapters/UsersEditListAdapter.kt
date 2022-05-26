@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Usuario
+import com.cybergod.oyeetaxi.api.model.usuario.Usuario
 import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
@@ -43,11 +43,11 @@ class UsersEditListAdapter (
     class MyViewHolder(itemView: View,private val usersAdministrationFragment:UsersAdministrationFragment): RecyclerView.ViewHolder(itemView){
 
         val binding = ItemUserEditBinding.bind(itemView)
-        private lateinit var usuarioSelected:Usuario
+        private lateinit var usuarioSelected: Usuario
 
 
         @SuppressLint("SetTextI18n")
-        fun bind(usuario:Usuario) {
+        fun bind(usuario: Usuario) {
 
             with(binding) {
 

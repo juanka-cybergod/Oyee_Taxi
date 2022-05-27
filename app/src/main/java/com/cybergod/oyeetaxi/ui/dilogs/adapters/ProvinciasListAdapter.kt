@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.databinding.ItemProvinciaBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ProvincesFragment
 
@@ -41,7 +41,7 @@ class ProvinciasListAdapter (
 
         private val bindig = ItemProvinciaBinding.bind(itemView)
 
-        fun bind(provincia:Provincia, provincesFragment: ProvincesFragment) {
+        fun bind(provincia: Provincia, provincesFragment: ProvincesFragment) {
             bindig.tvProvinciaNombre.text = provincia.nombre
 
             bindig.tvProvinciaNombre.setOnClickListener {

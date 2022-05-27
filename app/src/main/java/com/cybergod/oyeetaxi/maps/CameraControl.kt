@@ -1,7 +1,7 @@
 package com.cybergod.oyeetaxi.maps
 
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.maps.Utils.ubicacionToLatLng
 import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -61,7 +61,7 @@ class CameraControl {
     }
 
 
-    fun moveCameraToProvince(province:Provincia){
+    fun moveCameraToProvince(province: Provincia){
 
         coroutine.launch(Dispatchers.Main) {
             delay(100L)
@@ -81,7 +81,7 @@ class CameraControl {
     }
 
 
-    fun goToUbicacionInicialProvincia(ubicacion:Ubicacion){
+    fun goToUbicacionInicialProvincia(ubicacion: Ubicacion){
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(ubicacion.latitud!!,ubicacion.longitud!!),8f))
         coroutine.launch(Dispatchers.Main) {

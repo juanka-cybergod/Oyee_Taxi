@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.TipoVehiculo
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.FragmentVehiclesTypeBinding
 import com.cybergod.oyeetaxi.ui.dilogs.adapters.VehicleTypeListAdapter
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleTypeViewModel

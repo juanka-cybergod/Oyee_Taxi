@@ -1,15 +1,21 @@
 package com.cybergod.oyeetaxi.api.interfaces
 
 
-import com.cybergod.oyeetaxi.api.model.*
-import com.cybergod.oyeetaxi.api.model.configuration.UpdateConfiguracion
-import com.cybergod.oyeetaxi.api.model.response.FicherosRespuesta
-import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
-import com.cybergod.oyeetaxi.api.model.response.RequestVerificationCodeResponse
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.model.userPaginated.UsuariosPaginados
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.model.usuario.requestFilter.UserFilterOptions
+import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.UpdateConfiguracion
+import com.cybergod.oyeetaxi.api.futures.file.model.response.FicherosRespuesta
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.travel.model.Viaje
+import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
+import com.cybergod.oyeetaxi.api.futures.user.model.response.RequestVerificationCodeResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.valoration.model.Valoracion
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_CONFIGURACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_FICHEROS
@@ -19,7 +25,8 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_USUARIOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VALORACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VEHICULOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VIAJES
-import com.oyeetaxi.cybergod.Modelos.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -143,7 +150,7 @@ interface RetroServiceInterface {
     suspend fun getConfiguration(): Response<Configuracion>
 
     @PUT(URL_BASE_CONFIGURACION + "updateConfiguration")
-    suspend fun updateConfiguration(@Body configuracion :Configuracion): Response<Configuracion>
+    suspend fun updateConfiguration(@Body configuracion : Configuracion): Response<Configuracion>
 
 
     /** UPPLOAD FILES ***********************************************************/

@@ -1,7 +1,7 @@
 package com.cybergod.oyeetaxi.ui.preferences.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 
 class myDiffUtil(
     private val oldList:List<Usuario>,

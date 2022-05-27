@@ -14,9 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.Vehiculo
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.VehicleControlPanelFragmentListBinding
 import com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.adapters.VehiculosListAdapter
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

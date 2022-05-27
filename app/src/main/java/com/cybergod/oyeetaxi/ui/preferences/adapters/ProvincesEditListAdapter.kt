@@ -6,20 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.databinding.ItemProvinciaEditBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
-import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.KEY_PROVINCE_PARCELABLE
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -54,11 +50,11 @@ class ProvincesEditListAdapter (
     class MyViewHolder(itemView: View,private val provincesAdministrationFragment:ProvincesAdministrationFragment): RecyclerView.ViewHolder(itemView){
 
         val binding = ItemProvinciaEditBinding.bind(itemView)
-        private lateinit var provinceSelected:Provincia
+        private lateinit var provinceSelected: Provincia
 
 
         @SuppressLint("SetTextI18n")
-        fun bind(provincia:Provincia) {
+        fun bind(provincia: Provincia) {
 
             with(binding) {
 

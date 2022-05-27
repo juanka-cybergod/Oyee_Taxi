@@ -2,9 +2,9 @@ package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.model.usuario.requestFilter.UserFilterOptions
-import com.cybergod.oyeetaxi.api.repository.UserRepository
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
+import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

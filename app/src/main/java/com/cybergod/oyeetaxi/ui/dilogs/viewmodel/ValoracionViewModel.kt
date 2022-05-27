@@ -2,8 +2,8 @@ package com.cybergod.oyeetaxi.ui.dilogs.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Valoracion
-import com.cybergod.oyeetaxi.api.repository.ValorationRepository
+import com.cybergod.oyeetaxi.api.futures.valoration.model.Valoracion
+import com.cybergod.oyeetaxi.api.futures.valoration.repositories.ValorationRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.databinding.FragmentProvincesBinding
 import com.cybergod.oyeetaxi.ui.dilogs.adapters.ProvinciasListAdapter
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.ProvincesViewModel

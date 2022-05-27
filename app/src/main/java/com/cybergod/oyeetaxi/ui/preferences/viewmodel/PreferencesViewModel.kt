@@ -5,8 +5,8 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Configuracion
-import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
+import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
+import com.cybergod.oyeetaxi.api.futures.configuration.repositories.ConfigurationRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel

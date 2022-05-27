@@ -6,7 +6,7 @@ import android.content.IntentSender
 import android.graphics.Color
 import android.location.Location
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -142,7 +142,7 @@ object Utils {
         return LatLng(ubicacion?.latitud ?:0.0,ubicacion?.longitud  ?:0.0)
     }
 
-    fun locationToUbicacion(location: Location):Ubicacion{
+    fun locationToUbicacion(location: Location): Ubicacion {
         return  Ubicacion(
             latitud = location.latitude,
             longitud = location.longitude,

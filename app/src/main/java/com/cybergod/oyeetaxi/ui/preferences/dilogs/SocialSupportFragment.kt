@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cybergod.oyeetaxi.api.model.RedSocial
 import com.cybergod.oyeetaxi.databinding.DialogSocialSoporteBinding
 import com.cybergod.oyeetaxi.ui.preferences.adapters.RedesSocialesListAdapterForClients
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel

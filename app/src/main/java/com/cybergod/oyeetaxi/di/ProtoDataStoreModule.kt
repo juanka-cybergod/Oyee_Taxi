@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
+import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.di.utils.LoginRespuestaSerializer
 import dagger.Module
 import dagger.Provides

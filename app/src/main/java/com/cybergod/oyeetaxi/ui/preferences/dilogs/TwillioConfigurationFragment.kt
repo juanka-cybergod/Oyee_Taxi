@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.configuration.TwilioConfiguracion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.TwilioConfiguracion
 import com.cybergod.oyeetaxi.databinding.FragmentTwillioConfigurationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
@@ -65,7 +65,7 @@ class TwillioConfigurationFragment : BottomSheetDialogFragment() {
 
     }
 
-   lateinit var twilioConfiguracion:TwilioConfiguracion
+   lateinit var twilioConfiguracion: TwilioConfiguracion
     private fun setServerTwilioConfiguration() {
 
         with(binding){

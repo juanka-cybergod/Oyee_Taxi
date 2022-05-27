@@ -4,10 +4,11 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.repository.*
-import com.cybergod.oyeetaxi.api.utils.UploadRequestBody
+import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
+import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive

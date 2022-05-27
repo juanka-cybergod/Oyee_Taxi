@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.RedSocial
+import com.cybergod.oyeetaxi.api.futures.share.model.RedSocial
 import com.cybergod.oyeetaxi.databinding.ItemRedSocialBinding
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialSupportFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageRedSocialFromURL
@@ -40,7 +40,7 @@ class RedesSocialesListAdapterForClients (
 
         val binding = ItemRedSocialBinding.bind(itemView)
 
-        fun bind(redSocial:RedSocial, socialSupportFragment: SocialSupportFragment) {
+        fun bind(redSocial: RedSocial, socialSupportFragment: SocialSupportFragment) {
 
 
             if (redSocial.disponible == true && redSocial.url?.isNotEmpty() == true) {

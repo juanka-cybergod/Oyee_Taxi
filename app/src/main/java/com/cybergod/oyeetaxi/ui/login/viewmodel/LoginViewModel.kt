@@ -4,8 +4,8 @@ package com.cybergod.oyeetaxi.ui.login.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
-import com.cybergod.oyeetaxi.api.repository.UserRepository
+import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
+import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

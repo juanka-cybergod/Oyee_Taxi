@@ -2,8 +2,8 @@ package com.cybergod.oyeetaxi.ui.vehicleRegistration.activity
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.TipoVehiculo
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.VehicleRegistrationActivityBinding
 import com.cybergod.oyeetaxi.ui.interfaces.Communicator
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

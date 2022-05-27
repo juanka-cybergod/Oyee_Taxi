@@ -9,8 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.databinding.UserControlPanelFragmentEditVerificationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.UserControlPanelViewModel
@@ -19,7 +19,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURI
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURL
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.cybergod.oyeetaxi.api.model.verification.UsuarioVerificacion
+import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint

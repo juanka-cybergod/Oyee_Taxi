@@ -1,8 +1,8 @@
 package com.cybergod.oyeetaxi.utils
 
 import androidx.lifecycle.MutableLiveData
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Circle

@@ -2,13 +2,13 @@ package com.cybergod.oyeetaxi.ui.vehicleRegistration.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.TipoVehiculo
-import com.cybergod.oyeetaxi.api.model.Vehiculo
-import com.cybergod.oyeetaxi.api.model.verification.VehiculoVerificacion
-import com.cybergod.oyeetaxi.api.repository.FilesRepository
-import com.cybergod.oyeetaxi.api.utils.UploadRequestBody
-import com.cybergod.oyeetaxi.api.repository.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.verification.VehiculoVerificacion
+import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
+import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
+import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
@@ -54,8 +54,9 @@ class VehicleRegistrationViewModel @Inject constructor(
 
     suspend fun addNewVehicle():Boolean? {
 
-        imagenFrontalPublicaURL = uploadSingleFile(imagenFrontalVehiculoFile.value,idVehiculo,TipoFichero.VEHICULO_FRONTAL)
-        imagenCirculacionURL = uploadSingleFile(imagenCirculacionFile.value,idVehiculo,TipoFichero.VEHICULO_CIRCULACION)
+        imagenFrontalPublicaURL = uploadSingleFile(imagenFrontalVehiculoFile.value,idVehiculo,
+            TipoFichero.VEHICULO_FRONTAL)
+        imagenCirculacionURL = uploadSingleFile(imagenCirculacionFile.value,idVehiculo, TipoFichero.VEHICULO_CIRCULACION)
 
         return if (!imagenFrontalPublicaURL.isNullOrEmpty())   {
 

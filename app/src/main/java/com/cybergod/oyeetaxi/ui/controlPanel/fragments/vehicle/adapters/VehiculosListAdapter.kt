@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.ItemVehiculoBinding
 import com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentList
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

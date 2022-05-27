@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.MetodoPago
+import com.cybergod.oyeetaxi.api.futures.travel.model.MetodoPago
 import com.cybergod.oyeetaxi.databinding.FragmentViajeBinding
 import com.cybergod.oyeetaxi.ui.dilogs.adapters.ImageVehicleTypeListAdapter
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.ViajeViewModel

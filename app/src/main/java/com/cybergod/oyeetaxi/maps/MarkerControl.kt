@@ -2,7 +2,7 @@ package com.cybergod.oyeetaxi.maps
 
 import android.location.Location
 import android.util.Log
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.maps.Utils.getCircle
 import com.cybergod.oyeetaxi.maps.Utils.getIcoFromResource
 import com.cybergod.oyeetaxi.maps.Utils.ubicacionToLatLng

@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Configuracion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
 import com.cybergod.oyeetaxi.databinding.FragmentAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EmailConfigurationFragment
@@ -22,7 +22,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.smsProviderFromString
-import com.oyeetaxi.cybergod.Modelos.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 

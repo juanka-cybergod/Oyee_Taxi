@@ -1,12 +1,8 @@
 package com.cybergod.oyeetaxi.connectivity
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -2,7 +2,7 @@ package com.cybergod.oyeetaxi.di.utils
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.cybergod.oyeetaxi.api.model.response.LoginRespuesta
+import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.InputStream

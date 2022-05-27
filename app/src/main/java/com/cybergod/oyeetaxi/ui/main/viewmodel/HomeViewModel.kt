@@ -2,9 +2,9 @@ package com.cybergod.oyeetaxi.ui.main.viewmodel
 
 import android.location.Location
 import androidx.lifecycle.*
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.repository.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.maps.Utils.locationToUbicacion
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel

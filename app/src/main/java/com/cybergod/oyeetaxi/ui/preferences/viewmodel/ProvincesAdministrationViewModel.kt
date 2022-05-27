@@ -2,8 +2,8 @@ package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.repository.ProvincesRepository
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.province.repositories.ProvincesRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +32,7 @@ class ProvincesAdministrationViewModel @Inject constructor(
 
     }
 
-    private suspend fun updateProvince(provincia: Provincia):Provincia?{
+    private suspend fun updateProvince(provincia: Provincia): Provincia?{
 
         val updatedProvince = provincesRepository.updateProvince(provincia)
         if (updatedProvince!=null) {
@@ -59,7 +59,7 @@ class ProvincesAdministrationViewModel @Inject constructor(
     }
 
 
-    suspend fun setProvinceVisibility(nombreProvincia: String,visible:Boolean) :Provincia?{
+    suspend fun setProvinceVisibility(nombreProvincia: String,visible:Boolean) : Provincia?{
         return updateProvince(
             Provincia(
                 nombre = nombreProvincia,

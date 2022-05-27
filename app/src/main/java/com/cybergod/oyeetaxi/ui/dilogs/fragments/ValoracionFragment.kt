@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentValoracionBinding
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.ValoracionViewModel
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

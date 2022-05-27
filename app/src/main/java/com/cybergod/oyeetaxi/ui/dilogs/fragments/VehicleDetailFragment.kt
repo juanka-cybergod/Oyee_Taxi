@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentVehicleDetailBinding
 import com.cybergod.oyeetaxi.maps.Utils.calculateTheDistance
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleDetailsViewModel

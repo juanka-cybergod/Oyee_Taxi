@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.cybergod.oyeetaxi.api.model.usuario.requestFilter.UserFilterOptions
+import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.databinding.DialogFilterUserBinding
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS

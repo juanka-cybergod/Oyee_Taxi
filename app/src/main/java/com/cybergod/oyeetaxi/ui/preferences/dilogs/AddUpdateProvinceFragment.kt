@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.databinding.DialogAddupdateProvinceBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.ProvincesAdministrationViewModel
@@ -19,7 +18,6 @@ import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isValidLatitude
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isValidLongitude
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.coroutines.launch
 
 class AddUpdateProvinceFragment : BottomSheetDialogFragment() {
 
@@ -29,7 +27,7 @@ class AddUpdateProvinceFragment : BottomSheetDialogFragment() {
 
     val viewModel: ProvincesAdministrationViewModel by activityViewModels()
 
-    private var provinceSelected:Provincia?=null
+    private var provinceSelected: Provincia?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,

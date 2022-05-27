@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.configuration.EmailConfiguracion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.EmailConfiguracion
 import com.cybergod.oyeetaxi.databinding.DialogConfigurationEmailBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
@@ -95,7 +95,7 @@ class EmailConfigurationFragment : BottomSheetDialogFragment() {
 
     }
 
-   lateinit var emailConfiguracion:EmailConfiguracion
+   lateinit var emailConfiguracion: EmailConfiguracion
     private fun setServerEmailConfiguration() {
 
         with(binding){

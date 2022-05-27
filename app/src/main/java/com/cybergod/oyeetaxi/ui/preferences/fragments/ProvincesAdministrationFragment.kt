@@ -5,22 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
 import com.cybergod.oyeetaxi.databinding.FragmentProvincesAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.ProvincesEditListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.ProvincesAdministrationViewModel
-import com.cybergod.oyeetaxi.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -3,8 +3,8 @@ package com.cybergod.oyeetaxi.ui.main.viewmodel
 import android.content.Context
 import androidx.lifecycle.*
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.repository.UserRepository
-import com.cybergod.oyeetaxi.api.repository.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
+import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.connectivity.ConnectionManager
 import com.cybergod.oyeetaxi.utils.GlobalVariables.NetworkErrorFound
 import com.cybergod.oyeetaxi.utils.GlobalVariables.NetworkErrorMessaje

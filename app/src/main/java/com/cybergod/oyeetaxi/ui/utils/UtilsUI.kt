@@ -18,10 +18,10 @@ import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.MetodoPago
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.model.verification.UsuarioVerificacion
+import com.cybergod.oyeetaxi.api.futures.travel.model.MetodoPago
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.utils.UtilsGlobal

@@ -3,11 +3,12 @@ package com.cybergod.oyeetaxi.ui.controlPanel.viewmodel
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.Vehiculo
-import com.cybergod.oyeetaxi.api.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.repository.*
-import com.cybergod.oyeetaxi.api.utils.UploadRequestBody
+import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ open class VehicleControlPanelViewModel @Inject constructor(
     private val vehicleRepository: VehicleRepository,
     private val filesRepository: FilesRepository,
 
-) : BaseViewModel(), UploadRequestBody.UploadCallback {
+    ) : BaseViewModel(), UploadRequestBody.UploadCallback {
 
 
     val vehicleUpdatedSusses :MutableLiveData<Boolean>  = MutableLiveData<Boolean>()
@@ -43,7 +44,7 @@ open class VehicleControlPanelViewModel @Inject constructor(
 
 
 
-    fun updateVehicleById(vehiculo: Vehiculo,vehiculoId:String){
+    fun updateVehicleById(vehiculo: Vehiculo, vehiculoId:String){
 
         vehiculo.id= vehiculoId
 

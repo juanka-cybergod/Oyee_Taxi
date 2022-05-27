@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.TipoFichero
-import com.cybergod.oyeetaxi.api.model.Ubicacion
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
-import com.cybergod.oyeetaxi.api.repository.ConfigurationRepository
-import com.cybergod.oyeetaxi.api.repository.FilesRepository
-import com.cybergod.oyeetaxi.api.utils.UploadRequestBody
-import com.cybergod.oyeetaxi.api.repository.UserRepository
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.configuration.repositories.ConfigurationRepository
+import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
+import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
+import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
-import com.oyeetaxi.cybergod.Modelos.SmsProvider
-import com.cybergod.oyeetaxi.api.model.verification.UsuarioVerificacion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -88,8 +88,9 @@ class UserRegistrationViewModel @Inject constructor(
 
     suspend fun addUser():Boolean? {
 
-        imagenPerfilURL = uploadSingleFile(imagenPerfilFile.value,idUsuario,TipoFichero.USUARIO_PERFIL)
-        imagenVerificacionURL = uploadSingleFile(imagenVerificacionFile.value,idUsuario,TipoFichero.USUARIO_VERIFICACION)
+        imagenPerfilURL = uploadSingleFile(imagenPerfilFile.value,idUsuario, TipoFichero.USUARIO_PERFIL)
+        imagenVerificacionURL = uploadSingleFile(imagenVerificacionFile.value,idUsuario,
+            TipoFichero.USUARIO_VERIFICACION)
 
         return if (!imagenPerfilURL.isNullOrEmpty()  &&  !imagenVerificacionURL.isNullOrEmpty() )   {
 

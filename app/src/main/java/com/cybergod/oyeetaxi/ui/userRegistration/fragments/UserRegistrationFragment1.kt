@@ -14,7 +14,7 @@ import com.cybergod.oyeetaxi.databinding.UserRegistrationFragment1Binding
 import com.cybergod.oyeetaxi.ui.login.activity.LoginActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
-import com.oyeetaxi.cybergod.Modelos.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

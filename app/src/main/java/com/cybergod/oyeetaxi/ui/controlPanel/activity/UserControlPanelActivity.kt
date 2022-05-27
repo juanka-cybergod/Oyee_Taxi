@@ -6,9 +6,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.model.Provincia
-import com.cybergod.oyeetaxi.api.model.TipoVehiculo
-import com.cybergod.oyeetaxi.api.model.usuario.Usuario
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.databinding.UserControlPanelActivityBinding
 import com.cybergod.oyeetaxi.ui.interfaces.Communicator
 import com.cybergod.oyeetaxi.ui.base.BaseActivity

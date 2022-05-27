@@ -1,10 +1,8 @@
 package com.cybergod.oyeetaxi.ui.dilogs.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
-import com.cybergod.oyeetaxi.api.model.Vehiculo
-import com.cybergod.oyeetaxi.api.repository.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

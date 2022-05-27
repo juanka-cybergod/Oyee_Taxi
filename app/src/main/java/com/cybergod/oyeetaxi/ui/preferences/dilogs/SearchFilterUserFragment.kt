@@ -66,17 +66,12 @@ class SearchFilterUserFragment : DialogFragment() {
 
 
             btnApply.setOnClickListener {
-                if (switchConductores.isChecked || switchDeshabilitados.isChecked || switchAdministradores.isChecked || switchVerificacionPendiente.isChecked) {
-                    val newFilterOption = UserFilterOptions(
-                                condutores = if (switchConductores.isChecked) {true} else {null},
-                                deshabilitados = if (switchDeshabilitados.isChecked) {true} else {null},
-                                administradores = if (switchAdministradores.isChecked) {true} else {null},
-                                verificacionesPendientes =if (switchVerificacionPendiente.isChecked) {true} else {null},
-                    )
-                    viewModel.userFilterOptions = newFilterOption
 
-                } else {
-                    viewModel.userFilterOptions = UserFilterOptions()
+                viewModel.userFilterOptions.apply {
+                    condutores = if (switchConductores.isChecked) {true} else {null}
+                    deshabilitados = if (switchDeshabilitados.isChecked) {true} else {null}
+                    administradores = if (switchAdministradores.isChecked) {true} else {null}
+                    verificacionesPendientes =if (switchVerificacionPendiente.isChecked) {true} else {null}
                 }
 
                 search()

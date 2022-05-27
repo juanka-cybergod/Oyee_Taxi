@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UserFilterOptions(
+    var texto:String="",
     var condutores:Boolean?=null,
     var deshabilitados:Boolean?=null,
     var administradores:Boolean?=null,

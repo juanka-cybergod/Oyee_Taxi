@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.futures.user.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
@@ -21,11 +22,10 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
     private val className = this.javaClass.simpleName?:"ClaseDesconocida"
 
 
-    suspend fun searchUsersPaginatedWithFilter(page:Int=1, nombre_apellidos_correo_telefono:String="", userFilterOptions: UserFilterOptions?=null, totalPages:MutableLiveData<Int>) : List<Usuario>?  {
+    suspend fun searchUsersPaginatedWithFilter(page:Int=1, userFilterOptions: UserFilterOptions?) : UsuariosPaginados?  {
 
         handleRequest {
             retroServiceInterface.searchUsersPaginatedWithFilter(
-                search = nombre_apellidos_correo_telefono,
                 page = page - 1,
                 userFilterOptions = userFilterOptions,
             )
@@ -42,8 +42,7 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
                 )
 
                 if (response.code() == RESPONSE_CODE_OK) {
-                    totalPages.postValue(response.body()?.totalPages)
-                    response.body()?.content?.toList()
+                    response.body()
 
                 } else  null
             } else null

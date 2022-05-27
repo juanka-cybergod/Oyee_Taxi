@@ -16,7 +16,6 @@ import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOpti
 import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.valoration.model.Valoracion
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
-import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_CONFIGURACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_FICHEROS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_PROVINCIAS
@@ -27,6 +26,7 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VEHICULOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VIAJES
 import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
+import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -59,8 +59,8 @@ interface RetroServiceInterface {
         @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
         @Query("sort") sort: String = "nombre",
-        @Query("search") search: String = "",
-        @Body userFilterOptions : UserFilterOptions?=null,
+        //@Query("search") search: String = "",
+        @Body userFilterOptions : UserFilterOptions?=UserFilterOptions(),
     ): Response<UsuariosPaginados>
 
     @GET(URL_BASE_USUARIOS + "getUserById={id}")

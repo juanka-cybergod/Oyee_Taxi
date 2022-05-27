@@ -65,7 +65,6 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
 
 
-
     private val myScrollListener = object : RecyclerView.OnScrollListener(){
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
@@ -88,18 +87,6 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
             //val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && noEstaAlPrincipio && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
             val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
 
-
-//            Log.d("searchUsersPaginated","onScrolled()")
-//            Log.d("searchUsersPaginated","primeraPosicionVisibleItem=$primeraPosicionVisibleItem")
-//            Log.d("searchUsersPaginated","cantidadDeItemsVisibles=$cantidadDeItemsVisibles")
-//            Log.d("searchUsersPaginated","cantidadTotalDeItems=$cantidadTotalDeItems")
-//            Log.d("searchUsersPaginated","noEstaCargando=$noEstaCargando")
-//            Log.d("searchUsersPaginated","noEstaEnLaUtlimaPagina=$noEstaEnLaUtlimaPagina")
-//            Log.d("searchUsersPaginated","esLaUltimaItem=$esLaUltimaItem")
-//            //Log.d("searchUsersPaginated","noEstaAlPrincipio=$noEstaAlPrincipio")
-//            Log.d("searchUsersPaginated","elTotalEsMasQueLasItemsRequeridas=$elTotalEsMasQueLasItemsRequeridas")
-//            Log.d("searchUsersPaginated","deberiaPaginar=$deberiaPaginar")
-
             if (deberiaPaginar) {
                 viewModel.getUsersPaginated()
                 viewModel.isScrolling = false
@@ -116,54 +103,32 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
         recyclerView.addOnScrollListener(myScrollListener)
     }
 
+    private fun setupObservers(){
+        with (viewModel) {
 
-    private fun setupObservers() {
+            usersList.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    recyclerViewAdapter.differ.submitList(it)
+                }
 
-        setupIsLoadingObserver()
+            })
 
-        setupVehiclesTypesListObserver()
+            usuariosPaginadosResponse.observe(viewLifecycleOwner, Observer {
+                if (it==null) {
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+                }
+            })
 
-
-    }
-
-    private fun setupIsLoadingObserver() {
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
-            with (binding) {
-                val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
-                isLoadingAnimation.visibility = visibility
-            }
-        })
-    }
-
-
-    private fun setupVehiclesTypesListObserver(){
-        viewModel.usersList.observe(viewLifecycleOwner, Observer {
-
-            viewModel.isLoading.postValue(false)
-
-
-            if (it != null) {
-
-                recyclerViewAdapter.differ.submitList(it)
-                //recyclerViewAdapter.setData(it)
-
-
-                viewModel.isLastPage = viewModel.getPage > viewModel.totalPages.value!!
-
-
-            } else {
-
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true
-                )
-
-            }
-
-        })
-
-
-
+            isLoading.observe(viewLifecycleOwner, Observer {
+                with (binding) {
+                    val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
+                    isLoadingAnimation.visibility = visibility
+                }
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -220,7 +185,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
     private fun search(text:String?) {
             viewModel.getPage=1
-            viewModel.textSearch = text?:""
+            viewModel.userFilterOptions.texto = text?:""
             viewModel.getUsersPaginated()
     }
 

@@ -7,6 +7,7 @@ import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
+import com.cybergod.oyeetaxi.utils.GlobalVariables
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersAdministrationViewModel @Inject constructor(
-    private val UserRepository: UserRepository
+    private val userRepository: UserRepository
     ) :  BaseViewModel() {
 
     var usersList: MutableLiveData<List<Usuario>?> = MutableLiveData()
@@ -44,7 +45,7 @@ class UsersAdministrationViewModel @Inject constructor(
 
                 delay(1000)
 
-                val response: UsuariosPaginados? = UserRepository.searchUsersPaginatedWithFilter(
+                val response: UsuariosPaginados? = userRepository.searchUsersPaginatedWithFilter(
                     page = getPage,
                     userFilterOptions = userFilterOptions,
                 )
@@ -83,6 +84,24 @@ class UsersAdministrationViewModel @Inject constructor(
     }
 
 
+
+
+
+
+
+    val userUpdatedSusses :MutableLiveData<Boolean>  = MutableLiveData<Boolean>()
+    fun updateUser(usuario: Usuario){
+
+        usuario.id= GlobalVariables.currentUserActive.value?.id
+
+        viewModelScope.launch(Dispatchers.IO) {
+            userUpdatedSusses.postValue(
+                userRepository.updateUser(usuario, GlobalVariables.currentUserActive)
+            )
+        }
+
+
+    }
 
 
 //    private suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo):TipoVehiculo?{

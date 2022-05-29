@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.cybergod.oyeetaxi.databinding.DialogImageViewBinding
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.ValoracionViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageToZoomFromURL
+import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,7 +31,7 @@ class ImageViewFragment : DialogFragment() {
 
 
         //Obtener el Imagen por Argumentos
-        requireArguments().getString("imageURL")?.let { imageURL ->
+        requireArguments().getString(KEY_IMAGE_URL)?.let { imageURL ->
             binding.imageView.loadImageToZoomFromURL(imageURL)
         }
 

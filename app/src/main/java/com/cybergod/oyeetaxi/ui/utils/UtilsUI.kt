@@ -15,6 +15,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybergod.oyeetaxi.R
@@ -36,7 +38,10 @@ import java.lang.Exception
 object UtilsUI {
 
 
-    //private val mBottomSheetDialog = BottomSheetDialog(instance)
+    fun RecyclerView.getItemCount():Int{
+        return (this.layoutManager as LinearLayoutManager).itemCount
+    }
+
     private lateinit var mBottomSheetDialog: BottomSheetDialog
     private lateinit var BottomSheetProgressBinding: DialogBottomProgressBinding
 

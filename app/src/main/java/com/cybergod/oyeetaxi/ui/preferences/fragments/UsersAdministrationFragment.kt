@@ -1,11 +1,13 @@
 package com.cybergod.oyeetaxi.ui.preferences.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.AbsListView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +15,9 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentUsersAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
-import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapterNew
+import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapter
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.getItemCount
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,8 +35,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
     private val binding get() = _binding!!
 
     private lateinit var recyclerView:RecyclerView
-//    private lateinit var recyclerViewAdapter : UsersEditListAdapter
-    private lateinit var recyclerViewAdapter : UsersEditListAdapterNew
+    private lateinit var recyclerViewAdapter : UsersEditListAdapter
 
     val viewModel: UsersAdministrationViewModel by activityViewModels()
 //    lateinit var  viewModel: UsersAdministrationViewModel
@@ -96,21 +98,31 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
 
     private fun initRecyclerView(){
-        recyclerViewAdapter = UsersEditListAdapterNew(this)
+        recyclerViewAdapter = UsersEditListAdapter(this)
         recyclerView = binding.recylerViewUsers
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         recyclerView.addOnScrollListener(myScrollListener)
     }
 
+
+
+
+
+    @SuppressLint("SetTextI18n")
     private fun setupObservers(){
         with (viewModel) {
 
             usersList.observe(viewLifecycleOwner, Observer {
                 it?.let {
                     recyclerViewAdapter.differ.submitList(it)
-                }
 
+                    lifecycleScope.launch {
+                        delay(250)
+                        binding.tvEnListado.text = "En Listado : ${recyclerView.getItemCount()}"
+                    }
+
+                }
             })
 
             usuariosPaginadosResponse.observe(viewLifecycleOwner, Observer {
@@ -119,14 +131,14 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
                         getString(R.string.fail_server_comunication),
                         true
                     )
+                } else {
+                    binding.tvEncontrados.text = "Encontrados : ${it.totalElements}"
                 }
             })
 
             isLoading.observe(viewLifecycleOwner, Observer {
-                with (binding) {
-                    val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
-                    isLoadingAnimation.visibility = visibility
-                }
+                val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
+                binding.isLoadingAnimation.visibility = visibility
             })
         }
     }

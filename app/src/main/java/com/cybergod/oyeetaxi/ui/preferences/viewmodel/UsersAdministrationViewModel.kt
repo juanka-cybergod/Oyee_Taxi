@@ -7,14 +7,11 @@ import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
-import com.cybergod.oyeetaxi.utils.GlobalVariables
-import com.google.gson.Gson
+import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,19 +19,18 @@ class UsersAdministrationViewModel @Inject constructor(
     private val userRepository: UserRepository
     ) :  BaseViewModel() {
 
-    var usersList: MutableLiveData<List<Usuario>?> = MutableLiveData()
-    var totalPages: Int = 0
-
+    var usersList: MutableLiveData<List<Usuario>> = MutableLiveData()
+    var usuariosPaginadosResponse: MutableLiveData<UsuariosPaginados?> = MutableLiveData<UsuariosPaginados?>()
 
     var userFilterOptions  = UserFilterOptions()
-
-    var getPage = 1
-
     var isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    var usuariosPaginadosResponse: MutableLiveData<UsuariosPaginados?> = MutableLiveData<UsuariosPaginados?>()
+
+    var totalPages: Int = 0
+    var getPage = 1
     var isLastPage = false
     var isScrolling = false
 
+    val userUpdatedSusses :MutableLiveData<Boolean>  = MutableLiveData<Boolean>()
 
     init {
         getUsersPaginated()
@@ -70,7 +66,7 @@ class UsersAdministrationViewModel @Inject constructor(
                         usersList.postValue(listaUsuariosAnteriores?.toList())
                     }
 
-                    if (!listaUsuariosObtenidos.isNullOrEmpty()) {
+                    if (listaUsuariosObtenidos.isNotEmpty()) {
                         getPage++
                     }
                 }
@@ -87,65 +83,44 @@ class UsersAdministrationViewModel @Inject constructor(
     }
 
 
-
-
-
-
-
-    val userUpdatedSusses :MutableLiveData<Boolean>  = MutableLiveData<Boolean>()
     fun updateUser(usuario: Usuario){
 
-        usuario.id= GlobalVariables.currentUserActive.value?.id
 
         viewModelScope.launch(Dispatchers.IO) {
-            userUpdatedSusses.postValue(
-                userRepository.updateUser(usuario, GlobalVariables.currentUserActive)
-            )
+
+            delay(1000)
+
+            val userUpdated : Usuario? = userRepository.updateUser(usuario)
+            if (userUpdated != null) {
+                currentUserActive.postValue(userUpdated)
+                userUpdatedSusses.postValue(true)
+                updateUsersList(userUpdated)
+            }else {
+                userUpdatedSusses.postValue(false)
+            }
         }
 
     }
 
 
-//    private suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo):TipoVehiculo?{
-//
-//        val updatedVehicleType = vehicleTypeRepository.updateVehicleType(tipoVehiculo)
-//        if (updatedVehicleType!=null) {
-//            updateVehiclesTypesList(updatedVehicleType)
-//        }
-//        return updatedVehicleType
-//
-//    }
-//
-//    private fun updateVehiclesTypesList(updatedVehicleType: TipoVehiculo) {
-//
-//        vehiclesTypesList.value?.toMutableList()?.let { listaTiposVehiculos ->
-//            val nuevaListaTiposVehiculos = ArrayList<TipoVehiculo>()
-//            listaTiposVehiculos.forEach { tipoVehiculo ->
-//                if (tipoVehiculo.tipoVehiculo.equals(updatedVehicleType.tipoVehiculo)) {
-//                    nuevaListaTiposVehiculos.add(updatedVehicleType)
-//                } else {
-//                    nuevaListaTiposVehiculos.add(tipoVehiculo)
-//                }
-//            }
-//            vehiclesTypesList.postValue(nuevaListaTiposVehiculos)
-//        }
-//
-//    }
-//
-//
-//
-//    fun updateThisVehicleType(tipoVehiculo: TipoVehiculo) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//
-//            delay(1000L)
-//
-//            vehicleTypeAddedOrUpdated.postValue(
-//                updateVehicleType(
-//                    tipoVehiculo
-//                )
-//            )
-//        }
-//    }
+    private fun updateUsersList(userUpdated: Usuario) {
+
+        usersList.value?.toMutableList()?.let { listaUsuarios ->
+            val nuevaListaUsuarios = ArrayList<Usuario>()
+            listaUsuarios.forEach { usuario ->
+                if (usuario.id.equals(userUpdated.id)) {
+                    nuevaListaUsuarios.add(userUpdated)
+                } else {
+                    nuevaListaUsuarios.add(usuario)
+                }
+            }
+            usersList.postValue(nuevaListaUsuarios)
+        }
+
+    }
+
+
+
 
 
 }

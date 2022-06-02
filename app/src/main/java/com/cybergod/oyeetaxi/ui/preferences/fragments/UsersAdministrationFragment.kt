@@ -115,6 +115,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
             usersList.observe(viewLifecycleOwner, Observer {
                 it?.let {
+
                     recyclerViewAdapter.differ.submitList(it)
 
                     lifecycleScope.launch {
@@ -140,6 +141,20 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
                 val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
                 binding.isLoadingAnimation.visibility = visibility
             })
+
+            viewModel.userUpdatedSusses.observe(viewLifecycleOwner, Observer {
+
+                (requireActivity() as BaseActivity).hideProgressDialog()
+
+                if (it==false) {
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+                }
+            })
+
+
         }
     }
 

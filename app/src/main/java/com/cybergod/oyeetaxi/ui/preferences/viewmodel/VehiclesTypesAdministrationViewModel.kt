@@ -64,7 +64,6 @@ class VehiclesTypesAdministrationViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             delay(1000L)
-
             vehicleTypeAddedOrUpdated.postValue(
                 updateVehicleType(
                     tipoVehiculo
@@ -72,7 +71,8 @@ class VehiclesTypesAdministrationViewModel @Inject constructor(
             )
         }
     }
-//
+
+
 //    fun addVehicleType(provincia: Provincia) {
 //        viewModelScope.launch(Dispatchers.IO) {
 //

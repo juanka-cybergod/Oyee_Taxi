@@ -1,7 +1,6 @@
 package com.cybergod.oyeetaxi.ui.preferences.dilogs
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,10 @@ import com.cybergod.oyeetaxi.databinding.DialogEditUserProfileBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
-import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
+import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.DatePickerFragment
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.setOnDateSelected
@@ -28,8 +30,9 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
     private var _binding: DialogEditUserProfileBinding? = null
     private val binding get() = _binding!!
 
-
     val viewModel: UsersAdministrationViewModel by activityViewModels()
+
+    private lateinit var user : Usuario
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,26 +42,109 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
         _binding = DialogEditUserProfileBinding.inflate(inflater, container, false)
 
 
-        requireArguments().getParcelable<Usuario>(Constants.KEY_USER_PARCELABLE)?.let { usuario ->
-            loadUserDetails(usuario)
+        return  binding.root
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.cancelButton.isChecked=false
+
+        requireArguments().getParcelable<Usuario>(KEY_USER_PARCELABLE)?.let { usuario ->
+            user = usuario
+
+            loadUserDetails(user)
+
+            setupOnClickListener()
         }
 
-
-        setupOnClickListener()
-
-        return  binding.root
 
     }
 
     private fun loadUserDetails(usuario: Usuario) {
 
-        binding.tvNombre.editText?.setText(usuario.nombre)
-        binding.tvApellidos.editText?.setText(usuario.apellidos)
-        binding.tvFechaNacimiento.editText?.setText(usuario.fechaDeNacimiento)
+        with(binding) {
+
+
+            imagePerfil.loadImagePerfilFromURLNoCache(usuario.imagenPerfilURL)
+
+            tvNombre.editText?.setText(usuario.nombre)
+            tvApellidos.editText?.setText(usuario.apellidos)
+            tvFechaNacimiento.editText?.setText(usuario.fechaDeNacimiento)
+
+            if (usuario.conductor==true) {
+                rbConductor.isChecked=true
+                rbPasajero.isChecked=false
+            } else {
+                rbConductor.isChecked=false
+                rbPasajero.isChecked=true
+            }
+
+            switchHabilitado.isChecked = usuario.habilitado?:true
+            switchAdministrador.isChecked = usuario.administrador?:false
+
+
+        }
+
+
+
 
     }
 
+    private fun changeClientEnabledStatus(ok:Boolean,motivo:String?){
+
+        if (ok) {
+            binding.switchHabilitado.isChecked = !binding.switchHabilitado.isChecked
+            user.mensaje = motivo?:""
+        }
+
+
+    }
+
+    var removeUserPerfil:String? = null
+
     private fun setupOnClickListener() {
+
+
+            binding.imagePerfil.setOnClickListener {
+
+                if (!user.imagenPerfilURL.isNullOrEmpty()) {
+
+                    requireContext().showMessageDialogForResult(
+                        funResult = {ok ->
+                            if (ok) {
+                                removeUserPerfil = ""
+                                binding.imagePerfil.loadImagePerfilFromURLNoCache("")
+                            }
+                        },
+                        title = "Quitar Foto de Perfil",
+                        message = "Desea quitar la foto de perfil de este usuario puesto que no cumple con los parámetros requeridos",
+                        icon = R.drawable.ic_alert_24
+                    )
+
+                }
+
+
+
+            }
+
+
+        binding.switchHabilitado.setOnClickListener {
+            if (!binding.switchHabilitado.isChecked) {
+
+                binding.switchHabilitado.isChecked = !binding.switchHabilitado.isChecked
+
+                requireActivity().showInputTextMessage(
+                    funResult =  {ok,motivo, -> changeClientEnabledStatus(ok,motivo)},
+                    title = "Motivo Deshabilitado",
+                    hint = "",
+                    helperText = "Se notificará al usuario al intentar iniciar sesión el motivo por el cuál fué Deshabilitado",
+                    message = user.mensaje,
+                    icon = R.drawable.ic_note,
+                )
+            }
+
+        }
 
 
         binding.etFechaNacimiento.setOnClickListener {
@@ -79,9 +165,15 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
 
                 viewModel.updateUser(
                     Usuario(
+                        id = user.id,
                         nombre = binding.tvNombre.editText?.text?.trim().toString(),
                         apellidos = binding.tvApellidos.editText?.text?.trim().toString(),
                         fechaDeNacimiento = binding.tvFechaNacimiento.editText?.text?.trim().toString(),
+                        conductor = binding.rbConductor.isChecked,
+                        administrador = binding.switchAdministrador.isChecked,
+                        habilitado = binding.switchHabilitado.isChecked,
+                        mensaje = user.mensaje,
+                        imagenPerfilURL = removeUserPerfil,
                     )
                 )
                 closeThisBottomSheetDialogFragment()

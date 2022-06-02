@@ -42,19 +42,19 @@ data class Usuario(
     @SerializedName("fechaDeRegistro")
     var fechaDeRegistro:String? = null,
     @SerializedName("habilitado")
-    val habilitado:Boolean? = null,
+    var habilitado:Boolean? = null,
     @SerializedName("administrador")
-    val administrador:Boolean? = null,
+    var administrador:Boolean? = null,
     @SerializedName("superAdministrador")
-    val superAdministrador:Boolean? = null,
+    var superAdministrador:Boolean? = null,
     @SerializedName("ubicacion")
     var ubicacion: Ubicacion? = null,
     @SerializedName("usuarioVerificacion")
-    val usuarioVerificacion: UsuarioVerificacion? = null,
+    var usuarioVerificacion: UsuarioVerificacion? = null,
     @SerializedName("valoracion")
-    val valoracion: Float? = null,
+    var valoracion: Float? = null,
     @SerializedName("mensaje")
-    val mensaje: String? = null,
+    var mensaje: String? = null,
 
     ):Parcelable
 

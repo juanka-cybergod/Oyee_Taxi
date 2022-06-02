@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.utils.UtilsApi
 import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
@@ -18,6 +19,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVerificacionEstado
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
+import com.cybergod.oyeetaxi.utils.UtilsGlobal
 
 
 class UsersEditListAdapter (
@@ -103,14 +105,15 @@ class UsersEditListAdapter (
             }
         }
 
-        private val editUserProfileFragment = EditUserProfileFragment()
+        //private val editUserProfileFragment = EditUserProfileFragment()
         private fun launchEditUserProfileFragment(usuario: Usuario) {
-            if (!editUserProfileFragment.isVisible) {
+            val editUserProfileFragment = EditUserProfileFragment()
+
                 val args = Bundle()
                 args.putParcelable(KEY_USER_PARCELABLE, usuario)
                 editUserProfileFragment.arguments = args
-                editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment")
-            }
+                editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${UtilsGlobal.getRamdomUUID()}")
+
         }
 
 

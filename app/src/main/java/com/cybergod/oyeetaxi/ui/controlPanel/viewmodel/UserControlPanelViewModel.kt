@@ -48,9 +48,15 @@ class UserControlPanelViewModel @Inject constructor(
         usuario.id=currentUserActive.value?.id
 
         viewModelScope.launch(Dispatchers.IO) {
-            userUpdatedSusses.postValue(
-                userRepository.updateUser(usuario,currentUserActive)
-            )
+
+            val userUpdated : Usuario? = userRepository.updateUser(usuario)
+            if (userUpdated != null) {
+                currentUserActive.postValue(userUpdated)
+                userUpdatedSusses.postValue(true)
+            }else {
+                userUpdatedSusses.postValue(false)
+            }
+
         }
 
 

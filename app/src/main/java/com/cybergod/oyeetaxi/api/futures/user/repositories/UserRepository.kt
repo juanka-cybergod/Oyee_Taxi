@@ -140,7 +140,7 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
     }
 
 
-    suspend fun updateUser(user: Usuario, userResponse: MutableLiveData<Usuario>):Boolean?   {
+    suspend fun updateUser(user: Usuario):Usuario?   {
 
         user.contrasena?.let { newPassword ->
             user.contrasena = passwordEncode(newPassword)
@@ -162,14 +162,9 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
                 )
 
                 if (response.code() == RESPONSE_CODE_OK) {
-                    userResponse.postValue(
                         response.body()
-                    )
-
-                    true
-
-                } else false
-            } else false
+                } else null
+            } else null
 
         }
 

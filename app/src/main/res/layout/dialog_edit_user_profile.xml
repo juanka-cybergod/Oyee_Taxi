@@ -31,9 +31,27 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="0dp">
 
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imagePerfil"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_user"
+                app:civ_border_color="@color/yellow_primary"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/yellow_primary"
+                app:civ_shadow_radius="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_user"
+
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvNombre"
@@ -136,6 +154,117 @@
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_user_type"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_app_title">
+
+
+                <RadioButton
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:id="@+id/rb_pasajero"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="PASAJERO"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:textStyle="normal" />
+
+                <RadioButton
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:id="@+id/rb_conductor"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="CONDUCTOR"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:textStyle="normal" />
+            </RadioGroup>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTransportePasajeros"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_disable_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchHabilitado"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="Usuario Habilitado"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnTransportePasajeros"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTransporteCarga"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_settings_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchAdministrador"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Administrador"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnTransporteCarga"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         </LinearLayout>

@@ -9,6 +9,7 @@ import com.cybergod.oyeetaxi.api.futures.user.model.response.RequestVerification
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
+import com.cybergod.oyeetaxi.utils.GlobalVariables
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ class RecoveryPasswordViewModel @Inject constructor(
     var recordarPassword : Boolean = false
 
     val userUpdated:MutableLiveData<Usuario>  = MutableLiveData<Usuario>()
+
 
     fun requestVerificationCode(userEmailOrPhone: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -64,9 +66,13 @@ class RecoveryPasswordViewModel @Inject constructor(
     fun updateUser(usuario: Usuario){
 
         viewModelScope.launch(Dispatchers.IO) {
-            userUpdatedSusses.postValue(
-                userRepository.updateUser(usuario,userUpdated)
-            )
+            val userUpdated : Usuario? = userRepository.updateUser(usuario)
+            if (userUpdated != null) {
+                GlobalVariables.currentUserActive.postValue(userUpdated)
+                userUpdatedSusses.postValue(true)
+            }else {
+                userUpdatedSusses.postValue(false)
+            }
         }
 
     }

@@ -8,10 +8,13 @@ import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOpti
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @HiltViewModel
@@ -99,7 +102,6 @@ class UsersAdministrationViewModel @Inject constructor(
                 userRepository.updateUser(usuario, GlobalVariables.currentUserActive)
             )
         }
-
 
     }
 

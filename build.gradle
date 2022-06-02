@@ -1,9 +1,10 @@
-buildscript {
+    buildscript {
 
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.5"
         classpath 'com.google.gms:google-services:4.3.10' //firebase
-        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.6.10' //Serialization
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.6.21' //Serialization
+
     }
 
 }

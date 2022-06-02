@@ -74,7 +74,6 @@
             android:exported="false"
             android:theme="@style/Theme.OyeeTaxi.NoActionBar" />
 
-
         <service
             android:name=".services.TrackerService"
             android:exported="false"

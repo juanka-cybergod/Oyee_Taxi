@@ -121,28 +121,24 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tvCarnetIdentidad"
+                    android:id="@+id/tvIdentificacion"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:endIconCheckable="true"
                     app:endIconDrawable="@drawable/ic_cancel_24"
-                    app:endIconMode="none"
+                    app:endIconMode="clear_text"
                     app:helperText=" "
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/ic_circulacion"
-
                     >
 
-
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etCarnetIdentidad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Número de Identidad"
                         android:inputType="number"
                         android:maxLength="11"
 
@@ -152,38 +148,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tvLicenciaConduccion"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconCheckable="true"
-                    app:endIconDrawable="@drawable/ic_cancel_24"
-                    app:endIconMode="none"
-                    app:helperText=" "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:startIconDrawable="@drawable/ic_circulacion">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etLicenciaConduccion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Licencia de Conducción"
-                        android:inputType="number"
-                        android:maxLength="11" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clImagenVerificacionURL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:padding="8dp"
-                    android:background="@color/casiBlanco">
+                    >
 
 
                     <com.google.android.material.textfield.TextInputLayout

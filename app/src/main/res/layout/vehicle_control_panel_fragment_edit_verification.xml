@@ -66,7 +66,7 @@
                         android:layout_height="wrap_content"
                         app:endIconCheckable="true"
                         app:endIconDrawable="@drawable/ic_cancel_24"
-                        app:endIconMode="none"
+                        app:endIconMode="clear_text"
                         app:helperText=" "
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         app:endIconCheckable="true"
                         app:endIconDrawable="@drawable/ic_cancel_24"
-                        app:endIconMode="none"
+                        app:endIconMode="clear_text"
                         app:helperText=" "
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,6 @@
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/casiBlanco"
                         android:padding="8dp"
                         >
 

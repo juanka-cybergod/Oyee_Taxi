@@ -28,14 +28,14 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListener {
+class UsersAdministrationFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
 
     private var _binding: FragmentUsersAdministrationBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var recyclerView:RecyclerView
-    private lateinit var recyclerViewAdapter : UsersEditListAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerViewAdapter: UsersEditListAdapter
 
     val viewModel: UsersAdministrationViewModel by activityViewModels()
 //    lateinit var  viewModel: UsersAdministrationViewModel
@@ -60,14 +60,11 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
         setupObservers()
 
 
-        return  binding.root
+        return binding.root
     }
 
 
-
-
-
-    private val myScrollListener = object : RecyclerView.OnScrollListener(){
+    private val myScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
@@ -83,11 +80,13 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
             val cantidadTotalDeItems = layoutManager.itemCount
             val noEstaCargando = !viewModel.isLoading.value!!
             val noEstaEnLaUtlimaPagina = !viewModel.isLastPage
-            val esLaUltimaItem = primeraPosicionVisibleItem + cantidadDeItemsVisibles >= cantidadTotalDeItems
+            val esLaUltimaItem =
+                primeraPosicionVisibleItem + cantidadDeItemsVisibles >= cantidadTotalDeItems
             //val noEstaAlPrincipio = primeraPosicionVisibleItem >= 0
             val elTotalEsMasQueLasItemsRequeridas = cantidadTotalDeItems >= QUERRY_PAGE_SIZE
             //val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && noEstaAlPrincipio && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
-            val deberiaPaginar = noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
+            val deberiaPaginar =
+                noEstaCargando && noEstaEnLaUtlimaPagina && esLaUltimaItem && elTotalEsMasQueLasItemsRequeridas && viewModel.isScrolling
 
             if (deberiaPaginar) {
                 viewModel.getUsersPaginated()
@@ -97,7 +96,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
     }
 
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         recyclerViewAdapter = UsersEditListAdapter(this)
         recyclerView = binding.recylerViewUsers
         recyclerView.adapter = recyclerViewAdapter
@@ -106,12 +105,9 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
     }
 
 
-
-
-
     @SuppressLint("SetTextI18n")
-    private fun setupObservers(){
-        with (viewModel) {
+    private fun setupObservers() {
+        with(viewModel) {
 
             usersList.observe(viewLifecycleOwner, Observer {
                 it?.let {
@@ -127,7 +123,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
             })
 
             usuariosPaginadosResponse.observe(viewLifecycleOwner, Observer {
-                if (it==null) {
+                if (it == null) {
                     showSnackBar(
                         getString(R.string.fail_server_comunication),
                         true
@@ -138,7 +134,9 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
             })
 
             isLoading.observe(viewLifecycleOwner, Observer {
-                val visibility = if (it == true) {View.VISIBLE} else (View.GONE)
+                val visibility = if (it == true) {
+                    View.VISIBLE
+                } else (View.GONE)
                 binding.isLoadingAnimation.visibility = visibility
             })
 
@@ -146,7 +144,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
                 (requireActivity() as BaseActivity).hideProgressDialog()
 
-                if (it==false) {
+                if (it == false) {
                     showSnackBar(
                         getString(R.string.fail_server_comunication),
                         true
@@ -161,7 +159,7 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
         val menuItem: MenuItem = menu.findItem(R.id.action_search)
-        val searchView :SearchView = menuItem.actionView as SearchView
+        val searchView: SearchView = menuItem.actionView as SearchView
         searchView.queryHint = "Buscar ..."
         searchView.setOnQueryTextListener(this)
 
@@ -200,29 +198,27 @@ class UsersAdministrationFragment : BaseFragment(),SearchView.OnQueryTextListene
 
     override fun onQueryTextChange(query: String?): Boolean {
 
-            job?.cancel()
-            job = MainScope().launch {
-                delay(findTime)
-                search(query)
-            }
+        job?.cancel()
+        job = MainScope().launch {
+            delay(findTime)
+            search(query)
+        }
 
         return false
     }
 
 
-    private fun search(text:String?) {
-            viewModel.getPage=1
-            viewModel.userFilterOptions.texto = text?:""
-            viewModel.getUsersPaginated()
+    private fun search(text: String?) {
+        viewModel.getPage = 1
+        viewModel.userFilterOptions.texto = text ?: ""
+        viewModel.getUsersPaginated()
     }
-
-
 
 
     private fun launchSearchFilterUserFragment() {
         findNavController().navigate(R.id.action_go_to_searchFilterUserFragment,
             Bundle().apply {
-                putParcelable(KEY_USER_FILTER_OPTIONS,viewModel.userFilterOptions)
+                putParcelable(KEY_USER_FILTER_OPTIONS, viewModel.userFilterOptions)
             }
         )
     }

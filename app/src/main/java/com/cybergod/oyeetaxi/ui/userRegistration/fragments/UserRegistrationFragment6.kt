@@ -18,6 +18,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURI
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURI
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
+import com.cybergod.oyeetaxi.utils.GlobalVariables
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -98,19 +99,19 @@ class UserRegistrationFragment6 : BaseFragment() {
 
         binding.ivImageVerificacion.loadImageUserVerificacionFromURI(viewModel.imagenVerificacionURI.value,viewModel.conductor.value)
 
-        if (viewModel.conductor.value == true) {
-            "CONDUCTOR\n${viewModel.telefonoMovil.value}".also { binding.tvUserInfo.text = it }
-            binding.tvCarnetIdentidad.visibility = View.GONE
-            binding.tvLicenciaConduccion.visibility = View.VISIBLE
-            binding.tvLicenciaConduccion.editText?.setText(viewModel.identificaion.value ?: "")
+
+        binding.tvIdentificacion.editText?.setText(viewModel.identificaion.value ?: "")
+
+        binding.tvIdentificacion.hint =
+            if (viewModel.conductor.value == true) {
+                "CONDUCTOR\n${viewModel.telefonoMovil.value}".also { binding.tvUserInfo.text = it }
+                "Licencia de Conducción"
+            } else {
+                "PASAJERO\n${viewModel.telefonoMovil.value}".also { binding.tvUserInfo.text = it }
+                "Número de Identidad"
+            }
 
 
-        } else {
-            "PASAJERO\n${viewModel.telefonoMovil.value}".also { binding.tvUserInfo.text = it }
-            binding.tvLicenciaConduccion.visibility = View.GONE
-            binding.tvCarnetIdentidad.visibility = View.VISIBLE
-            binding.tvCarnetIdentidad.editText?.setText(viewModel.identificaion.value ?: "")
-        }
 
 
 
@@ -120,63 +121,37 @@ class UserRegistrationFragment6 : BaseFragment() {
 
     private fun verifyUserData(): Boolean {
 
-        val mNumeroCarnetIdentidad = binding.tvCarnetIdentidad.editText!!.text.trim().toString()
-        val mNumeroLicenciaConduccion = binding.tvLicenciaConduccion.editText!!.text.trim().toString()
-        val identificacion :String
+        val mNumeroIdentificacion = binding.tvIdentificacion.editText!!.text.trim().toString()
 
+        binding.tvIdentificacion.isErrorEnabled = false
 
         return when {
 
             //mNumeroCarnetIdentidad
-            (mNumeroLicenciaConduccion.length < 11) && (viewModel.conductor.value == true) -> {
-                showSnackBar(
-                    "Por favor introduzca su licencia de conducir completa",
-                    true,
-                )
+            (mNumeroIdentificacion.length < 11) && (GlobalVariables.currentUserActive.value?.conductor == true) -> {
+                binding.tvIdentificacion.error =
+                    "Por favor introduzca su licencia de conducir completa"
                 false
             }
             //mNumeroLicenciaConduccion
-            (mNumeroCarnetIdentidad.length < 11) && (viewModel.conductor.value == false) -> {
-                    showSnackBar(
-                        "Por favor introduzca su número de identidad completo",
-                    true,
-                )
+            (mNumeroIdentificacion.length < 11) && (GlobalVariables.currentUserActive.value?.conductor == false) -> {
+                binding.tvIdentificacion.error =
+                    "Por favor introduzca su número de identidad completo"
                 false
             }
             //foto Verificacion
-            viewModel.imagenVerificacionFile.value == null  -> {
-                showSnackBar(
-                    "Por favor seleccione la fotocopia del documento requerido",
-                    true,
-                )
+            (viewModel.imagenVerificacionFile.value == null) && (GlobalVariables.currentUserActive.value?.usuarioVerificacion?.imagenIdentificaionURL.isNullOrEmpty()) -> {
+                binding.tvIdentificacion.error =
+                    "Por favor adjunte fotocopia del documento requerido"
                 false
             }
-
             else -> {
 
-                if (viewModel.conductor.value == true) {
-                    identificacion = mNumeroLicenciaConduccion
-                } else {
-                    identificacion = mNumeroCarnetIdentidad
-                }
-                viewModel.identificaion.value = identificacion
-
-
+                viewModel.identificaion.value = mNumeroIdentificacion
                 true
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 

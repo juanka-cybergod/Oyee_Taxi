@@ -94,14 +94,14 @@
                         >
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/buttonSelectImageVerification"
+                            android:id="@+id/buttonRemoveImageVerification"
                             style="@style/Widget.Material3.Button.Icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Adjuntar Fotocopia"
+                            android:text="Requerir Nueva Fotocopia al Usuario"
                             android:textColor="@color/black"
                             android:textSize="13sp"
-                            app:icon="@drawable/ic_attach"
+                            app:icon="@drawable/ic_cancel_24"
                             app:iconTint="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/buttonSelectImageVerification"
+                            app:layout_constraintTop_toBottomOf="@+id/buttonRemoveImageVerification"
                             >
 
                             <ImageView
@@ -140,6 +140,41 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                          >
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnUsuarioVerificado"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:enabled="false"
+                            app:icon="@drawable/ic_verified"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/colorSnackBarSuccess"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchVerificado"
+                            android:layout_width="0dp"
+                            android:layout_height="38dp"
+                            android:checked="false"
+                            android:padding="4dp"
+                            android:text="Usuario Verificado"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/btnUsuarioVerificado"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

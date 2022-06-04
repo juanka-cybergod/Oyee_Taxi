@@ -25,14 +25,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class EditUserProfileFragment: BottomSheetDialogFragment()  {
+class EditUserProfileFragment : BottomSheetDialogFragment() {
 
     private var _binding: DialogEditUserProfileBinding? = null
     private val binding get() = _binding!!
 
     val viewModel: UsersAdministrationViewModel by activityViewModels()
 
-    private lateinit var user : Usuario
+    private lateinit var user: Usuario
+
+    var removeUserPerfil: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +44,13 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
         _binding = DialogEditUserProfileBinding.inflate(inflater, container, false)
 
 
-        return  binding.root
+        return binding.root
 
     }
 
     override fun onResume() {
         super.onResume()
-        binding.cancelButton.isChecked=false
+        binding.cancelButton.isChecked = false
 
         requireArguments().getParcelable<Usuario>(KEY_USER_PARCELABLE)?.let { usuario ->
             user = usuario
@@ -72,61 +74,57 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
             tvApellidos.editText?.setText(usuario.apellidos)
             tvFechaNacimiento.editText?.setText(usuario.fechaDeNacimiento)
 
-            if (usuario.conductor==true) {
-                rbConductor.isChecked=true
-                rbPasajero.isChecked=false
+            if (usuario.conductor == true) {
+                rbConductor.isChecked = true
+                rbPasajero.isChecked = false
             } else {
-                rbConductor.isChecked=false
-                rbPasajero.isChecked=true
+                rbConductor.isChecked = false
+                rbPasajero.isChecked = true
             }
 
-            switchHabilitado.isChecked = usuario.habilitado?:true
-            switchAdministrador.isChecked = usuario.administrador?:false
+            switchHabilitado.isChecked = usuario.habilitado ?: true
+            switchAdministrador.isChecked = usuario.administrador ?: false
 
 
         }
 
 
-
-
     }
 
-    private fun changeClientEnabledStatus(ok:Boolean,motivo:String?){
+    private fun changeClientEnabledStatus(ok: Boolean, motivo: String?) {
 
         if (ok) {
             binding.switchHabilitado.isChecked = !binding.switchHabilitado.isChecked
-            user.mensaje = motivo?:""
+            user.mensaje = motivo ?: ""
         }
 
 
     }
 
-    var removeUserPerfil:String? = null
 
     private fun setupOnClickListener() {
 
 
-            binding.imagePerfil.setOnClickListener {
+        binding.imagePerfil.setOnClickListener {
 
-                if (!user.imagenPerfilURL.isNullOrEmpty()) {
+            if (!user.imagenPerfilURL.isNullOrEmpty()) {
 
-                    requireContext().showMessageDialogForResult(
-                        funResult = {ok ->
-                            if (ok) {
-                                removeUserPerfil = ""
-                                binding.imagePerfil.loadImagePerfilFromURLNoCache("")
-                            }
-                        },
-                        title = "Quitar Foto de Perfil",
-                        message = "Desea quitar la foto de perfil de este usuario puesto que no cumple con los parámetros requeridos",
-                        icon = R.drawable.ic_alert_24
-                    )
-
-                }
-
-
+                requireContext().showMessageDialogForResult(
+                    funResult = { ok ->
+                        if (ok) {
+                            removeUserPerfil = ""
+                            binding.imagePerfil.loadImagePerfilFromURLNoCache("")
+                        }
+                    },
+                    title = "Quitar Foto de Perfil",
+                    message = "Desea quitar la foto de perfil de este usuario puesto que no cumple con los parámetros requeridos",
+                    icon = R.drawable.ic_alert_24
+                )
 
             }
+
+
+        }
 
 
         binding.switchHabilitado.setOnClickListener {
@@ -135,7 +133,7 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
                 binding.switchHabilitado.isChecked = !binding.switchHabilitado.isChecked
 
                 requireActivity().showInputTextMessage(
-                    funResult =  {ok,motivo, -> changeClientEnabledStatus(ok,motivo)},
+                    funResult = { ok, motivo -> changeClientEnabledStatus(ok, motivo) },
                     title = "Motivo Deshabilitado",
                     hint = "",
                     helperText = "Se notificará al usuario al intentar iniciar sesión el motivo por el cuál fué Deshabilitado",
@@ -149,9 +147,15 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
 
         binding.etFechaNacimiento.setOnClickListener {
             requireView().hideKeyboard()
-            val datePicker = DatePickerFragment({ day, month, year -> binding.tvFechaNacimiento.setOnDateSelected(day, month, year)},binding.etFechaNacimiento.text.toString(), setMaxDate = true, setMinDate = false)
+            val datePicker = DatePickerFragment({ day, month, year ->
+                binding.tvFechaNacimiento.setOnDateSelected(
+                    day,
+                    month,
+                    year
+                )
+            }, binding.etFechaNacimiento.text.toString(), setMaxDate = true, setMinDate = false)
             datePicker
-                .show(parentFragmentManager,"datePicker")
+                .show(parentFragmentManager, "datePicker")
         }
 
         binding.cancelButton.setOnClickListener {
@@ -168,7 +172,8 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
                         id = user.id,
                         nombre = binding.tvNombre.editText?.text?.trim().toString(),
                         apellidos = binding.tvApellidos.editText?.text?.trim().toString(),
-                        fechaDeNacimiento = binding.tvFechaNacimiento.editText?.text?.trim().toString(),
+                        fechaDeNacimiento = binding.tvFechaNacimiento.editText?.text?.trim()
+                            .toString(),
                         conductor = binding.rbConductor.isChecked,
                         administrador = binding.switchAdministrador.isChecked,
                         habilitado = binding.switchHabilitado.isChecked,
@@ -182,13 +187,11 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
         }
 
 
-
-
     }
 
 
-    private fun closeThisBottomSheetDialogFragment(){
-        this.isCancelable=true
+    private fun closeThisBottomSheetDialogFragment() {
+        this.isCancelable = true
         this.dismiss()
     }
 
@@ -198,9 +201,9 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
         val mApellidos: String = binding.tvApellidos.editText!!.text.trim().toString()
 
 
-        binding.tvNombre.isErrorEnabled=false
-        binding.tvApellidos.isErrorEnabled=false
-        binding.tvFechaNacimiento.isErrorEnabled=false
+        binding.tvNombre.isErrorEnabled = false
+        binding.tvApellidos.isErrorEnabled = false
+        binding.tvFechaNacimiento.isErrorEnabled = false
 
         return when {
 
@@ -223,7 +226,6 @@ class EditUserProfileFragment: BottomSheetDialogFragment()  {
         }
 
     }
-
 
 
 }

@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
-import com.cybergod.oyeetaxi.api.utils.UtilsApi
 import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
@@ -20,6 +21,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVerificacionEstado
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
 
 class UsersEditListAdapter (
@@ -82,9 +84,21 @@ class UsersEditListAdapter (
                         launchImageViewFragment(usuario.imagenPerfilURL)
                     }
                 }
-
                 btnEdit.setOnClickListener {
                     launchEditUserProfileFragment(usuario)
+                }
+                btnVerificado.setOnClickListener {
+                    launchEditUserVerificationFragment(usuario)
+                }
+                btnCondutor.setOnClickListener {
+                    val text = if (usuario.conductor==true) {"Conductor"} else {"Pasajero"}
+                    Toast.makeText(usersAdministrationFragment.requireContext(),text,Toast.LENGTH_SHORT).show()
+                }
+                btnAdminOrSuperAdmin.setOnClickListener {
+                    Toast.makeText(usersAdministrationFragment.requireContext(),"Administrador",Toast.LENGTH_SHORT).show()
+                }
+                btnDisabledUser.setOnClickListener {
+                    Toast.makeText(usersAdministrationFragment.requireContext(),"Usuario Deshabilitado",Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -95,24 +109,30 @@ class UsersEditListAdapter (
         }
 
 
-        private val imageViewFragment = ImageViewFragment()
+
         private fun launchImageViewFragment(imageURL:String?) {
-            if (!imageViewFragment.isVisible) {
+            val imageViewFragment = ImageViewFragment()
                 val args = Bundle()
                 args.putString(KEY_IMAGE_URL, imageURL)
                 imageViewFragment.arguments = args
-                imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment")
-            }
+                imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment+${getRamdomUUID()}")
         }
 
-        //private val editUserProfileFragment = EditUserProfileFragment()
         private fun launchEditUserProfileFragment(usuario: Usuario) {
             val editUserProfileFragment = EditUserProfileFragment()
-
                 val args = Bundle()
                 args.putParcelable(KEY_USER_PARCELABLE, usuario)
                 editUserProfileFragment.arguments = args
-                editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${UtilsGlobal.getRamdomUUID()}")
+                editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${getRamdomUUID()}")
+
+        }
+
+        private fun launchEditUserVerificationFragment(usuario: Usuario) {
+            val editUserVerificationFragment = EditUserVerificationFragment()
+                val args = Bundle()
+                args.putParcelable(KEY_USER_PARCELABLE, usuario)
+                editUserVerificationFragment.arguments = args
+                editUserVerificationFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserVerificationFragment+${getRamdomUUID()}")
 
         }
 

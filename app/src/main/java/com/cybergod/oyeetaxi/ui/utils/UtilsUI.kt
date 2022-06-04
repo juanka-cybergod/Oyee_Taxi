@@ -26,6 +26,7 @@ import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -585,10 +586,7 @@ object UtilsUI {
 
     fun View.loadImagePerfilFromURLNoCache(relativeURL:String?) {
 
-//        (this as ImageView).visibility = View.INVISIBLE
-//        (this as ImageView).visibility = View.VISIBLE
         (this as ImageView).setImageResource(R.drawable.ic_user)
-
 
         if (!relativeURL.isNullOrEmpty()  )  {
 
@@ -599,6 +597,32 @@ object UtilsUI {
                 //.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 //.skipMemoryCache(true)
                 .placeholder(R.drawable.ic_user)
+                .into((this as ImageView))
+
+        }
+
+    }
+
+    fun View.loadImageUserVerificacionFromURLNoCache(relativeURL: String?,conductor: Boolean?) {
+
+
+        val placeholder = if (conductor == true) {
+            (this as ImageView).setImageResource(R.drawable.ic_driver_verification)
+            R.drawable.ic_driver_verification
+        } else {
+            (this as ImageView).setImageResource(R.drawable.ic_user_verification)
+            R.drawable.ic_user_verification
+        }
+
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .centerCrop()
+                //.circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(placeholder)
                 .into((this as ImageView))
 
         }

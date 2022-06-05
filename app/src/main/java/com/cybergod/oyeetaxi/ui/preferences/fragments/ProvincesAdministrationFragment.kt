@@ -39,15 +39,11 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
         _binding = FragmentProvincesAdministrationBinding.inflate(inflater, container, false)
 
-
         initRecyclerView()
 
         setupOnClickListener()
 
         setupObservers()
-
-        getProvinces1stTime()
-
 
         return  binding.root
     }
@@ -63,77 +59,72 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
     private fun setupObservers() {
 
-        setupProvincesListObserver()
-
-        setupProvinceAddedOrUpdated()
-
-    }
-
-    private fun setupProvinceAddedOrUpdated() {
-        viewModel.provincesAddedOrUpdated.observe(viewLifecycleOwner, Observer {
-
-            (requireActivity() as BaseActivity).hideProgressDialog()
-            if (it == null) {
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true
-                )
-            }
-        })
-    }
+        with(viewModel) {
 
 
-    private fun setupProvincesListObserver(){
-        viewModel.provincesList.observe(viewLifecycleOwner, Observer {
+            isLoading.observe(viewLifecycleOwner, Observer {
+                val visibility = if (it == true) {
+                    View.VISIBLE
+                } else (View.GONE)
+                binding.isLoadingAnimation.visibility = visibility
+            })
+
+            provincesAddedOrUpdated.observe(viewLifecycleOwner, Observer {
+
+                (requireActivity() as BaseActivity).hideProgressDialog()
+                if (it == null) {
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+                }
+            })
+
+            provincesList.observe(viewLifecycleOwner, Observer {
 
 
 
-            if (it != null) {
+                if (it != null) {
 
-                binding.animationView.visibility = View.INVISIBLE
-                binding.scrollView2.visibility = View.VISIBLE
+                    if (it.isNotEmpty()) {
+
+                        it.plus(it)
+                        recyclerViewAdapter.setProvincesList(it)
+                        recyclerViewAdapter.notifyDataSetChanged()
 
 
-                if (it.isNotEmpty()) {
+                    } else {
 
-                    it.plus(it)
-                    recyclerViewAdapter.setProvincesList(it)
-                    recyclerViewAdapter.notifyDataSetChanged()
+                        showSnackBar(
+                            getString(R.string.no_provinces_availables),
+                            false
+                        )
+
+
+                    }
 
 
                 } else {
 
                     showSnackBar(
-                        getString(R.string.no_provinces_availables),
-                        false
+                        getString(R.string.fail_server_comunication),
+                        true
                     )
-
 
                 }
 
+            })
 
-            } else {
 
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true
-                )
-
-            }
-
-        })
-
+        }
 
 
     }
 
 
-    private fun getProvinces1stTime(){
-        binding.animationView.visibility = View.VISIBLE
-        binding.scrollView2.visibility = View.INVISIBLE
 
-        updateProvincesList()
-    }
+
+
 
 
 
@@ -151,20 +142,8 @@ class ProvincesAdministrationFragment : BaseFragment() {
 
     private fun launchAddUpdateProvinceFragment() {
         findNavController().navigate(R.id.action_go_to_addUpdateProvinceFragment,Bundle().apply {
-
         })
     }
-
-    override fun onResume() {
-        super.onResume()
-        updateProvincesList()
-
-    }
-
-    private fun updateProvincesList(){
-        viewModel.getAllProvinces()
-    }
-
 
 
 

@@ -382,63 +382,55 @@ class ControlPanelFragmentMain : BaseFragment() {
 
             userDetails?.let { usuario ->
 
-                //Imagen Perfil
-                binding.imagePerfil.loadImagePerfilFromURL(currentUserActive.value?.imagenPerfilURL)
+                with(binding) {
 
-                //Verificacion
-                binding.imageUsuarioVerificado.setUsuarioVerificacionImage(usuario)
-                binding.buttonUsuarioVerificacion.setUsuarioVerificacionButton(usuario)
+                    imagePerfil.loadImagePerfilFromURL(currentUserActive.value?.imagenPerfilURL)
 
-                //Nombre y Apellidos
-                binding.tvNombreUsuario.text = "${usuario.nombre} ${usuario.apellidos}"
+                    imageUsuarioVerificado.setUsuarioVerificacionImage(usuario)
+                    buttonUsuarioVerificacion.setUsuarioVerificacionButton(usuario)
 
-                // Telefono Movil
-                binding.tvTelefonoMovil.text = usuario.telefonoMovil
+                    tvNombreUsuario.text = "${usuario.nombre} ${usuario.apellidos}"
+                    tvTelefonoMovil.text = usuario.telefonoMovil
+                    userRatingBar.rating = usuario.valoracion?:0f
 
-                //Tipo de Usuario
-                var tipoUsuario  = "Registrado como"
-                usuario.administrador?.let { if (it) {tipoUsuario = "Administrador"} }
-                usuario.superAdministrador?.let { if (it) {tipoUsuario = "Super Administrador"} }
-                //Edad
-                binding.tvEdad.text = "Edad ${getAge(usuario.fechaDeNacimiento!!)} años"
-                //y Antiguedad
-                binding.tvAntiguedad.text = timePassedFromDateString(usuario.fechaDeRegistro!!)
-                //Provincia
-                binding.buttonProvincia.text = "Provincia\n${usuario.provincia?.nombre}"
-                //Tipo de Usuario
-                binding.tvTipoUsuario.text = tipoUsuario
-                if (usuario.conductor == true) {
-                    binding.tvCondutorOPasajero.text = "Conductor"
-                    binding.buttonSolicitarModoCondutor.visibility = View.GONE
-                    binding.clDriverPanel.visibility = View.VISIBLE
+                    var tipoUsuario  = "Registrado como"
+                    usuario.administrador?.let { if (it) {tipoUsuario = "Administrador"} }
+                    usuario.superAdministrador?.let { if (it) {tipoUsuario = "Super Administrador"} }
 
+                    tvEdad.text = "Edad ${getAge(usuario.fechaDeNacimiento!!)} años"
+                    tvAntiguedad.text = timePassedFromDateString(usuario.fechaDeRegistro!!)
+                    buttonProvincia.text = "Provincia\n${usuario.provincia?.nombre}"
 
-                    //Modo Condutor o Modo Pasajero
-                    usuario.modoCondutor?.let {
-                        if (it) {
-                            binding.buttonModoConductor.isClickable = false
-                            binding.buttonModoConductor.isChecked = true
-                            binding.buttonModoPasajero.isChecked = false
-                            binding.buttonModoPasajero.isClickable = true
-                        } else {
-                            binding.buttonModoConductor.isClickable = true
-                            binding.buttonModoConductor.isChecked = false
-                            binding.buttonModoPasajero.isClickable = false
-                            binding.buttonModoPasajero.isChecked = true
+                    tvTipoUsuario.text = tipoUsuario
+                    if (usuario.conductor == true) {
+                        tvCondutorOPasajero.text = "Conductor"
+                        buttonSolicitarModoCondutor.visibility = View.GONE
+                        clDriverPanel.visibility = View.VISIBLE
+
+                        usuario.modoCondutor?.let {
+                            if (it) {
+                                buttonModoConductor.isClickable = false
+                                buttonModoConductor.isChecked = true
+                                buttonModoPasajero.isChecked = false
+                                buttonModoPasajero.isClickable = true
+                            } else {
+                                buttonModoConductor.isClickable = true
+                                buttonModoConductor.isChecked = false
+                                buttonModoPasajero.isClickable = false
+                                buttonModoPasajero.isChecked = true
+                            }
                         }
+
+
+                    } else {
+                        tvCondutorOPasajero.text = "Pasajero"
+                        buttonSolicitarModoCondutor.visibility = View.VISIBLE
+                        clDriverPanel.visibility = View.GONE
                     }
 
 
 
-                } else {
-                    binding.tvCondutorOPasajero.text = "Pasajero"
-                    binding.buttonSolicitarModoCondutor.visibility = View.VISIBLE
-                    binding.clDriverPanel.visibility = View.GONE
                 }
-
-
-
-
 
             }
 

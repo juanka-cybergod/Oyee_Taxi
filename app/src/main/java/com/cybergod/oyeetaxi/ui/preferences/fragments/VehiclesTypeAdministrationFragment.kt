@@ -39,14 +39,9 @@ class VehiclesTypeAdministrationFragment : BaseFragment() {
 
         _binding = FragmentVehiclesTypesAdministrationBinding.inflate(inflater, container, false)
 
-
         initRecyclerView()
 
-
         setupObservers()
-
-        getProvinces1stTime()
-
 
         return  binding.root
     }
@@ -62,13 +57,20 @@ class VehiclesTypeAdministrationFragment : BaseFragment() {
 
     private fun setupObservers() {
 
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            val visibility = if (it == true) {
+                View.VISIBLE
+            } else (View.GONE)
+            binding.isLoadingAnimation.visibility = visibility
+        })
+
         setupVehiclesTypesListObserver()
 
-        setupProvinceAddedOrUpdated()
+        setupVehiclesTypesAddedOrUpdated()
 
     }
 
-    private fun setupProvinceAddedOrUpdated() {
+    private fun setupVehiclesTypesAddedOrUpdated() {
         viewModel.vehicleTypeAddedOrUpdated.observe(viewLifecycleOwner, Observer {
 
             (requireActivity() as BaseActivity).hideProgressDialog()
@@ -91,8 +93,6 @@ class VehiclesTypeAdministrationFragment : BaseFragment() {
 
             if (it != null) {
 
-                binding.animationView.visibility = View.INVISIBLE
-                binding.scrollView2.visibility = View.VISIBLE
 
 
                 if (it.isNotEmpty()) {
@@ -129,25 +129,9 @@ class VehiclesTypeAdministrationFragment : BaseFragment() {
     }
 
 
-    private fun getProvinces1stTime(){
-        binding.animationView.visibility = View.VISIBLE
-        binding.scrollView2.visibility = View.INVISIBLE
-
-        updateVehiclesTypesList()
-    }
 
 
 
-
-    override fun onResume() {
-        super.onResume()
-        updateVehiclesTypesList()
-
-    }
-
-    private fun updateVehiclesTypesList(){
-        viewModel.getAllVehicleTypes()
-    }
 
 
 

@@ -30,21 +30,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:visibility="gone"
-        android:id="@+id/animationView"
-        android:layout_width="150dp"
-        android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="infinity-loop.json"
-        app:lottie_loop="true"
-        app:lottie_speed="1.6" />
-
 
     <ScrollView
         android:id="@+id/scrollView2"

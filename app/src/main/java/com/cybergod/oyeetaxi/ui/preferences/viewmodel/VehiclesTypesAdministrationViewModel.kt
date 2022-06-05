@@ -14,28 +14,39 @@ import javax.inject.Inject
 @HiltViewModel
 class VehiclesTypesAdministrationViewModel @Inject constructor(
     private val vehicleTypeRepository: VehicleTypeRepository
-    ) :  BaseViewModel() {
+) : BaseViewModel() {
 
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     var vehiclesTypesList: MutableLiveData<List<TipoVehiculo>> = MutableLiveData()
     var vehicleTypeAddedOrUpdated: MutableLiveData<TipoVehiculo?> = MutableLiveData()
 
-    fun getAllVehicleTypes(){
 
-            viewModelScope.launch(Dispatchers.IO) {
-                vehiclesTypesList.postValue(
-                    vehicleTypeRepository.getAllVehicleTypes()
-                )
+    init {
+        getAllVehicleTypes()
+
+    }
+
+    private fun getAllVehicleTypes() {
 
 
+        isLoading.postValue(true)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(500)
+            vehiclesTypesList.postValue(
+                vehicleTypeRepository.getAllVehicleTypes()
+            )
+
+            isLoading.postValue(false)
         }
 
 
     }
 
-    private suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo): TipoVehiculo?{
+    private suspend fun updateVehicleType(tipoVehiculo: TipoVehiculo): TipoVehiculo? {
 
         val updatedVehicleType = vehicleTypeRepository.updateVehicleType(tipoVehiculo)
-        if (updatedVehicleType!=null) {
+        if (updatedVehicleType != null) {
             updateVehiclesTypesList(updatedVehicleType)
         }
         return updatedVehicleType
@@ -57,7 +68,6 @@ class VehiclesTypesAdministrationViewModel @Inject constructor(
         }
 
     }
-
 
 
     fun updateThisVehicleType(tipoVehiculo: TipoVehiculo) {

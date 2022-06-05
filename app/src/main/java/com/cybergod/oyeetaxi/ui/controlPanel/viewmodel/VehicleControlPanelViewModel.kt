@@ -10,8 +10,10 @@ import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
+import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -25,11 +27,11 @@ open class VehicleControlPanelViewModel @Inject constructor(
 
     ) : BaseViewModel(), UploadRequestBody.UploadCallback {
 
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     val vehicleUpdatedSusses :MutableLiveData<Boolean>  = MutableLiveData<Boolean>()
 
     var imagenFrontalVehiculoURL : MutableLiveData<String> = MutableLiveData<String>()
-    //var imagenFrontalCurrentVehiculoURL : MutableLiveData<String> = MutableLiveData<String>()
 
 
     var vehicleSelectedToChangeImagen : VehiculoResponse? = null
@@ -42,6 +44,27 @@ open class VehicleControlPanelViewModel @Inject constructor(
 
     var rememberListExpanded: HashMap<String, Int> = HashMap()
 
+    init {
+        getAllVehicleFromUserId()
+    }
+
+
+    fun getAllVehicleFromUserId(){
+
+        isLoading.postValue(true)
+
+        viewModelScope.launch {
+
+            delay(500)
+
+            vehiclesList.postValue(
+                vehicleRepository.getAllVehiclesFromUserId((currentUserActive.value?.id.orEmpty()))
+            )
+
+            isLoading.postValue(false)
+        }
+
+    }
 
 
     fun updateVehicleById(vehiculo: Vehiculo, vehiculoId:String){
@@ -101,39 +124,7 @@ open class VehicleControlPanelViewModel @Inject constructor(
     }
 
 
-//    fun uploadFileImagenFrontalCurrentVehiculo(file: File?, id:String, fileType: TipoFichero){
-//
-//
-//        file?.let { fileToUpload ->
-//
-//                filesRepository.uploadSingleFile(
-//                    file = fileToUpload,
-//                    URL = imagenFrontalCurrentVehiculoURL,
-//                    context = this,
-//                    id = id,
-//                    tipoFichero = fileType,
-//                    created = nothing
-//                )
-//
-//
-//
-//
-//
-//        }
-//
-//    }
 
-
-
-    fun getAllVehicleFromUserId(userId:String){
-
-        viewModelScope.launch {
-            vehiclesList.postValue(
-                vehicleRepository.getAllVehiclesFromUserId(userId)
-            )
-        }
-
-    }
 
 
     fun activeVehicleToUserId(userId: String, vehicleId:String,){

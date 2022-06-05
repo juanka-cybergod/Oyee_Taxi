@@ -24,7 +24,6 @@ import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.VehicleControlPanelViewModel
 import com.cybergod.oyeetaxi.ui.vehicleRegistration.activity.VehicleRegistrationActivity
 import com.cybergod.oyeetaxi.utils.GlobalVariables
-import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -65,11 +64,121 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
 
     private fun setupObservers(){
 
-        setupVehiclesListObserver()
+        with(viewModel) {
 
-        setupVehicleUpdatedSussesObserver()
+            isLoading.observe(viewLifecycleOwner, Observer {
+                val visibility = if (it == true) {
+                    View.VISIBLE
+                } else (View.GONE)
+                binding.isLoadingAnimation.visibility = visibility
+            })
 
-        setupImagenVehiculoURLUpdatedSussessObserver()
+            vehiclesList.observe(viewLifecycleOwner, Observer {
+
+                if (it != null) {
+
+                    if (it.isNotEmpty()) {
+
+                        it.plus(it)
+                        recyclerViewAdapter.setVehiculosList(it)
+                        recyclerViewAdapter.notifyDataSetChanged()
+
+
+                    } else {
+
+                        showSnackBar(
+                            getString(R.string.found_no_vehicles),
+                            false
+                        )
+
+
+                    }
+
+
+                    //Alerta al View Model de que se restableció la Conexion y Servidor
+                    GlobalVariables.isServerAvailable.postValue(true)
+
+                } else {
+
+                    //Alerta al View Model de que hay Errores de Conexion y Servidor
+                    GlobalVariables.isServerAvailable.postValue(false)
+
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+
+                }
+
+            })
+
+            vehicleUpdatedSusses.observe(viewLifecycleOwner, Observer { updatedOK ->
+
+                (requireActivity() as BaseActivity).hideProgressDialog()
+
+
+                if (updatedOK != null){
+
+                    if (updatedOK) {
+
+                        viewModel.updateCurrentUserAndActiveVehicleGlobalVariables()
+
+                        viewModel.getAllVehicleFromUserId()
+
+
+                    } else {
+                        showSnackBar(
+                            getString(R.string.error_al_actualizar_vehiculo),
+                            true
+                        )
+                    }
+
+                } else {
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true,
+                    )
+                }
+
+
+
+            })
+
+            imagenFrontalVehiculoURL.observe(viewLifecycleOwner, Observer { imagenFrontalVehiculoURL ->
+                if (!imagenFrontalVehiculoURL.isNullOrEmpty()) {
+
+                    if (!viewModel.vehicleSelectedToChangeImagen?.id.isNullOrEmpty()) {
+
+                        viewModel.updateVehicleById(
+                            Vehiculo(
+                                imagenFrontalPublicaURL = imagenFrontalVehiculoURL
+                            ),
+                            vehiculoId = viewModel.vehicleSelectedToChangeImagen?.id!!
+                        )
+
+                        viewModel.vehicleSelectedToChangeImagen = null
+                    }
+
+
+
+                } else {
+
+                    (requireActivity() as BaseActivity).hideProgressDialog()
+
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+
+
+                }
+
+            })
+
+        }
+
+
+
 
     }
 
@@ -99,9 +208,6 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
                         fileType = TipoFichero.VEHICULO_FRONTAL
                     )
 
-
-
-
                 }
 
 
@@ -109,76 +215,7 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
         }
     )
 
-    private fun setupImagenVehiculoURLUpdatedSussessObserver(){
 
-        viewModel.imagenFrontalVehiculoURL.observe(viewLifecycleOwner, Observer { imagenFrontalVehiculoURL ->
-            if (!imagenFrontalVehiculoURL.isNullOrEmpty()) {
-
-                if (!viewModel.vehicleSelectedToChangeImagen?.id.isNullOrEmpty()) {
-
-                    viewModel.updateVehicleById(
-                        Vehiculo(
-                            imagenFrontalPublicaURL = imagenFrontalVehiculoURL
-                        ),
-                        vehiculoId = viewModel.vehicleSelectedToChangeImagen?.id!!
-                    )
-
-                    viewModel.vehicleSelectedToChangeImagen = null
-                }
-
-
-
-            } else {
-
-                (requireActivity() as BaseActivity).hideProgressDialog()
-
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true
-                )
-
-
-            }
-
-        })
-
-    }
-
-
-
-    private fun setupVehicleUpdatedSussesObserver(){
-        viewModel.vehicleUpdatedSusses.observe(viewLifecycleOwner, Observer { updatedOK ->
-
-            (requireActivity() as BaseActivity).hideProgressDialog()
-
-
-            if (updatedOK != null){
-
-                if (updatedOK) {
-
-                    viewModel.updateCurrentUserAndActiveVehicleGlobalVariables()
-
-                    viewModel.getAllVehicleFromUserId(currentUserActive.value?.id.orEmpty())
-
-
-                } else {
-                    showSnackBar(
-                        getString(R.string.error_al_actualizar_vehiculo),
-                        true
-                    )
-                }
-
-            } else {
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true,
-                )
-            }
-
-
-
-        })
-    }
 
     private fun initRecyclerView(){
         recyclerViewAdapter = VehiculosListAdapter(requireContext(),requireActivity(),binding.root,this)
@@ -189,74 +226,11 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
     }
 
 
-    private fun setupVehiclesListObserver(){
-
-        viewModel.vehiclesList.observe(viewLifecycleOwner, Observer {
-
-            if (it != null) {
-
-                binding.animationView.visibility = View.INVISIBLE
-
-                if (it.isNotEmpty()) {
-
-                    it.plus(it)
-                    recyclerViewAdapter.setVehiculosList(it)
-                    recyclerViewAdapter.notifyDataSetChanged()
-
-
-                } else {
-
-                    showSnackBar(
-                        getString(R.string.found_no_vehicles),
-                        false
-                    )
-
-
-                }
-
-
-                //Alerta al View Model de que se restableció la Conexion y Servidor
-                GlobalVariables.isServerAvailable.postValue(true)
-
-            } else {
-
-                //Alerta al View Model de que hay Errores de Conexion y Servidor
-                GlobalVariables.isServerAvailable.postValue(false)
-
-                showSnackBar(
-                    getString(R.string.fail_server_comunication),
-                    true
-                )
-
-            }
-
-        })
-
-
-
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        updateVehiclesList()
-    }
-
-    private fun updateVehiclesList(){
-        viewModel.getAllVehicleFromUserId(currentUserActive.value?.id.orEmpty())
-    }
-
     private fun setupOnClickListener() {
-
-        binding.btnOK.setOnClickListener {
-            closeThisFragment()
-        }
 
         binding.buttonAddVehicle.setOnClickListener {
             launchVehicleRegisterActivity()
         }
-
-
 
 
     }

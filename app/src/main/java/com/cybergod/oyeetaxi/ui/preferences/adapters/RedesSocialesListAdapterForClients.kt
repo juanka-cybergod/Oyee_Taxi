@@ -1,8 +1,10 @@
 package com.cybergod.oyeetaxi.ui.preferences.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.share.model.RedSocial
@@ -13,7 +15,7 @@ import com.cybergod.oyeetaxi.utils.Intents.launchRedSocialIntent
 
 
 class RedesSocialesListAdapterForClients (
-    private val socialSupportFragment: SocialSupportFragment,
+    private val context: Context,
 ) : RecyclerView.Adapter<RedesSocialesListAdapterForClients.MyViewHolder>() {
 
 
@@ -32,7 +34,7 @@ class RedesSocialesListAdapterForClients (
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(redesSocialesList[position],socialSupportFragment)
+        holder.bind(redesSocialesList[position],context)
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -40,7 +42,7 @@ class RedesSocialesListAdapterForClients (
 
         val binding = ItemRedSocialBinding.bind(itemView)
 
-        fun bind(redSocial: RedSocial, socialSupportFragment: SocialSupportFragment) {
+        fun bind(redSocial: RedSocial, context: Context) {
 
 
             if (redSocial.disponible == true && redSocial.url?.isNotEmpty() == true) {
@@ -50,7 +52,7 @@ class RedesSocialesListAdapterForClients (
                 redSocial.url?.let {  link ->
 
                     binding.container.setOnClickListener {
-                        socialSupportFragment.requireContext().launchRedSocialIntent(
+                        context.launchRedSocialIntent(
                             redSocial.nombre,
                             link
                         )

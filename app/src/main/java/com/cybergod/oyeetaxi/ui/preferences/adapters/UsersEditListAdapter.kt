@@ -14,13 +14,13 @@ import com.cybergod.oyeetaxi.databinding.ItemUserEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVerificacionEstado
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
-import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
 
@@ -77,6 +77,7 @@ class UsersEditListAdapter (
                 btnAdminOrSuperAdmin.visibility = if (usuario.administrador==true || usuario.superAdministrador==true  ) {View.VISIBLE} else {View.GONE}
                 btnCondutor.setTipoClienteConductor(usuario.conductor)
                 btnVerificado.setVerificacionEstado(usuario.usuarioVerificacion)
+                userRatingBar.rating = usuario.valoracion?:0f
 
                 imageUsuario.loadImagePerfilFromURLNoCache(usuario.imagenPerfilURL)
                 if (!usuario.imagenPerfilURL.isNullOrEmpty()) {
@@ -100,6 +101,9 @@ class UsersEditListAdapter (
                 btnDisabledUser.setOnClickListener {
                     Toast.makeText(usersAdministrationFragment.requireContext(),"Usuario Deshabilitado",Toast.LENGTH_SHORT).show()
                 }
+                binding.clUsuario.setOnClickListener {
+                    launchUserOverviewFragment(usuario)
+                }
 
 
             }
@@ -112,27 +116,37 @@ class UsersEditListAdapter (
 
         private fun launchImageViewFragment(imageURL:String?) {
             val imageViewFragment = ImageViewFragment()
-                val args = Bundle()
-                args.putString(KEY_IMAGE_URL, imageURL)
-                imageViewFragment.arguments = args
-                imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment+${getRamdomUUID()}")
+            val args = Bundle()
+            args.putString(KEY_IMAGE_URL, imageURL)
+            imageViewFragment.arguments = args
+            imageViewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment+${getRamdomUUID()}")
         }
 
         private fun launchEditUserProfileFragment(usuario: Usuario) {
             val editUserProfileFragment = EditUserProfileFragment()
-                val args = Bundle()
-                args.putParcelable(KEY_USER_PARCELABLE, usuario)
-                editUserProfileFragment.arguments = args
-                editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${getRamdomUUID()}")
+            val args = Bundle()
+            args.putParcelable(KEY_USER_PARCELABLE, usuario)
+            editUserProfileFragment.arguments = args
+            editUserProfileFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${getRamdomUUID()}")
 
         }
 
         private fun launchEditUserVerificationFragment(usuario: Usuario) {
             val editUserVerificationFragment = EditUserVerificationFragment()
-                val args = Bundle()
-                args.putParcelable(KEY_USER_PARCELABLE, usuario)
-                editUserVerificationFragment.arguments = args
-                editUserVerificationFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserVerificationFragment+${getRamdomUUID()}")
+            val args = Bundle()
+            args.putParcelable(KEY_USER_PARCELABLE, usuario)
+            editUserVerificationFragment.arguments = args
+            editUserVerificationFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"editUserVerificationFragment+${getRamdomUUID()}")
+
+        }
+
+
+        private fun launchUserOverviewFragment(usuario: Usuario) {
+            val userOverviewFragment = UserOverviewFragment()
+            val args = Bundle()
+            args.putParcelable(KEY_USER_PARCELABLE, usuario)
+            userOverviewFragment.arguments = args
+            userOverviewFragment.show(usersAdministrationFragment.requireActivity().supportFragmentManager,"userOverviewFragment+${getRamdomUUID()}")
 
         }
 

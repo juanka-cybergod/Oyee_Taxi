@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cybergod.oyeetaxi.api.futures.share.model.RedSocial
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.model.SocialConfiguracion
 import com.cybergod.oyeetaxi.databinding.DialogSocialSoporteBinding
 import com.cybergod.oyeetaxi.ui.preferences.adapters.RedesSocialesListAdapterForClients
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
+import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentCallPhone
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentOpenSendEmailTo
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentOpenWebURL
@@ -20,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 
-class SocialSupportFragment : BottomSheetDialogFragment() {
+class UserOverviewFragment : BottomSheetDialogFragment() {
 
     private var _binding: DialogSocialSoporteBinding? = null
     private val binding get() = _binding!!
@@ -28,9 +30,6 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: RedesSocialesListAdapterForClients
-
-    val viewModel: PreferencesViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,26 +39,53 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
 
         _binding = DialogSocialSoporteBinding.inflate(inflater, container, false)
 
-
-        initRecyclerView()
-
-        loadData()
-
-
-        setupOnClickListener()
-
-
         return  binding.root
+
+    }
+
+    private lateinit var user:Usuario
+
+    override fun onResume() {
+        super.onResume()
+
+        requireArguments().getParcelable<Usuario>(KEY_USER_PARCELABLE)?.let { usuario ->
+
+            user = usuario
+
+            val listaRedSocial = ArrayList<RedSocial>()
+            listaRedSocial.add(
+                RedSocial(
+                    disponible = true,
+                    nombre = "WhatsApp",
+                    ico = "ficheros/descarga/SOCIAL_WHATSAPP.PNG",
+                    url = usuario.telefonoMovil,
+                    ayuda = null,
+                )
+            )
+
+            val socialConfiguracion = SocialConfiguracion(
+                disponible  = true,
+                phone = usuario.telefonoMovil,
+                email = usuario.correo,
+                web = null,
+                redesSociales = listaRedSocial,
+            )
+
+            initRecyclerView()
+            loadData(socialConfiguracion)
+            setupOnClickListener(socialConfiguracion)
+        }
+
 
     }
 
 
 
-    private fun loadData() {
+    private fun loadData(socialConfiguracion: SocialConfiguracion) {
 
 
 
-        viewModel.serverConfiguration.value?.socialConfiguracion?.let {
+        socialConfiguracion.let {
 
             val socialConfiguration = it
             val listRedesSocialesDisponibles = socialConfiguration.redesSociales?.toMutableList()?.filter { itemRedSocial ->
@@ -69,8 +95,9 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
 
 
             with(binding) {
-                btnPhone.text = socialConfiguration.phone
+                btnPhone.text = user.nombre?: socialConfiguration.phone
                 btnEmail.text = socialConfiguration.email
+
 
                 if (!socialConfiguration.web.isNullOrEmpty()) {
                     btnWeb.text = socialConfiguration.web
@@ -78,21 +105,14 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
                     clWeb.visibility = View.GONE
                 }
 
-
                 if (!listRedesSocialesDisponibles.isNullOrEmpty()) {
 
                     recyclerViewAdapter.setRedSocialList(listRedesSocialesDisponibles)
                     recyclerViewAdapter.notifyDataSetChanged()
 
                 } else {
-                    with(binding) {
-                        clRedesSociales.visibility = View.GONE
-
-                    }
-
+                    clRedesSociales.visibility = View.GONE
                 }
-
-
 
             }
 
@@ -109,11 +129,11 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
     }
 
 
-    private fun setupOnClickListener() {
+    private fun setupOnClickListener(socialConfiguracion: SocialConfiguracion) {
 
        with(binding) {
 
-           if (!viewModel.serverConfiguration.value?.socialConfiguracion?.phone.isNullOrEmpty()) {
+           if (!socialConfiguracion.phone.isNullOrEmpty()) {
                btnCall.setOnClickListener {
                    requireContext().launchIntentCallPhone(btnPhone.text.toString())
                }
@@ -121,17 +141,17 @@ class SocialSupportFragment : BottomSheetDialogFragment() {
                    requireContext().launchIntentSendSMS(btnPhone.text.toString())
                }
                btnContact.setOnClickListener {
-                   requireContext().launchIntentToAddContact(socialConfiguracion = viewModel.serverConfiguration.value?.socialConfiguracion!!)
+                   requireContext().launchIntentToAddContact(nombre = "${user.nombre?.replace(" ","_",true)} ${user.apellidos?.replace(" ","_",true)} " ,socialConfiguracion = socialConfiguracion)
                }
            } else clPhone.visibility = View.GONE
 
-           if (!viewModel.serverConfiguration.value?.socialConfiguracion?.email.isNullOrEmpty()) {
+           if (!socialConfiguracion.email.isNullOrEmpty()) {
                btnEmail.setOnClickListener {
                    requireContext().launchIntentOpenSendEmailTo(btnEmail.text.toString())
                }
            } else clEmail.visibility = View.GONE
 
-           if (!viewModel.serverConfiguration.value?.socialConfiguracion?.web.isNullOrEmpty()) {
+           if (!socialConfiguracion.web.isNullOrEmpty()) {
                btnWeb.setOnClickListener {
                    requireContext().launchIntentOpenWebURL(btnWeb.text.toString())
                }

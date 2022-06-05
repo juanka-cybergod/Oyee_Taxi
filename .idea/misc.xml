@@ -89,9 +89,9 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_users_administration.xml" value="0.5" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vahicles_types_administration.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_valoracion.xml" value="0.67" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicle_detail.xml" value="1.25" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicle_detail.xml" value="0.5" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_type.xml" value="0.3625" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_types_administration.xml" value="0.54375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_types_administration.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_viaje.xml" value="0.5532503457814661" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_descripcion_actualizacion.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_imagen_tipo_vehiculo.xml" value="0.75" />
@@ -114,7 +114,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_profile.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_security.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_edit_verification.xml" value="0.3625" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_main.xml" value="0.67" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_control_panel_fragment_main.xml" value="0.7344961240310077" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_egistration_fragment_1.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_activity.xml" value="0.35185185185185186" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/user_registration_fragment_1.xml" value="0.3625" />

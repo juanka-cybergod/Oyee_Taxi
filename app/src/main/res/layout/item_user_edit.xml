@@ -117,16 +117,21 @@
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvTipoUsuario"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:lines="1"-->
-<!--                android:maxLines="1"-->
-<!--                android:hint="Tipo de Usuario"-->
-<!--                android:textAlignment="textStart"-->
-<!--                android:textAppearance="@style/TextAppearance.Material3.BodySmall"-->
-<!--                />-->
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/userRatingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.1"
+                android:clickable="false"
+                android:focusable="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageUsuario" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

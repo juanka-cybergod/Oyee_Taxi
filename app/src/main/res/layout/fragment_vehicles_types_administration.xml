@@ -5,24 +5,31 @@
     android:id="@+id/preferences"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     >
 
-    <com.airbnb.lottie.LottieAnimationView
 
-        android:id="@+id/animationView"
-        android:layout_width="150dp"
-        android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MyApplication.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="infinity-loop.json"
-        app:lottie_loop="true"
-        app:lottie_speed="1.6" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.Toolbar
+            app:title="Administrar Tipos de Vehículos"
+            app:titleTextAppearance="@style/TextAppearance.Material3.BodyLarge"
+            app:navigationIcon="@drawable/ic_vehicle_type_32"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -30,13 +37,13 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:fillViewport="true"
-        android:scrollbars="none"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -45,9 +52,29 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylerViewVehiclesTypes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/isLoadingAnimation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/isLoadingAnimation"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/isLoadingAnimation"
+                android:layout_width="match_parent"
+
+                android:layout_height="100dp"
+                android:layout_margin="4dp"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="infinity-loop.json"
+                app:lottie_loop="true"
+                app:lottie_speed="1.6" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>

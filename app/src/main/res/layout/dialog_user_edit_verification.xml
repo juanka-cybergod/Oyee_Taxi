@@ -103,6 +103,7 @@
                             android:textSize="13sp"
                             app:icon="@drawable/ic_cancel_24"
                             app:iconTint="@color/black"
+                            android:backgroundTint="@color/casiRojo"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">

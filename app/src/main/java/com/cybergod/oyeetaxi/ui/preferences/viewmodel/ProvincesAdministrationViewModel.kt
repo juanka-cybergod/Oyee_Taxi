@@ -14,28 +14,38 @@ import javax.inject.Inject
 @HiltViewModel
 class ProvincesAdministrationViewModel @Inject constructor(
     private val provincesRepository: ProvincesRepository
-    ) :  BaseViewModel() {
+) : BaseViewModel() {
 
+
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     var provincesList: MutableLiveData<List<Provincia>> = MutableLiveData()
     var provincesAddedOrUpdated: MutableLiveData<Provincia?> = MutableLiveData()
 
-    fun getAllProvinces(){
+    init {
+        getAllProvinces()
+    }
 
-            viewModelScope.launch(Dispatchers.IO) {
-                provincesList.postValue(
-                    provincesRepository.getAllProvinces()
-                )
+    fun getAllProvinces() {
 
+        isLoading.postValue(true)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(500)
+            provincesList.postValue(
+                provincesRepository.getAllProvinces()
+            )
+
+            isLoading.postValue(false)
 
         }
 
 
     }
 
-    private suspend fun updateProvince(provincia: Provincia): Provincia?{
+    private suspend fun updateProvince(provincia: Provincia): Provincia? {
 
         val updatedProvince = provincesRepository.updateProvince(provincia)
-        if (updatedProvince!=null) {
+        if (updatedProvince != null) {
             updateProvincesList(updatedProvince)
         }
         return updatedProvince
@@ -59,7 +69,7 @@ class ProvincesAdministrationViewModel @Inject constructor(
     }
 
 
-    suspend fun setProvinceVisibility(nombreProvincia: String,visible:Boolean) : Provincia?{
+    suspend fun setProvinceVisibility(nombreProvincia: String, visible: Boolean): Provincia? {
         return updateProvince(
             Provincia(
                 nombre = nombreProvincia,
@@ -69,11 +79,10 @@ class ProvincesAdministrationViewModel @Inject constructor(
     }
 
 
-
     fun setProvinceLocation(provincia: Provincia) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            delay(1000L)
+            delay(500L)
 
             provincesAddedOrUpdated.postValue(
                 updateProvince(
@@ -85,8 +94,6 @@ class ProvincesAdministrationViewModel @Inject constructor(
 
     fun addProvince(provincia: Provincia) {
         viewModelScope.launch(Dispatchers.IO) {
-
-            delay(1000L)
 
             val addedProvince = provincesRepository.addProvince(provincia)
             provincesAddedOrUpdated.postValue(addedProvince)

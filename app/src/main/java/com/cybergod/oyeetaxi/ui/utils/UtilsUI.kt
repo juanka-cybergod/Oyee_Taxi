@@ -24,6 +24,7 @@ import com.cybergod.oyeetaxi.api.futures.travel.model.MetodoPago
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
@@ -137,13 +138,12 @@ object UtilsUI {
     }
 
 
-    fun View.setVerificacionEstado(usuarioVerificacion: UsuarioVerificacion?){
+    fun View.setEstadoVerificacionUsuario(usuarioVerificacion: UsuarioVerificacion?){
 
         val button = (this as MaterialButton)
 
         button.visibility = View.VISIBLE
 
-        //Verificacion de Usuario
         if (usuarioVerificacion?.verificado == true) {
             //Verificado OK
             button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
@@ -160,22 +160,35 @@ object UtilsUI {
             }
 
         }
-
-//
-//        when (verificacion?.verificado?:false ) {
-//            true -> {
-//                //button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
-//                button.setIconTintResource(R.color.casiBlancoObscuro)
-//            }
-//            else -> {
-//                //button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
-//                button.setIconTintResource(R.color.casiRojo)
-//            }
-//        }
-
-
-
     }
+    fun View.setEstadoVerificacionVehiculo(vehiculoVerificacion: VehiculoVerificacion?){
+
+        val button = (this as MaterialButton)
+
+        button.visibility = View.VISIBLE
+
+
+        if (vehiculoVerificacion?.verificado == true) {
+            //Verificado OK
+            button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+            button.setIconTintResource(R.color.casiBlancoObscuro)
+
+        } else {
+            if (vehiculoVerificacion?.matricula.isNullOrEmpty() || vehiculoVerificacion?.circulacion.isNullOrEmpty() || vehiculoVerificacion?.imagenCirculacionURL.isNullOrEmpty()) {
+                //No Llenada
+                button.visibility = View.GONE
+            } else {
+                //Pendiente a Aprobar
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+                button.setIconTintResource(R.color.casiRojo)
+            }
+
+        }
+    }
+
+
+
+
 
 
     fun View.setMetodoPagoButton(metodoPago: MetodoPago){
@@ -250,22 +263,24 @@ object UtilsUI {
 
         when (active) {
             true -> {
-                button.setBackgroundColor(
-                    ResourcesCompat.getColor(
-                        resources,
-                        R.color.white,
-                        null
-                    )
-                )
+                button.setIconTintResource(R.color.casiBlancoObscuro)
+//                button.setBackgroundColor(
+//                    ResourcesCompat.getColor(
+//                        resources,
+//                        R.color.casiBlanco,
+//                        null
+//                    )
+//                )
             }
             false -> {
-                button.setBackgroundColor(
-                    ResourcesCompat.getColor(
-                        resources,
-                        R.color.casiRojo,
-                        null
-                    )
-                )
+                button.setIconTintResource(R.color.casiRojo)
+//                button.setBackgroundColor(
+//                    ResourcesCompat.getColor(
+//                        resources,
+//                        R.color.casiRojo,
+//                        null
+//                    )
+//                )
             }
         }
 

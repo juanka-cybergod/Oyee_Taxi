@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 data class VehicleFilterOptions(
     var texto:String="",
     var tipoVehiculo:String?=null,
-    var visibles:Boolean?=null,
-    var activos:Boolean?=null,
+    var noVisibles:Boolean?=null,
+//    var activos:Boolean?=null, //Not Use Yet
     var deshabilitados:Boolean?=null,
     var verificacionesPendientes:Boolean?=null,
 ): Parcelable

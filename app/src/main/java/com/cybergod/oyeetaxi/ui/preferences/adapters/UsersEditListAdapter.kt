@@ -18,7 +18,7 @@ import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVerificacionEstado
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionUsuario
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
@@ -73,10 +73,10 @@ class UsersEditListAdapter (
                 tvNombreUsuario.text = "${usuario.nombre} ${usuario.apellidos}"
                 tvCorreo.text = "${usuario.correo}"
                 tvTelefonoMovil.text = "${usuario.telefonoMovil}"
-                btnDisabledUser.visibility = if (usuario.habilitado==false) {View.VISIBLE} else {View.GONE}
+                btnDisabled.visibility = if (usuario.habilitado==false) {View.VISIBLE} else {View.GONE}
                 btnAdminOrSuperAdmin.visibility = if (usuario.administrador==true || usuario.superAdministrador==true  ) {View.VISIBLE} else {View.GONE}
                 btnCondutor.setTipoClienteConductor(usuario.conductor)
-                btnVerificado.setVerificacionEstado(usuario.usuarioVerificacion)
+                btnVerificado.setEstadoVerificacionUsuario(usuario.usuarioVerificacion)
                 userRatingBar.rating = usuario.valoracion?:0f
 
                 imageUsuario.loadImagePerfilFromURLNoCache(usuario.imagenPerfilURL)
@@ -98,7 +98,7 @@ class UsersEditListAdapter (
                 btnAdminOrSuperAdmin.setOnClickListener {
                     Toast.makeText(usersAdministrationFragment.requireContext(),"Administrador",Toast.LENGTH_SHORT).show()
                 }
-                btnDisabledUser.setOnClickListener {
+                btnDisabled.setOnClickListener {
                     Toast.makeText(usersAdministrationFragment.requireContext(),"Usuario Deshabilitado",Toast.LENGTH_SHORT).show()
                 }
                 binding.clUsuario.setOnClickListener {

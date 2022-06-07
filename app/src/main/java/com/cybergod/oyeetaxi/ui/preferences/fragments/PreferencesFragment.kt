@@ -72,8 +72,6 @@ class PreferencesFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun loadData() {
 
-
-
         binding.tvVersion.text = "Versión ${getAppVersionString()}"
         viewModel.getServerConfiguration()
 
@@ -81,13 +79,6 @@ class PreferencesFragment : BaseFragment() {
 
     private fun setupObservers() {
 
-        setupMapStyleObserver()
-
-
-
-    }
-
-    private fun setupMapStyleObserver(){
         viewModel.readMapStyle.observe(viewLifecycleOwner, Observer {
 
             binding.tvEstilosMapa.setText(
@@ -100,6 +91,8 @@ class PreferencesFragment : BaseFragment() {
             fillTexViewMapStyles()
 
         })
+
+
     }
 
 

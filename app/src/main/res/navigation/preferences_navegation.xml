@@ -23,6 +23,11 @@
         />
 
 
+    <action android:id="@+id/action_go_to_searchFilterVehicleFragment"
+        app:destination="@id/searchFilterVehicleFragment"
+        />
+
+
 
 
     <fragment
@@ -93,6 +98,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment"
         android:label="VehiclesAdministrationFragment"
         tools:layout="@layout/fragment_vehicles_administration"
+        />
+    <dialog
+        android:id="@+id/searchFilterVehicleFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.SearchFilterVehicleFragment"
+        android:label="SearchFilterVehicleFragment"
+        tools:layout="@layout/dialog_filter_vehicle"
         />
 
 </navigation>

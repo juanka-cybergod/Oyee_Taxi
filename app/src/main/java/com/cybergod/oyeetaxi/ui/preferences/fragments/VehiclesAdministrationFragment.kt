@@ -19,6 +19,7 @@ import com.cybergod.oyeetaxi.ui.preferences.adapters.VehiclesEditListAdapter
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.getItemCount
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -170,7 +171,7 @@ class VehiclesAdministrationFragment : BaseFragment(), SearchView.OnQueryTextLis
                 true
             }
             R.id.action_filter -> {
-                launchSearchFilterUserFragment()
+                launchSearchFilterVehicleFragment()
                 true
             }
             else -> {
@@ -211,10 +212,10 @@ class VehiclesAdministrationFragment : BaseFragment(), SearchView.OnQueryTextLis
     }
 
 
-    private fun launchSearchFilterUserFragment() {
-        findNavController().navigate(R.id.action_go_to_searchFilterUserFragment,
+    private fun launchSearchFilterVehicleFragment() {
+        findNavController().navigate(R.id.action_go_to_searchFilterVehicleFragment,
             Bundle().apply {
-                putParcelable(KEY_USER_FILTER_OPTIONS, viewModel.vehicleFilterOptions)
+                putParcelable(KEY_VEHICLE_FILTER_OPTIONS, viewModel.vehicleFilterOptions)
             }
         )
     }

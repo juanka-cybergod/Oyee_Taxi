@@ -1,12 +1,15 @@
 package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
 import com.cybergod.oyeetaxi.api.futures.vehicle.repositories.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.vehicle_type.repositories.VehicleTypeRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
+import com.cybergod.oyeetaxi.utils.Constants.VEHICLE_ANY_TYPE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VehiclesAdministrationViewModel @Inject constructor(
-//    private val userRepository: UserRepository,
+    private val vehicleTypeRepository: VehicleTypeRepository,
     private val vehicleRepository: VehicleRepository,
 
     ) :  BaseViewModel() {
@@ -123,5 +126,24 @@ class VehiclesAdministrationViewModel @Inject constructor(
 
 
 
+    val vehicleTypesItems: MutableList<String> = getVehicleTypesList()
+    lateinit var arrayAdapter : ArrayAdapter<String>
+
+    private fun getVehicleTypesList(): MutableList<String>{
+        val stringArray = mutableListOf<String>(VEHICLE_ANY_TYPE)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            vehicleTypeRepository.getAllVehicleTypes()?.let { listaTipoVehiculos ->
+                listaTipoVehiculos.forEach { tipoVehiculo ->
+                    tipoVehiculo.tipoVehiculo?.let {
+                        stringArray.add(it)
+                    }
+
+                }
+            }
+        }
+
+        return  stringArray
+    }
 
 }

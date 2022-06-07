@@ -3,8 +3,8 @@ package com.cybergod.oyeetaxi.ui.preferences.adapters
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +17,11 @@ import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setDetallesVehiculos
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionUsuario
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionVehiculo
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
@@ -67,17 +70,14 @@ class VehiclesEditListAdapter (
 
             with(binding) {
 
-
                 tvMatricula.setVehiculoMatricula(vehiculoResponse.vehiculoVerificacion?.matricula)
-
-                //Detalles del Vehiculo
                 tvDetalles.setDetallesVehiculos(vehiculoResponse)
 
-
-//                btnDisabledUser.visibility = if (vehiculo.habilitado==false) {View.VISIBLE} else {View.GONE}
+                btnDisabled.visibility = if (vehiculoResponse.habilitado==false) {View.VISIBLE} else {View.GONE}
 //                btnAdminOrSuperAdmin.visibility = if (vehiculo.administrador==true || vehiculo.superAdministrador==true  ) {View.VISIBLE} else {View.GONE}
 //                btnCondutor.setTipoClienteConductor(vehiculo.conductor)
-//                btnVerificado.setVerificacionEstado(vehiculo.usuarioVerificacion)
+                btnVisible.setButtonVisibilityIcon(vehiculoResponse.visible?:true)
+                btnVerificado.setEstadoVerificacionVehiculo(vehiculoResponse.vehiculoVerificacion)
 
 
                 imageVehiculo.loadImageVehiculoFrontalFromURLNoCache(vehiculoResponse.imagenFrontalPublicaURL)

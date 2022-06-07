@@ -82,7 +82,7 @@ interface RetroServiceInterface {
     suspend fun searchVehiclesPaginatedWithFilter(
         @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
-        @Query("sort") sort: String = "fechaDeRegistro",
+        @Query("sort") sort: String = "fechaDeRegistro,DESC",
         @Body vehicleFilterOptions : VehicleFilterOptions?=VehicleFilterOptions(),
     ): Response<VehiculosPaginados>
 

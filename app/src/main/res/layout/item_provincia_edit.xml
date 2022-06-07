@@ -75,36 +75,34 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:layout_margin="8dp"
             android:id="@+id/btnEditarUbicacion"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_marginRight="8dp"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:backgroundTint="@color/white"
+            android:textAlignment="textStart"
             android:textSize="13sp"
             app:icon="@drawable/ic_location_edit"
             app:iconTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnVisible"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAlignment="textStart"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.button.MaterialButton
+            android:layout_margin="8dp"
             android:id="@+id/btnVisible"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/casiBlanco"
             android:textSize="13sp"
             app:icon="@drawable/ic_visibility_on_24"
             app:iconTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintEnd_toStartOf="@+id/btnEditarUbicacion"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

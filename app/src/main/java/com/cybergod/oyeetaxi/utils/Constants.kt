@@ -69,12 +69,15 @@ object Constants {
     const val KEY_PROVINCE_PARCELABLE = "KEY_PROVINCE_PARCELABLE"
     const val KEY_VEHICLE_TYPE_PARCELABLE = "KEY_VEHICLE_TYPE_PARCELABLE"
     const val KEY_USER_FILTER_OPTIONS = "KEY_USER_FILTER_OPTIONS"
+    const val KEY_VEHICLE_FILTER_OPTIONS = "KEY_VEHICLE_FILTER_OPTIONS"
     const val KEY_IMAGE_URL = "KEY_IMAGE_URL"
 
 
 
 
     const val CONTRY_CODE = "+53"
+
+    const val VEHICLE_ANY_TYPE = "Cualquier Tipo"
 
 
 

@@ -178,6 +178,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
                 android:id="@+id/btnAdminOrSuperAdmin"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="32dp"
@@ -188,7 +189,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDisabledUser"
+                android:id="@+id/btnDisabled"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -207,11 +208,21 @@
                 app:iconGravity="textStart"
                 />
             <com.google.android.material.button.MaterialButton
+                android:visibility="gone"
                 android:id="@+id/btnCondutor"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 app:icon="@drawable/ic_driver_user"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVisible"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_visibility_on_24"
                 app:iconTint="@color/casiBlancoObscuro"
                 app:iconGravity="textStart"
                 />

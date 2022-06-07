@@ -90,6 +90,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vahicles_types_administration.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_valoracion.xml" value="0.67" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicle_detail.xml" value="0.5" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_administration.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_type.xml" value="0.3625" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_vehicles_types_administration.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_viaje.xml" value="0.5532503457814661" />
@@ -101,8 +102,9 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_red_social.xml" value="1.1058823529411765" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_tipo_vehiculo.xml" value="2.0" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_user_edit.xml" value="0.67" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehicle_edit.xml" value="0.7178030303030303" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehicle_type_edit.xml" value="0.67" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehiculo.xml" value="0.67" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/item_vehiculo.xml" value="0.5" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/month_year_picker_dialog.xml" value="0.41796875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/permisions_fragment.xml" value="0.246875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/personas_slider_fragment.xml" value="0.3625" />

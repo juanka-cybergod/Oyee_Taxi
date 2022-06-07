@@ -1,7 +1,9 @@
-package com.cybergod.oyeetaxi.api.futures.user.model.pagination
+package com.cybergod.oyeetaxi.api.futures.user.model.response
 
 
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.share.model.pagination.Pageable
+import com.cybergod.oyeetaxi.api.futures.share.model.pagination.Sort
 import com.google.gson.annotations.SerializedName
 
 data class UsuariosPaginados(

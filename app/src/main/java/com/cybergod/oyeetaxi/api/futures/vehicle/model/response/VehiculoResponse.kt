@@ -1,13 +1,12 @@
-package com.cybergod.oyeetaxi.api.futures.vahicle.model.response
+package com.cybergod.oyeetaxi.api.futures.vehicle.model.response
 
 
 import android.os.Parcelable
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.verification.VehiculoVerificacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
-
 
 @Parcelize
 @Serializable

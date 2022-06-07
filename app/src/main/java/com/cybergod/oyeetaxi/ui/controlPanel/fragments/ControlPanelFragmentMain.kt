@@ -347,7 +347,7 @@ class ControlPanelFragmentMain : BaseFragment() {
                     binding.imageVehiculoVerificado.setVehiculoVerificacionImage(vehiculo)
 
                     //Matricula
-                    binding.tvMatricula.setVehiculoMatricula(vehiculo)
+                    binding.tvMatricula.setVehiculoMatricula(vehiculo.vehiculoVerificacion?.matricula)
 
                     //Detalles del Vehiculo
                     binding.tvDetalles.setDetallesVehiculos(vehiculo)

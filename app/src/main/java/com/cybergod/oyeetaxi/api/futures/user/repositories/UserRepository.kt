@@ -1,11 +1,9 @@
 package com.cybergod.oyeetaxi.api.futures.user.repositories
 
-
-import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
-import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
+import com.cybergod.oyeetaxi.api.futures.user.model.response.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.futures.user.model.response.RequestVerificationCodeResponse
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
@@ -44,34 +42,6 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
                 if (response.code() == RESPONSE_CODE_OK) {
                     response.body()
 
-                } else  null
-            } else null
-
-        }
-
-        return null
-    }
-
-
-
-    suspend fun getAllUsers() : List<Usuario>?  {
-
-        handleRequest {
-            retroServiceInterface.getAllUsers()
-        }?.let { response ->
-
-            return if (response.isSuccessful) {
-
-                logResponse(
-                    className = className,
-                    metodo = object{}.javaClass.enclosingMethod!!,
-                    responseCode = response.code(),
-                    responseHeaders = response.headers().toString(),
-                    responseBody = response.body().toString()
-                )
-
-                if (response.code() == RESPONSE_CODE_OK) {
-                    response.body()?.toList()
                 } else  null
             } else null
 
@@ -368,6 +338,34 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
 
 
 
+
+
+//suspend fun getAllUsers() : List<Usuario>?  {
+//
+//    handleRequest {
+//        retroServiceInterface.getAllUsers()
+//    }?.let { response ->
+//
+//        return if (response.isSuccessful) {
+//
+//            logResponse(
+//                className = className,
+//                metodo = object{}.javaClass.enclosingMethod!!,
+//                responseCode = response.code(),
+//                responseHeaders = response.headers().toString(),
+//                responseBody = response.body().toString()
+//            )
+//
+//            if (response.code() == RESPONSE_CODE_OK) {
+//                response.body()?.toList()
+//            } else  null
+//        } else null
+//
+//    }
+//
+//    return null
+//}
+//
 
 
 

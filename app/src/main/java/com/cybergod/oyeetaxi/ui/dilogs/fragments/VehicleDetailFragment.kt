@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentVehicleDetailBinding
 import com.cybergod.oyeetaxi.maps.Utils.calculateTheDistance
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleDetailsViewModel
@@ -101,7 +101,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         binding.imageUsuarioVerificado.setUsuarioVerificacionImage(vehicleOK.value?.usuario!!)
 
         //Matricula
-        binding.tvMatricula.setVehiculoMatricula(vehicleOK.value!!)
+        binding.tvMatricula.setVehiculoMatricula(vehicleOK.value?.vehiculoVerificacion?.matricula)
 
         //Detalles del Vehiculo
         binding.tvDetalles.setDetallesVehiculos(vehicleOK.value!!)

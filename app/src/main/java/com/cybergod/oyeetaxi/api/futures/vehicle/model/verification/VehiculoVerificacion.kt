@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.api.futures.vahicle.model.verification
+package com.cybergod.oyeetaxi.api.futures.vehicle.model.verification
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

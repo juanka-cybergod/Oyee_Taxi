@@ -2,7 +2,7 @@ package com.cybergod.oyeetaxi.api.futures.user.model.response
 
 import android.os.Parcelable
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 

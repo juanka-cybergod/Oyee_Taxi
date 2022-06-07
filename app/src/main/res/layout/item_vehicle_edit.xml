@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:theme="@style/Theme.OyeeTaxi"
+    android:padding="4dp"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/clUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/casiBlanco"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="8dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clUserImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+
+                android:id="@+id/imageVehiculo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="6dp"
+                android:src="@drawable/ic_front_vehicle"
+                app:civ_border_color="@color/yellow_primary"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/yellow_primary"
+                app:civ_shadow_radius="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_front_vehicle" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:visibility="invisible"
+                android:id="@+id/imageUsuarioVerificado"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="0dp"
+                android:src="@drawable/ic_verified"
+                android:tint="@color/colorSnackBarSuccess"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@+id/clUserImageView"
+            app:layout_constraintTop_toTopOf="@+id/clUserImageView">
+
+
+            <TextView
+                android:id="@+id/tvMatricula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="Matrícula"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tvDetalles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="4"
+                android:maxLines="5"
+                android:text="Tipo de Vehiculo\nMarca Modelo Año\nCapacidad Pasajeros"
+                app:layout_constraintStart_toStartOf="@+id/tvMatricula"
+                app:layout_constraintTop_toBottomOf="@+id/tvMatricula"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                />
+
+
+
+<!--            <androidx.appcompat.widget.AppCompatRatingBar-->
+<!--                android:id="@+id/userRatingBar"-->
+<!--                style="?android:attr/ratingBarStyleSmall"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:isIndicator="true"-->
+<!--                android:numStars="5"-->
+<!--                android:rating="0"-->
+<!--                android:stepSize="0.1"-->
+<!--                android:clickable="false"-->
+<!--                android:focusable="false"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/imageUsuario" />-->
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:textSize="13sp"
+            app:icon="@drawable/ic_edit_48"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--        app:icon="@drawable/ic_driver_user"-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnInfo"-->
+<!--            style="@style/Widget.Material3.Button.IconButton"-->
+<!--            android:layout_width="38dp"-->
+<!--            android:layout_height="38dp"-->
+<!--            app:icon="@drawable/ic_note"-->
+<!--            app:iconGravity="textStart"-->
+<!--            app:iconTint="@color/black"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btnEdit"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/btnEdit" />-->
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTypeCarga"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_alert_24"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                android:visibility="invisible"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdminOrSuperAdmin"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_settings_24"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDisabledUser"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_disable_24"
+                app:iconTint="@color/casiRojo"
+                app:iconGravity="textStart"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerificado"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_verified"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCondutor"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:icon="@drawable/ic_driver_user"
+                app:iconTint="@color/casiBlancoObscuro"
+                app:iconGravity="textStart"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

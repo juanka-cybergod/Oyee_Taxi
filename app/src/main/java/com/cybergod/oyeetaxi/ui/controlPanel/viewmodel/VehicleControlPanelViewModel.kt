@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive

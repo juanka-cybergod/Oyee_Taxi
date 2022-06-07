@@ -11,9 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.verification.VehiculoVerificacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import com.cybergod.oyeetaxi.databinding.VehicleControlPanelFragmentEditVerificationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.VehicleControlPanelViewModel

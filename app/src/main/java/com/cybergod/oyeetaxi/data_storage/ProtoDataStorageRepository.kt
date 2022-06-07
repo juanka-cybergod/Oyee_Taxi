@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

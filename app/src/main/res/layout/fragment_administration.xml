@@ -281,12 +281,13 @@
                     android:drawableTint="@color/black"
                     android:lines="3"
                     android:maxLines="3"
-                    android:text="Configurar\nTipos\nVehículos"
+                    android:text="@string/admin_vehicles_types"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="normal"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
                     />
 
                 <com.google.android.material.button.MaterialButton
@@ -300,11 +301,14 @@
                     android:drawableTint="@color/black"
                     android:lines="3"
                     android:maxLines="3"
-                    android:text="Configurar\nProvincias\n"
+                    android:text="@string/admin_provinces"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
+                    />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnUsersAdministration"
@@ -317,14 +321,95 @@
                     android:drawableTint="@color/black"
                     android:lines="3"
                     android:maxLines="3"
-                    android:text="Administrar\nUsuarios"
+                    android:text="@string/admin_users"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
+                    />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/clServerConfig2"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVehiclesAdministration"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_taxi"
+                    android:drawableTint="@color/black"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="@string/admin_vehicles"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:visibility="invisible"
+                    android:id="@+id/btn2"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_location_32"
+                    android:drawableTint="@color/black"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="@string/admin_provinces"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:visibility="invisible"
+                    android:id="@+id/btn3"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/casiBlanco"
+                    android:drawableTop="@drawable/ic_peoples_32"
+                    android:drawableTint="@color/black"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="@string/admin_users"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    tools:targetApi="m"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
 
         </LinearLayout>
 
@@ -332,28 +417,26 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
+        android:visibility="visible"
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/casiBlanco"
-        android:padding="18dp"
+        android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="invisible"
             android:id="@+id/clAppVersion"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnComprobarActualizacions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             >
 
             <TextView
@@ -361,7 +444,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:text="@string/app_name"
+                android:text="Oyee Taxi Server"
                 android:textSize="13sp"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@+id/tvVersion"

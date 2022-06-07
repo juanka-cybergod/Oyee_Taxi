@@ -22,11 +22,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.travel.model.MetodoPago
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -348,13 +347,13 @@ object UtilsUI {
 
     }
 
-    fun View.setVehiculoMatricula(vehiculo: VehiculoResponse){
+    fun View.setVehiculoMatricula(matricula: String?){
         val tvMatricula = (this as TextView)
 
-        if (vehiculo.vehiculoVerificacion?.matricula.isNullOrEmpty()){
+        if (matricula.isNullOrEmpty()){
             tvMatricula.text = "Sin Matrícula"
         } else {
-            tvMatricula.text = vehiculo.vehiculoVerificacion?.matricula
+            tvMatricula.text = matricula
         }
     }
 
@@ -583,6 +582,23 @@ object UtilsUI {
 
     }
 
+    fun View.loadImageVehiculoFrontalFromURLNoCache(relativeURL:String?) {
+
+        (this as ImageView).setImageResource(R.drawable.ic_front_vehicle)
+
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .fitCenter()
+                .circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(R.drawable.ic_front_vehicle)
+                .into((this as ImageView))
+        }
+
+    }
 
     fun View.loadImagePerfilFromURLNoCache(relativeURL:String?) {
 

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.ItemVehiculoBinding
 import com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.VehicleControlPanelFragmentList
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
@@ -71,27 +71,31 @@ class VehiculosListAdapter (
 
             vehicleDetails.let { vehiculo ->
 
-                //Ocultar las Opciones por defecto
-                binding.clVehiculoOpciones.visibility = vehicleControlPanelFragmentList.viewModel.rememberListExpanded[vehiculo.id!!] ?:View.GONE
+                with(binding) {
+                    //Ocultar las Opciones por defecto
+                    clVehiculoOpciones.visibility = vehicleControlPanelFragmentList.viewModel.rememberListExpanded[vehiculo.id!!] ?:View.GONE
 
-                //vehiculo Activo o Inactivo
-                binding.buttonVehiculoActivo.setButtonVehiculoActivo(vehiculo.activo)
+                    //vehiculo Activo o Inactivo
+                    buttonVehiculoActivo.setButtonVehiculoActivo(vehiculo.activo)
 
-                //Imagen Frontal
-                binding.imageVehiculo.loadImageVehiculoFrontalFromURL(vehiculo.imagenFrontalPublicaURL)
+                    //Imagen Frontal
+                    imageVehiculo.loadImageVehiculoFrontalFromURL(vehiculo.imagenFrontalPublicaURL)
 
-                //Verificacion
-                binding.imageVehiculoVerificado.setVehiculoVerificacionImage(vehiculo)
-                binding.buttonVehiculoVerificacion.setVehiculoVerificacionButton(vehiculo)
+                    //Verificacion
+                    imageVehiculoVerificado.setVehiculoVerificacionImage(vehiculo)
+                    buttonVehiculoVerificacion.setVehiculoVerificacionButton(vehiculo)
 
-                //Matricula
-                binding.tvMatricula.setVehiculoMatricula(vehiculo)
+                    //Matricula
+                    tvMatricula.setVehiculoMatricula(vehiculo.vehiculoVerificacion?.matricula)
 
-                //Detalles del Vehiculo
-                binding.tvDetalles.setDetallesVehiculos(vehiculo)
+                    //Detalles del Vehiculo
+                    tvDetalles.setDetallesVehiculos(vehiculo)
 
-                //Climatizado
-                binding.imageVehiculoClimatizado.setVehiculoClimatizado(vehiculo)
+                    //Climatizado
+                    imageVehiculoClimatizado.setVehiculoClimatizado(vehiculo)
+                }
+
+
 
                 //setupOnClickListeners
                 setupOnClickListeners(vehiculo,vehicleControlPanelFragmentList)

@@ -48,6 +48,9 @@
             android:id="@+id/action_administrationFragment_to_usersAdministrationFragment"
             app:destination="@id/usersAdministrationFragment"
             />
+        <action
+            android:id="@+id/action_administrationFragment_to_vehiclesAdministrationFragment"
+            app:destination="@id/vehiclesAdministrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"
@@ -84,6 +87,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.SearchFilterUserFragment"
         android:label="SearchFilterUserFragment"
         tools:layout="@layout/dialog_filter_user"
+        />
+    <fragment
+        android:id="@+id/vehiclesAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment"
+        android:label="VehiclesAdministrationFragment"
+        tools:layout="@layout/fragment_vehicles_administration"
         />
 
 </navigation>

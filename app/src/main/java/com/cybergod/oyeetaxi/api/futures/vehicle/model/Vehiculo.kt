@@ -1,8 +1,8 @@
-package com.cybergod.oyeetaxi.api.futures.vahicle.model
+package com.cybergod.oyeetaxi.api.futures.vehicle.model
 
 
 import android.os.Parcelable
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.verification.VehiculoVerificacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable

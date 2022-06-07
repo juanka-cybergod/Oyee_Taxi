@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.api.futures.user.model.pagination
+package com.cybergod.oyeetaxi.api.futures.share.model.pagination
 
 
 import com.google.gson.annotations.SerializedName

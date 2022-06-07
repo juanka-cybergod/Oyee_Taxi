@@ -4,11 +4,11 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.verification.VehiculoVerificacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
 import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
-import com.cybergod.oyeetaxi.api.futures.vahicle.repositories.VehicleRepository
+import com.cybergod.oyeetaxi.api.futures.vehicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID

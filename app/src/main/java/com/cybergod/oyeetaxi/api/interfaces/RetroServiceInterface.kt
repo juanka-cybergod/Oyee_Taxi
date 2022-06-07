@@ -9,11 +9,11 @@ import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.travel.model.Viaje
 import com.cybergod.oyeetaxi.api.futures.user.model.response.LoginRespuesta
 import com.cybergod.oyeetaxi.api.futures.user.model.response.RequestVerificationCodeResponse
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.api.futures.user.model.pagination.UsuariosPaginados
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.api.futures.user.model.response.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
-import com.cybergod.oyeetaxi.api.futures.vahicle.model.Vehiculo
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.valoration.model.Valoracion
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_CONFIGURACION
@@ -26,6 +26,8 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VEHICULOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VIAJES
 import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -35,31 +37,14 @@ import retrofit2.http.*
 interface RetroServiceInterface {
 
     /** USUARIOS ***********************************************************/
-
-    @GET(URL_BASE_USUARIOS + "getAllUsers")
-    suspend fun getAllUsers(): Response<ArrayList<Usuario>>
-
-    @GET(URL_BASE_USUARIOS + "getAllUsersPaginated")
-    suspend fun getAllUsersPaginated(
-        @Query("size") size: Int = QUERRY_PAGE_SIZE,
-        @Query("page") page: Int = 0,
-        @Query("sort") sort: String = "nombre",
-    ): Response<UsuariosPaginados>
-
-    @GET(URL_BASE_USUARIOS + "searchUsersPaginated")
-    suspend fun searchUsersPaginated(
-        @Query("size") size: Int = QUERRY_PAGE_SIZE,
-        @Query("page") page: Int = 0,
-        @Query("sort") sort: String = "nombre",
-        @Query("search") search: String = "",
-    ): Response<UsuariosPaginados>
+//    @GET(URL_BASE_USUARIOS + "getAllUsers")
+//    suspend fun getAllUsers(): Response<ArrayList<Usuario>>
 
     @PUT(URL_BASE_USUARIOS + "searchUsersPaginatedWithFilter")
     suspend fun searchUsersPaginatedWithFilter(
         @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
         @Query("sort") sort: String = "nombre",
-        //@Query("search") search: String = "",
         @Body userFilterOptions : UserFilterOptions?=UserFilterOptions(),
     ): Response<UsuariosPaginados>
 
@@ -92,6 +77,15 @@ interface RetroServiceInterface {
 
 
     /** VEHICULOS ***********************************************************/
+
+    @PUT(URL_BASE_VEHICULOS + "searchVehiclesPaginatedWithFilter")
+    suspend fun searchVehiclesPaginatedWithFilter(
+        @Query("size") size: Int = QUERRY_PAGE_SIZE,
+        @Query("page") page: Int = 0,
+        @Query("sort") sort: String = "fechaDeRegistro",
+        @Body vehicleFilterOptions : VehicleFilterOptions?=VehicleFilterOptions(),
+    ): Response<VehiculosPaginados>
+
     @GET(URL_BASE_VEHICULOS + "getAllVehiclesFromUserId={id}")
     suspend fun getAllVehiclesFromUserId( @Path("id") id : String ): Response<ArrayList<VehiculoResponse>>
 

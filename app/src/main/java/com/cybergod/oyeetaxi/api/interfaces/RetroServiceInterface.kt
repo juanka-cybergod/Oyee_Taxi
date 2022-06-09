@@ -44,7 +44,8 @@ interface RetroServiceInterface {
     suspend fun searchUsersPaginatedWithFilter(
         @Query("size") size: Int = QUERRY_PAGE_SIZE,
         @Query("page") page: Int = 0,
-        @Query("sort") sort: String = "nombre",
+        @Query("sort") sort: String = "fechaDeRegistro,DESC",
+//        @Query("sort") sort: String = "nombre",
         @Body userFilterOptions : UserFilterOptions?=UserFilterOptions(),
     ): Response<UsuariosPaginados>
 
@@ -100,6 +101,9 @@ interface RetroServiceInterface {
 
     @PUT(URL_BASE_VEHICULOS + "updateVehicle")
     suspend fun updateVehicle(@Body vehiculo : Vehiculo) : Response<Vehiculo>
+
+    @PUT(URL_BASE_VEHICULOS + "updateVehicleAndGetVehicleResponse")
+    suspend fun updateVehicleAndGetVehicleResponse(@Body vehiculo : Vehiculo) : Response<VehiculoResponse>
 
     @GET(URL_BASE_VEHICULOS + "setActiveVehicleToUserId")
     suspend fun setActiveVehicleToUserId(@Query("idUsuario") idUsuario: String, @Query("idVehiculo") idVehiculo: String): Response<Boolean>

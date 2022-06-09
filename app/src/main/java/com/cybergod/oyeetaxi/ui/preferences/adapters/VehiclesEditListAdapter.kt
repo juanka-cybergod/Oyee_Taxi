@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +15,18 @@ import com.cybergod.oyeetaxi.databinding.ItemVehicleEditBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditVehicleFragmentEdit
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
 import com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setDetallesVehiculos
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionUsuario
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionVehiculo
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_PARCELABLE
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
 
@@ -74,8 +77,6 @@ class VehiclesEditListAdapter (
                 tvDetalles.setDetallesVehiculos(vehiculoResponse)
 
                 btnDisabled.visibility = if (vehiculoResponse.habilitado==false) {View.VISIBLE} else {View.GONE}
-//                btnAdminOrSuperAdmin.visibility = if (vehiculo.administrador==true || vehiculo.superAdministrador==true  ) {View.VISIBLE} else {View.GONE}
-//                btnCondutor.setTipoClienteConductor(vehiculo.conductor)
                 btnVisible.setButtonVisibilityIcon(vehiculoResponse.visible?:true)
                 btnVerificado.setEstadoVerificacionVehiculo(vehiculoResponse.vehiculoVerificacion)
 
@@ -88,22 +89,15 @@ class VehiclesEditListAdapter (
                 }
 
 
+                btnDisabled.setOnClickListener {
+                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),"Vehiculo Deshabilitado",Toast.LENGTH_SHORT).show()
+                }
 
-//                btnEdit.setOnClickListener {
-//                    launchEditUserProfileFragment(vehiculoResponse)
-//                }
+                btnEdit.setOnClickListener {
+                    launchEditVehicleFragmentEdit(vehiculoResponse)
+                }
 //                btnVerificado.setOnClickListener {
 //                    launchEditUserVerificationFragment(vehiculoResponse)
-//                }
-//                btnCondutor.setOnClickListener {
-//                    val text = if (vehiculoResponse.conductor==true) {"Conductor"} else {"Pasajero"}
-//                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),text,Toast.LENGTH_SHORT).show()
-//                }
-//                btnAdminOrSuperAdmin.setOnClickListener {
-//                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),"Administrador",Toast.LENGTH_SHORT).show()
-//                }
-//                btnDisabledUser.setOnClickListener {
-//                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),"Usuario Deshabilitado",Toast.LENGTH_SHORT).show()
 //                }
 //                binding.clUsuario.setOnClickListener {
 //                    launchUserOverviewFragment(vehiculoResponse)
@@ -126,12 +120,12 @@ class VehiclesEditListAdapter (
             imageViewFragment.show(vehiclesAdministrationFragment.requireActivity().supportFragmentManager,"imageViewFragment+${getRamdomUUID()}")
         }
 
-        private fun launchEditUserProfileFragment(usuario: Usuario) {
-            val editUserProfileFragment = EditUserProfileFragment()
+        private fun launchEditVehicleFragmentEdit(vehiculoResponse: VehiculoResponse) {
+            val editVehicleFragmentEdit = EditVehicleFragmentEdit()
             val args = Bundle()
-            args.putParcelable(KEY_USER_PARCELABLE, usuario)
-            editUserProfileFragment.arguments = args
-            editUserProfileFragment.show(vehiclesAdministrationFragment.requireActivity().supportFragmentManager,"editUserProfileFragment+${getRamdomUUID()}")
+            args.putParcelable(KEY_VEHICLE_RESPONSE_PARCELABLE, vehiculoResponse)
+            editVehicleFragmentEdit.arguments = args
+            editVehicleFragmentEdit.show(vehiclesAdministrationFragment.requireActivity().supportFragmentManager,"editVehicleFragmentEdit+${getRamdomUUID()}")
 
         }
 

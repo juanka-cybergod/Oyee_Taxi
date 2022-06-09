@@ -166,6 +166,31 @@ class VehicleRepository @Inject constructor(private val retroServiceInterface: R
     }
 
 
+    suspend fun updateVehicleAndGetVehicleResponse(vehiculo: Vehiculo) :VehiculoResponse?  {
+
+        handleRequest {
+            retroServiceInterface.updateVehicleAndGetVehicleResponse(vehiculo)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                response.body()
+
+            } else null
+
+        }
+
+        return null
+    }
+
     suspend fun getAllVehiclesFromUserId(userId: String):List<VehiculoResponse>?  {
 
         handleRequest {

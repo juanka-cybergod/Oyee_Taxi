@@ -14,6 +14,7 @@ import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.passwordRecovery.viewmodel.RecoveryPasswordViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isValidEmail
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.pasteFromClipBoard
 import dagger.hilt.android.AndroidEntryPoint
@@ -298,13 +299,13 @@ class RecoveryPasswordActivity : BaseActivity() {
 
         return when {
             //Usuario vacio
-            TextUtils.isEmpty(mCorreoPhone.trim { it <= ' ' }) -> {
-                binding.tvPhoneOrEmail.error = "Por favor introduzca su correo o su teléfono"
+            mCorreoPhone.isEmptyTrim() -> {
+                binding.tvPhoneOrEmail.error = "Introduzca su correo o su teléfono"
                 false
             }
             //correo electronico
             mCorreoPhone.contains("@",true) &&  (!mCorreoPhone.isValidEmail()) -> {
-                binding.tvPhoneOrEmail.error = "Por favor introduzca una dirección válida de correo o su número de teléfono"
+                binding.tvPhoneOrEmail.error = "Introduzca una dirección válida de correo o su teléfono"
                 false
             }
 

@@ -255,14 +255,17 @@ class LoginActivity : BaseActivity() {
         binding.tvForgetPassword.visibility = View.INVISIBLE
 
         return when {
-            //Usuario vacio
-            TextUtils.isEmpty(mUsuario.trim { it <= ' ' }) -> {
-                binding.tvPhone.error = "Por favor introduzca su número de teléfono"
+
+            mUsuario.isEmptyTrim() -> {
+                binding.tvPhone.error = "Introduzca su número de teléfono"
                 false
             }
-            //contaseña vacia
-            TextUtils.isEmpty(mPassword.trim { it <= ' ' }) -> {
-                binding.tvPassword.error = "Por favor introduzca su contraseña"
+            mUsuario.length < 8 -> {
+                binding.tvPhone.error = "Su teléfono debe contener al menos 8 caratéres"
+                false
+            }
+            mUsuario.isEmptyTrim() -> {
+                binding.tvPassword.error = "Introduzca su contraseña"
                 false
             }
             else -> {

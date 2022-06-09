@@ -92,7 +92,6 @@ class UsersAdministrationViewModel @Inject constructor(
 
             val userUpdated : Usuario? = userRepository.updateUser(usuario)
             if (userUpdated != null) {
-                currentUserActive.postValue(userUpdated)
                 userUpdatedSusses.postValue(true)
                 updateUsersList(userUpdated)
             }else {

@@ -1,9 +1,5 @@
 package com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle.adapters
 
-
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +24,6 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoVerificacionImage
 
 
 class VehiculosListAdapter (
-    private val context: Context,
-    private val activity: Activity,
-    private val view : View,
     private val vehicleControlPanelFragmentList: VehicleControlPanelFragmentList,
 ) : RecyclerView.Adapter<VehiculosListAdapter.MyViewHolder>() {
 
@@ -42,7 +35,10 @@ class VehiculosListAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_vehiculo,parent,false))
+        return MyViewHolder(
+            ItemVehiculoBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            vehicleControlPanelFragmentList
+        )
     }
 
     override fun getItemCount(): Int {
@@ -50,26 +46,21 @@ class VehiculosListAdapter (
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(vehiculosList[position],vehicleControlPanelFragmentList)
+        holder.bind(vehiculosList[position])
     }
 
 
 
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(
+        private val binding : ItemVehiculoBinding,
+        private val vehicleControlPanelFragmentList: VehicleControlPanelFragmentList
+    ): RecyclerView.ViewHolder(binding.root){
         //Nuevo Metodo Binding para Cargar las Vistas dentro de los Adapters
-        val binding = ItemVehiculoBinding.bind(itemView)
 
 
-        fun bind(vehiculo:VehiculoResponse, vehicleControlPanelFragmentList: VehicleControlPanelFragmentList) {
-            paintVehicleDetails(vehiculo, vehicleControlPanelFragmentList)
-        }
 
-        @SuppressLint("SetTextI18n")
-        private fun paintVehicleDetails(vehicleDetails: VehiculoResponse, vehicleControlPanelFragmentList: VehicleControlPanelFragmentList) {
-
-
-            vehicleDetails.let { vehiculo ->
+        fun bind(vehiculo:VehiculoResponse ) {
 
                 with(binding) {
                     //Ocultar las Opciones por defecto
@@ -98,15 +89,14 @@ class VehiculosListAdapter (
 
 
                 //setupOnClickListeners
-                setupOnClickListeners(vehiculo,vehicleControlPanelFragmentList)
-
-            }
-
+                setupOnClickListeners(vehiculo)
 
 
         }
 
-        private fun setupOnClickListeners(vehiculo: VehiculoResponse, vehicleControlPanelFragmentList: VehicleControlPanelFragmentList) {
+
+
+        private fun setupOnClickListeners(vehiculo: VehiculoResponse) {
             //Btn Climatizado
             binding.imageVehiculoClimatizado.setOnClickListener {
                 Toast.makeText(vehicleControlPanelFragmentList.requireContext(),"Climatizado", Toast.LENGTH_LONG).show()
@@ -133,7 +123,7 @@ class VehiculosListAdapter (
 
             //Boton Activar o Desactivar Vehiculo
             binding.buttonVehiculoActivo.setOnClickListener {
-                showSetActiveVehicleDialog(vehiculo,vehicleControlPanelFragmentList)
+                showSetActiveVehicleDialog(vehiculo)
             }
 
             //Boton Editar Vehiculo
@@ -146,10 +136,12 @@ class VehiculosListAdapter (
 
             //Boton Verificar Vehiculo
             binding.buttonVehiculoVerificacion.setOnClickListener {
-                findNavController(vehicleControlPanelFragmentList).navigate(R.id.action_vehicleListControlPanelFragment_to_vehicleControlPanelFragmentEditVerification,
-                    Bundle().apply {
-                        putParcelable(Constants.KEY_VEHICLE_PARCELABLE, vehiculo)
-                    })
+                if (vehiculo.vehiculoVerificacion?.verificado!=true) {
+                    launchVehicleVerificationFragment(vehiculo)
+
+                }
+
+
             }
 
             //Boton Cambiar Imagen Frontal de Vehiculo
@@ -159,7 +151,14 @@ class VehiculosListAdapter (
 
         }
 
-        private fun setActiveVehicle(vehiculo: VehiculoResponse, vehicleControlPanelFragmentList: VehicleControlPanelFragmentList) {
+        private fun launchVehicleVerificationFragment(vehiculoResponse: VehiculoResponse) {
+            findNavController(vehicleControlPanelFragmentList).navigate(R.id.action_vehicleListControlPanelFragment_to_vehicleControlPanelFragmentEditVerification,
+                Bundle().apply {
+                    putParcelable(Constants.KEY_VEHICLE_PARCELABLE, vehiculoResponse)
+                })
+        }
+
+        private fun setActiveVehicle(vehiculo: VehiculoResponse) {
             //Show Dialog
             (vehicleControlPanelFragmentList.requireActivity() as BaseActivity).
             showProgressDialog(vehicleControlPanelFragmentList.getString(R.string.updating_vehicle))
@@ -169,7 +168,7 @@ class VehiculosListAdapter (
 
         }
 
-        private fun showSetActiveVehicleDialog(vehiculo: VehiculoResponse, vehicleControlPanelFragmentList: VehicleControlPanelFragmentList) {
+        private fun showSetActiveVehicleDialog(vehiculo: VehiculoResponse) {
             val title  = "Activar este Vehículo"
             val icon = R.drawable.ic_vehicle_active_32
             val text  = "Al activar este vehículo será visible en el mapa para todos los pasajeros mientras que los demás pasarán a inactivos, podrá cambiar su selección en cuaquier momento"
@@ -181,7 +180,7 @@ class VehiculosListAdapter (
                 .setIcon(icon)
                 .setPositiveButton("Activar"){ dialogInterface , _ ->
                     dialogInterface.dismiss()
-                    setActiveVehicle(vehiculo,vehicleControlPanelFragmentList)
+                    setActiveVehicle(vehiculo)
                 }
                 .setNegativeButton("Cancelar"){ dialogInterface, _ ->
                     dialogInterface.cancel()

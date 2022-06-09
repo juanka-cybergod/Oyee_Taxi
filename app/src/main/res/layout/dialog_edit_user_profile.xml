@@ -82,6 +82,9 @@
 
         </LinearLayout>
 
+
+
+
         <LinearLayout
             android:id="@+id/llApellidos"
             android:layout_width="match_parent"
@@ -265,6 +268,40 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart3"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_date"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvFechaRegistro"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Fecha Registro"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnStart3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>

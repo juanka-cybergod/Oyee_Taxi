@@ -6,9 +6,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.net.Uri
+import android.text.Html
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
@@ -28,11 +30,13 @@ import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVeri
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.lang.Exception
+import java.util.*
 
 
 @SuppressLint("StaticFieldLeak")
@@ -886,6 +890,48 @@ object UtilsUI {
         alertDialog.setCancelable(false)
         alertDialog.show()
 
+    }
+
+
+
+    fun Activity.showDialogYearPicker(funResult: (yearSelected:String)  -> Unit,initialYear:Int? = null) {
+
+
+        val alertDialog: AlertDialog
+        val builder = AlertDialog.Builder(this, R.style.AlertDialogStyle)
+        val inflater = this.layoutInflater
+
+        val cal = Calendar.getInstance()
+
+        val dialog = inflater.inflate(R.layout.year_picker_dialog, null)
+        val monthPicker = dialog.findViewById(R.id.picker_month) as NumberPicker
+        val yearPicker = dialog.findViewById(R.id.picker_year) as NumberPicker
+
+        monthPicker.minValue = 1
+        monthPicker.maxValue = 12
+        monthPicker.value = cal.get(Calendar.MONTH) + 1
+
+        val year = initialYear ?: cal.get(Calendar.YEAR)
+
+        yearPicker.minValue = 1900
+        yearPicker.maxValue = getCurrentYear()
+
+        yearPicker.value = year
+
+        builder.setView(dialog).setPositiveButton(Html.fromHtml("<font color='#FF4081'>Ok</font>")){ dialogInterface, which ->
+            val value = yearPicker.value
+            funResult(value.toString())
+            dialogInterface.cancel()
+        }
+
+        builder.setNegativeButton(Html.fromHtml("<font color='#FF4081'>Cancel</font>")){ dialogInterface, which ->
+            dialogInterface.cancel()
+        }
+
+        alertDialog = builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(true)
+        alertDialog.show()
     }
 
 

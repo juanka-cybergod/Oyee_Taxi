@@ -85,6 +85,8 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
             switchHabilitado.isChecked = usuario.habilitado ?: true
             switchAdministrador.isChecked = usuario.administrador ?: false
 
+            tvFechaRegistro.text = "Fecha Registro : ${usuario.fechaDeRegistro}"
+
 
         }
 

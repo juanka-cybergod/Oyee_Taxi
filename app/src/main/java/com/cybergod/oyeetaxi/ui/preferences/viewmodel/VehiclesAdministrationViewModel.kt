@@ -3,6 +3,7 @@ package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
@@ -85,46 +86,48 @@ class VehiclesAdministrationViewModel @Inject constructor(
 
 
     }
-//
-//
-//    fun updateUser(usuario: Usuario){
-//
-//
-//        viewModelScope.launch(Dispatchers.IO) {
-//
-//            delay(1000)
-//
-//            val userUpdated : Usuario? = vehicleRepository.updateUser(usuario)
-//            if (userUpdated != null) {
-//                currentUserActive.postValue(userUpdated)
-//                userUpdatedSusses.postValue(true)
-//                updateUsersList(userUpdated)
-//            }else {
-//                userUpdatedSusses.postValue(false)
-//            }
-//        }
-//
-//    }
-//
-//
-//    private fun updateUsersList(userUpdated: Usuario) {
-//
-//        usersList.value?.toMutableList()?.let { listaUsuarios ->
-//            val nuevaListaUsuarios = ArrayList<Usuario>()
-//            listaUsuarios.forEach { usuario ->
-//                if (usuario.id.equals(userUpdated.id)) {
-//                    nuevaListaUsuarios.add(userUpdated)
-//                } else {
-//                    nuevaListaUsuarios.add(usuario)
-//                }
-//            }
-//            usersList.postValue(nuevaListaUsuarios)
-//        }
-//
-//    }
-//
 
 
+    fun updateVehicleAndGetVehicleResponse(vehiculo: Vehiculo){
+
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            delay(1000)
+
+            val vehicleResponseUpdated : VehiculoResponse? = vehicleRepository.updateVehicleAndGetVehicleResponse(vehiculo)
+            if (vehicleResponseUpdated != null) {
+                vehicleUpdatedSusses.postValue(true)
+                updateVehicleResponseList(vehicleResponseUpdated)
+            }else {
+                vehicleUpdatedSusses.postValue(false)
+            }
+
+
+        }
+
+    }
+
+
+    private fun updateVehicleResponseList(vehicleResponseUpdated: VehiculoResponse) {
+
+        vehiclesList.value?.toMutableList()?.let { listaVehiculosResponse ->
+            val nuevaListaVehiculoResponse = ArrayList<VehiculoResponse>()
+            listaVehiculosResponse.forEach { vehiculoResponse ->
+                if (vehiculoResponse.id.equals(vehicleResponseUpdated.id)) {
+                    nuevaListaVehiculoResponse.add(vehicleResponseUpdated)
+                } else {
+                    nuevaListaVehiculoResponse.add(vehiculoResponse)
+                }
+            }
+            vehiclesList.postValue(nuevaListaVehiculoResponse)
+        }
+
+    }
+
+
+
+    /////////////////////////////////////////////////////////////////
 
     val vehicleTypesItems: MutableList<String> = getVehicleTypesList()
     lateinit var arrayAdapter : ArrayAdapter<String>

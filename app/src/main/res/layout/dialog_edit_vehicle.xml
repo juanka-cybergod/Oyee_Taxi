@@ -12,7 +12,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -28,7 +28,6 @@
             android:paddingBottom="16dp"
             >
 
-
             <LinearLayout
                 android:id="@+id/llMarca"
                 android:layout_width="match_parent"
@@ -36,9 +35,27 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 >
 
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageFrontal"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_front_vehicle"
+                    app:civ_border_color="@color/yellow_primary"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_color="@color/yellow_primary"
+                    app:civ_shadow_radius="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_user"
+
+                    />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tvMarca"
@@ -52,19 +69,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:startIconDrawable="@drawable/ic_write">
+                    app:startIconDrawable="@drawable/ic_write"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_alert_24"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Marca"
-                        android:inputType="text"
+                        android:inputType="textPersonName"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/llModelo"
@@ -248,9 +269,7 @@
                 android:layout_marginEnd="16dp"
                 android:orientation="vertical"
                 android:padding="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llCapacidadEquipaje">
+                >
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -377,6 +396,127 @@
 
             </LinearLayout>
 
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_disable_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchHabilitado"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="Vehículo Habilitado"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnStart"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart2"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_visibility_on_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchVisible"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:text="Visible por Clientes"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnStart2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStart3"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:enabled="false"
+                    app:icon="@drawable/ic_date"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/casiBlancoObscuro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvFechaRegistro"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Fecha Registro"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnStart3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
         </LinearLayout>
 
     </ScrollView>
@@ -388,7 +528,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
             android:id="@+id/cancelButton"

@@ -1,111 +1,141 @@
-package com.cybergod.oyeetaxi.ui.controlPanel.fragments.vehicle
+package com.cybergod.oyeetaxi.ui.preferences.dilogs
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.text.Html
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.NumberPicker
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
-import com.cybergod.oyeetaxi.databinding.VehicleControlPanelFragmentEditBinding
-import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.VehicleControlPanelViewModel
+import com.cybergod.oyeetaxi.databinding.DialogEditVehicleBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showDialogYearPicker
-import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_PARCELABLE
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
+import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
-import java.util.*
 
 
 @AndroidEntryPoint
-class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
+class EditVehicleFragmentEdit : BottomSheetDialogFragment() {
 
-    private var _binding: VehicleControlPanelFragmentEditBinding? = null
+    private var _binding: DialogEditVehicleBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: VehicleControlPanelViewModel by activityViewModels()
+    val viewModel: VehiclesAdministrationViewModel by activityViewModels()
 
-    private lateinit var vehiculoId:String
+    private lateinit var vehiculoResponse: VehiculoResponse
 
+    var removeVehicleImagenFrontal: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = VehicleControlPanelFragmentEditBinding.inflate(inflater, container, false)
+        _binding = DialogEditVehicleBinding.inflate(inflater, container, false)
+        return binding.root
 
-        //Obtener el Vehiculo pasado por Argumentos para Editarlo
-        requireArguments().getParcelable<VehiculoResponse>(KEY_VEHICLE_PARCELABLE)?.let { vehicle->
+    }
 
-            if (!vehicle.id.isNullOrEmpty()) {
-                vehiculoId = vehicle.id!!
-                loadVehicleDetails(vehicle)
+
+    override fun onResume() {
+        super.onResume()
+        binding.cancelButton.isChecked = false
+
+        requireArguments().getParcelable<VehiculoResponse>(KEY_VEHICLE_RESPONSE_PARCELABLE)
+            ?.let { vehicleResponse ->
+
+                if (!vehicleResponse.id.isNullOrEmpty()) {
+                    vehiculoResponse = vehicleResponse
+                    loadVehicleDetails(vehicleResponse)
+                }
+
             }
 
-        }
-
-
         setupOnClickListener()
-
-
-        return  binding.root
-
 
     }
 
 
     private fun loadVehicleDetails(vehiculo: VehiculoResponse) {
 
-        if (vehiculo.tipoVehiculo != null) {
+        with(binding) {
 
-            if (vehiculo.tipoVehiculo?.transportePasajeros!!) {
-                binding.llCapacidadPasajeros.visibility = View.VISIBLE
-                binding.llCapacidadEquipaje.visibility = View.VISIBLE
+            imageFrontal.loadImageVehiculoFrontalFromURLNoCache(vehiculo.imagenFrontalPublicaURL)
 
-            } else {
-                binding.llCapacidadPasajeros.visibility = View.GONE
-                binding.llCapacidadEquipaje.visibility = View.GONE
+            if (vehiculo.tipoVehiculo != null) {
+
+                if (vehiculo.tipoVehiculo?.transportePasajeros!!) {
+                    llCapacidadPasajeros.visibility = View.VISIBLE
+                    llCapacidadEquipaje.visibility = View.VISIBLE
+
+                } else {
+                    llCapacidadPasajeros.visibility = View.GONE
+                    llCapacidadEquipaje.visibility = View.GONE
+                }
+
+                if (vehiculo.tipoVehiculo?.transporteCarga!!) {
+                    llCapacidadCarga.visibility = View.VISIBLE
+                } else {
+                    llCapacidadCarga.visibility = View.GONE
+                }
+
             }
 
-            if (vehiculo.tipoVehiculo?.transporteCarga!!) {
-                binding.llCapacidadCarga.visibility = View.VISIBLE
-            } else {
-                binding.llCapacidadCarga.visibility = View.GONE
-            }
+
+            tvMarca.editText?.setText(vehiculo.marca)
+            tvModelo.editText?.setText(vehiculo.modelo)
+            tvAno.editText?.setText(vehiculo.ano)
+            tvCapacidadPasajeros.editText?.setText(vehiculo.capacidadPasajeros)
+            tvCapacidadEquipaje.editText?.setText(vehiculo.capacidadEquipaje)
+            tvCapacidadCarga.editText?.setText(vehiculo.capacidadCarga)
+            rbYes.isChecked = vehiculo.climatizado ?: false
+
+
+            switchHabilitado.isChecked = vehiculo.habilitado ?: true
+            switchVisible.isChecked = vehiculo.visible ?: true
+            tvFechaRegistro.text = "Fecha Registro : ${vehiculo.fechaDeRegistro}"
+
 
         }
-
-
-        binding.tvMarca.editText?.setText(vehiculo.marca)
-        binding.tvModelo.editText?.setText(vehiculo.modelo)
-        binding.tvAno.editText?.setText(vehiculo.ano)
-        binding.tvCapacidadPasajeros.editText?.setText(vehiculo.capacidadPasajeros)
-        binding.tvCapacidadEquipaje.editText?.setText(vehiculo.capacidadEquipaje)
-        binding.tvCapacidadCarga.editText?.setText(vehiculo.capacidadCarga)
-        binding.rbYes.isChecked = vehiculo.climatizado ?: false
-
-
-
-
-
-
 
 
     }
 
 
     private fun setupOnClickListener() {
+
+
+        binding.imageFrontal.setOnClickListener {
+
+            if (!vehiculoResponse.imagenFrontalPublicaURL.isNullOrEmpty()) {
+
+                requireContext().showMessageDialogForResult(
+                    funResult = { ok ->
+                        if (ok) {
+                            removeVehicleImagenFrontal = ""
+                            binding.imageFrontal.loadImageVehiculoFrontalFromURLNoCache("")
+                        }
+                    },
+                    title = "Quitar Imágen Vehículo",
+                    message = "Desea quitar imágen pública de este vehículo puesto que no cumple con los parámetros requeridos",
+                    icon = R.drawable.ic_alert_24
+                )
+
+            }
+
+
+        }
 
         binding.cancelButton.setOnClickListener {
             closeThisBottomSheetDialogFragment()
@@ -116,8 +146,9 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
 
                 (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.updating_vehicle))
 
-                viewModel.updateVehicleById(
+                viewModel.updateVehicleAndGetVehicleResponse(
                     Vehiculo(
+                        id = vehiculoResponse.id,
                         marca =binding.tvMarca.editText?.text.toString(),
                         modelo = binding.tvModelo.editText?.text.toString(),
                         ano = binding.tvAno.editText?.text.toString(),
@@ -125,9 +156,13 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
                         capacidadEquipaje = binding.tvCapacidadEquipaje.editText?.text.toString(),
                         capacidadCarga = binding.tvCapacidadCarga.editText?.text.toString(),
                         climatizado = binding.rbYes.isChecked,
-                        ),
-                    vehiculoId = vehiculoId
+                        habilitado = binding.switchHabilitado.isChecked,
+                        visible = binding.switchVisible.isChecked,
+                        imagenFrontalPublicaURL = removeVehicleImagenFrontal,
+                    )
                 )
+
+
                 closeThisBottomSheetDialogFragment()
 
 
@@ -136,10 +171,11 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
 
 
         binding.etAno.setOnClickListener {
-            var initialYear : Int? = null
+            var initialYear: Int? = null
             try {
                 initialYear = binding.tvAno.editText?.text.toString().toInt()
-            } catch (e: Exception){}
+            } catch (e: Exception) {
+            }
 
             requireActivity().showDialogYearPicker(
                 funResult = { yearSelected -> binding.tvAno.editText?.setText(yearSelected) },
@@ -151,9 +187,8 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
     }
 
 
-
-    private fun closeThisBottomSheetDialogFragment(){
-        this.isCancelable=true
+    private fun closeThisBottomSheetDialogFragment() {
+        this.isCancelable = true
         this.dismiss()
     }
 
@@ -165,17 +200,19 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
         val mModelo = binding.tvModelo.editText!!.text.trim().toString()
         val mAno = binding.tvAno.editText!!.text.trim().toString()
         val mCapacidadPasajeros = binding.tvCapacidadPasajeros.editText!!.text.trim().toString()
-        val mCapacidadEquipaje: String = binding.tvCapacidadEquipaje.editText!!.text.trim().toString()
+        val mCapacidadEquipaje: String =
+            binding.tvCapacidadEquipaje.editText!!.text.trim().toString()
         val mCapacidadCarga = binding.tvCapacidadCarga.editText!!.text.trim().toString()
         //val mClimatizado = binding.rbYes.isChecked
 
 
-        binding.tvMarca.isErrorEnabled=false
-        binding.tvModelo.isErrorEnabled=false
-        binding.tvAno.isErrorEnabled=false
-        binding.tvCapacidadPasajeros.isErrorEnabled=false
-        binding.tvCapacidadEquipaje.isErrorEnabled=false
-        binding.tvCapacidadCarga.isErrorEnabled=false
+        binding.tvMarca.isErrorEnabled = false
+        binding.tvModelo.isErrorEnabled = false
+        binding.tvAno.isErrorEnabled = false
+        binding.tvCapacidadPasajeros.isErrorEnabled = false
+        binding.tvCapacidadEquipaje.isErrorEnabled = false
+        binding.tvCapacidadCarga.isErrorEnabled = false
+
 
 
         return when {
@@ -217,8 +254,6 @@ class VehicleControlPanelFragmentEdit: BottomSheetDialogFragment()  {
 
 
     }
-
-
 
 
 }

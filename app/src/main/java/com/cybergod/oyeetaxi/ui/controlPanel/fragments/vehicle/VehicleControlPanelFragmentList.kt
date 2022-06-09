@@ -218,7 +218,7 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
 
 
     private fun initRecyclerView(){
-        recyclerViewAdapter = VehiculosListAdapter(requireContext(),requireActivity(),binding.root,this)
+        recyclerViewAdapter = VehiculosListAdapter(this)
         recyclerView = binding.recylerViewVehiculos
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())

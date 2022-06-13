@@ -16,6 +16,7 @@ import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewMod
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +51,7 @@ class EditUserVerificationFragment : BottomSheetDialogFragment() {
         super.onResume()
         binding.cancelButton.isChecked = false
 
-        requireArguments().getParcelable<Usuario>(Constants.KEY_USER_PARCELABLE)?.let { usuario ->
+        requireArguments().getParcelable<Usuario>(KEY_USER_PARCELABLE)?.let { usuario ->
             user = usuario
 
             loadUserDetails(user)
@@ -64,21 +65,27 @@ class EditUserVerificationFragment : BottomSheetDialogFragment() {
 
     private fun loadUserDetails(user: Usuario) {
 
-        binding.ivImageVerificacion.loadImageUserVerificacionFromURLNoCache(
-            relativeURL = user.usuarioVerificacion?.imagenIdentificaionURL,
-            conductor = user.conductor ?: false
-        )
+        with (binding) {
 
-        binding.switchVerificado.isChecked = user.usuarioVerificacion?.verificado ?: false
+            ivImageVerificacion.loadImageUserVerificacionFromURLNoCache(
+                relativeURL = user.usuarioVerificacion?.imagenIdentificaionURL,
+                conductor = user.conductor ?: false
+            )
 
-        binding.tvIdentificacion.editText?.setText(user.usuarioVerificacion?.identificacion ?: "")
+            switchVerificado.isChecked = user.usuarioVerificacion?.verificado ?: false
 
-        binding.tvIdentificacion.hint =
-            if (user.conductor == true) {
-                "Licencia de Conducción"
-            } else {
-                "Número de Identidad"
-            }
+            tvIdentificacion.editText?.setText(user.usuarioVerificacion?.identificacion ?: "")
+
+            tvIdentificacion.hint =
+                if (user.conductor == true) {
+                    "Licencia de Conducción"
+                } else {
+                    "Número de Identidad"
+                }
+
+
+        }
+
 
 
     }
@@ -104,7 +111,7 @@ class EditUserVerificationFragment : BottomSheetDialogFragment() {
         }
 
         binding.buttonRemoveImageVerification.setOnClickListener {
-            if (!user.imagenPerfilURL.isNullOrEmpty()) {
+            if (!user.usuarioVerificacion?.imagenIdentificaionURL.isNullOrEmpty()) {
 
                 requireContext().showMessageDialogForResult(
                     funResult = { ok ->

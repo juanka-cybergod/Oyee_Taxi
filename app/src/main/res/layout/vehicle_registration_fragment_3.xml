@@ -130,7 +130,7 @@
                         android:id="@+id/etMatricula"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Matrícula del Vehiculo"
+                        android:hint="Matrícula"
                         android:maxLength="7"
                         android:maxLines="1"
                         />
@@ -158,9 +158,9 @@
                         android:id="@+id/etCirculacion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Circulación del vehiculo"
+                        android:hint="Circulación"
                         android:inputType="number"
-                        android:maxLength="10"
+                        android:maxLength="12"
                         android:maxLines="1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>

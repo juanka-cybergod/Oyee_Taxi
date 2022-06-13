@@ -29,6 +29,7 @@ import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerifica
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -146,17 +147,17 @@ object UtilsUI {
 
         val button = (this as MaterialButton)
 
-        button.visibility = View.VISIBLE
 
         if (usuarioVerificacion?.verificado == true) {
             //Verificado OK
             button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
-            button.setIconTintResource(R.color.casiBlancoObscuro)
+            button.setIconTintResource(R.color.colorCasiVerde)
 
         } else {
             if (usuarioVerificacion?.imagenIdentificaionURL.isNullOrEmpty() || usuarioVerificacion?.identificacion.isNullOrEmpty()) {
                 //No Llenada
-                button.visibility = View.GONE
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+                button.setIconTintResource(R.color.casiBlancoObscuro)
             } else {
                 //Pendiente a Aprobar
                 button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
@@ -169,18 +170,16 @@ object UtilsUI {
 
         val button = (this as MaterialButton)
 
-        button.visibility = View.VISIBLE
-
-
         if (vehiculoVerificacion?.verificado == true) {
             //Verificado OK
             button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
-            button.setIconTintResource(R.color.casiBlancoObscuro)
+            button.setIconTintResource(R.color.colorCasiVerde)
 
         } else {
             if (vehiculoVerificacion?.matricula.isNullOrEmpty() || vehiculoVerificacion?.circulacion.isNullOrEmpty() || vehiculoVerificacion?.imagenCirculacionURL.isNullOrEmpty()) {
                 //No Llenada
-                button.visibility = View.GONE
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
+                button.setIconTintResource(R.color.casiBlancoObscuro)
             } else {
                 //Pendiente a Aprobar
                 button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_verified,null)
@@ -635,6 +634,26 @@ object UtilsUI {
                 .into((this as ImageView))
 
         }
+
+    }
+
+    fun View.loadImageVehiculoCirculacionFromURLNoCache(relativeURL: String?) {
+
+        (this as ImageView).setImageResource(R.drawable.ic_licencia_circulacion)
+
+        if (!relativeURL.isNullOrEmpty()  )  {
+
+            Glide.with(this)
+                //.load(Constants.URL_BASE +url)
+                .load(UtilsGlobal.getFullURL(relativeURL))
+                .centerCrop()
+                //.circleCrop()
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.skipMemoryCache(true)
+                .placeholder(R.drawable.ic_licencia_circulacion)
+                .into((this as ImageView))
+        }
+
 
     }
 

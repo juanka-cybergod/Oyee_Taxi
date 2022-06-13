@@ -1,13 +1,16 @@
 package com.cybergod.oyeetaxi.ui.preferences.viewmodel
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
+import com.cybergod.oyeetaxi.api.futures.province.repositories.ProvincesRepository
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.user.model.response.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
-import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
+import com.cybergod.oyeetaxi.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersAdministrationViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val provincesRepository: ProvincesRepository
     ) :  BaseViewModel() {
 
     var usersList: MutableLiveData<List<Usuario>> = MutableLiveData()
@@ -117,6 +121,44 @@ class UsersAdministrationViewModel @Inject constructor(
         }
 
     }
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////
+
+    val provincesItems: MutableList<String> = getProvincesList()
+    private var allProvinces: MutableLiveData<List<Provincia>> = MutableLiveData()
+    lateinit var arrayAdapter : ArrayAdapter<String>
+
+    fun getProvinceSelectedByName(provinceName:String?):Provincia?{
+        return allProvinces.value?.find {provincia -> provincia.nombre == provinceName  }
+    }
+
+    private fun getProvincesList(): MutableList<String>{
+        val stringArray = mutableListOf<String>()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            provincesRepository.getAvailableProvinces()?.let { listaProvincias ->
+                allProvinces.postValue(listaProvincias)
+
+                listaProvincias.forEach { provincia ->
+                    provincia.nombre?.let {
+                        stringArray.add(it)
+                    }
+
+                }
+            }
+        }
+
+        return  stringArray
+    }
+
 
 
 

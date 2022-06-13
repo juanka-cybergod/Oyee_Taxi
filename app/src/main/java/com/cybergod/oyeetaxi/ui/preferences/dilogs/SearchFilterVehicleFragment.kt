@@ -37,13 +37,9 @@ class SearchFilterVehicleFragment : DialogFragment() {
 
         _binding = DialogFilterVehicleBinding.inflate(inflater, container, false)
 
-
-
-
         requireArguments().getParcelable<VehicleFilterOptions>(KEY_VEHICLE_FILTER_OPTIONS)?.let { filterOptions ->
             loadData(filterOptions)
         }
-
 
         setupOnClickListener()
 

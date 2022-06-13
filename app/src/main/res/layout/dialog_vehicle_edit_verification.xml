@@ -151,18 +151,22 @@
 
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/buttonSelectImageCirculacion"
+                            android:id="@+id/buttonRemoveImageVerification"
                             style="@style/Widget.Material3.Button.Icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Adjuntar Fotocopia"
+                            android:text="Requerir Nueva Fotocopia al Usuario"
                             android:textColor="@color/black"
                             android:textSize="13sp"
-                            app:icon="@drawable/ic_attach"
+                            app:icon="@drawable/ic_cancel_24"
                             app:iconTint="@color/black"
+                            android:backgroundTint="@color/casiRojo"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
+
+
+
 
                         </com.google.android.material.button.MaterialButton>
 
@@ -177,7 +181,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
 
-                            app:layout_constraintTop_toBottomOf="@+id/buttonSelectImageCirculacion"
+                            app:layout_constraintTop_toBottomOf="@+id/buttonRemoveImageVerification"
                             app:srcCompat="@drawable/ic_user">
 
 
@@ -195,6 +199,43 @@
                                 app:srcCompat="@drawable/ic_licencia_circulacion" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        >
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnVehiculoVerificado"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:enabled="false"
+                            app:icon="@drawable/ic_verified"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/colorSnackBarSuccess"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchVerificado"
+                            android:layout_width="0dp"
+                            android:layout_height="38dp"
+                            android:checked="false"
+                            android:padding="4dp"
+                            android:text="Vehículo Verificado"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/btnVehiculoVerificado"
+                            app:layout_constraintTop_toTopOf="parent" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

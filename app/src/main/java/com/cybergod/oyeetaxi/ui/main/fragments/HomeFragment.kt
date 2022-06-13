@@ -163,7 +163,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
 //            return
 //        }
 
-        if (!placesControl.predictionListPlaces.isNullOrEmpty()) {
+        if (placesControl.predictionListPlaces.isNotEmpty()) {
             val selectedPrediction : AutocompletePrediction = placesControl.predictionListPlaces[position]
             placesControl.getLocationFromPlace(selectedPrediction.placeId)
 

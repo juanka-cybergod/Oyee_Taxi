@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.ItemVehicleEditBinding
+
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditVehicleFragmentEdit
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
+import com.cybergod.oyeetaxi.ui.preferences.dilogs.*
 import com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
@@ -25,7 +23,6 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionVehiculo
 import com.cybergod.oyeetaxi.utils.Constants.KEY_IMAGE_URL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
-import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
@@ -96,12 +93,24 @@ class VehiclesEditListAdapter (
                 btnEdit.setOnClickListener {
                     launchEditVehicleFragmentEdit(vehiculoResponse)
                 }
-//                btnVerificado.setOnClickListener {
-//                    launchEditUserVerificationFragment(vehiculoResponse)
-//                }
+                btnVerificado.setOnClickListener {
+                    launchEditVehicleVerificationFragment(vehiculoResponse)
+                }
+
 //                binding.clUsuario.setOnClickListener {
 //                    launchUserOverviewFragment(vehiculoResponse)
 //                }
+
+                btnDisabled.setOnClickListener {
+                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),"Vehículo Deshabilitado",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+                btnVisible.setOnClickListener {
+                    val text = if (vehiculoResponse.visible == true) {"Visible para Clientes"} else {"No Visible para Clientes"}
+                    Toast.makeText(vehiclesAdministrationFragment.requireContext(),text,
+                        Toast.LENGTH_SHORT).show()
+                }
 
 
             }
@@ -129,12 +138,12 @@ class VehiclesEditListAdapter (
 
         }
 
-        private fun launchEditUserVerificationFragment(usuario: Usuario) {
-            val editUserVerificationFragment = EditUserVerificationFragment()
+        private fun launchEditVehicleVerificationFragment(vehiculoResponse: VehiculoResponse) {
+            val editVehicleVerificationFragment = EditVehicleVerificationFragment()
             val args = Bundle()
-            args.putParcelable(KEY_USER_PARCELABLE, usuario)
-            editUserVerificationFragment.arguments = args
-            editUserVerificationFragment.show(vehiclesAdministrationFragment.requireActivity().supportFragmentManager,"editUserVerificationFragment+${getRamdomUUID()}")
+            args.putParcelable(KEY_VEHICLE_RESPONSE_PARCELABLE, vehiculoResponse)
+            editVehicleVerificationFragment.arguments = args
+            editVehicleVerificationFragment.show(vehiclesAdministrationFragment.requireActivity().supportFragmentManager,"editVehicleVerificationFragment+${getRamdomUUID()}")
 
         }
 

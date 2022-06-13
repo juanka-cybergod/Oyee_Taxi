@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.databinding.DialogEditUserProfileBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
@@ -16,10 +18,8 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_PARCELABLE
 import com.cybergod.oyeetaxi.utils.DatePickerFragment
-import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.setOnDateSelected
-import com.cybergod.oyeetaxi.utils.UtilsGlobal.wordCount
-
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +35,7 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
     private lateinit var user: Usuario
 
     var removeUserPerfil: String? = null
+    var provinceSelected: Provincia? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,6 +75,11 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
             tvApellidos.editText?.setText(usuario.apellidos)
             tvFechaNacimiento.editText?.setText(usuario.fechaDeNacimiento)
 
+
+            setupProvincesListAdapter()
+            tvProvincia.setText(usuario.provincia?.nombre)
+            fillTexViewProvincesList()
+
             if (usuario.conductor == true) {
                 rbConductor.isChecked = true
                 rbPasajero.isChecked = false
@@ -93,6 +99,22 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
 
     }
 
+    private fun fillTexViewProvincesList() {
+
+        binding.tvProvincia.setAdapter(
+            viewModel.arrayAdapter
+        )
+        binding.tfProvincia.clearFocus()
+    }
+
+    private fun setupProvincesListAdapter() {
+        viewModel.arrayAdapter = ArrayAdapter(
+            requireActivity(),
+            R.layout.item_map_style,
+            viewModel.provincesItems
+        )
+    }
+
     private fun changeClientEnabledStatus(ok: Boolean, motivo: String?) {
 
         if (ok) {
@@ -106,87 +128,103 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
 
     private fun setupOnClickListener() {
 
+        with(binding) {
 
-        binding.imagePerfil.setOnClickListener {
+            tvProvincia.setOnClickListener {
+                binding.tvProvincia.showDropDownMenuFix(viewModel.arrayAdapter)
+            }
 
-            if (!user.imagenPerfilURL.isNullOrEmpty()) {
+            tvProvincia.setOnItemClickListener { adapterView, view, position, id ->
 
-                requireContext().showMessageDialogForResult(
-                    funResult = { ok ->
-                        if (ok) {
-                            removeUserPerfil = ""
-                            binding.imagePerfil.loadImagePerfilFromURLNoCache("")
-                        }
-                    },
-                    title = "Quitar Foto de Perfil",
-                    message = "Desea quitar la foto de perfil de este usuario puesto que no cumple con los parámetros requeridos",
-                    icon = R.drawable.ic_alert_24
-                )
+                val selection = adapterView.getItemAtPosition(position).toString()
+                provinceSelected = viewModel.getProvinceSelectedByName(selection)
 
             }
 
 
-        }
+            imagePerfil.setOnClickListener {
+
+                if (!user.imagenPerfilURL.isNullOrEmpty()) {
+
+                    requireContext().showMessageDialogForResult(
+                        funResult = { ok ->
+                            if (ok) {
+                                removeUserPerfil = ""
+                                imagePerfil.loadImagePerfilFromURLNoCache("")
+                            }
+                        },
+                        title = "Quitar Foto de Perfil",
+                        message = "Desea quitar la foto de perfil de este usuario puesto que no cumple con los parámetros requeridos",
+                        icon = R.drawable.ic_alert_24
+                    )
+
+                }
 
 
-        binding.switchHabilitado.setOnClickListener {
-            if (!binding.switchHabilitado.isChecked) {
-
-                binding.switchHabilitado.isChecked = !binding.switchHabilitado.isChecked
-
-                requireActivity().showInputTextMessage(
-                    funResult = { ok, motivo -> changeClientEnabledStatus(ok, motivo) },
-                    title = "Motivo Deshabilitado",
-                    hint = "",
-                    helperText = "Se notificará al usuario al intentar iniciar sesión el motivo por el cuál fué Deshabilitado",
-                    message = user.mensaje,
-                    icon = R.drawable.ic_note,
-                )
             }
 
-        }
+
+            switchHabilitado.setOnClickListener {
+                if (!switchHabilitado.isChecked) {
+
+                    switchHabilitado.isChecked = !switchHabilitado.isChecked
+
+                    requireActivity().showInputTextMessage(
+                        funResult = { ok, motivo -> changeClientEnabledStatus(ok, motivo) },
+                        title = "Motivo Deshabilitado",
+                        hint = "",
+                        helperText = "Se notificará al usuario al intentar iniciar sesión el motivo por el cuál fué Deshabilitado",
+                        message = user.mensaje,
+                        icon = R.drawable.ic_note,
+                    )
+                }
+
+            }
 
 
-        binding.etFechaNacimiento.setOnClickListener {
-            requireView().hideKeyboard()
-            val datePicker = DatePickerFragment({ day, month, year ->
-                binding.tvFechaNacimiento.setOnDateSelected(
-                    day,
-                    month,
-                    year
-                )
-            }, binding.etFechaNacimiento.text.toString(), setMaxDate = true, setMinDate = false)
-            datePicker
-                .show(parentFragmentManager, "datePicker")
-        }
+            etFechaNacimiento.setOnClickListener {
+                requireView().hideKeyboard()
+                val datePicker = DatePickerFragment({ day, month, year ->
+                    tvFechaNacimiento.setOnDateSelected(
+                        day,
+                        month,
+                        year
+                    )
+                }, etFechaNacimiento.text.toString(), setMaxDate = true, setMinDate = false)
+                datePicker
+                    .show(parentFragmentManager, "datePicker")
+            }
 
-        binding.cancelButton.setOnClickListener {
-            closeThisBottomSheetDialogFragment()
-        }
+            cancelButton.setOnClickListener {
+                closeThisBottomSheetDialogFragment()
+            }
 
-        binding.continueButton.setOnClickListener {
-            if (verifyData()) {
+            continueButton.setOnClickListener {
 
                 (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.updating_user))
 
                 viewModel.updateUser(
                     Usuario(
                         id = user.id,
-                        nombre = binding.tvNombre.editText?.text?.trim().toString(),
-                        apellidos = binding.tvApellidos.editText?.text?.trim().toString(),
-                        fechaDeNacimiento = binding.tvFechaNacimiento.editText?.text?.trim()
+                        nombre = tvNombre.editText?.text?.trim().toString(),
+                        apellidos = tvApellidos.editText?.text?.trim().toString(),
+                        fechaDeNacimiento = tvFechaNacimiento.editText?.text?.trim()
                             .toString(),
-                        conductor = binding.rbConductor.isChecked,
-                        administrador = binding.switchAdministrador.isChecked,
-                        habilitado = binding.switchHabilitado.isChecked,
+                        conductor = rbConductor.isChecked,
+                        administrador = switchAdministrador.isChecked,
+                        habilitado = switchHabilitado.isChecked,
                         mensaje = user.mensaje,
                         imagenPerfilURL = removeUserPerfil,
+                        provincia = provinceSelected,
                     )
                 )
                 closeThisBottomSheetDialogFragment()
 
             }
+
         }
+
+
 
 
     }
@@ -195,38 +233,6 @@ class EditUserProfileFragment : BottomSheetDialogFragment() {
     private fun closeThisBottomSheetDialogFragment() {
         this.isCancelable = true
         this.dismiss()
-    }
-
-
-    private fun verifyData(): Boolean {
-        val mNombre = binding.tvNombre.editText!!.text.trim().toString()
-        val mApellidos: String = binding.tvApellidos.editText!!.text.trim().toString()
-
-
-        binding.tvNombre.isErrorEnabled = false
-        binding.tvApellidos.isErrorEnabled = false
-        binding.tvFechaNacimiento.isErrorEnabled = false
-
-        return when {
-
-            mNombre.isEmptyTrim() -> {
-                binding.tvNombre.error = "Por favor introduzca el nombre completo"
-                false
-            }
-            mApellidos.isEmptyTrim() -> {
-                binding.tvApellidos.error = "Por favor introduzca los apellidos"
-                false
-            }
-            mApellidos.wordCount() < 2 -> {
-                binding.tvApellidos.error = "Por favor introduzca el segundo apellido"
-                false
-            }
-            else -> {
-                true
-            }
-
-        }
-
     }
 
 

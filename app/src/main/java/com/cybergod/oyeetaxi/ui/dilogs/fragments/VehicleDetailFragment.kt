@@ -73,6 +73,8 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
                 setupCalculateDistancesObserver()
 
+                setupOnClickListener()
+
             }
         }
 
@@ -88,42 +90,43 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
     //Pintar la Vista
     private fun paintVehicle(){
 
-        //Imagen Perfil
-        binding.imageUsuario.loadImagePerfilFromURL(vehicleOK.value?.usuario?.imagenPerfilURL)
+        with(binding) {
 
-        //Imagen Frontal
-        binding.imageVehiculo.loadImageVehiculoFrontalFromURL(vehicleOK.value?.imagenFrontalPublicaURL)
+            //Imagen Perfil
+            imageUsuario.loadImagePerfilFromURL(vehicleOK.value?.usuario?.imagenPerfilURL)
 
-        //Verificacion Vehiculo
-        binding.imageVehiculoVerificado.setVehiculoVerificacionImage(vehicleOK.value!!)
+            //Imagen Frontal
+            imageVehiculo.loadImageVehiculoFrontalFromURL(vehicleOK.value?.imagenFrontalPublicaURL)
 
-        //Verificacion Usuario
-        binding.imageUsuarioVerificado.setUsuarioVerificacionImage(vehicleOK.value?.usuario!!)
+            //Verificacion Vehiculo
+            imageVehiculoVerificado.setVehiculoVerificacionImage(vehicleOK.value!!)
 
-        //Matricula
-        binding.tvMatricula.setVehiculoMatricula(vehicleOK.value?.vehiculoVerificacion?.matricula)
+            //Verificacion Usuario
+            imageUsuarioVerificado.setUsuarioVerificacionImage(vehicleOK.value?.usuario!!)
 
-        //Detalles del Vehiculo
-        binding.tvDetalles.setDetallesVehiculos(vehicleOK.value!!)
+            //Matricula
+            tvMatricula.setVehiculoMatricula(vehicleOK.value?.vehiculoVerificacion?.matricula)
 
-        //Climatizado
-        binding.imageVehiculoClimatizado.setVehiculoClimatizado(vehicleOK.value!!)
+            //Detalles del Vehiculo
+            tvDetalles.setDetallesVehiculos(vehicleOK.value!!)
 
-        //Nombre Condutor
-        binding.tvNombreCondutor.text = vehicleOK.value?.usuario?.nombre
+            //Climatizado
+            imageVehiculoClimatizado.setVehiculoClimatizado(vehicleOK.value!!)
 
-        //Datos Condutor
-        binding.tvDetallesUsuario.setDetallesUsuario(vehicleOK.value!!)
+            //Nombre Condutor
+            tvNombreCondutor.text = vehicleOK.value?.usuario?.nombre
 
-        //Valoracion
-        vehicleOK.value!!.usuario!!.valoracion?.let {
-            binding.userRatingBar.rating = it
+            //Datos Condutor
+            tvDetallesUsuario.setDetallesUsuario(vehicleOK.value!!)
+
+            //Valoracion
+            vehicleOK.value!!.usuario!!.valoracion?.let {
+                userRatingBar.rating = it
+            }
+
         }
 
 
-
-        //setupOnClickListener
-        setupOnClickListener()
 
     }
 

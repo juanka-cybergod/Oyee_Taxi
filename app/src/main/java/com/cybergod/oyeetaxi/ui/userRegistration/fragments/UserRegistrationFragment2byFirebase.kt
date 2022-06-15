@@ -268,7 +268,7 @@ class UserRegistrationFragment2byFirebase : BaseFragment() {
 
                 binding.tvPhone.isEnabled = false
 
-                binding.tvPhone.helperText  = "Código de verificación enviado satisfactoriamente"
+                binding.tvPhone.helperText  = getString(R.string.code_sent)
 
                 binding.llCode.visibility = View.VISIBLE
 

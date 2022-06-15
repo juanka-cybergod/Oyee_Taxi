@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:id="@+id/user_registration2"
     tools:context=".ui.userRegistration.activity.UserRegistrationActivity"
+    android:padding="16dp"
     >
 
 
@@ -14,7 +14,6 @@
         android:id="@+id/tv_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:lines="1"
         android:text="Número de Teléfono"
         android:textAlignment="center"
@@ -30,11 +29,8 @@
         android:id="@+id/llPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_app_title">
@@ -48,7 +44,7 @@
             app:endIconCheckable="true"
             app:endIconDrawable="@drawable/ic_cancel_24"
             app:endIconMode="custom"
-            app:helperText="Por favor ingrese su Número de Móvil (8 Dígitos)"
+            app:helperText="Ingrese su Número de Teléfono Móvil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,10 +53,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="+53 "
+                android:hint="Teléfono"
                 android:inputType="number"
                 android:maxLength="8"
-
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +73,7 @@
             android:enabled="true"
             android:gravity="center"
             android:text="Solicitar código"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@drawable/drawable_gender_tab_text_color_selector"
             android:textStyle="italic" />
 
@@ -86,25 +83,22 @@
 
     <ImageView
         android:id="@+id/clImageView"
-        android:layout_width="0dp"
-        android:layout_height="239dp"
-        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:padding="32dp"
         app:layout_constraintBottom_toTopOf="@+id/continueButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llCode"
         app:srcCompat="@drawable/ic_code_verification" />
 
 
     <LinearLayout
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:id="@+id/llCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        android:padding="8dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llPhone">
@@ -118,7 +112,7 @@
             app:endIconCheckable="true"
             app:endIconDrawable="@drawable/ic_paste"
             app:endIconMode="custom"
-            app:helperText="Recibirá un mensaje con el código (6 Dígitos)"
+            app:helperText="Recibirá un mensaje con el código"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -132,7 +126,7 @@
                 android:hint="Código de Verificación "
                 android:inputType="number"
                 android:maxLength="6"
-
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +146,6 @@
         android:textStyle="italic"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_margin="32dp"
         android:text="Continuar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

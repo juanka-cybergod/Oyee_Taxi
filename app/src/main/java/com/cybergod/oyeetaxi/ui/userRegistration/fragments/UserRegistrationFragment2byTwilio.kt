@@ -226,7 +226,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         binding.tvPhone.isEnabled = false
 
         //Mostrar el Helper
-        binding.tvPhone.helperText  = "Código de verificación enviado satisfactoriamente"
+        binding.tvPhone.helperText  = getString(R.string.code_sent)
 
         //Modtrar el Campo para ingresar el Codigo de Verificacion
         binding.llCode.visibility = View.VISIBLE

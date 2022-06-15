@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:padding="16dp"
     android:id="@+id/user_registration1"
     tools:context=".ui.userRegistration.activity.UserRegistrationActivity"
 >
@@ -29,7 +29,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:padding="48dp"
+        android:padding="32dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_permission_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,10 +60,12 @@
         android:text="@string/registro_message_start_screen"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="14sp"
+
         app:layout_constraintBottom_toTopOf="@+id/cancelButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        />
 
 
     <RadioButton

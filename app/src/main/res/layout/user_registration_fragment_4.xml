@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:padding="16dp"
     android:id="@+id/user_registration4"
     tools:context=".ui.userRegistration.activity.UserRegistrationActivity"
     >
@@ -14,7 +14,6 @@
         android:id="@+id/climageView"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_user"
@@ -65,21 +64,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/climageView"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
+        android:padding="4dp"
         >
 
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:lines="1"
             android:text="@string/personal_information"
-            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="italic"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,10 +89,11 @@
             android:text="CLIENTE\nTELEFONO"
             android:textAlignment="textStart"
             android:textColor="@color/colorCrema"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="normal"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -117,12 +115,10 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:id="@+id/llNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,9 +143,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre"
+                    android:hint="@string/name"
                     android:inputType="textPersonName"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,12 +153,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="0dp"
             android:id="@+id/llApellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
 
@@ -190,9 +183,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Apellidos"
+                    android:hint="@string/last_name"
                     android:inputType="textPersonName"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,15 +193,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="0dp"
             android:id="@+id/llCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llApellidos">
@@ -233,9 +222,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Correo Electrónico"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
 
 
@@ -245,15 +234,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="0dp"
             android:id="@+id/llFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llCorreo">
@@ -281,12 +266,12 @@
                     android:id="@+id/etFechaNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Fecha de Nacimiento"
+                    android:hint="@string/bird_date"
                     android:inputType="none"
                     android:maxLength="10"
                     android:clickable="false"
                     android:focusable="false"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -294,15 +279,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="0dp"
             android:id="@+id/llProvincia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llFechaNacimiento">
@@ -328,10 +309,11 @@
                     android:id="@+id/etProvincia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Provincia de Residencia"
+                    android:hint="@string/province_of_residence"
                     android:inputType="text"
                     android:clickable="false"
                     android:focusable="false"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
 
 
@@ -355,8 +337,7 @@
         android:textStyle="italic"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_margin="32dp"
-        android:text="CONTIRUAR"
+        android:text="@string/continue_"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

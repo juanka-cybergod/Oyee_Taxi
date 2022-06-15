@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:padding="16dp"
     android:id="@+id/user_registration5"
     tools:context=".ui.userRegistration.activity.UserRegistrationActivity"
     >
@@ -14,7 +14,6 @@
         android:id="@+id/climageView"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_user"
@@ -52,9 +51,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topInfo"
         android:layout_width="0dp"
@@ -62,25 +58,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/climageView"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
+        android:padding="4dp"
         >
 
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:lines="1"
-            android:text="Seguridad de usuario"
-            android:textAlignment="center"
+            android:text="@string/personal_information"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="italic"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+
             android:id="@+id/tv_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,13 +83,15 @@
             android:text="CLIENTE\nTELEFONO"
             android:textAlignment="textStart"
             android:textColor="@color/colorCrema"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="normal"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -112,12 +109,10 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:id="@+id/llPassword1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,9 +136,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contraseña"
-
+                    android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,8 +151,6 @@
             android:id="@+id/llPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:padding="0dp"
 
@@ -184,9 +177,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Verificar su Contraseña"
+                    android:hint="@string/confirm_password"
                     android:inputType="textPassword"
-
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -194,9 +187,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:id="@+id/checkboxRememberPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -204,6 +195,7 @@
             app:layout_constraintStart_toStartOf="@+id/llPassword2"
             app:layout_constraintTop_toBottomOf="@+id/llPassword2"
             android:checked="true"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             />
 
 
@@ -220,7 +212,6 @@
         android:textStyle="italic"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_margin="32dp"
         android:text="@string/continue_"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

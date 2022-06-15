@@ -32,7 +32,7 @@
     <string name="fail_internet_conection">Verifique su conexión a Internet</string>
     <string name="number_validation_is_disable">La Validacion de números está deshabilitada por el momento</string>
     <string name="fail_server_comunication">Falló la comunicación con el Servidor :(</string>
-    <string name="server_fail_to_sent_email">El servidor no pudo enviarle el código de verificación a su dirección de correo, por favor intentelo mas adelante. Si el problema persiste contacte con soporte. Gracias por usar nuestros servicios</string>
+    <string name="server_fail_to_sent_email">El servidor no pudo enviarle el código de verificación a su dirección de correo, por favor intentelo mas tarde. Si el problema persiste contacte con soporte. Gracias por usar nuestros servicios</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
     <string name="user_not_found">Usuario no encontrado</string>
     <string name="user_temporary_disabled">Usuario deshabilitado temporalmente</string>
@@ -53,7 +53,7 @@
     <string name="user_update_fail">Error al Intentar Actualizar el Usuario</string>
     <string name="agendar_mi_viaje"> Agendar mi viaje </string>
     <string name="agendado"> </string>
-    <string name="forget_my_password">Olvidé mi contraseña</string>
+    <string name="forget_my_password">Restablecer mi contraseña Aquí</string>
     <string name="verification_code_sent">El código de verificación fué enviado satisfactoriamente a su dirección de correo personal registrada en Oyee Taxi. Para restablecer su contraseña revise la bandeja de entrada y siga las instrucciones</string>
 
 
@@ -98,6 +98,27 @@
     <string name="admin_users">Administrar\nUsuarios</string>
     <string name="admin_vehicles_types">Administrar\nTipos\nVehículos</string>
     <string name="admin_vehicles">Administrar\nVehículos</string>
+    <string name="code_sent">Código enviado satisfactoriamente</string>
+    <string name="pasajero_select">PASAJERO</string>
+    <string name="conductor_select">CONDUCTOR</string>
+    <string name="name">Nombre</string>
+    <string name="last_name">Apellidos</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="bird_date">Fecha de Nacimiento</string>
+    <string name="province_of_residence">Provincia de Residencia</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Verificar su Contraseña</string>
+    <string name="user_verification">Verificación de Usuario</string>
+    <string name="start_sesion">Iniciar sesión</string>
+    <string name="phone">Teléfono</string>
+    <string name="start">INICIAR</string>
+    <string name="register_new_user_here">Registrar usuario nuevo</string>
+    <string name="here">Aquí</string>
+    <string name="restore_my_password">Restablecer mi contraseña</string>
+    <string name="email_or_phone">Correo o teléfono móvil</string>
+    <string name="request_verification_code">  Solicitar Código de Verificación</string>
+    <string name="enter_verification_code">Código de Verificación</string>
+    <string name="restore_password">Restablecer mi contraseña</string>
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>
         <item>Normal</item>

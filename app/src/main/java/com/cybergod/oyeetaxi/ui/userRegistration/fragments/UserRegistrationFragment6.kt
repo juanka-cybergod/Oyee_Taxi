@@ -19,6 +19,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURI
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURI
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
 import com.cybergod.oyeetaxi.utils.GlobalVariables
+import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -49,7 +50,7 @@ class UserRegistrationFragment6 : BaseFragment() {
         setupOnclickListener()
 
 
-        return  binding.root
+        return binding.root
     }
 
     private fun setupOnclickListener() {
@@ -73,13 +74,16 @@ class UserRegistrationFragment6 : BaseFragment() {
 
     private val startActivityForResult = registerForActivityResult(
         ActivityResultContracts.GetContent(),
-        ActivityResultCallback {uri ->
+        ActivityResultCallback { uri ->
 
-            if (uri != null ) {
+            if (uri != null) {
 
                 viewModel.imagenVerificacionURI.value = uri
 
-                binding.ivImageVerificacion.loadImageUserVerificacionFromURI(uri,viewModel.conductor.value)
+                binding.ivImageVerificacion.loadImageUserVerificacionFromURI(
+                    uri,
+                    viewModel.conductor.value
+                )
 
                 viewModel.imagenVerificacionFile.postValue(
                     requireContext().prepareImageCompressAndGetFile(uri)
@@ -88,16 +92,17 @@ class UserRegistrationFragment6 : BaseFragment() {
             }
 
 
-
         })
-
 
 
     private fun loadTempDatafromViewModel() {
 
         binding.imagePerfil.loadImagePerfilFromURI(viewModel.imagenPerfilURI.value)
 
-        binding.ivImageVerificacion.loadImageUserVerificacionFromURI(viewModel.imagenVerificacionURI.value,viewModel.conductor.value)
+        binding.ivImageVerificacion.loadImageUserVerificacionFromURI(
+            viewModel.imagenVerificacionURI.value,
+            viewModel.conductor.value
+        )
 
 
         binding.tvIdentificacion.editText?.setText(viewModel.identificaion.value ?: "")
@@ -112,11 +117,7 @@ class UserRegistrationFragment6 : BaseFragment() {
             }
 
 
-
-
-
     }
-
 
 
     private fun verifyUserData(): Boolean {
@@ -127,22 +128,22 @@ class UserRegistrationFragment6 : BaseFragment() {
 
         return when {
 
-            //mNumeroCarnetIdentidad
-            (mNumeroIdentificacion.length < 11) && (GlobalVariables.currentUserActive.value?.conductor == true) -> {
-                binding.tvIdentificacion.error =
-                    "Por favor introduzca su licencia de conducir completa"
+            //mNumeroIdentificacion
+            (mNumeroIdentificacion.length < 11) -> {
+
+                binding.tvIdentificacion.error = if (viewModel.conductor.value == true) {
+                    "Introduzca su número de licencia completo"
+                } else {
+                    "Introduzca su número de identidad completo"
+                }
+
                 false
             }
-            //mNumeroLicenciaConduccion
-            (mNumeroIdentificacion.length < 11) && (GlobalVariables.currentUserActive.value?.conductor == false) -> {
-                binding.tvIdentificacion.error =
-                    "Por favor introduzca su número de identidad completo"
-                false
-            }
+
             //foto Verificacion
-            (viewModel.imagenVerificacionFile.value == null) && (GlobalVariables.currentUserActive.value?.usuarioVerificacion?.imagenIdentificaionURL.isNullOrEmpty()) -> {
+            (viewModel.imagenVerificacionFile.value == null) && (viewModel.imagenVerificacionURL.isNullOrEmpty()) -> {
                 binding.tvIdentificacion.error =
-                    "Por favor adjunte fotocopia del documento requerido"
+                    "Adjunte la fotocopia del documento requerido"
                 false
             }
             else -> {
@@ -197,19 +198,20 @@ class UserRegistrationFragment6 : BaseFragment() {
     }
 
 
-    private fun launchSplashActivity(){
+    private fun launchSplashActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
 
             delay(600)
 
             startActivity(
-                Intent(requireActivity(),
-                    SplashActivity::class.java)
+                Intent(
+                    requireActivity(),
+                    SplashActivity::class.java
+                )
             )
             requireActivity().finish() //cerrar esta actividad
         }
     }
-
 
 
 }

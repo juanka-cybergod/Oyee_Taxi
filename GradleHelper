@@ -1,0 +1,10 @@
+
+//Para Ver la version de Kotlin + Java + Windows
+./gradlew --version
+
+//Para Obtener el signingReport de la App
+./gradlew signingReport
+
+//Para hacer el Build del Proyento
+./gradlew build
+

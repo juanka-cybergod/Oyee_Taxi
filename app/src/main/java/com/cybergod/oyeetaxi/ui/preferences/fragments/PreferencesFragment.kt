@@ -23,6 +23,7 @@ import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialSupportFragment
 import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
 import com.cybergod.oyeetaxi.ui.splash.viewmodel.SplashViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
+import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionString
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,27 +106,21 @@ class PreferencesFragment : BaseFragment() {
             if (updateConfiguration != null ){
                 if (updateConfiguration.available == true) {
 
-                    if (getAppVersionInt() < updateConfiguration.version?:1){
-
+                    if (getAppVersionInt() < (updateConfiguration.version ?: 1)){
 
                             launchUpdateApplicationFragment()
 
-
                     } else {
-                        //noUpdateAndContinue()
                         Toast.makeText(requireContext(),"Su aplicación está actualizada", Toast.LENGTH_SHORT).show()
                     }
 
 
-
                 } else {
-                    //noUpdateAndContinue()
                     Toast.makeText(requireContext(),"Actualizaciones desactivadas temporalmente",Toast.LENGTH_SHORT).show()
 
                 }
 
             }  else {
-                //noUpdateAndContinue()
                 Toast.makeText(requireContext(),getString(R.string.fail_server_comunication), Toast.LENGTH_SHORT).show()
             }
 
@@ -249,7 +244,16 @@ class PreferencesFragment : BaseFragment() {
             R.id.action_admin -> {
 
                 //if (isCurrentFragment(R.id.preferencesFragment )) {
+
+                if (currentUserActive.value?.administrador == true || currentUserActive.value?.superAdministrador == true ) {
                     findNavController().navigate(R.id.action_go_to_administrationFragment)
+                } else {
+                    showSnackBar(
+                        getString(R.string.no_access_permited),
+                        true
+                    )
+                }
+
                 //}
 
                 true

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:background="@color/colorSnackBarError"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/llNetworkError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,10 +32,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="16dp"
                 android:textColor="@color/white"
                 android:padding="7dp"
-
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                 >
 
 

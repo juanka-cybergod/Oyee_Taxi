@@ -25,6 +25,7 @@ import com.cybergod.oyeetaxi.ui.controlPanel.viewmodel.VehicleControlPanelViewMo
 import com.cybergod.oyeetaxi.ui.vehicleRegistration.activity.VehicleRegistrationActivity
 import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
+import com.cybergod.oyeetaxi.utils.GlobalVariables.isServerAvailable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -96,12 +97,12 @@ class VehicleControlPanelFragmentList: BaseFragment()  {
 
 
                     //Alerta al View Model de que se restableció la Conexion y Servidor
-                    GlobalVariables.isServerAvailable.postValue(true)
+                    isServerAvailable.postValue(true)
 
                 } else {
 
                     //Alerta al View Model de que hay Errores de Conexion y Servidor
-                    GlobalVariables.isServerAvailable.postValue(false)
+                    isServerAvailable.postValue(false)
 
                     showSnackBar(
                         getString(R.string.fail_server_comunication),

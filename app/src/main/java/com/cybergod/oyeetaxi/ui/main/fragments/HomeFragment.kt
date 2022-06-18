@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -245,12 +246,13 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
 
         homeViewModel.isVehiclesAviables.observe(viewLifecycleOwner) { vehiclesAviables ->
             if (!vehiclesAviables) {
+                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),  R.color.colorSnackBarSuccess);
                 binding.tvHomeErrorMessage.text = getString(R.string.no_vehicles_aviables_for_now)
                 binding.llHomeError.visibility = View.VISIBLE
             } else {
+                requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(),  R.color.yellow_light);
                 binding.llHomeError.visibility = View.GONE
             }
-
         }
 
     }

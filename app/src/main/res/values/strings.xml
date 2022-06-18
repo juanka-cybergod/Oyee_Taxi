@@ -17,7 +17,7 @@
     <string name="permission_required">Permiso Requerido</string>
     <string name="notificationServiceTitle">Recogidas más rápidas y viajes mas seguros</string>
     <string name="notificationServiceText">"Mientras usas Oyee Taxi tu ubicación se obtiene de manera cifrada para que los viajes sean precisos y seguros"</string>
-    <string name="no_vehicles_aviables_for_now">No existen vehículos disponibles por el momento</string>
+    <string name="no_vehicles_aviables_for_now">No hay vehículos disponibles por el momento</string>
     <string name="registro_message_start_screen">Bienvenido a Oyee Taxi. Tu aplicación preferida para viajar por Cuba, a continuación te guiaremos en el proceso de registro. Comencemos !</string>
     <string name="cliente_type_message">Como pasajero podrá viajar rápidamente asi como agendar sus viajes con nuestros conductores, los honorarios del servicio recibido será acordado entre las dos partes en la propia aplicación. También si lo desea más adelante podrá aplicar para ser Conductor, unicamente completando las formalidades.</string>
     <string name="conductor_type_message">Como conductor el uso de la aplicación es gratuita por un período de tiempo, luego de generar veneficios comenzarán los pagos de las mensualidades para mejorar el sistema y su mantenimiento, los honorarios por el servicio prestado a los clientes serán acordados entre las dos partes y además podrá recibir todos los servicios como pasajero.</string>
@@ -30,7 +30,7 @@
     <string name="cancel">CANCELAR</string>
     <string name="fail_server_conection">Falló la conexión con el Servidor</string>
     <string name="fail_internet_conection">Verifique su conexión a Internet</string>
-    <string name="number_validation_is_disable">La Validacion de números está deshabilitada por el momento</string>
+    <string name="number_validation_is_disable">La validacion de números está deshabilitada por el momento</string>
     <string name="fail_server_comunication">Falló la comunicación con el Servidor :(</string>
     <string name="server_fail_to_sent_email">El servidor no pudo enviarle el código de verificación a su dirección de correo, por favor intentelo mas tarde. Si el problema persiste contacte con soporte. Gracias por usar nuestros servicios</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
@@ -119,6 +119,7 @@
     <string name="request_verification_code">  Solicitar Código de Verificación</string>
     <string name="enter_verification_code">Código de Verificación</string>
     <string name="restore_password">Restablecer mi contraseña</string>
+    <string name="no_access_permited">Acceso denegado</string>
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>
         <item>Normal</item>

@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.viewmodel
+package com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration
 
 
 import androidx.lifecycle.MutableLiveData

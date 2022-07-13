@@ -11,7 +11,7 @@ import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.databinding.DialogEditUserProfileBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage

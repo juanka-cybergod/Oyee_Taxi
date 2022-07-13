@@ -5,7 +5,6 @@ import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.Email
 import com.google.gson.annotations.SerializedName
 import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.TwilioConfiguracion
 import com.cybergod.oyeetaxi.api.model.SocialConfiguracion
-import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.UpdateConfiguracion
 import com.cybergod.oyeetaxi.utils.Constants.DEFAULT_CONFIG
 import kotlinx.parcelize.Parcelize
 
@@ -27,8 +26,8 @@ data class Configuracion(
     val smsProvider: SmsProvider?=null,
     @SerializedName("emailConfiguracion")
     val emailConfiguracion: EmailConfiguracion? = null,
-    @SerializedName("updateConfiguracion")
-    val updateConfiguracion: UpdateConfiguracion? = null,
+    @SerializedName("actualizacionHabilita")
+    val actualizacionHabilita: Boolean? = null,
     @SerializedName("socialConfiguracion")
     val socialConfiguracion: SocialConfiguracion? = null,
 

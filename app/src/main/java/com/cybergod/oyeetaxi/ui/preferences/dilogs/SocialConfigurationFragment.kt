@@ -16,8 +16,8 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.DialogConfigurationSocialBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.preferences.adapters.RedesSocialesListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.RedesSocialesViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.AdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.RedesSocialesViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.Intents.launchRedSocialIntent

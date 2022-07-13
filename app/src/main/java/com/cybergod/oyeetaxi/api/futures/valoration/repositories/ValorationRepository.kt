@@ -5,12 +5,14 @@ import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.futures.valoration.model.Valoracion
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
+import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import javax.inject.Inject
 
 class ValorationRepository @Inject constructor(private val retroServiceInterface: RetroServiceInterface) {
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
     suspend fun getValorationByUsersId(idUsuarioValora: String, idUsuarioValorado: String): Valoracion?   {

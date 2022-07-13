@@ -5,6 +5,7 @@ import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.di.utils.OkHttpClients
 import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.Authorization
+import com.cybergod.oyeetaxi.utils.Constants.URL_BASE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getOyeeTaxiApiKeyEncoded
 import dagger.Module
 import dagger.Provides
@@ -61,7 +62,7 @@ object RetrofitModule {
 
 
         return Retrofit.Builder()
-            .baseUrl(Constants.URL_BASE)
+            .baseUrl(URL_BASE)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

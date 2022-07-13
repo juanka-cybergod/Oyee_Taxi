@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.databinding.DialogFilterUserBinding
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
 
 class SearchFilterUserFragment : DialogFragment() {

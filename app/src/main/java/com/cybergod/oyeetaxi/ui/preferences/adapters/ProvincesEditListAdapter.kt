@@ -12,7 +12,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.databinding.ItemProvinciaEditBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment
+import com.cybergod.oyeetaxi.ui.preferences.fragments.administration.ProvincesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
@@ -47,7 +47,7 @@ class ProvincesEditListAdapter (
 
 
 
-    class MyViewHolder(itemView: View,private val provincesAdministrationFragment:ProvincesAdministrationFragment): RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View,private val provincesAdministrationFragment: ProvincesAdministrationFragment): RecyclerView.ViewHolder(itemView){
 
         val binding = ItemProvinciaEditBinding.bind(itemView)
         private lateinit var provinceSelected: Provincia

@@ -4,26 +4,31 @@ package com.cybergod.oyeetaxi.utils
 object Constants {
 
     //API
-        //Telefono 192.168.137.1
-        //EMulador
-    fun getHttpProtocol(useSSL:Boolean):String{
-        return when{
-            useSSL -> {"https"}
+    //Telefono 192.168.137.1
+    //EMulador
+    fun getHttpProtocol(useSSL: Boolean): String {
+        return when {
+            useSSL -> {
+                "https"
+            }
             else -> {
                 "http"
             }
         }
     }
-    fun getPort(useSSL:Boolean):Int{
-        return when{
+
+    fun getPort(useSSL: Boolean): Int {
+        return when {
             useSSL -> {
-                URL_PORT_SSL}
+                URL_PORT_SSL
+            }
             else -> {
                 URL_PORT
             }
         }
     }
-    val URL_USE_SSL:Boolean = false
+
+    val URL_USE_SSL: Boolean = false
     val URL_IP = "192.168.0.100"
     val URL_PORT_SSL = 8443
     val URL_PORT = 80
@@ -31,11 +36,12 @@ object Constants {
     const val URL_BASE_USUARIOS = "usuarios/"
     const val URL_BASE_VEHICULOS = "vehiculos/"
     const val URL_BASE_TIPO_VEHICULOS = "tipo_vehiculos/"
-    const val URL_BASE_PROVINCIAS= "provincias/"
+    const val URL_BASE_PROVINCIAS = "provincias/"
     const val URL_BASE_VIAJES = "viajes/"
-    const val URL_BASE_CONFIGURACION= "configuracion/"
-    const val URL_BASE_FICHEROS="ficheros/"
-    const val URL_BASE_VALORACION="valoraciones/"
+    const val URL_BASE_CONFIGURACION = "configuracion/"
+    const val URL_BASE_ACTUALIZACION="actualizacion/"
+    const val URL_BASE_FICHEROS = "ficheros/"
+    const val URL_BASE_VALORACION = "valoraciones/"
 
     const val DEFAULT_CONFIG = "default"
     const val QUERRY_PAGE_SIZE = 10
@@ -45,6 +51,7 @@ object Constants {
     const val RESPONSE_CODE_CREATED = 201
     const val RESPONSE_CODE_OK = 200
     const val RESPONSE_CODE_NOT_FOUND = 404
+    const val ERROR_RESPONSE="ERROR_RESPONSE"
 
     //API
     const val Authorization = "Authorization"
@@ -59,9 +66,8 @@ object Constants {
     const val PERMISSION_WRITE_EXTERNAL_STORAGE = 6
 
 
-
     //General
-    const val DELAY_VEHICLES_UPDATE = 10000L
+    const val DELAY_VEHICLES_UPDATE = 5000L
     const val KEY_VEHICLE_ID = "KEY_VEHICLE_ID"
     const val KEY_VEHICLE_RESPONSE_PARCELABLE = "KEY_VEHICLE_RESPONSE_PARCELABLE"
     const val KEY_VEHICLE_PARCELABLE = "KEY_VEHICLE_PARCELABLE"
@@ -70,15 +76,16 @@ object Constants {
     const val KEY_VEHICLE_TYPE_PARCELABLE = "KEY_VEHICLE_TYPE_PARCELABLE"
     const val KEY_USER_FILTER_OPTIONS = "KEY_USER_FILTER_OPTIONS"
     const val KEY_VEHICLE_FILTER_OPTIONS = "KEY_VEHICLE_FILTER_OPTIONS"
+    const val KEY_APP_UPDATE_PARCELABLE = "KEY_APP_UPDATE_PARCELABLE"
     const val KEY_IMAGE_URL = "KEY_IMAGE_URL"
 
 
+    const val UNKNOWN_CLASS = "ClaseDesconocida"
 
 
     const val CONTRY_CODE = "+53"
 
     const val VEHICLE_ANY_TYPE = "Cualquier Tipo"
-
 
 
     //TRACKER SERVICE
@@ -90,13 +97,6 @@ object Constants {
     const val PENDING_INTENT_REQUEST_CODE = 101
     const val LOCATION_UPDATE_INTERVAL = 4000L
     const val LOCATION_UPDATE_INTERFAL_FASTEST = 2000L
-
-
-
-
-
-
-
 
 
 }

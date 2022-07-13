@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.databinding.DialogUserEditVerificationBinding
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageUserVerificacionFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.Constants

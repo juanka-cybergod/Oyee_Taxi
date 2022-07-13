@@ -71,7 +71,7 @@ class UserControlPanelViewModel @Inject constructor(
                 if (tipoFichero == TipoFichero.USUARIO_PERFIL) {
 
                     imagenPerfilURL.postValue(
-                        filesRepository.uploadSingleFile(
+                        filesRepository.uploadSingleFileByType(
                             file = fileToUplod,
                             context = this@UserControlPanelViewModel,
                             id = id,
@@ -83,7 +83,7 @@ class UserControlPanelViewModel @Inject constructor(
                 if (tipoFichero == TipoFichero.USUARIO_VERIFICACION) {
 
                     imagenVerificacionURL.postValue(
-                        filesRepository.uploadSingleFile(
+                        filesRepository.uploadSingleFileByType(
                             file = fileToUplod,
                             context = this@UserControlPanelViewModel,
                             id = id,

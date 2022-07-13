@@ -15,7 +15,6 @@ import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.splash.viewmodel.SplashViewModel
 import com.cybergod.oyeetaxi.ui.userRegistration.activity.UserRegistrationActivity
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
-import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isGooglePlayServicesAvailable
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentDate
@@ -88,41 +87,27 @@ class SplashActivity : BaseActivity() {
 
     private fun getAvailableUpdates() {
 
-
         lifecycleScope.launch (Dispatchers.Main){
 
-            val updateConfiguration = viewModel.getAvailableUpdate()
-            if (updateConfiguration != null ){
-                if (updateConfiguration.available == true) {
+            val actualizacion = viewModel.getCurrentAppUpdate()
+            if (actualizacion != null ){
 
-                    if (getAppVersionInt() < updateConfiguration.version?:1){
+                if (actualizacion.errorResponse.isNullOrEmpty()) {
 
-                        if (updateConfiguration.forceUpdate == false && viewModel.omitActualization) {
-                            noUpdateAndContinue()
-                        } else {
-                            launchUpdateApplicationFragment()
-                        }
-
-                    } else {
+                    if (actualizacion.forceUpdate == false && viewModel.omitActualization) {
                         noUpdateAndContinue()
-                        //Toast.makeText(requireContext(),"Su aplicación está actualizada", Toast.LENGTH_SHORT).show()
+                    } else {
+                        launchUpdateApplicationFragment()
                     }
-
-
 
                 } else {
                     noUpdateAndContinue()
-                    //Toast.makeText(requireContext(),"Actualizaciones desactivadas temporalmente",Toast.LENGTH_SHORT).show()
-
+                    //No Alert
                 }
-
             }  else {
                 noUpdateAndContinue()
-                //Toast.makeText(requireContext(),"Falló la conexion con el Servidor para obtener actualizacions", Toast.LENGTH_SHORT).show()
+                //No Alert
             }
-
-
-
 
         }
     }

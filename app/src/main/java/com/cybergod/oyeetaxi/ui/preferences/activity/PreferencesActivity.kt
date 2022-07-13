@@ -1,16 +1,11 @@
 package com.cybergod.oyeetaxi.ui.preferences.activity
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.ActivityPreferencesBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.userPreferences.PreferencesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -11,13 +11,14 @@ import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
 import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_OK
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.passwordEncode
 import javax.inject.Inject
 
 
 class UserRepository @Inject constructor(private val retroServiceInterface: RetroServiceInterface) {
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
     suspend fun searchUsersPaginatedWithFilter(page:Int=1, userFilterOptions: UserFilterOptions?) : UsuariosPaginados?  {

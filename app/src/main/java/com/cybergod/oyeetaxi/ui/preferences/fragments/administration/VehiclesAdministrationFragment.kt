@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.administration
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,9 +16,8 @@ import com.cybergod.oyeetaxi.databinding.FragmentVehiclesAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.VehiclesEditListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.VehiclesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.getItemCount
-import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import dagger.hilt.android.AndroidEntryPoint

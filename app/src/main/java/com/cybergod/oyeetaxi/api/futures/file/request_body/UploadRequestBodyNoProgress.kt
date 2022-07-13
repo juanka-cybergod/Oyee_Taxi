@@ -1,6 +1,7 @@
 package com.cybergod.oyeetaxi.api.futures.file.request_body
 
 
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okio.BufferedSink
@@ -14,7 +15,7 @@ class UploadRequestBodyNoProgress(
     ):RequestBody() {
 
 
-    override fun contentType()  = "$contentType/*".toMediaTypeOrNull()
+    override fun contentType()  = "$contentType/*".toMediaType()
     override fun contentLength() = file.length()
 
 

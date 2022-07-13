@@ -72,7 +72,7 @@ class VehicleRegistrationViewModel @Inject constructor(
 
 
     private suspend fun uploadSingleFile(file: File?,id:String,tipoFichero: TipoFichero):String?{
-        return filesRepository.uploadSingleFile(
+        return filesRepository.uploadSingleFileByType(
             file = file,
             context = this,
             id = id,

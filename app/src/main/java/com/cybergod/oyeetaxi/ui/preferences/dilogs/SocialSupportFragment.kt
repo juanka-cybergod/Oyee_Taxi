@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.databinding.DialogSocialSoporteBinding
 import com.cybergod.oyeetaxi.ui.preferences.adapters.RedesSocialesListAdapterForClients
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.userPreferences.PreferencesViewModel
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentCallPhone
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentOpenSendEmailTo
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentOpenWebURL

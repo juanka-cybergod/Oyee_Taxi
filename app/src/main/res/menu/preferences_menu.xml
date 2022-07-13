@@ -6,12 +6,14 @@
 
 
         <item
+            android:icon="@drawable/ic_settings_24"
             android:id="@+id/action_admin"
             android:title="Administrar"
             app:showAsAction="never"
 
             />
         <item
+            android:icon="@drawable/ic_settings_24"
             android:id="@+id/action_superAdmin"
             android:title="Super Administrar"
             app:showAsAction="never"

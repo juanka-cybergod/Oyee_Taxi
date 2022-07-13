@@ -25,6 +25,7 @@
     <string name="remember_credentials">Recordar mis credenciales</string>
     <string name="continue_">CONTINUAR</string>
     <string name="finalizar_">FINALIZAR REGISTO</string>
+    <string name="uppload_app_update">SUBIR ACTUALIZACION</string>
     <string name="apply">APLICAR</string>
     <string name="send_viaje">SOLICITAR VIAJE</string>
     <string name="cancel">CANCELAR</string>
@@ -49,6 +50,8 @@
     <string name="error_al_actualizar_vehiculo">Error al Intentar Actualizar el Vehiculo</string>
     <string name="boton_vehiculo_activo_true">Vehículo\nActivo</string>
     <string name="boton_vehiculo_activo_false">Vehículo\nInactivo</string>
+    <string name="boton_actualizacion_activa_true">Activa</string>
+    <string name="boton_actualizacion_activa_false">Inactiva</string>
     <string name="user_sussefuctly_updated">Usuario Actualizado Satisfactoriamente</string>
     <string name="user_update_fail">Error al Intentar Actualizar el Usuario</string>
     <string name="agendar_mi_viaje"> Agendar mi viaje </string>
@@ -72,26 +75,36 @@
     <string name="vehicle_register_fail">Ha ocurrido un error al intentar registrar el vehículo</string>
     <string name="user_register_fail">Ha ocurrido un error al intentar registrar el usuario</string>
     <string name="no_vehicles_type_available">No hay Tipos de Vehículos disponibles en este momento</string>
+    <string name="no_app_updates_list_available">No hay Actualizaciones disponibles en el servidor por el momento</string>
     <string name="no_users_available">No hay Usuarios disponibles en este momento</string>
     <string name="no_provinces_availables">No hay Provincias disponibles en este momento</string>
     <string name="user_registered_secces">Usuario registrado satisfactoriamente</string>
-    <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión.Deberá usar esta opción con propósitos administrativos muy específicos</string>
+    <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión. Deberá usar esta opción con propósitos administrativos muy específicos</string>
+    <string name="disable_server_for_admins_description">Precaución: Si desactiva el servidor, los administradores no podrán iniciar sesión. Deberá usar esta opción con propósitos administrativos muy específicos</string>
+    <string name="disable_app_update_description">Precaución: Si desactiva las actualizaciones en el servidor, todos los usuarios dejarán de recibir las actualizaciones de la aplicación. Deberá usar esta opción con propósitos administrativos muy específicos</string>
     <string name="server_active_for_clients">Servidor activo para clientes</string>
+    <string name="server_active_for_admins">Servidor activo para administradores</string>
+    <string name="app_update_enabled">Actualizaciones activadas</string>
     <string name="star_sesion">Iniciando sesión ...</string>
     <string name="appling_server_configuration">Aplicando cambios en el servidor ...</string>
+    <string name="adding_app_update">Añadiendo actualizacion ...</string>
+    <string name="deleting_app_update">Eliminando actualizacion ...</string>
     <string name="no_vehicles_actives">Usted no tiene vehículos activos</string>
     <string name="cheking_phone_number">Verificando su número de teléfono ...</string>
     <string name="cheking_your_code">Verificando su código ...</string>
     <string name="verification_code_is_incorrect">El Código de Verificación es Incorrecto</string>
     <string name="not_configurable_provider">Este proveedor no es configurable</string>
     <string name="email_server_provider_description">Aquí puedes configura el proveedor que gestiona el envío de automático de correos electrónicos a los clientes</string>
+    <string name="application_updates_configuration_description">Aquí puedes configurar las actualizaciones de la aplicación que estarán disponibles para los clientes</string>
     <string name="email_social_network_description">Aquí puedes dar visibilidad a todas tus redes</string>
     <string name="config_email_provider">  Configuración del Proveedor de Correos</string>
+    <string name="config_app_update_config">  Configurar las Actualizaciones de la App</string>
     <string name="config_sms_provider">  Configurar</string>
     <string name="config_social_network">  Configuración de Redes Sociales</string>
     <string name="select_social_network_to_modify">Seleccione la red social que desea modificar</string>
     <string name="not_abailable_for_the_moment">No disponible por el momento</string>
     <string name="elegible_for_new_clients">Seleccionable para conductores</string>
+    <string name="force_update">Actualización Requerida</string>
     <string name="to_pasanger_transport">Para transporte de pasajeros</string>
     <string name="to_charge_transport">Para transporte de carga</string>
     <string name="admin_provinces">Administrar\nProvincias\n</string>
@@ -120,6 +133,9 @@
     <string name="enter_verification_code">Código de Verificación</string>
     <string name="restore_password">Restablecer mi contraseña</string>
     <string name="no_access_permited">Acceso denegado</string>
+    <string name="your_app_is_up_to_date">Su aplicación está actualizada</string>
+    <string name="store"> Tienda</string>
+    <string name="select_apk_file_to_upload">Seleccionar Fichero APK de Actualizacion</string>
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>
         <item>Normal</item>

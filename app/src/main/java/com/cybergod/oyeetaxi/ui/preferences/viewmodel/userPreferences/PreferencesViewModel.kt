@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.viewmodel
+package com.cybergod.oyeetaxi.ui.preferences.viewmodel.userPreferences
 
 
 import android.widget.ArrayAdapter

@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.administration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.cybergod.oyeetaxi.databinding.FragmentVehiclesTypesAdministrationBind
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.VehiclesTypesEditListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesTypesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.VehiclesTypesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,18 +87,18 @@ class VehiclesTypeAdministrationFragment : BaseFragment() {
 
 
     private fun setupVehiclesTypesListObserver(){
-        viewModel.vehiclesTypesList.observe(viewLifecycleOwner, Observer {
+        viewModel.vehiclesTypesList.observe(viewLifecycleOwner, Observer { listaTiposVehiculos ->
 
 
 
-            if (it != null) {
+            if (listaTiposVehiculos != null) {
 
 
 
-                if (it.isNotEmpty()) {
+                if (listaTiposVehiculos.isNotEmpty()) {
 
-                    it.plus(it)
-                    recyclerViewAdapter.setVehiclesTypesList(it)
+                    listaTiposVehiculos.plus(listaTiposVehiculos)
+                    recyclerViewAdapter.setVehiclesTypesList(listaTiposVehiculos)
                     recyclerViewAdapter.notifyDataSetChanged()
 
 

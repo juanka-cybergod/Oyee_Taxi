@@ -9,15 +9,11 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
 import com.cybergod.oyeetaxi.databinding.DialogFilterVehicleBinding
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesAdministrationViewModel
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
-import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.VehiclesAdministrationViewModel
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.VEHICLE_ANY_TYPE
-import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 
 class SearchFilterVehicleFragment : DialogFragment() {

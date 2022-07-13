@@ -1,8 +1,8 @@
 package com.cybergod.oyeetaxi.api.interfaces
 
 
+import com.cybergod.oyeetaxi.api.futures.app_update.model.Actualizacion
 import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
-import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.UpdateConfiguracion
 import com.cybergod.oyeetaxi.api.futures.file.model.response.FicherosRespuesta
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
@@ -29,6 +29,8 @@ import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
+import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_ACTUALIZACION
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.getAppVersionInt
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -141,21 +143,43 @@ interface RetroServiceInterface {
     @GET(URL_BASE_CONFIGURACION + "getSmsProvider")
     suspend fun getSmsProvider(): Response<SmsProvider>
 
-    @GET(URL_BASE_CONFIGURACION + "getUpdateConfiguration")
-    suspend fun getUpdateConfiguration(): Response<UpdateConfiguracion>
-
     @GET(URL_BASE_CONFIGURACION + "getConfiguration")
     suspend fun getConfiguration(): Response<Configuracion>
 
     @PUT(URL_BASE_CONFIGURACION + "updateConfiguration")
     suspend fun updateConfiguration(@Body configuracion : Configuracion): Response<Configuracion>
 
+    /** APP UPDATE *************************************************/
+
+    @GET(URL_BASE_ACTUALIZACION + "getAppUpdate")
+    suspend fun getAppUpdate(@Query("clientAppVersion") clientAppVersion: Int = getAppVersionInt()): Response<Actualizacion>
+
+    @GET(URL_BASE_ACTUALIZACION + "getAllAppUpdates")
+    suspend fun getAllAppUpdates(): Response<ArrayList<Actualizacion>>
+
+    @GET(URL_BASE_ACTUALIZACION + "setAppUpdateActiveById")
+    suspend fun setAppUpdateActiveById(@Query("idActualizacion") idActualizacion: String,@Query("active") active: Boolean): Response<Boolean>
+
+    @POST(URL_BASE_ACTUALIZACION + "addAppUpdate")
+    suspend fun addAppUpdate(@Body actualizacion: Actualizacion): Response<Actualizacion>
+
+
+    @DELETE(URL_BASE_ACTUALIZACION + "deleteAppUpdateById")
+    suspend fun deleteAppUpdateById(@Query("idActualizacion") idActualizacion: String): Response<Boolean>
+
+
 
     /** UPPLOAD FILES ***********************************************************/
 
     @Multipart
     @POST(URL_BASE_FICHEROS + "uploadSingleFileByType")
-    suspend fun uploadSingleFile(@Part file: MultipartBody.Part, @Part("id") id: String, @Part("fileType") fileType: TipoFichero) : Response<FicherosRespuesta>
+    suspend fun uploadSingleFileByType(@Part file: MultipartBody.Part, @Part("id") id: String, @Part("fileType") fileType: TipoFichero) : Response<FicherosRespuesta>
+
+
+    @Multipart
+    @POST(URL_BASE_FICHEROS + "uploadSingleFile")
+    suspend fun uploadSingleFile(@Part file: MultipartBody.Part, @Part("fileName") fileName: String) : Response<FicherosRespuesta>
+
 
     /** VIAJES ***********************************************************/
     @POST(URL_BASE_VIAJES + "addViaje")

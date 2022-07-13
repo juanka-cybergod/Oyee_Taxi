@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.administration
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.cybergod.oyeetaxi.databinding.FragmentUsersAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.UsersEditListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.UsersAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.UsersAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.getItemCount
 import com.cybergod.oyeetaxi.utils.Constants.KEY_USER_FILTER_OPTIONS
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE

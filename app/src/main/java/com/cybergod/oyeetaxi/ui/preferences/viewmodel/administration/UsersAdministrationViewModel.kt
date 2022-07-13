@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.viewmodel
+package com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration
 
 import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,6 @@ import com.cybergod.oyeetaxi.api.futures.user.model.response.UsuariosPaginados
 import com.cybergod.oyeetaxi.api.futures.user.model.requestFilter.UserFilterOptions
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
-import com.cybergod.oyeetaxi.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -26,6 +26,7 @@ import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_T
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -38,6 +39,10 @@ class LoginActivity : BaseActivity() {
     lateinit var mUsuario :String
     lateinit var mPassword :String
 
+
+    //TODO BORRAR
+    @Inject
+    lateinit var dataStorageRepository: DataStorageRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +59,15 @@ class LoginActivity : BaseActivity() {
 
 
         setupObservers()
+
+
+        //TODO Borrar
+        binding.imageView2.setOnClickListener {
+            lifecycleScope.launch{
+                dataStorageRepository.removeRememberAppUpdateAfterDate()
+            }
+        }
+
 
 
 

@@ -12,7 +12,7 @@ import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.databinding.DialogAddupdateProvinceBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.ProvincesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.ProvincesAdministrationViewModel
 import com.cybergod.oyeetaxi.utils.Constants.KEY_PROVINCE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isValidLatitude

@@ -4,12 +4,14 @@ package com.cybergod.oyeetaxi.api.futures.travel.repositories
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.futures.travel.model.Viaje
 import com.cybergod.oyeetaxi.api.utils.UtilsApi
+import com.cybergod.oyeetaxi.utils.Constants
 import com.cybergod.oyeetaxi.utils.Constants.RESPONSE_CODE_CREATED
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import javax.inject.Inject
 
 class ViajeRepository @Inject constructor(private val retroServiceInterface: RetroServiceInterface) {
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
     suspend fun addViaje(viaje: Viaje):Boolean?   {

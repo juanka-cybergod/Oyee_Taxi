@@ -20,7 +20,7 @@ object UtilsApi {
 
     fun logResponse(className:String, metodo: Method?, responseCode :Int, responseHeaders:String, responseBody:String){
         Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Code : $responseCode")
-        //Log.d(className, "$funcName R_Headers : $responseHeaders")
+        //Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Headers : $responseHeaders")
         Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Body : $responseBody")
     }
 }

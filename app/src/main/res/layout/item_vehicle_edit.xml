@@ -183,7 +183,7 @@
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:icon="@drawable/ic_settings_24"
+                app:icon="@drawable/ic_admin_24"
                 app:iconTint="@color/casiBlancoObscuro"
                 app:iconGravity="textStart"
                 />

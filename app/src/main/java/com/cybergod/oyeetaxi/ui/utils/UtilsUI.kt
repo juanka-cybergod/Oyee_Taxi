@@ -30,12 +30,15 @@ import com.cybergod.oyeetaxi.api.futures.vehicle.model.verification.VehiculoVeri
 import com.cybergod.oyeetaxi.databinding.DialogBottomProgressBinding
 import com.cybergod.oyeetaxi.databinding.TextInputBinding
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVehiculoActivo
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionUsuario
 import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
 import java.lang.Exception
 import java.util.*
 
@@ -142,6 +145,62 @@ object UtilsUI {
 
     }
 
+    fun View.setActualizacionFileExist(existe: Boolean?){
+
+        val button = (this as MaterialButton)
+
+
+        when (existe) {
+            true -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_cloud_ok_24,null)
+                //button.text = "Conductor"
+            }
+            else -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_cloud_no_ok_24,null)
+                //button.text = "Pasajero"
+            }
+        }
+
+
+    }
+
+
+    fun View.setActualizacionForceUpdate(forceUpdate: Boolean?){
+
+        val button = (this as MaterialButton)
+
+
+        when (forceUpdate) {
+            true -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_check_circle_24,null)
+                //button.text = "Conductor"
+            }
+            else -> {
+                button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_unchecked_circle_24,null)
+                //button.text = "Pasajero"
+            }
+        }
+
+
+    }
+
+
+
+    fun View.setFicheroActualizacionSeleccionado(fichero: File?){
+
+        val button = (this as MaterialButton)
+
+        if (fichero != null) {
+            button.text = "${fichero.name} Seleccionado"
+            button.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.casiAmarillo,null))
+            button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_cloud_ok_24,null)
+        } else {
+            button.text =  resources.getText(R.string.select_apk_file_to_upload)
+            button.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.casiRojo,null))
+            button.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_cloud_no_ok_24,null)
+        }
+
+    }
 
     fun View.setEstadoVerificacionUsuario(usuarioVerificacion: UsuarioVerificacion?){
 
@@ -579,6 +638,25 @@ object UtilsUI {
                 buttonVehiculoActivo.isEnabled = true
             }
             else -> {buttonVehiculoActivo.visibility = View.INVISIBLE}
+
+        }
+
+    }
+
+    fun View.setActualizacionActiva(activo:Boolean) {
+
+        val buttonVehiculoActivo = (this as MaterialButton)
+        when (activo) {
+            true -> {
+                buttonVehiculoActivo.text = this.resources.getString(R.string.boton_actualizacion_activa_true)
+                buttonVehiculoActivo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_vehicle_active_32, 0, 0)
+                buttonVehiculoActivo.isEnabled = true
+            }
+            false -> {
+                buttonVehiculoActivo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_vehicle_inactive_32, 0, 0)
+                buttonVehiculoActivo.text = this.resources.getString(R.string.boton_actualizacion_activa_false)
+                buttonVehiculoActivo.isEnabled = true
+            }
 
         }
 

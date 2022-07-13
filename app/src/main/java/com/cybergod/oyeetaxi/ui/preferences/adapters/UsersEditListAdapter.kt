@@ -15,7 +15,7 @@ import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserProfileFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EditUserVerificationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.UserOverviewFragment
-import com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment
+import com.cybergod.oyeetaxi.ui.preferences.fragments.administration.UsersAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setTipoClienteConductor
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setEstadoVerificacionUsuario
@@ -58,7 +58,7 @@ class UsersEditListAdapter (
 
 
     class MyViewHolder(private val binding : ItemUserEditBinding,
-                       private val usersAdministrationFragment:UsersAdministrationFragment
+                       private val usersAdministrationFragment: UsersAdministrationFragment
                        ): RecyclerView.ViewHolder(binding.root){
 
 

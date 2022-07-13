@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.ItemVehicleTypeEditBinding
-import com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesTypeAdministrationFragment
+import com.cybergod.oyeetaxi.ui.preferences.fragments.administration.VehiclesTypeAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.simpleAlertDialog
@@ -43,7 +43,7 @@ class VehiclesTypesEditListAdapter (
 
 
 
-    class MyViewHolder(itemView: View,private val vehiclesTypeAdministrationFragment:VehiclesTypeAdministrationFragment): RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View,private val vehiclesTypeAdministrationFragment: VehiclesTypeAdministrationFragment): RecyclerView.ViewHolder(itemView){
 
         val binding = ItemVehicleTypeEditBinding.bind(itemView)
         private lateinit var vehicleTypeSelected: TipoVehiculo

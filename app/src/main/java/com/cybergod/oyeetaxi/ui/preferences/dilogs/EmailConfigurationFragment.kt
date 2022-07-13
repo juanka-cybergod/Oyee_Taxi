@@ -11,7 +11,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.EmailConfiguracion
 import com.cybergod.oyeetaxi.databinding.DialogConfigurationEmailBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.AdministrationViewModel
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

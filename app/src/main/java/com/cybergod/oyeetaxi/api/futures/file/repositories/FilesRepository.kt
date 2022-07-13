@@ -7,27 +7,26 @@ import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
 import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.logResponse
-import okhttp3.MultipartBody
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
 import java.io.File
 import javax.inject.Inject
 
 class FilesRepository @Inject constructor(private val retroServiceInterface: RetroServiceInterface){
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
 
-    suspend fun uploadSingleFile(file: File?, context: UploadRequestBody.UploadCallback, id:String, tipoFichero: TipoFichero):String?   {
+    suspend fun uploadSingleFileByType(file: File?, context: UploadRequestBody.UploadCallback, id:String, tipoFichero: TipoFichero):String?   {
 
         if (file != null) {
-
-            val body = UploadRequestBody(file,"image",context)
+            val body = UploadRequestBody(file,"image/*".toMediaType(),context)
             val multiPartFile = MultipartBody.Part.createFormData("file",file.name,body)
 
-
-
             handleRequest {
-                retroServiceInterface.uploadSingleFile(multiPartFile,id,tipoFichero)
+                retroServiceInterface.uploadSingleFileByType(multiPartFile,id,tipoFichero)
             }?.let { response ->
 
                 return if (response.isSuccessful) {
@@ -60,10 +59,74 @@ class FilesRepository @Inject constructor(private val retroServiceInterface: Ret
     }
 
 
+    suspend fun uploadAppUpdateFile(file: File?, context: UploadRequestBody.UploadCallback, fileName:String):String?   {
+
+        if (file != null) {
+
+            val body = UploadRequestBody(file,MultipartBody.FORM,context)
+            val multiPartFile = MultipartBody.Part.createFormData("file",fileName,body)
+
+            handleRequest {
+                retroServiceInterface.uploadSingleFile(multiPartFile,fileName)
+            }?.let { response ->
+
+                return if (response.isSuccessful) {
+
+                    logResponse(
+                        className = className,
+                        metodo = object {}.javaClass.enclosingMethod!!,
+                        responseCode = response.code(),
+                        responseHeaders = response.headers().toString(),
+                        responseBody = response.body().toString()
+                    )
+
+                    val urlRelativa :String? = response.body()?.url
+                    Log.d(className, "uploadSingleFile: R_Body: urlRelativa : $urlRelativa")
+                    urlRelativa
+                } else null
+
+            }
+
+            return null
+
+        } else {
+            return null
+        }
 
 
+    }
 
 
+    /** OTRO METODO PARA SUBIR FICHEROS CON OKHTTP *Funciona solo hay q corregirlo
+    //            val fileBody = RequestBody.create(MultipartBody.FORM,file)
+    //
+    //            val body : RequestBody = MultipartBody.Builder()
+    //                .setType(MultipartBody.FORM)
+    //                .addFormDataPart("type","apk")
+    //                .addFormDataPart("file",fileName,fileBody)
+    //                .build()
+    //
+    //
+    //
+    //            val request = Request.Builder()
+    //                .addHeader(Constants.Authorization, UtilsGlobal.getOyeeTaxiApiKeyEncoded())
+    //                .url(Constants.URL_BASE)
+    //                .post(body)
+    //                .build()
+    //
+    //            val okHttpClient = OkHttpClientNoSSLErrors().build()
+    //
+    //            try {
+    //                val response = okHttpClient.newCall(request).execute()
+    //                if (response.isSuccessful) {
+    //                    println("Call OK")
+    //                } else {
+    //                    println("Call Error")
+    //                }
+    //            } catch (e:Exception) {
+    //                println("Call Exception $e")
+    //            }
+     */
 
 
 

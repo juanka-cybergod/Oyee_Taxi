@@ -15,7 +15,7 @@ import com.cybergod.oyeetaxi.databinding.ItemVehicleEditBinding
 
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.ImageViewFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.*
-import com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment
+import com.cybergod.oyeetaxi.ui.preferences.fragments.administration.VehiclesAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setDetallesVehiculos
@@ -61,7 +61,7 @@ class VehiclesEditListAdapter (
 
 
     class MyViewHolder(private val binding : ItemVehicleEditBinding,
-                       private val vehiclesAdministrationFragment:VehiclesAdministrationFragment
+                       private val vehiclesAdministrationFragment: VehiclesAdministrationFragment
                        ): RecyclerView.ViewHolder(binding.root){
 
 

@@ -90,7 +90,7 @@ open class VehicleControlPanelViewModel @Inject constructor(
 
                 if (fileType == TipoFichero.VEHICULO_FRONTAL) {
                     imagenFrontalVehiculoURL.postValue(
-                        filesRepository.uploadSingleFile(
+                        filesRepository.uploadSingleFileByType(
                             file = fileToUpload,
                             context = this@VehicleControlPanelViewModel,
                             id = id,
@@ -101,7 +101,7 @@ open class VehicleControlPanelViewModel @Inject constructor(
                 }
                 if (fileType == TipoFichero.VEHICULO_CIRCULACION) {
                     imagenCirculacionURL.postValue(
-                        filesRepository.uploadSingleFile(
+                        filesRepository.uploadSingleFileByType(
                             file = fileToUpload,
                             context = this@VehicleControlPanelViewModel,
                             id = id,

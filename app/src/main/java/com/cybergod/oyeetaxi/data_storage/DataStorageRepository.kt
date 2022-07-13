@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
+import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.logGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.passwordDecode
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.passwordEncode
@@ -17,7 +19,7 @@ import javax.inject.Inject
 
 class DataStorageRepository @Inject constructor(private val preferenceDataStoreInstance : DataStore<Preferences>) {
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
     suspend fun saveMapStyle(mapStyle: TypeAndStyle.MapStyle) {

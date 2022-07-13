@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.administration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import com.cybergod.oyeetaxi.databinding.FragmentProvincesAdministrationBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.adapters.ProvincesEditListAdapter
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.ProvincesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.ProvincesAdministrationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

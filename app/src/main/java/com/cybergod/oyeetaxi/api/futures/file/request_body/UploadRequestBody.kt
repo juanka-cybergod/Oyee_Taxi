@@ -3,6 +3,7 @@ package com.cybergod.oyeetaxi.api.futures.file.request_body
 
 import android.os.Handler
 import android.os.Looper
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okio.BufferedSink
@@ -12,7 +13,7 @@ import java.io.FileInputStream
 
 class UploadRequestBody(
     private val file: File,
-    private val contentType:String,
+    private val contentType:MediaType,
     private val callback: UploadCallback
     ):RequestBody() {
 
@@ -22,7 +23,8 @@ class UploadRequestBody(
     }
 
 
-    override fun contentType()  = "$contentType/*".toMediaTypeOrNull()
+    override fun contentType()  = contentType
+//    override fun contentType()  = "$contentType/*".toMediaTypeOrNull()
     override fun contentLength() = file.length()
 
 

@@ -1,7 +1,6 @@
 package com.cybergod.oyeetaxi.ui.preferences.dilogs
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,12 @@ import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.DialogEditVehicleBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesAdministrationViewModel
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURLNoCache
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.VehiclesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURLNoCache
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showDialogYearPicker
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_RESPONSE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
-import com.cybergod.oyeetaxi.utils.UtilsGlobal
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getCurrentYear
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

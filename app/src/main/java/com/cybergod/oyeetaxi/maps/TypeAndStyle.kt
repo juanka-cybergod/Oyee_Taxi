@@ -3,6 +3,8 @@ package com.cybergod.oyeetaxi.maps
 import android.content.Context
 import android.util.Log
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
 import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.google.android.gms.maps.GoogleMap
@@ -13,7 +15,7 @@ class TypeAndStyle(context: Context) {
 
     private val thisContext = context
 
-    private val className = this.javaClass.simpleName?:"ClaseDesconocida"
+    private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
     private fun setMapStyle(rawStyle: Int = R.raw.styledefault):Boolean{

@@ -27,18 +27,24 @@
         app:destination="@id/searchFilterVehicleFragment"
         />
 
+    <action android:id="@+id/action_go_to_superAdminFragment"
+        app:destination="@id/superAdminFragment"
+        />
 
+    <action android:id="@+id/action_go_to_addEditAppUpdateFragment"
+        app:destination="@id/addEditAppUpdateFragment"
+        />
 
 
     <fragment
         android:id="@+id/preferencesFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.PreferencesFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.userPreferences.PreferencesFragment"
         android:label="PreferencesFragment"
         tools:layout="@layout/fragment_preferences_main"
         />
     <fragment
         android:id="@+id/administrationFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.AdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.administration.AdministrationFragment"
         android:label="AdministrationFragment"
         tools:layout="@layout/fragment_administration"
 
@@ -59,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.ProvincesAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.administration.ProvincesAdministrationFragment"
         android:label="ProvincesAdministrationFragment"
         tools:layout="@layout/fragment_provinces_administration"
         />
@@ -71,7 +77,7 @@
         />
     <fragment
         android:id="@+id/vehiclesTypeAdministrationFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesTypeAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.administration.VehiclesTypeAdministrationFragment"
         android:label="VehiclesTypeAdministrationFragment"
         tools:layout="@layout/fragment_vehicles_types_administration"
         />
@@ -83,7 +89,7 @@
         />
     <fragment
         android:id="@+id/usersAdministrationFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.UsersAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.administration.UsersAdministrationFragment"
         android:label="UsersAdministrationFragment"
         tools:layout="@layout/fragment_users_administration"
         />
@@ -95,7 +101,7 @@
         />
     <fragment
         android:id="@+id/vehiclesAdministrationFragment"
-        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.VehiclesAdministrationFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.administration.VehiclesAdministrationFragment"
         android:label="VehiclesAdministrationFragment"
         tools:layout="@layout/fragment_vehicles_administration"
         />
@@ -104,6 +110,28 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.SearchFilterVehicleFragment"
         android:label="SearchFilterVehicleFragment"
         tools:layout="@layout/dialog_filter_vehicle"
+        />
+    <fragment
+        android:id="@+id/superAdminFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.superAdmin.SuperAdminFragment"
+        android:label="SuperAdminFragment"
+        tools:layout="@layout/fragment_super_admin"
+        >
+        <action
+            android:id="@+id/action_superAdminFragment_to_appUpdateAdminFragment"
+            app:destination="@id/appUpdateAdminFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appUpdateAdminFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.superAdmin.AppUpdateAdminFragment"
+        android:label="AppUpdateAdminFragment"
+        tools:layout="@layout/fragment_app_updates_administration"
+        />
+    <dialog
+        android:id="@+id/addEditAppUpdateFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.superAdmin.AddEditAppUpdateFragment"
+        android:label="AddEditAppUpdateFragment"
+        tools:layout="@layout/dialog_add_edit_app_update"
         />
 
 </navigation>

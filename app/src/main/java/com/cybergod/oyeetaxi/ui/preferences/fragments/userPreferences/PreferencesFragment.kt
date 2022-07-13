@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.userPreferences
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,8 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentPreferencesMainBinding
@@ -20,7 +18,7 @@ import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.dilogs.fragments.UpdateApplicationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialSupportFragment
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.PreferencesViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.userPreferences.PreferencesViewModel
 import com.cybergod.oyeetaxi.ui.splash.viewmodel.SplashViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
@@ -101,30 +99,18 @@ class PreferencesFragment : BaseFragment() {
     private fun getAvailableUpdates() {
         lifecycleScope.launch (Dispatchers.Main){
 
-            val updateConfiguration = splashViewModel.getAvailableUpdate()
+            val actualizacion = splashViewModel.getCurrentAppUpdate()
+            if (actualizacion != null ){
 
-            if (updateConfiguration != null ){
-                if (updateConfiguration.available == true) {
-
-                    if (getAppVersionInt() < (updateConfiguration.version ?: 1)){
-
-                            launchUpdateApplicationFragment()
-
-                    } else {
-                        Toast.makeText(requireContext(),"Su aplicación está actualizada", Toast.LENGTH_SHORT).show()
-                    }
-
-
+                if (actualizacion.errorResponse.isNullOrEmpty()) {
+                    launchUpdateApplicationFragment()
                 } else {
-                    Toast.makeText(requireContext(),"Actualizaciones desactivadas temporalmente",Toast.LENGTH_SHORT).show()
-
+                    Toast.makeText(requireContext(),actualizacion.errorResponse, Toast.LENGTH_LONG).show()
                 }
 
             }  else {
-                Toast.makeText(requireContext(),getString(R.string.fail_server_comunication), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.fail_server_conection), Toast.LENGTH_SHORT).show()
             }
-
-
 
         }
     }
@@ -243,8 +229,6 @@ class PreferencesFragment : BaseFragment() {
         return when (item.itemId) {
             R.id.action_admin -> {
 
-                //if (isCurrentFragment(R.id.preferencesFragment )) {
-
                 if (currentUserActive.value?.administrador == true || currentUserActive.value?.superAdministrador == true ) {
                     findNavController().navigate(R.id.action_go_to_administrationFragment)
                 } else {
@@ -254,11 +238,19 @@ class PreferencesFragment : BaseFragment() {
                     )
                 }
 
-                //}
-
                 true
             }
             R.id.action_superAdmin -> {
+
+                if (currentUserActive.value?.superAdministrador == true ) {
+                    findNavController().navigate(R.id.action_go_to_superAdminFragment)
+                } else {
+                    showSnackBar(
+                        getString(R.string.no_access_permited),
+                        true
+                    )
+                }
+
                 true
             }
             else -> {
@@ -270,6 +262,7 @@ class PreferencesFragment : BaseFragment() {
 
 
 
+//if (isCurrentFragment(R.id.preferencesFragment )) -> Use
 //    private fun isCurrentFragment(destinationFragment:Int):Boolean {
 //        val fragment = supportFragmentManager.findFragmentById(R.id.navPreferencesFragment)
 //        return NavHostFragment.findNavController(fragment!!).currentDestination?.id == destinationFragment

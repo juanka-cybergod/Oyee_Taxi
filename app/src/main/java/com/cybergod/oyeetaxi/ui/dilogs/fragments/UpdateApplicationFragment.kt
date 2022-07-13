@@ -57,15 +57,15 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
 
     private fun setupObservers() {
 
-        viewModel.updateConfiguration.observe(viewLifecycleOwner, Observer {
-            it?.let { updateConfiguration ->
+        viewModel.appUpdateLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let { actualizacion ->
 
                 this.isCancelable = false
 
-                binding.tvVersion.text = "Versión\n${getAppVersionString()} --> ${updateConfiguration.versionString}"
+                binding.tvVersion.text = "Versión\n${getAppVersionString()} --> ${actualizacion.versionString}"
 
                 //Actualizacion Forzada o No
-                if (updateConfiguration.forceUpdate == true) {
+                if (actualizacion.forceUpdate == true) {
                     binding.tvTipoActualizacion.text = "Actualización\nRequerida"
                     binding.btnUpdateLater.text = " Cancelar y Salir"
                     binding.btnUpdateLater.icon = ResourcesCompat.getDrawable(resources,R.drawable.ic_cancel_24,null)
@@ -84,12 +84,12 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
                 }
 
                 //Tamaño Fichero
-                if (!updateConfiguration.fileSize.isNullOrEmpty()) {
-                    binding.tvPesoActualizacion.text = "Tamaño\n${updateConfiguration.fileSize.uppercase()}"
+                if (!actualizacion.fileSize.isNullOrEmpty()) {
+                    binding.tvPesoActualizacion.text = "Tamaño\n${actualizacion.fileSize?.uppercase()}"
                 } else {binding.tvPesoActualizacion.text = "Tamaño\nDesconocido"}
 
                 //Descripcion
-                if (updateConfiguration.description.isNullOrEmpty()) {
+                if (actualizacion.description.isNullOrEmpty()) {
                     binding.scrollViewUpdateDescription.visibility = View.GONE
                 } else {
                     //Pintar Descripcion
@@ -97,7 +97,7 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
                 }
 
 
-                if (!updateConfiguration.appURL.isNullOrEmpty()) {
+                if (!actualizacion.appURL.isNullOrEmpty()) {
 
                     binding.btnUpdateNow.setOnClickListener {
                         checkStoragePermissionAndDownload()
@@ -107,11 +107,15 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
                 }
 
 
-                binding.btnUpdateNowPlayStore.setOnClickListener {
-                    openPlayStoreApp(updateConfiguration.packageName)
+                if (actualizacion.playStorePackageName.isNullOrEmpty()) {
+                    binding.btnUpdateNowPlayStore.visibility = View.GONE
+                } else {
+                    binding.btnUpdateNowPlayStore.visibility = View.VISIBLE
+
+                    binding.btnUpdateNowPlayStore.setOnClickListener {
+                        openPlayStoreApp(actualizacion.playStorePackageName)
+                    }
                 }
-
-
 
 
             }
@@ -136,7 +140,7 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
 
         initRecyclerView()
 
-        viewModel.updateConfiguration.value?.description?.let { descriptionList ->
+        viewModel.appUpdateLiveData.value?.description?.let { descriptionList ->
             if (descriptionList.isNotEmpty()){
                 recyclerViewAdapter.setDescriptionList(descriptionList)
                 recyclerViewAdapter.notifyDataSetChanged()
@@ -153,11 +157,11 @@ class UpdateApplicationFragment : BottomSheetDialogFragment(), EasyPermissions.P
 
         dismiss()
 
-        val apkUrl = getFullURL(viewModel.updateConfiguration.value?.appURL!!)
+        val apkUrl = getFullURL(viewModel.appUpdateLiveData.value?.appURL!!)
         val downloadApk = FileDownloadManager(requireContext(),requireActivity())
 
         lifecycleScope.launch {
-            downloadApk.startDownloadingApk(apkUrl,"${getString(R.string.app_name)} v${viewModel.updateConfiguration.value?.versionString}");
+            downloadApk.startDownloadingApk(apkUrl,"${getString(R.string.app_name)} v${viewModel.appUpdateLiveData.value?.versionString}");
         }
 
 

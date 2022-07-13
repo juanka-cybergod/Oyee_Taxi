@@ -1,4 +1,4 @@
-package com.cybergod.oyeetaxi.ui.preferences.fragments
+package com.cybergod.oyeetaxi.ui.preferences.fragments.administration
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -17,7 +17,7 @@ import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.EmailConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.SocialConfigurationFragment
 import com.cybergod.oyeetaxi.ui.preferences.dilogs.TwillioConfigurationFragment
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.AdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.AdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix

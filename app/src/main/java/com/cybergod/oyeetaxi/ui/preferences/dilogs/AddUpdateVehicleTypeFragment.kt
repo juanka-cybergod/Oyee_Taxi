@@ -13,7 +13,7 @@ import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.vehicle_type.model.TipoVehiculo
 import com.cybergod.oyeetaxi.databinding.DialogAddUpdateVehicleTypeBinding
 import com.cybergod.oyeetaxi.ui.base.BaseActivity
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.VehiclesTypesAdministrationViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.VehiclesTypesAdministrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_TYPE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim

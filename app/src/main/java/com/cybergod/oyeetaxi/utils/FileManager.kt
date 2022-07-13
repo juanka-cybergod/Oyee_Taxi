@@ -54,6 +54,24 @@ object FileManager {
         }
     }
 
+
+    fun Context.loadFile(selectedFileURI: Uri): File?{
+        val parcelFileDescriptor = this.contentResolver.openAssetFileDescriptor(selectedFileURI,"r", null)
+        val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
+        val file = File(this.cacheDir,this.contentResolver.getFileName(selectedFileURI))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+
+        return try {
+            file
+        } catch (e: Exception) {
+            null
+        } finally {
+            //file.delete()
+        }
+    }
+
     @SuppressLint("Range")
     fun ContentResolver.getFileName(uri:Uri) :String{
         var name :String = ""

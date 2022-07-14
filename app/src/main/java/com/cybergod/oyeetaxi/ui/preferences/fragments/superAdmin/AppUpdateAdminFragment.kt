@@ -91,18 +91,13 @@ class AppUpdateAdminFragment : BaseFragment() {
 
                 if (listaActualizaciones!=null) {
 
-                    if (listaActualizaciones.isNotEmpty()) {
+                    recyclerViewAdapter.differ.submitList(listaActualizaciones)
 
-                        recyclerViewAdapter.differ.submitList(listaActualizaciones)
-
-                    } else {
-
-                        showSnackBar(
-                            getString(R.string.no_app_updates_list_available),
-                            false
-                        )
-
-
+                    if (listaActualizaciones.isEmpty()) {
+                            showSnackBar(
+                                getString(R.string.no_app_updates_list_available),
+                                false
+                            )
                     }
 
 

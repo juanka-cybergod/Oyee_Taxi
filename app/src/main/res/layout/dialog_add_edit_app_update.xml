@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.OyeeTaxi"
     android:paddingBottom="16dp"
+    android:id="@+id/container"
     >
 
 
@@ -181,6 +182,36 @@
         android:orientation="vertical"
         android:padding="0dp"
         >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tvDescripcion"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cambios de versión"
+                app:helperText=" "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageUsuario"
+                app:startIconDrawable="@drawable/ic_note"
+                app:endIconMode="clear_text"
+                app:endIconCheckable="true"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:text=""
+                    android:textSize="12sp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSelectApkFile"
                 style="@style/Widget.Material3.Button.Icon"

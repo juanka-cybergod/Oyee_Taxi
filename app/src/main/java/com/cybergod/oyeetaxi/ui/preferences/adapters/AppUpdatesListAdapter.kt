@@ -19,7 +19,10 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setActualizacionActiva
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setActualizacionForceUpdate
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setActualizacionFileExist
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSimpleAlertDialog
 import com.cybergod.oyeetaxi.utils.Constants.KEY_APP_UPDATE_PARCELABLE
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.convertToStringList
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 
 
 class AppUpdatesListAdapter (
@@ -95,7 +98,10 @@ class AppUpdatesListAdapter (
 
 
                 btnDescription.setOnClickListener {
-                    Toast.makeText(appUpdateAdminFragment.requireContext(),actualizacion.description.toString(),Toast.LENGTH_LONG).show()
+                    appUpdateAdminFragment.requireActivity().showSimpleAlertDialog("Cambios en v${actualizacion.versionString}",
+                        actualizacion.description.convertToStringList()
+                    )
+
                 }
 
                 btnForceUpdate.setOnClickListener {
@@ -104,7 +110,7 @@ class AppUpdatesListAdapter (
                 }
 
                 btnFileExist.setOnClickListener {
-                    val text = if (fileExist==true) {"Fichero Correcto"} else {"No se encuentra Fichero en Servidor "}
+                    val text = if (fileExist) {"Fichero Correcto"} else {"No se encuentra Fichero en Servidor "}
                     Toast.makeText(appUpdateAdminFragment.requireContext(),text,Toast.LENGTH_SHORT).show()
                 }
 

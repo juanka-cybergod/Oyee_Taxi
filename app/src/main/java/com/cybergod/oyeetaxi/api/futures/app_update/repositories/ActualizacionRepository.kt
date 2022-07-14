@@ -145,6 +145,36 @@ class ActualizacionRepository @Inject constructor(private val retroServiceInterf
 
     }
 
+    suspend fun editAppUpdate(actualizacion: Actualizacion):Actualizacion? {
+
+        handleRequest {
+            retroServiceInterface.editAppUpdate(actualizacion)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    response.body()
+                } else  null
+
+            } else null
+
+        }
+
+
+        return null
+
+    }
+
+
     suspend fun deleteAppUpdateById(idActualizacion: String):Boolean? {
 
         handleRequest {

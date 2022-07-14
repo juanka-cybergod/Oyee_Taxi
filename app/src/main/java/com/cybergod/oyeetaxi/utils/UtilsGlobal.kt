@@ -3,7 +3,9 @@ package com.cybergod.oyeetaxi.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.*
+import android.content.ClipDescription
+import android.content.ClipboardManager
+import android.content.Context
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
@@ -14,11 +16,11 @@ import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.cybergod.oyeetaxi.BuildConfig
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.material.textfield.TextInputLayout
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
 import java.lang.reflect.Method
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -29,6 +31,23 @@ import java.util.*
 object UtilsGlobal {
 
     private const val TAG = "UtilsGlobal"
+
+
+    fun String.converToArrayList():List<String>{
+        return this.trim().split("\n")
+    }
+
+    fun List<String>?.convertToStringList():String {
+        var changeLog="";
+        this?.forEach { item->
+            changeLog = if (changeLog.isEmpty()) {
+                 item
+            }else {
+                "$changeLog\n$item"
+            }
+        }
+        return changeLog
+    }
 
     fun AutoCompleteTextView.showDropDownMenuFix(adapter: ArrayAdapter<String>?) {
         if (this.text.isNotEmpty()){

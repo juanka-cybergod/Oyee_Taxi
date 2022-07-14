@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideBottomProgressDialog
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showBottomProgressDialog
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.simpleAlertDialog
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSimpleAlertDialog
 
 
 open class BaseFragment : Fragment() {
@@ -43,7 +43,7 @@ open class BaseFragment : Fragment() {
 
 
     fun showMessage(title: String, text: String) {
-       requireActivity().simpleAlertDialog(title, text)
+       requireActivity().showSimpleAlertDialog(title, text)
     }
 
 

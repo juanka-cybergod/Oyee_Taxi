@@ -108,7 +108,7 @@ object UtilsUI {
     }
 
 
-    fun Context.simpleAlertDialog(title: String,text: String){
+    fun Context.showSimpleAlertDialog(title: String, text: String){
         val builder = AlertDialog.Builder(this)
         builder
             .setTitle(title)

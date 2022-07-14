@@ -21,6 +21,8 @@ import com.cybergod.oyeetaxi.ui.preferences.viewmodel.superAdmin.Actualizaciones
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setFicheroActualizacionSeleccionado
 import com.cybergod.oyeetaxi.utils.Constants.KEY_APP_UPDATE_PARCELABLE
 import com.cybergod.oyeetaxi.utils.FileManager.loadFile
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.converToArrayList
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.convertToStringList
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
@@ -86,6 +88,10 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
                 tvVersionString.editText?.setText(actualizacion.versionString.orEmpty())
                 tvPlayStorePackageName.editText?.setText(actualizacion.playStorePackageName.orEmpty())
                 switchForceUpdate.isChecked = actualizacion.forceUpdate == true
+                tvDescripcion.editText?.setText(actualizacion.description.convertToStringList())
+                btnSelectApkFile.visibility = View.GONE
+                tvVersionInt.isEnabled = false
+
             }
 
     }
@@ -100,9 +106,20 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
             }
 
             continueButton.setOnClickListener {
-                if (verifyData()) {
-                    addEditAppUpdate()
+
+                if (actualizacion==null) {
+                    //add
+                    if (verifyDataToAdd()) {
+                        addEditAppUpdate()
+                    }
+                } else {
+                    //edit
+                    if (verifyDataToEdit()) {
+                        addEditAppUpdate()
+                    }
                 }
+
+
             }
 
             btnSelectApkFile.setOnClickListener {
@@ -136,31 +153,45 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
     private fun addEditAppUpdate() {
 
         if (actualizacion != null) {
-//            (requireActivity() as BaseActivity).showProgressDialog("Actualizando provincia ...")
-//
-//                viewModel.setProvinceLocation(
-//                    Provincia(
-//                        nombre = actualizacion?.nombre,
-//                        ubicacion = Ubicacion(
-//                            latitud = newLatitude,
-//                            longitud = newLongitude,
-//                        )
-//
-//                    )
-//                )
+
+            (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.adding_app_update))
+
+            viewModel.editAppUpdate(
+                Actualizacion(
+                    id = actualizacion?.id,
+                    versionString = binding.tvVersionString.editText!!.text.trim().toString(),
+                    playStorePackageName = binding.tvPlayStorePackageName.editText!!.text.toString().trim(),
+                    forceUpdate = binding.switchForceUpdate.isChecked,
+                    description = binding.tvDescripcion.editText?.text.toString().converToArrayList(),
+                )
+            )
+
+            closeThisBottomSheetDialogFragment()
 
         } else {
 
             lifecycleScope.launch(Dispatchers.Main) {
 
-                val urlRelativa = viewModel.uploadAppUpdateFile()
+                binding.btnSelectApkFile.isClickable=false
+                binding.continueButton.isClickable=false
+                binding.cancelButton.isClickable=false
 
-                if (urlRelativa!=null) {
-                    uploadActualizacionData(urlRelativa)
-                } else {
-                    Toast.makeText(requireContext(), getString(R.string.fail_server_comunication),Toast.LENGTH_LONG).show()
+                this@AddEditAppUpdateFragment.isCancelable=false
+
+                viewModel.uploadAppUpdateFile().also { urlRelativa ->
+                    if (urlRelativa!=null) {
+                        addAppUpdate(urlRelativa)
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.fail_server_comunication),Toast.LENGTH_LONG).show()
+                    }
                 }
 
+
+                this@AddEditAppUpdateFragment.isCancelable=true
+
+                binding.btnSelectApkFile.isClickable=false
+                binding.continueButton.isClickable=false
+                binding.cancelButton.isClickable=false
             }
 
 
@@ -171,30 +202,27 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
 }
 
 
-    private fun uploadActualizacionData(urlRelativa:String) {
-        val actualizacion = Actualizacion(
-            version  = binding.tvVersionInt.editText!!.text.toString().trim().toIntOrNull(),
-            versionString = binding.tvVersionString.editText!!.text.trim().toString(),
-            playStorePackageName = binding.tvPlayStorePackageName.editText!!.text.toString().trim(),
-            forceUpdate = binding.switchForceUpdate.isChecked,
-            description = null,
-            appURL = urlRelativa,
-        )
+    private fun addAppUpdate(urlRelativa:String) {
 
         (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.adding_app_update))
 
-        viewModel.addAppUpdate(actualizacion)
-
-        //delay(1000)
-
-        //(requireActivity() as BaseActivity).hideProgressDialog()
+        viewModel.addAppUpdate(
+            Actualizacion(
+                version  = binding.tvVersionInt.editText!!.text.toString().trim().toIntOrNull(),
+                versionString = binding.tvVersionString.editText!!.text.trim().toString(),
+                playStorePackageName = binding.tvPlayStorePackageName.editText!!.text.toString().trim(),
+                forceUpdate = binding.switchForceUpdate.isChecked,
+                description = binding.tvDescripcion.editText?.text.toString().converToArrayList(),
+                appURL = urlRelativa,
+            )
+        )
 
         closeThisBottomSheetDialogFragment()
 
     }
 
 
-    private fun verifyData(): Boolean {
+    private fun verifyDataToAdd(): Boolean {
 
         with (binding) {
             val mVersionInt: Int? =  tvVersionInt.editText!!.text.trim().toString().toIntOrNull()
@@ -241,6 +269,31 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
 
     }
 
+
+    private fun verifyDataToEdit(): Boolean {
+
+        with (binding) {
+            val mVersionString: String = tvVersionString.editText!!.text.trim().toString()
+            tvVersionString.isErrorEnabled=false
+
+            return when {
+                mVersionString.isEmptyTrim()-> {
+                    tvVersionString.error = "Nombre versión"
+                    false
+                }
+                else -> {
+                    true
+                }
+
+            }
+
+        }
+
+
+
+    }
+
+
     private fun actualizacionExist(versionInt:Int):Boolean {
         return viewModel.actualizacionesList.value?.find { actualizacion -> actualizacion.version == versionInt }.let {
             it!=null
@@ -253,7 +306,6 @@ class AddEditAppUpdateFragment : BottomSheetDialogFragment() {
     }
 
     private fun closeThisBottomSheetDialogFragment(){
-        this.isCancelable=true
         this.dismiss()
     }
 

@@ -136,9 +136,11 @@ class ActualizacionesViewModel @Inject constructor(
     fun addAppUpdate(actualizacion: Actualizacion) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            delay(1000)
 
             val actualizacionAdded = actualizacionRepository.addAppUpdate(actualizacion)
+
+            delay(1000)
+
             if (actualizacionAdded != null) {
                 getAllAppUpdates()
                 success.postValue(true)
@@ -166,6 +168,24 @@ class ActualizacionesViewModel @Inject constructor(
 
         }
 
+    }
+
+    fun editAppUpdate(actualizacion: Actualizacion) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val actualizacionModified = actualizacionRepository.editAppUpdate(actualizacion)
+
+            delay(1000)
+
+            if (actualizacionModified != null) {
+                getAllAppUpdates()
+                success.postValue(true)
+            } else {
+                success.postValue(false)
+            }
+
+        }
     }
 
 

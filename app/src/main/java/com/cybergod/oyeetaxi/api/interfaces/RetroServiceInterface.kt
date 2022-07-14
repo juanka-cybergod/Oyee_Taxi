@@ -163,6 +163,9 @@ interface RetroServiceInterface {
     @POST(URL_BASE_ACTUALIZACION + "addAppUpdate")
     suspend fun addAppUpdate(@Body actualizacion: Actualizacion): Response<Actualizacion>
 
+    @PUT(URL_BASE_ACTUALIZACION + "editAppUpdate")
+    suspend fun editAppUpdate(@Body actualizacion: Actualizacion): Response<Actualizacion>
+
 
     @DELETE(URL_BASE_ACTUALIZACION + "deleteAppUpdateById")
     suspend fun deleteAppUpdateById(@Query("idActualizacion") idActualizacion: String): Response<Boolean>

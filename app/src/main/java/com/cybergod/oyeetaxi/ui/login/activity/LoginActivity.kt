@@ -2,7 +2,6 @@ package com.cybergod.oyeetaxi.ui.login.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +17,7 @@ import com.cybergod.oyeetaxi.ui.main.activity.MainActivity
 import com.cybergod.oyeetaxi.ui.passwordRecovery.activity.RecoveryPasswordActivity
 import com.cybergod.oyeetaxi.ui.userRegistration.activity.UserRegistrationActivity
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSnackBar
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.simpleAlertDialog
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSimpleAlertDialog
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
@@ -127,7 +126,7 @@ class LoginActivity : BaseActivity() {
                             } else {
 
                                 if (!loginRespusta.usuario.mensaje.isNullOrEmpty()) {
-                                    simpleAlertDialog(
+                                    showSimpleAlertDialog(
                                         getString(R.string.user_disabled),
                                         getString(R.string.reason) + loginRespusta.usuario.mensaje)
                                 } else {
@@ -145,7 +144,7 @@ class LoginActivity : BaseActivity() {
                                 val motivo = if (it.isNullOrEmpty()) {
                                     "Desconocido"
                                 } else { loginRespusta.mensaje }
-                                simpleAlertDialog("Servicio desactivado","Motivo: $motivo, intente iniciar sesión mas tarde, disculpe las molestias ocacionadas")
+                                showSimpleAlertDialog("Servicio desactivado","Motivo: $motivo, intente iniciar sesión mas tarde, disculpe las molestias ocacionadas")
                             }
 
                         }

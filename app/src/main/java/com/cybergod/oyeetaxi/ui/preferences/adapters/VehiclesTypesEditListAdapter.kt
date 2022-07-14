@@ -13,7 +13,7 @@ import com.cybergod.oyeetaxi.databinding.ItemVehicleTypeEditBinding
 import com.cybergod.oyeetaxi.ui.preferences.fragments.administration.VehiclesTypeAdministrationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImageVehiculoFrontalFromURL
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setButtonVisibilityIcon
-import com.cybergod.oyeetaxi.ui.utils.UtilsUI.simpleAlertDialog
+import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showSimpleAlertDialog
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_TYPE_PARCELABLE
 
 
@@ -68,7 +68,7 @@ class VehiclesTypesEditListAdapter (
 
 
                 btnInfo.setOnClickListener {
-                    vehiclesTypeAdministrationFragment.requireContext().simpleAlertDialog("Descripción",tipoVehiculo.descripcion?:"")
+                    vehiclesTypeAdministrationFragment.requireContext().showSimpleAlertDialog("Descripción",tipoVehiculo.descripcion?:"")
                 }
 
 

@@ -130,23 +130,29 @@ object Utils {
 
 
     fun calculateTheDistance(startLocation: Ubicacion?, endLocation: Ubicacion?):String {
-       val startLocationLatLng: LatLng = ubicacionToLatLng(startLocation)
-       val endLocationLatLng: LatLng = ubicacionToLatLng(endLocation)
+       val startLocationLatLng: LatLng = startLocation.toLatLng()
+       val endLocationLatLng: LatLng = endLocation.toLatLng()
 
        val meters = SphericalUtil.computeDistanceBetween(startLocationLatLng,endLocationLatLng)
        val kilometers = meters / 1000
-       return DecimalFormat("#.##").format(kilometers)
+       return DecimalFormat("#.#").format(kilometers)
+//       return DecimalFormat("#.##").format(kilometers)
     }
 
-    fun ubicacionToLatLng(ubicacion: Ubicacion?):LatLng{
-        return LatLng(ubicacion?.latitud ?:0.0,ubicacion?.longitud  ?:0.0)
+    fun Ubicacion?.toLatLng():LatLng{
+        return LatLng(this?.latitud ?:0.0,this?.longitud  ?:0.0)
     }
 
-    fun locationToUbicacion(location: Location): Ubicacion {
+    fun LatLng.toUbicacion():Ubicacion{
+        return Ubicacion(latitud =  this.latitude, longitud = this.longitude)
+    }
+
+
+    fun Location.toUbicacion(): Ubicacion {
         return  Ubicacion(
-            latitud = location.latitude,
-            longitud = location.longitude,
-            rotacion = location.bearing.toInt(),
+            latitud = this.latitude,
+            longitud = this.longitude,
+            rotacion = this.bearing.toInt(),
         )
     }
 

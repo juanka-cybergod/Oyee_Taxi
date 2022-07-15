@@ -1,23 +1,32 @@
 package com.cybergod.oyeetaxi.maps
 
 import android.location.Location
-import android.util.Log
+import android.os.Handler
+import android.os.SystemClock
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
+import com.cybergod.oyeetaxi.maps.Constants.USER_LOCATION
 import com.cybergod.oyeetaxi.maps.Utils.getCircle
 import com.cybergod.oyeetaxi.maps.Utils.getIcoFromResource
-import com.cybergod.oyeetaxi.maps.Utils.ubicacionToLatLng
+import com.cybergod.oyeetaxi.maps.Utils.toLatLng
+import com.cybergod.oyeetaxi.utils.Constants
+import com.cybergod.oyeetaxi.utils.Constants.DELAY_VEHICLES_UPDATE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkers
+import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkersObservable
 import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationCircle
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationMarker
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.logGlobal
 import com.google.android.gms.maps.model.*
+
 
 class MarkerControl {
 
-
-
+    private val className = this.javaClass.simpleName?: Constants.UNKNOWN_CLASS
 
 
     fun addUserLocationMarker(location : Location){
@@ -33,9 +42,8 @@ class MarkerControl {
 
         val marker :Marker
         map.addMarker(markerOptions).also {
-            it?.tag = "USER_LOCATION"
+            it?.tag = USER_LOCATION
             marker = it!!
-
         }
 
         userLocationMarker = marker
@@ -52,12 +60,11 @@ class MarkerControl {
     }
 
     fun updateUserLocationMarker( location : Location){
+
         val latLng = LatLng(location.latitude,location.longitude)
 
-        Log.d("CHEAK",latLng.toString()+" "+location.bearing)
-
-        // Clear the current marker before add the new one
         if (userLocationMarker != null) {
+
             userLocationMarker?.apply {
                 setAnchor(0.5f,0.5f)
                 position = latLng
@@ -65,75 +72,189 @@ class MarkerControl {
                 rotation = location.bearing
                 title = ""
                 snippet = ""
-            }
 
+                logGlobal(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    logText = "$USER_LOCATION -> $position ($rotation)"
+                )
+            }
 
             userLocationCircle?.apply {
                 center = latLng
                 radius = location.accuracy.toDouble()
             }
-        } else
 
+        } else {
             addUserLocationMarker(location)
+        }
+
+    }
 
 
+    fun removeUnavailableVehiclesFromMapMarker(listVehiculoResponse: List<VehiculoResponse>){
+
+//        logGlobal(
+//            className = className,
+//            metodo = object {}.javaClass.enclosingMethod!!,
+//            logText = hashMapMarkers.value?.keys?.toList().toString()
+//        )
+
+        hashMapMarkers.keys.toList().forEach { idMarcador ->
+            val vehiculoEncontrado =  listVehiculoResponse.find { item -> item.id.equals(idMarcador,true) }
+
+            if ( vehiculoEncontrado== null) {
+                val marker: Marker = hashMapMarkers[idMarcador]!!
+                marker.remove()
+                hashMapMarkers.remove(idMarcador)
+
+                if (hashMapMarkers[idMarcador]?.position != hashMapMarkersObservable.value?.get(idMarcador)?.position) {
+                    hashMapMarkersObservable.postValue(hashMapMarkers)
+                }
 
 
+                logGlobal(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    logText = "Eliminado $idMarcador"
+                )
+
+            }
+
+        }
 
 
 
     }
-
 
     fun addVehicleMarker(vehiculoResponse: VehiculoResponse){
 
         val markerOptions = MarkerOptions()
             .anchor(0.5f,0.5f)
-            .position(ubicacionToLatLng(vehiculoResponse.usuario?.ubicacion))
-            //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)) //Cambar el Color al Marcador
+            .position(vehiculoResponse.usuario?.ubicacion.toLatLng())
             .icon(getIcoFromResource(vehiculoResponse.tipoVehiculo?.tipoVehiculo,vehiculoResponse.usuario?.modoCondutor))
             .rotation(vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: 0F)
             .title(vehiculoResponse.tipoVehiculo?.tipoVehiculo ?: "")
             .snippet("snippet")
 
-        val marker :Marker
-        map.addMarker(markerOptions).also {
-            it?.tag = vehiculoResponse.id
-            marker = it!!
+        map.addMarker(markerOptions)?.also { marker ->
+            marker.tag = vehiculoResponse.id
+            hashMapMarkers[vehiculoResponse.id!!] = marker
 
+            if (hashMapMarkers[vehiculoResponse.id!!]?.position != hashMapMarkersObservable.value?.get(vehiculoResponse.id!!)?.position) {
+                hashMapMarkersObservable.postValue(hashMapMarkers)
+            }
         }
 
 
-        hashMapMarkers.value?.put(vehiculoResponse.id!!,marker)
+
+
 
     }
 
     fun updateVehicleMarker(vehiculoResponse: VehiculoResponse){
-        val marker: Marker = hashMapMarkers.value?.get(vehiculoResponse.id)!!
 
-        marker.setAnchor(0.5f,0.5f)
-        marker.position = ubicacionToLatLng(vehiculoResponse.usuario?.ubicacion)
-        marker.setIcon(getIcoFromResource(vehiculoResponse.tipoVehiculo?.tipoVehiculo,vehiculoResponse.usuario?.modoCondutor))
-        marker.rotation = vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: 0f
-    }
+        hashMapMarkers[vehiculoResponse.id]?.apply {
+//            setAnchor(0.5f,0.5f)
+//            setIcon(getIcoFromResource(vehiculoResponse.tipoVehiculo?.tipoVehiculo,vehiculoResponse.usuario?.modoCondutor))
+//            position = ubicacionToLatLng(vehiculoResponse.usuario?.ubicacion)
+//            rotation = vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: 0f
+
+            if (vehiculoResponse.id=="id_van")
+            logGlobal(
+                className = className,
+                metodo = object {}.javaClass.enclosingMethod!!,
+                logText = "${vehiculoResponse.id} -> $position ($rotation)"
+            )
 
 
-    //Buscar y quitar los Marcadores que ya no son vehiculos Disponibles
-    fun removeUnaviableVehiclesFromMapMarker(listVehiculoResponse: List<VehiculoResponse>){
+            this.changePositionSmoothly(vehiculoResponse)
 
-        Log.d("PRUEBA",hashMapMarkers.value?.keys?.toList().toString())
-        hashMapMarkers.value?.keys?.toList()?.forEach { idMarcador ->
-            val vehiculoEncontrado =  listVehiculoResponse.find { item -> item.id.equals(idMarcador,true) }
-
-            if ( vehiculoEncontrado== null) {
-                val marker: Marker = hashMapMarkers.value?.get(idMarcador)!!
-                marker.remove()
-                hashMapMarkers.value?.remove(idMarcador)
-                Log.d("PRUEBA","Eliminado $idMarcador")
-            }
 
         }
+
+
+
+
+
     }
+
+
+    fun Marker.changePositionSmoothly(vehiculoResponse: VehiculoResponse) {
+        val startPosition:LatLng = this.position
+        val handler = Handler()
+        val start: Long = SystemClock.uptimeMillis()
+        val interpolator: Interpolator = AccelerateDecelerateInterpolator()
+        val durationInMs = DELAY_VEHICLES_UPDATE.toFloat()
+        val hideMarker = false
+        handler.post(object : Runnable {
+            var elapsed: Long = 0
+            var t = 0f
+            var v = 0f
+            override fun run() {
+                this@changePositionSmoothly.rotation = vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: this@changePositionSmoothly.rotation
+                // Calculate progress using interpolator
+                elapsed = SystemClock.uptimeMillis() - start
+                t = elapsed / durationInMs
+                v = interpolator.getInterpolation(t)
+                val currentPosition = LatLng(
+                    startPosition.latitude * (1 - t) + vehiculoResponse.usuario?.ubicacion?.latitud!! * t,
+                    startPosition.longitude * (1 - t) + vehiculoResponse.usuario?.ubicacion?.longitud!! * t
+                )
+                this@changePositionSmoothly.position = currentPosition
+
+                // Repeat till progress is complete.
+                if (t < 1) {
+                    // Post again 16ms later.
+                    handler.postDelayed(this, 16)
+                } else {
+                    this@changePositionSmoothly.isVisible = !hideMarker
+                }
+
+
+                hashMapMarkersObservable.postValue(hashMapMarkers)
+
+
+
+            }
+        })
+    }
+
+
+
+
+//
+//    fun addVehicleMarker(vehiculoResponse: VehiculoResponse){
+//
+//        val markerOptions = MarkerOptions()
+//            .anchor(0.5f,0.5f)
+//            .position(ubicacionToLatLng(vehiculoResponse.usuario?.ubicacion))
+//            //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)) //Cambar el Color al Marcador
+//            .icon(getIcoFromResource(vehiculoResponse.tipoVehiculo?.tipoVehiculo,vehiculoResponse.usuario?.modoCondutor))
+//            .rotation(vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: 0F)
+//            .title(vehiculoResponse.tipoVehiculo?.tipoVehiculo ?: "")
+//            .snippet("snippet")
+//
+//        val marker :Marker
+//        map.addMarker(markerOptions).also {
+//            it?.tag = vehiculoResponse.id
+//            marker = it!!
+//
+//        }
+//
+//
+//        hashMapMarkers.value?.put(vehiculoResponse.id!!,marker)
+//
+//    }
+//
+//    fun updateVehicleMarker(vehiculoResponse: VehiculoResponse){
+//        val marker: Marker = hashMapMarkers.value?.get(vehiculoResponse.id)!!
+//
+//        marker.setAnchor(0.5f,0.5f)
+//        marker.position = ubicacionToLatLng(vehiculoResponse.usuario?.ubicacion)
+//        marker.setIcon(getIcoFromResource(vehiculoResponse.tipoVehiculo?.tipoVehiculo,vehiculoResponse.usuario?.modoCondutor))
+//        marker.rotation = vehiculoResponse.usuario?.ubicacion?.rotacion?.toFloat() ?: 0f
+//    }
 
 
 //    fun addVehicleMarkerOld(title:String,map: GoogleMap,vehiculo: VehiculoResponse,activity: Activity){

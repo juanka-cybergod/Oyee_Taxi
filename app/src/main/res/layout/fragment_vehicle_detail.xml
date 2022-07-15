@@ -29,7 +29,7 @@
             android:layout_margin="6dp"
             android:lines="1"
             android:maxLines="1"
-            android:text="Vehículo a 1.5 Km de su posición"
+            android:text="Vehículo a X distancia de su posición"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"

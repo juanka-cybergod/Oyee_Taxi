@@ -32,6 +32,12 @@ object UtilsGlobal {
 
     private const val TAG = "UtilsGlobal"
 
+//    fun logGlobal(className:String, metodo: Method?, body:String){
+//        Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Code : $responseCode")
+//        //Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Headers : $responseHeaders")
+//        Log.d(className, "${metodo?.name?: "MetodoDesconocido"}: R_Body : $responseBody")
+//    }
+
 
     fun String.converToArrayList():List<String>{
         return this.trim().split("\n")

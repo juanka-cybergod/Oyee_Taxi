@@ -2,7 +2,7 @@ package com.cybergod.oyeetaxi.maps
 
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
-import com.cybergod.oyeetaxi.maps.Utils.ubicacionToLatLng
+import com.cybergod.oyeetaxi.maps.Utils.toLatLng
 import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -65,7 +65,7 @@ class CameraControl {
 
         coroutine.launch(Dispatchers.Main) {
             delay(100L)
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacionToLatLng(province.ubicacion),10f) , 1500, object: GoogleMap.CancelableCallback{
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(province.ubicacion.toLatLng(),10f) , 1500, object: GoogleMap.CancelableCallback{
                 override fun onCancel() {
                     //activity.toastText("Cancel")
                 }

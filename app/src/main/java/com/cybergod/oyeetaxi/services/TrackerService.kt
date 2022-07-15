@@ -20,7 +20,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
-import com.cybergod.oyeetaxi.maps.Utils.locationToUbicacion
+import com.cybergod.oyeetaxi.maps.Utils.toUbicacion
 import com.cybergod.oyeetaxi.utils.Constants.ACTION_SERVICE_START
 import com.cybergod.oyeetaxi.utils.Constants.ACTION_SERVICE_STOP
 import com.cybergod.oyeetaxi.utils.Constants.LOCATION_UPDATE_INTERFAL_FASTEST
@@ -73,7 +73,7 @@ class TrackerService : LifecycleService() {
                     updateNotificationPeriodically()
                    // if (location.bearing != 0.0f){
                         currentLocationFromService.postValue(location)
-                        ubicacionActualToServer = locationToUbicacion(location)
+                        ubicacionActualToServer = location.toUbicacion()
                        // Log.d(TAG,"ubicacionActualToServer=${ubicacionActualToServer}")
 
                         Log.d(TAG,"currentUser.value?.id!!=${currentUserActive.value?.id}")

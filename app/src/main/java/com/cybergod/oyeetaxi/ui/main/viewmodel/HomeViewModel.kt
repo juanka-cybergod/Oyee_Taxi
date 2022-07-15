@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.repositories.VehicleRepository
-import com.cybergod.oyeetaxi.maps.Utils.locationToUbicacion
+import com.cybergod.oyeetaxi.maps.Utils.toUbicacion
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
 
     fun updateCurrentUserLocation(location:Location){
         currentUserActive.value?.apply {
-            this.ubicacion = locationToUbicacion(location)
+            this.ubicacion = location.toUbicacion()
         }
     }
 
@@ -49,12 +49,10 @@ class HomeViewModel @Inject constructor(
 
         fun getAvailableVehicles(){
 
-                viewModelScope.launch {
-                    vehicleList.postValue(
-                        repository.getAvailableVehicles()
-                    )
-
-
+            viewModelScope.launch {
+                repository.getAvailableVehicles()?.let {
+                    vehicleList.postValue(it)
+                }
             }
 
         }

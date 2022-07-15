@@ -14,9 +14,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
+import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
+import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentVehicleDetailBinding
 import com.cybergod.oyeetaxi.maps.Utils.calculateTheDistance
+import com.cybergod.oyeetaxi.maps.Utils.toUbicacion
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleDetailsViewModel
 import com.cybergod.oyeetaxi.ui.main.viewmodel.HomeViewModel
 import com.cybergod.oyeetaxi.ui.permissions.utils.Permissions
@@ -34,6 +38,8 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoClimatizado
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoMatricula
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.setVehiculoVerificacionImage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
+import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkers
+import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkersObservable
 import com.cybergod.oyeetaxi.utils.Intents.launchIntentCallPhone
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.logD
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -51,7 +57,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
     lateinit var viewModel: VehicleDetailsViewModel
     private val viewModelHome: HomeViewModel by activityViewModels()
 
-    private var vehicleOK: MutableLiveData<VehiculoResponse> = MutableLiveData<VehiculoResponse>()
+    private var vehicleOK: VehiculoResponse = VehiculoResponse()
 
 
     override fun onCreateView(
@@ -93,34 +99,34 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         with(binding) {
 
             //Imagen Perfil
-            imageUsuario.loadImagePerfilFromURL(vehicleOK.value?.usuario?.imagenPerfilURL)
+            imageUsuario.loadImagePerfilFromURL(vehicleOK.usuario?.imagenPerfilURL)
 
             //Imagen Frontal
-            imageVehiculo.loadImageVehiculoFrontalFromURL(vehicleOK.value?.imagenFrontalPublicaURL)
+            imageVehiculo.loadImageVehiculoFrontalFromURL(vehicleOK.imagenFrontalPublicaURL)
 
             //Verificacion Vehiculo
-            imageVehiculoVerificado.setVehiculoVerificacionImage(vehicleOK.value!!)
+            imageVehiculoVerificado.setVehiculoVerificacionImage(vehicleOK)
 
             //Verificacion Usuario
-            imageUsuarioVerificado.setUsuarioVerificacionImage(vehicleOK.value?.usuario!!)
+            imageUsuarioVerificado.setUsuarioVerificacionImage(vehicleOK.usuario?: Usuario())
 
             //Matricula
-            tvMatricula.setVehiculoMatricula(vehicleOK.value?.vehiculoVerificacion?.matricula)
+            tvMatricula.setVehiculoMatricula(vehicleOK.vehiculoVerificacion?.matricula)
 
             //Detalles del Vehiculo
-            tvDetalles.setDetallesVehiculos(vehicleOK.value!!)
+            tvDetalles.setDetallesVehiculos(vehicleOK)
 
             //Climatizado
-            imageVehiculoClimatizado.setVehiculoClimatizado(vehicleOK.value!!)
+            imageVehiculoClimatizado.setVehiculoClimatizado(vehicleOK)
 
             //Nombre Condutor
-            tvNombreCondutor.text = vehicleOK.value?.usuario?.nombre
+            tvNombreCondutor.text = vehicleOK.usuario?.nombre
 
             //Datos Condutor
-            tvDetallesUsuario.setDetallesUsuario(vehicleOK.value!!)
+            tvDetallesUsuario.setDetallesUsuario(vehicleOK)
 
             //Valoracion
-            vehicleOK.value!!.usuario!!.valoracion?.let {
+            vehicleOK.usuario?.valoracion?.let {
                 userRatingBar.rating = it
             }
 
@@ -152,7 +158,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         binding.btnCall.setOnClickListener {
 
             if (Permissions.hasCallPhonePermission(this.requireContext())){
-                requireContext().launchIntentCallPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
+                requireContext().launchIntentCallPhone(vehicleOK.usuario?.telefonoMovil!!)
             } else {
                 Permissions.requestCallPhonePermission(this)
             }
@@ -161,7 +167,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
         //Valorar
         binding.imageUsuario.setOnClickListener {
-            vehicleOK.value?.let {
+            vehicleOK.let {
                 findNavController().navigate(R.id.action_vehicleDetailFragment_to_valoracionFragment,Bundle().apply {
                     putParcelable(KEY_VEHICLE_RESPONSE_PARCELABLE,it)
                 })
@@ -193,14 +199,14 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
                 Toast.makeText(requireContext(),"Mensaje no enviado porque estaba en blanco",Toast.LENGTH_LONG).show()
             } else {
 
-                val phoneNumber:String = vehicleOK.value?.usuario?.telefonoMovil!!
+                val phoneNumber:String = vehicleOK.usuario?.telefonoMovil!!
                 val sentPI: PendingIntent = PendingIntent.getBroadcast(requireContext(), 0, Intent("SMS_SENT"), 0)
 
                 try {
 
 
                     SmsManager.getDefault().sendTextMessage(phoneNumber, null,  "Cliente de " + requireContext().getString(R.string.app_name) + " dice : $message", sentPI, null)
-                    Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.value?.usuario?.nombre}",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.usuario?.nombre}",Toast.LENGTH_LONG).show()
                 }catch (e: Exception){
 
 
@@ -209,7 +215,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
                         requireContext().getSystemService(SmsManager::class.java)}  else null
 
                         smsManager?.sendTextMessage(phoneNumber, null,  "Cliente de " + requireContext().getString(R.string.app_name) + " dice : $message", sentPI, null)
-                        Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.value?.usuario?.nombre}",Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(),"Mensaje Enviado a ${vehicleOK.usuario?.nombre}",Toast.LENGTH_LONG).show()
 
 
 
@@ -252,33 +258,49 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
     private fun setupCalculateDistancesObserver() {
 
-        vehicleOK.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                reCalculateDistances()
-            }
+//        vehicleOK.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//                reCalculateDistances()
+//            }
+//
+//        })
 
-        })
-        currentUserActive.observe(viewLifecycleOwner, Observer {
-            it?.let {
-               reCalculateDistances()
+        hashMapMarkersObservable.observe(viewLifecycleOwner, Observer { hashMarkers ->
+            hashMarkers[vehicleOK.id]?.let { marker ->
+                reCalculateDistances(marker.position.toUbicacion())
             }
         })
+
+        //TODO Poner userLocationMarker de GlobalVariables como MutableLiveData para que cuando cambie la posicion del usuario actual
+        //TODO se recalcule su distancia hacia el vehiculo aunque este no se halla movido
+//        currentUserActive.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//               reCalculateDistances()
+//            }
+//        })
 
     }
 
-    private fun reCalculateDistances(){
-        if (currentUserActive.value?.ubicacion != null && vehicleOK.value?.usuario?.ubicacion != null) {
-            "Vehículo a ${calculateTheDistance(currentUserActive.value?.ubicacion,vehicleOK.value?.usuario?.ubicacion)  } Km de su posición".also { binding.tvDistanceBetween.text = it }
-
+    private fun reCalculateDistances(ubicacionVehiculo: Ubicacion){
+        if (currentUserActive.value?.ubicacion != null) {
+            "Vehículo a ${calculateTheDistance(currentUserActive.value?.ubicacion,ubicacionVehiculo)  } Km de su posición".also { binding.tvDistanceBetween.text = it }
         } else binding.tvDistanceBetween.text = ""
     }
+
+
+//    private fun reCalculateDistances(){
+//        if (currentUserActive.value?.ubicacion != null && vehicleOK.value?.usuario?.ubicacion != null) {
+//            "Vehículo a ${calculateTheDistance(currentUserActive.value?.ubicacion,vehicleOK.value?.usuario?.ubicacion)  } Km de su posición".also { binding.tvDistanceBetween.text = it }
+//
+//        } else binding.tvDistanceBetween.text = ""
+//    }
 
     @SuppressLint("SetTextI18n")
     private fun setupVehicleDetailObserverFromHomeViewModel(vehicleId: String){
 
 
         viewModelHome.vehicleList.value?.find {  item -> item.id.equals(vehicleId,true) }?.let { vehiculoResponse ->
-            vehicleOK.value = vehiculoResponse
+            vehicleOK = vehiculoResponse
             paintVehicle()
         }
 
@@ -288,8 +310,8 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
             if (!listaVehiculos.isNullOrEmpty()) {
 
                 listaVehiculos.find {  item -> item.id.equals(vehicleId,true) }?.let { vehiculoResponse ->
-                    if ( vehiculoResponse != vehicleOK.value) {
-                        vehicleOK.value = vehiculoResponse
+                    if ( vehiculoResponse != vehicleOK) {
+                        vehicleOK = vehiculoResponse
                         paintVehicle()
                     }
 
@@ -347,7 +369,7 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
 
         when (requestCode) {
             PERMISSION_CALL_PHONE_REQUEST_CODE -> {
-                requireContext().launchIntentCallPhone(vehicleOK.value?.usuario?.telefonoMovil!!)
+                requireContext().launchIntentCallPhone(vehicleOK.usuario?.telefonoMovil!!)
             }
             PERMISSION_SEND_SMS_REQUEST_CODE -> {
                 showDialogSendSMS()

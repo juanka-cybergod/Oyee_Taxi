@@ -16,13 +16,11 @@ object GlobalVariables {
     var NetworkErrorFound:MutableLiveData<Boolean> = MutableLiveData()
     var NetworkErrorMessaje : String = ""
 
-    //Maps
+    //Maps Objects
     lateinit var map: GoogleMap
 
-    //Maps Markers
-    var hashMapMarkers: MutableLiveData<HashMap<String, Marker>> = MutableLiveData(HashMap())
-
-    //Maps Objects
+    var hashMapMarkers: HashMap<String, Marker> = HashMap()
+    var hashMapMarkersObservable: MutableLiveData<HashMap<String, Marker>> = MutableLiveData(HashMap())
 
     var userLocationMarker : Marker? = null
     var userLocationCircle : Circle? = null

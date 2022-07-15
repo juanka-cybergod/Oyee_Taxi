@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.FragmentHomeBinding
 import com.cybergod.oyeetaxi.maps.*
+import com.cybergod.oyeetaxi.maps.Constants.USER_LOCATION
 import com.cybergod.oyeetaxi.services.ServiceController.startLocationService
 import com.cybergod.oyeetaxi.services.ServiceController.stopLocationService
 import com.cybergod.oyeetaxi.services.TrackerService
@@ -34,7 +35,6 @@ import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationCircle
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationMarker
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
-import com.cybergod.oyeetaxi.utils.GlobalVariables
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.Marker
@@ -271,7 +271,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
             if (listVehiculoResponse != null) {
 
                 //Buscar y quitar los Marcadores que ya no son vehiculos Disponibles
-                markerControl.removeUnaviableVehiclesFromMapMarker(listVehiculoResponse)
+                markerControl.removeUnavailableVehiclesFromMapMarker(listVehiculoResponse)
 
 
                 if (listVehiculoResponse.isNotEmpty()) {
@@ -285,7 +285,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
                         if (currentUserActive.value?.id != vehiculo.usuario?.id) {
 
                             //Actualizar los Marcadores en el Mapa en Tiempo Real (ADD/UPDATE)
-                            if (hashMapMarkers.value?.containsKey(vehiculo.id) == true) {
+                            if (hashMapMarkers.containsKey(vehiculo.id)) {
                                 //Actualiza el Marcador
                                 markerControl.updateVehicleMarker(vehiculo)
                             } else {
@@ -314,7 +314,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
 
     override fun onResume() {
 
-        hashMapMarkers.value?.clear()
+        //hashMapMarkers.value?.clear()
 
         homeViewModel.getAvailableVehicles()
 
@@ -470,7 +470,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
                     }
 
                     override fun onFinish() {
-                        if (marker.tag.toString().equals("USER_LOCATION",true)) {
+                        if (marker.tag.toString().equals(USER_LOCATION,true)) {
 
                             Toast.makeText(requireContext(),"Tu Ubicación Actual",Toast.LENGTH_SHORT).show()
                         } else {

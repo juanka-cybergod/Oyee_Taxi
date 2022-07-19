@@ -30,9 +30,6 @@ object GlobalVariables {
     val currentVehicleActive: MutableLiveData<VehiculoResponse> = MutableLiveData<VehiculoResponse>()
     var currentMapStyle: TypeAndStyle.MapStyle = TypeAndStyle.MapStyle.SILVER
 
-
-
-
-
+    var hashMapMarkersChangingPosition: HashMap<Any?, Boolean> = HashMap()
 
 }

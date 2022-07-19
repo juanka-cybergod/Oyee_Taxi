@@ -19,6 +19,7 @@ import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.databinding.FragmentVehicleDetailBinding
+import com.cybergod.oyeetaxi.maps.CameraControl
 import com.cybergod.oyeetaxi.maps.Utils.calculateTheDistance
 import com.cybergod.oyeetaxi.maps.Utils.toUbicacion
 import com.cybergod.oyeetaxi.ui.dilogs.viewmodel.VehicleDetailsViewModel
@@ -268,6 +269,12 @@ class VehicleDetailFragment : BottomSheetDialogFragment(), EasyPermissions.Permi
         hashMapMarkersObservable.observe(viewLifecycleOwner, Observer { hashMarkers ->
             hashMarkers[vehicleOK.id]?.let { marker ->
                 reCalculateDistances(marker.position.toUbicacion())
+
+
+                val cameraControl by lazy { CameraControl() }
+                cameraControl.moveCameraTo(marker.position)
+
+
             }
         })
 

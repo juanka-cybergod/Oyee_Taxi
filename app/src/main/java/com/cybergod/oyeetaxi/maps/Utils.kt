@@ -143,6 +143,10 @@ object Utils {
         return LatLng(this?.latitud ?:0.0,this?.longitud  ?:0.0)
     }
 
+    fun Location.toLatLng():LatLng{
+        return LatLng(this.latitude,this.longitude)
+    }
+
     fun LatLng.toUbicacion():Ubicacion{
         return Ubicacion(latitud =  this.latitude, longitud = this.longitude)
     }

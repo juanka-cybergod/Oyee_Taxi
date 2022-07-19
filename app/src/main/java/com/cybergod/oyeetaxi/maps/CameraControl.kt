@@ -92,6 +92,11 @@ class CameraControl {
 
     }
 
+
+    fun moveCameraTo(latLng: LatLng){
+        map.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+    }
+
 //UTILES
 //map.moveCamera(CameraUpdateFactory.newLatLngZoom(getProvinceLatLng(province),9f))
 //map.animateCamera(CameraUpdateFactory.newLatLngZoom(getProvinceLatLng(province),10f) , 1500,null)

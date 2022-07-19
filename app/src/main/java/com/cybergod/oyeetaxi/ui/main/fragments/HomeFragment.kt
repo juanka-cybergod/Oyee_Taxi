@@ -32,25 +32,23 @@ import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_ID
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkers
 import com.cybergod.oyeetaxi.utils.GlobalVariables.map
-import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationCircle
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationMarker
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
+import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationCircle
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.Marker
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.mancj.materialsearchbar.MaterialSearchBar
 import com.mancj.materialsearchbar.adapter.SuggestionsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClickListener,
     MaterialSearchBar.OnSearchActionListener, TextWatcher,
-    SuggestionsAdapter.OnItemViewClickListener {
+    SuggestionsAdapter.OnItemViewClickListener{
 
 
     private var _binding: FragmentHomeBinding? = null
@@ -313,54 +311,30 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
     }
 
     override fun onResume() {
-
-        //hashMapMarkers.value?.clear()
-
-        homeViewModel.getAvailableVehicles()
-
-        homeViewModel.stopMapVehicleUpdate = false
-
-        continueslyUpdateVhieclesInTheMap()
-
+        homeViewModel.stopGettingAvailableVehicleToMap = false
         super.onResume()
     }
 
 
 
     override fun onStop() {
+        homeViewModel.stopGettingAvailableVehicleToMap = true
+        super.onStop()
+    }
 
-        homeViewModel.stopMapVehicleUpdate = true
 
+    override fun onDestroy() {
         userLocationMarker?.remove()
         userLocationMarker=null
 
         userLocationCircle?.remove()
         userLocationCircle = null
 
-        super.onStop()
+        hashMapMarkers.clear()
+
+
+        super.onDestroy()
     }
-
-
-    fun continueslyUpdateVhieclesInTheMap(){
-
-        homeViewModel.coroutine.launch(Dispatchers.IO) {
-            //Log.d("CoroutineScope","Started ...")
-            while (!homeViewModel.stopMapVehicleUpdate) {
-                //Log.d("CoroutineScope","Running ...")
-                delay(DELAY_VEHICLES_UPDATE)
-                homeViewModel.getAvailableVehicles()
-            }
-
-        }
-    }
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
@@ -385,18 +359,13 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
         try {
             map.isMyLocationEnabled = true
         } catch (e :Exception) {
-            Log.d("HomeFragment","imposible Activar la Ubicacion Motivo : $e")
+            Log.d("HomeFragment","Imposible Activar la Ubicacion Motivo : $e")
         }
 
-        //Ejecuta Solo una Vez
         goToProvinceOneTime()
 
-
-        //Prepara los Click Listener sobre el Mapa
         setupMapOnClicksListeners()
 
-
-        //Observa la Localizacion en Servicio de Localizacion
         setupObserveCurrentLocationFromTrackerService()
 
 
@@ -404,7 +373,7 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
     }
 
 
-    fun updateUserLocationOnMap(location :Location){
+    private fun updateUserLocationOnMap(location :Location){
 
         if (map != null) {
             if (userLocationMarker == null) {
@@ -440,7 +409,6 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
     }
 
 
-    //Al cargar el mapa la 1ra vez aplica efecto de acercamiento a la provincia que cada cual
     private fun goToProvinceOneTime() {
 
         if (!homeViewModel.aleadyRuned) {
@@ -531,36 +499,6 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
         )
 
     }
-
-
-//    //Escucha la opcionSeleccionada en el Menu
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//
-//        typeAndStyle.setMapType(item,map,this.requireContext())
-//
-//        when(item.itemId){
-//
-//            R.id.provinces -> {
-//                findNavController().navigate(R.id.action_navigation_home_to_provincesFragment)
-//            }
-//            R.id.addVehicle -> {
-//                //launchVehicleRegisterActivity()
-//            }
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
-
-
-//    //Inflar los Menus para es
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.menu_provinces,menu)
-//        inflater.inflate(R.menu.menu_map_types,menu)
-//        inflater.inflate(R.menu.menu_service,menu)
-//        inflater.inflate(R.menu.menu_test,menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
 
 
 

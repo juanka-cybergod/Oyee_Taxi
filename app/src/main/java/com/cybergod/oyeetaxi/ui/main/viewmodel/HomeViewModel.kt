@@ -6,10 +6,12 @@ import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.repositories.VehicleRepository
 import com.cybergod.oyeetaxi.maps.Utils.toUbicacion
+import com.cybergod.oyeetaxi.utils.Constants.DELAY_VEHICLES_UPDATE
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,7 +34,7 @@ class HomeViewModel @Inject constructor(
 
 
     //Variables para Controlar la Actualizacion de los Vehiculos en el Mapa
-    var stopMapVehicleUpdate : Boolean = false
+    var stopGettingAvailableVehicleToMap : Boolean = false
     var coroutine : CoroutineScope = CoroutineScope(Dispatchers.IO)
 
 
@@ -47,15 +49,39 @@ class HomeViewModel @Inject constructor(
 
 
 
-        fun getAvailableVehicles(){
+    private fun getAvailableVehicles(){
 
-            viewModelScope.launch {
-                repository.getAvailableVehicles()?.let {
-                    vehicleList.postValue(it)
+        viewModelScope.launch {
+            getting = true
+            repository.getAvailableVehicles()?.let {
+                vehicleList.postValue(it)
+            }.also {
+                getting = false
+            }
+        }
+
+    }
+
+
+    init {
+        continueslyUpdateVhieclesInTheMap()
+    }
+
+    var getting = false
+    fun continueslyUpdateVhieclesInTheMap(){
+
+        coroutine.launch(Dispatchers.IO) {
+
+            while (true) {
+
+                if (!stopGettingAvailableVehicleToMap && !getting) {
+                    getAvailableVehicles()
                 }
+                delay(DELAY_VEHICLES_UPDATE)
             }
 
         }
+    }
 
 
 

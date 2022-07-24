@@ -13,6 +13,7 @@ import com.cybergod.oyeetaxi.databinding.UserRegistrationFragment5Binding
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURI
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -79,33 +80,24 @@ class UserRegistrationFragment5 : BaseFragment() {
         val mPassword1 = binding.tvPassword1.editText!!.text.trim().toString()
         val mPassword2 = binding.tvPassword2.editText!!.text.trim().toString()
 
+        binding.tvPassword1.isErrorEnabled=false
+        binding.tvPassword2.isErrorEnabled=false
+
         return when {
-            TextUtils.isEmpty(mPassword1.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor introduzca una contraseña",
-                    true,
-                )
+            mPassword1.isEmptyTrim() -> {
+                binding.tvPassword1.error = "Por favor introduzca una contraseña"
                 false
             }
             mPassword1.length < 6 -> {
-                showSnackBar(
-                    "La contraseña deberá tener más de 6 caracteres",
-                    true,
-                )
+                binding.tvPassword1.error = "La contraseña deberá tener más de 6 caracteres"
                 false
             }
-            TextUtils.isEmpty(mPassword2.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor verifique su contraseña",
-                    true,
-                )
+            mPassword2.isEmptyTrim() -> {
+                binding.tvPassword2.error = "Por favor verifique su contraseña"
                 false
             }
            mPassword1 != mPassword2 -> {
-                showSnackBar(
-                    "La verificación de la contraseña no coincide",
-                    true,
-                )
+               binding.tvPassword2.error = "La verificación de la contraseña no coincide"
                 false
             }
 

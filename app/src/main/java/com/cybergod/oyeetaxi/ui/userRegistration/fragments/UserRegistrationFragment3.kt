@@ -61,7 +61,6 @@ class UserRegistrationFragment3 : BaseFragment() {
              findNavController().navigate(R.id.action_userRegistrationFragment3_to_userRegistrationFragment4)
         }
 
-
         loadTempDatafromViewModel()
 
 
@@ -73,15 +72,26 @@ class UserRegistrationFragment3 : BaseFragment() {
 
     private fun loadTempDatafromViewModel() {
 
-        if (viewModel.conductor.value != null) {
+        with(binding) {
+            rbConductor.isEnabled = viewModel.registerConfiguration?.habilitadoRegistroConductores?:false
+            rbPasajero.isEnabled = viewModel.registerConfiguration?.habilitadoRegistroPasajeros?:false
 
-            if (viewModel.conductor.value!!) {
-                binding.rbConductor.isChecked = true
-            } else {
-                binding.rbPasajero.isChecked = true
+            if (viewModel.conductor.value != null) {
+
+                if (viewModel.conductor.value!!) {
+                    rbConductor.isChecked = true
+                } else {
+                    rbPasajero.isChecked = true
+                }
+
             }
 
+
+
         }
+
+
+
 
     }
 

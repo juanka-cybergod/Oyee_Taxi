@@ -73,25 +73,19 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
             val verificationCode: String = binding.tvCode.editText!!.text.trim().toString()
             val phoneNumber:String = binding.tvPhone.editText!!.text.toString()
 
+            binding.tvPhone.isErrorEnabled=false
+            binding.tvCode.isErrorEnabled=false
+
             if (phoneNumber.length != 8) {
-                showSnackBar(
-                    "Por favor introduzca su número de teléfono",
-                    true,
-                )
+                binding.tvPhone.error = "Por favor introduzca su número de teléfono"
             } else {
 
                 if (verificationCode.isEmptyTrim()) {
-                        showSnackBar(
-                            "Por favor introduzca el código de verificación",
-                            true,
-                        )
+                    binding.tvCode.error = "Por favor introduzca el código de verificación"
                 } else {
 
                     if (verificationCode.length != 6) {
-                        showSnackBar(
-                            "El código de verificación está incompleto",
-                            true,
-                        )
+                        binding.tvCode.error = "El código de verificación está incompleto"
                    } else {
 
                         lifecycleScope.launch {
@@ -139,25 +133,20 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
 
         val mPhoneNumber = binding.tvPhone.editText!!.text.trim().toString()
 
+        binding.tvPhone.isErrorEnabled=false
+
         return when {
             //mPhoneNumber
-            TextUtils.isEmpty(mPhoneNumber.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor introduzca su su número de teléfono",
-                    true,
-                )
+            mPhoneNumber.isEmptyTrim() -> {
+                binding.tvPhone.error = "Por favor introduzca su número de teléfono"
                 false
             }
             //mPhoneNumber
             mPhoneNumber.length != 8 -> {
-                showSnackBar(
-                    "Por favor introduzca un número de teléfono válido",
-                    true,
-                )
+                binding.tvPhone.error = "Por favor introduzca su número de teléfono"
                 false
             }
             else -> {
-
                 phoneNumber = CONTRY_CODE + mPhoneNumber
                 true
             }
@@ -187,13 +176,11 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
 
         viewModel.userAlreadyExistWithPhone.observe(viewLifecycleOwner, Observer { exist ->
 
+            hideProgressDialog()
+
             if (exist != null) {
                 if (exist == true) {
-                    hideProgressDialog()
-                    showSnackBar(
-                        getString(R.string.user_already_exist),
-                        true,
-                    )
+                    binding.tvPhone.error = getString(R.string.user_already_exist)
                 } else {
 
                     //si no existe comenzar la verificacion
@@ -202,7 +189,6 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
                 }
 
             } else {
-                hideProgressDialog()
                 showSnackBar(
                     getString(R.string.fail_server_comunication),
                     true,
@@ -221,6 +207,8 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         // Toast.makeText(requireContext(),"Código de Verificación Enviado",Toast.LENGTH_LONG).show()
         Log.d(TAG_CLASS_NAME,"onCodeSent : Código de Verificación Enviado (verificationId=${viewModel.otpCode.value})")
 
+        //Habilitar Boton Continuar
+        binding.continueButton.isEnabled = true
 
         //Deshabilitar el Campo de Telefono
         binding.tvPhone.isEnabled = false
@@ -237,18 +225,19 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
         coroutine.launch(Dispatchers.Main) {
 
             binding.sendCodeButton.isEnabled = false
+            binding.sendCodeButton.isChecked = false
 
-            var i:Int = 120
+            var i = 120
             while (i > 0) {
+                binding.sendCodeButton.text = "Volver a solicitar código en $i segundos"
                 delay(1000L)
                 i--
-                binding.sendCodeButton.setText("Volver a solicitar código en $i segundos")
-
             }
 
             binding.sendCodeButton.text = "Solicitar código"
             binding.sendCodeButton.isEnabled = true
-            binding.tvPhone.isEnabled = true
+            //binding.tvPhone.isEnabled = true
+            binding.sendCodeButton.isChecked = true
         }
 
     }
@@ -268,10 +257,7 @@ class UserRegistrationFragment2byTwilio : BaseFragment() {
             Log.d(TAG_CLASS_NAME,"El Código de Verificación es Correcto")
             goToNextFragment()
         } else {
-            showSnackBar(
-                getString(R.string.verification_code_is_incorrect),
-                true
-            )
+            binding.tvCode.error = getString(R.string.verification_code_is_incorrect)
             Log.d(TAG_CLASS_NAME,getString(R.string.verification_code_is_incorrect))
 
         }

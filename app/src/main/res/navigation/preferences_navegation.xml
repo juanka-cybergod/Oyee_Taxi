@@ -23,6 +23,11 @@
         />
 
 
+    <action android:id="@+id/action_go_to_registerNewUsersFragment"
+        app:destination="@id/registerNewUsersFragment"
+        />
+
+
     <action android:id="@+id/action_go_to_searchFilterVehicleFragment"
         app:destination="@id/searchFilterVehicleFragment"
         />
@@ -132,6 +137,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.fragments.superAdmin.AddEditAppUpdateFragment"
         android:label="AddEditAppUpdateFragment"
         tools:layout="@layout/dialog_add_edit_app_update"
+        />
+    <dialog
+        android:id="@+id/registerNewUsersFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.RegisterNewUsersFragment"
+        android:label="RegisterNewUsersFragment"
+        tools:layout="@layout/dialog_admin_users_registration"
         />
 
 </navigation>

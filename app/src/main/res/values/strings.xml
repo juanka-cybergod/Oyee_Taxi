@@ -32,7 +32,7 @@
     <string name="fail_server_conection">Falló la conexión con el Servidor</string>
     <string name="fail_internet_conection">Verifique su conexión a Internet</string>
     <string name="number_validation_is_disable">La validacion de números está deshabilitada por el momento</string>
-    <string name="fail_server_comunication">Falló la comunicación con el Servidor :(</string>
+    <string name="fail_server_comunication">Falló la conexión con el Servidor :(</string>
     <string name="server_fail_to_sent_email">El servidor no pudo enviarle el código de verificación a su dirección de correo, por favor intentelo mas tarde. Si el problema persiste contacte con soporte. Gracias por usar nuestros servicios</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
     <string name="user_not_found">Usuario no encontrado</string>
@@ -82,6 +82,7 @@
     <string name="disable_server_for_clients_description">Precaución: Si desactiva el servidor, los clientes no podrán iniciar sesión. Deberá usar esta opción con propósitos administrativos muy específicos</string>
     <string name="disable_server_for_admins_description">Precaución: Si desactiva el servidor, los administradores no podrán iniciar sesión. Deberá usar esta opción con propósitos administrativos muy específicos</string>
     <string name="disable_app_update_description">Precaución: Si desactiva las actualizaciones en el servidor, todos los usuarios dejarán de recibir las actualizaciones de la aplicación. Deberá usar esta opción con propósitos administrativos muy específicos</string>
+    <string name="register_new_users_description">Aqui puede definir si se admitirán nuevos registros para usuarios de tipo (Conductor y/o Pasajeros) de ahora en adelante. Deberá usar esta opción con propósitos administrativos muy específicos</string>
     <string name="server_active_for_clients">Servidor activo para clientes</string>
     <string name="server_active_for_admins">Servidor activo para administradores</string>
     <string name="app_update_enabled">Actualizaciones activadas</string>
@@ -107,10 +108,11 @@
     <string name="force_update">Actualización Requerida</string>
     <string name="to_pasanger_transport">Para transporte de pasajeros</string>
     <string name="to_charge_transport">Para transporte de carga</string>
-    <string name="admin_provinces">Administrar\nProvincias\n</string>
-    <string name="admin_users">Administrar\nUsuarios</string>
-    <string name="admin_vehicles_types">Administrar\nTipos\nVehículos</string>
-    <string name="admin_vehicles">Administrar\nVehículos</string>
+    <string name="admin_provinces">Provincias\n</string>
+    <string name="admin_register">Registro de Usuarios\n</string>
+    <string name="admin_users">Usuarios\n</string>
+    <string name="admin_vehicles_types">Tipos Vehículos\n</string>
+    <string name="admin_vehicles">Vehículos\n</string>
     <string name="code_sent">Código enviado satisfactoriamente</string>
     <string name="pasajero_select">PASAJERO</string>
     <string name="conductor_select">CONDUCTOR</string>
@@ -136,6 +138,8 @@
     <string name="your_app_is_up_to_date">Su aplicación está actualizada</string>
     <string name="store"> Tienda</string>
     <string name="select_apk_file_to_upload">Seleccionar Fichero APK de Actualizacion</string>
+    <string name="preparing_new_register">Preparando registro ...</string>
+    <string name="validating_email">Validando correo ...</string>
     <string-array name="map_styles_items">
         <item>Oye Taxi</item>
         <item>Normal</item>

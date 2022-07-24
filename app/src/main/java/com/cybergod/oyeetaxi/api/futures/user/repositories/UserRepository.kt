@@ -316,6 +316,34 @@ class UserRepository @Inject constructor(private val retroServiceInterface: Retr
     }
 
 
+    suspend fun emailExist(email: String) : Boolean?  {
+
+        handleRequest {
+            retroServiceInterface.emailExist(email)
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object{}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    response.body()
+                } else null
+            } else null
+
+        }
+
+        return null
+
+    }
+
+
 }
 
 

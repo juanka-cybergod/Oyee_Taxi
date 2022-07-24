@@ -3,6 +3,7 @@ package com.cybergod.oyeetaxi.api.interfaces
 
 import com.cybergod.oyeetaxi.api.futures.app_update.model.Actualizacion
 import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.RegisterConfiguracion
 import com.cybergod.oyeetaxi.api.futures.file.model.response.FicherosRespuesta
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
@@ -24,7 +25,7 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_USUARIOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VALORACION
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VEHICULOS
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VIAJES
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
@@ -77,6 +78,9 @@ interface RetroServiceInterface {
 
     @GET(URL_BASE_USUARIOS + "verifyOTPCodeToRestorePassword")
     suspend fun verifyOTPCodeToRestorePassword(@Query("idUsuario") idUsuario: String,@Query("otpCode") otpCode: String): Response<Boolean>
+
+    @GET(URL_BASE_USUARIOS + "emailExist")
+    suspend fun emailExist(@Query("email") email: String): Response<Boolean>
 
 
     /** VEHICULOS ***********************************************************/
@@ -140,8 +144,12 @@ interface RetroServiceInterface {
     @GET(URL_BASE_CONFIGURACION + "isServerActive")
     suspend fun isServerActive(): Response<Boolean>
 
-    @GET(URL_BASE_CONFIGURACION + "getSmsProvider")
-    suspend fun getSmsProvider(): Response<SmsProvider>
+//    @GET(URL_BASE_CONFIGURACION + "getSmsProvider")
+//    suspend fun getSmsProvider(): Response<SmsProvider>
+
+
+    @GET(URL_BASE_CONFIGURACION + "getRegisterConfiguration")
+    suspend fun getRegisterConfiguration(): Response<RegisterConfiguracion>
 
     @GET(URL_BASE_CONFIGURACION + "getConfiguration")
     suspend fun getConfiguration(): Response<Configuracion>

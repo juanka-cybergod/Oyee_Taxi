@@ -16,7 +16,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.cybergod.oyeetaxi.BuildConfig
 import com.cybergod.oyeetaxi.R
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.SmsProvider
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil

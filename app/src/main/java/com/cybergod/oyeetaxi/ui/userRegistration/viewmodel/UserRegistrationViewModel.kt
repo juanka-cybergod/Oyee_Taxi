@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.RegisterConfiguracion
 import com.cybergod.oyeetaxi.api.futures.province.model.Provincia
 import com.cybergod.oyeetaxi.api.futures.file.model.types.TipoFichero
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
@@ -14,7 +15,7 @@ import com.cybergod.oyeetaxi.api.futures.file.repositories.FilesRepository
 import com.cybergod.oyeetaxi.api.futures.file.request_body.UploadRequestBody
 import com.cybergod.oyeetaxi.api.futures.user.repositories.UserRepository
 import com.cybergod.oyeetaxi.data_storage.DataStorageRepository
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.user.model.verification.UsuarioVerificacion
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.getRamdomUUID
 
@@ -48,17 +49,15 @@ class UserRegistrationViewModel @Inject constructor(
 
     }
 
-    var smsProvider : MutableLiveData<SmsProvider> = MutableLiveData<SmsProvider>(SmsProvider.FIREBASE)
-    init {
+    var registerConfiguration : RegisterConfiguracion? = null
+    suspend fun getRegisterConfiguration():RegisterConfiguracion?{
 
-        viewModelScope.launch(Dispatchers.IO) {
-            smsProvider.postValue(
-                configurationRepository.getSmsProvider()
-            )
+        configurationRepository.getRegisterConfiguration().also {
+            registerConfiguration = it
+            return it
         }
 
     }
-
 
     var imagenPerfilURL : String? = null
     var imagenVerificacionURL : String? = null
@@ -173,6 +172,10 @@ class UserRegistrationViewModel @Inject constructor(
     override fun onProggressUpdate(porcentage: Int) {
         fileProgress.postValue(porcentage)
 
+    }
+
+    suspend fun emailExist(email:String): Boolean? {
+       return  userRepository.emailExist(email)
     }
 
 

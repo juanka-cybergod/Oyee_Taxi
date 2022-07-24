@@ -50,6 +50,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_peoples_32.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_person_32.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_refresh.xml" value="0.223" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_register_config_24.xml" value="0.2035" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_sms.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi_32.xml" value="0.242" />
@@ -74,6 +75,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_add_update_province.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_add_update_vehicle_type.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_addupdate_province.xml" value="0.54375" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_admin_users_registration.xml" value="0.49115646258503404" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_bottom_progress.xml" value="0.33" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_configuration_email.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_configuration_social.xml" value="0.5" />
@@ -86,7 +88,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_social_soporte.xml" value="0.3337950138504155" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_user_edit_verification.xml" value="0.25" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_vehicle_edit_verification.xml" value="0.271875" />
-        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_administration.xml" value="0.33" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_administration.xml" value="0.25" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_app_updates_administration.xml" value="0.271875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_dashboard.xml" value="0.246875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/fragment_email_configuration.xml" value="0.54375" />

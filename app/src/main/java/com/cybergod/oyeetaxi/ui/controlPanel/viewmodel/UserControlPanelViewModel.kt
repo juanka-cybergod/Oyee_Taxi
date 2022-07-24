@@ -14,6 +14,7 @@ import com.cybergod.oyeetaxi.ui.main.viewmodel.BaseViewModel
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -48,6 +49,8 @@ class UserControlPanelViewModel @Inject constructor(
         usuario.id=currentUserActive.value?.id
 
         viewModelScope.launch(Dispatchers.IO) {
+
+            delay(500)
 
             val userUpdated : Usuario? = userRepository.updateUser(usuario)
             if (userUpdated != null) {
@@ -121,6 +124,9 @@ class UserControlPanelViewModel @Inject constructor(
 
     }
 
+    suspend fun emailExist(email:String): Boolean? {
+        return  userRepository.emailExist(email)
+    }
 
 
 }

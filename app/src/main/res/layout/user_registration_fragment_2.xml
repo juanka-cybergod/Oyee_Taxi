@@ -138,7 +138,7 @@
 
 
     <Button
-        android:enabled="true"
+        android:enabled="false"
         android:id="@+id/continueButton"
         android:textAlignment="center"
         android:textColor="@color/black"

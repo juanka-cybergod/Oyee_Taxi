@@ -9,9 +9,11 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.databinding.UserRegistrationFragment4Binding
+import com.cybergod.oyeetaxi.ui.base.BaseActivity
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
 import com.cybergod.oyeetaxi.ui.userRegistration.viewmodel.UserRegistrationViewModel
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
@@ -19,9 +21,13 @@ import com.cybergod.oyeetaxi.utils.DatePickerFragment
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.isValidEmail
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURI
 import com.cybergod.oyeetaxi.utils.FileManager.prepareImageCompressAndGetFile
+import com.cybergod.oyeetaxi.utils.UtilsGlobal.isEmptyTrim
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.setOnDateSelected
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.wordCount
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -44,11 +50,24 @@ class UserRegistrationFragment4 : BaseFragment() {
 
         loadTempDatafromViewModel()
 
+        setupOnClickListeners()
+
+        viewModel.provincia.observe(viewLifecycleOwner, Observer { selectedProvince ->
+            binding.tvProvincia.editText!!.setText(selectedProvince.nombre)
+        })
+
+        return  binding.root
+    }
+
+    private fun setupOnClickListeners() {
         binding.continueButton.setOnClickListener {
 
-           if (verifyData()) {
-               goToNextFragment()
-           }
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (verifyData()) {
+                    goToNextFragment()
+                }
+            }
+
         }
 
         binding.imageViewSelect.setOnClickListener {
@@ -66,12 +85,6 @@ class UserRegistrationFragment4 : BaseFragment() {
             requireView().hideKeyboard()
             findNavController().navigate(R.id.action_userRegistrationFragment4_to_provincesFragment2)
         }
-
-        viewModel.provincia.observe(viewLifecycleOwner, Observer { selectedProvince ->
-            binding.tvProvincia.editText!!.setText(selectedProvince.nombre)
-        })
-
-        return  binding.root
     }
 
 
@@ -102,7 +115,7 @@ class UserRegistrationFragment4 : BaseFragment() {
     }
 
 
-    private fun verifyData(): Boolean {
+    private suspend fun verifyData(): Boolean {
         val mNombre = binding.tvNombre.editText!!.text.trim().toString()
         val mApellidos: String = binding.tvApellidos.editText!!.text.trim().toString()
         val mfechaNacimiento = binding.tvFechaNacimiento.editText!!.text.trim().toString()
@@ -110,7 +123,14 @@ class UserRegistrationFragment4 : BaseFragment() {
         val mProvincia = binding.tvProvincia.editText!!.text.trim().toString()
 
 
-        return when {
+        binding.tvNombre.isErrorEnabled=false
+        binding.tvApellidos.isErrorEnabled=false
+        binding.tvCorreo.isErrorEnabled=false
+        binding.tvFechaNacimiento.isErrorEnabled=false
+        binding.tvProvincia.isErrorEnabled=false
+
+
+        var dataOK :Boolean = when {
 
             //foto de perfil
             viewModel.imagenPerfilFile.value == null  -> {
@@ -122,54 +142,35 @@ class UserRegistrationFragment4 : BaseFragment() {
             }
 
             //nombre
-            TextUtils.isEmpty(mNombre.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor introduzca su nombre completo",
-                    true,
-                )
+            mNombre.isEmptyTrim()-> {
+                binding.tvNombre.error = "Por favor introduzca su nombre completo"
                 false
             }
             //apellidos
-            TextUtils.isEmpty(mApellidos.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor introduzca sus apellidos",
-                    true,
-                )
+            mApellidos.isEmptyTrim()-> {
+                binding.tvApellidos.error = "Por favor introduzca sus apellidos"
                 false
             }
             //los 2 apellidos
             mApellidos.wordCount() < 2 -> {
-                showSnackBar(
-                    "Por favor introduzca su segundo apellido",
-                    true,
-                )
+                binding.tvApellidos.error = "Por favor introduzca su segundo apellido"
                 false
             }
             //correo electronico
             !mCorreo.isValidEmail() -> {
-                showSnackBar(
-                    "Por favor introduzca una dirección válida de correo",
-                    true
-                )
+                binding.tvCorreo.error = "Por favor introduzca una dirección válida de correo"
                 false
             }
             //fecha de nacimiento
-            TextUtils.isEmpty(mfechaNacimiento.trim { it <= ' ' }) -> {
-                showSnackBar(
-                    "Por favor introduzca su fecha de nacimiento",
-                    true,
-                )
+            mfechaNacimiento.isEmptyTrim()-> {
+                binding.tvFechaNacimiento.error = "Por favor introduzca su fecha de nacimiento"
                 false
             }
             //provincia
-            TextUtils.isEmpty(mProvincia.trim { it <= ' ' })  -> {
-                showSnackBar(
-                    "Por favor introduzca su provincia de recidencia",
-                    true
-                )
+            mProvincia.isEmptyTrim()-> {
+                binding.tvProvincia.error = "Por favor introduzca su provincia de recidencia"
                 false
             }
-
             else -> {
 
                 viewModel.nombre.postValue(mNombre)
@@ -179,19 +180,38 @@ class UserRegistrationFragment4 : BaseFragment() {
                 //viewModel.provincia.postValue(mProvincia)
                 true
             }
+        }
+
+        if (dataOK) {
+
+            (requireActivity() as BaseActivity).showProgressDialog(getString(R.string.validating_email))
+
+            delay(500)
+
+            dataOK = when (viewModel.emailExist(mCorreo)) {
+                true -> {
+                    binding.tvCorreo.error = "Este correo ya está siendo usado"
+                    false
+                }
+                null -> {
+                    showSnackBar(
+                        getString(R.string.fail_server_comunication),
+                        true
+                    )
+                    false
+                }
+                false -> {
+                    true
+                }
+
+            }.also {
+                (requireActivity() as BaseActivity).hideProgressDialog()
+            }
+
 
         }
 
-
-
-
-
-
-
-
-
-
-
+    return dataOK
 
     }
 

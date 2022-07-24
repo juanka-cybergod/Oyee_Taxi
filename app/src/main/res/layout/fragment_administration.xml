@@ -361,18 +361,18 @@
                     />
 
                 <com.google.android.material.button.MaterialButton
-                    android:visibility="invisible"
-                    android:id="@+id/btn2"
+                    android:visibility="visible"
+                    android:id="@+id/btnUsersRegistration"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/casiBlanco"
-                    android:drawableTop="@drawable/ic_location_32"
+                    android:drawableTop="@drawable/ic_register_config_24"
                     android:drawableTint="@color/black"
                     android:lines="3"
                     android:maxLines="3"
-                    android:text="@string/admin_provinces"
+                    android:text="@string/admin_register"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="11sp"

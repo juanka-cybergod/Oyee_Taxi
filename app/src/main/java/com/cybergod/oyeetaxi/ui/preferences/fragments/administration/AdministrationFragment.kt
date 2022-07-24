@@ -22,7 +22,7 @@ import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showMessageDialogForResult
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.showDropDownMenuFix
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.smsProviderFromString
-import com.cybergod.oyeetaxi.api.futures.configuration.model.SmsProvider
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.SmsProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -126,7 +126,7 @@ class AdministrationFragment : BaseFragment() {
 
 
 
-        binding.tvSmsProvider.setText(serverConfiguration.smsProvider?.name ?: SmsProvider.DESHABILITADO.name,false)
+        binding.tvSmsProvider.setText(serverConfiguration.registerConfiguracion?.smsProvider?.name ?: SmsProvider.DESHABILITADO.name,false)
 
         fillTexViewSmSProviderList()
     }
@@ -136,6 +136,14 @@ class AdministrationFragment : BaseFragment() {
     private fun setupOnClickListener() {
 
         with (binding) {
+
+            btnUsersRegistration.setOnClickListener {
+                findNavController().navigate(R.id.action_go_to_registerNewUsersFragment,
+                    Bundle().apply {
+                        //putParcelable(KEY_USER_FILTER_OPTIONS, viewModel.userFilterOptions)
+                    }
+                )
+            }
 
             btnVehiclesAdministration.setOnClickListener {
                 findNavController().navigate(R.id.action_administrationFragment_to_vehiclesAdministrationFragment)
@@ -196,9 +204,9 @@ class AdministrationFragment : BaseFragment() {
 
                 selectedSmsProvider = smsProviderFromString(adapterView.getItemAtPosition(position).toString())
 
-                binding.tvSmsProvider.setText(viewModel.serverConfiguration.value?.smsProvider?.name,false)
+                binding.tvSmsProvider.setText(viewModel.serverConfiguration.value?.registerConfiguracion?.smsProvider?.name,false)
 
-                if (selectedSmsProvider != viewModel.serverConfiguration.value?.smsProvider ) {
+                if (selectedSmsProvider != viewModel.serverConfiguration.value?.registerConfiguracion?.smsProvider ) {
 
                     requireContext().showMessageDialogForResult(
                         funResult =  {ok -> setServerSmsProvider(ok)},

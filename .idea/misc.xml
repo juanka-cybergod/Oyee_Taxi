@@ -32,6 +32,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_cloud_no_ok_24.xml" value="0.238" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_cloud_ok_24.xml" value="0.238" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_disable_24.xml" value="0.238" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_download_now_24.xml" value="0.2035" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_edit_48.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_edit_person_32.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_email_send_24.xml" value="0.238" />
@@ -54,6 +55,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_sms.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi.xml" value="0.226" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_taxi_32.xml" value="0.242" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_timer_24.xml" value="0.2035" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_type.xml" value="0.211" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_unchecked_circle_24.xml" value="0.1435" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/drawable/ic_vehicle_active_32.xml" value="0.238" />
@@ -84,6 +86,7 @@
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_filter_user.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_filter_vehicle.xml" value="0.54375" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_image_view.xml" value="0.41953125" />
+        <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_interval_timer_configuration.xml" value="0.271875" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_progress.xml" value="0.75" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_social_soporte.xml" value="0.3337950138504155" />
         <entry key="..\:/Android/MyProjects/OyeeTaxi/app/src/main/res/layout/dialog_user_edit_verification.xml" value="0.25" />

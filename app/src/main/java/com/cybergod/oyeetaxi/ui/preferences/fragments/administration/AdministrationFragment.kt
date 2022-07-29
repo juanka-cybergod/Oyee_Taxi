@@ -138,7 +138,7 @@ class AdministrationFragment : BaseFragment() {
         with (binding) {
 
             btnUsersRegistration.setOnClickListener {
-                findNavController().navigate(R.id.action_go_to_registerNewUsersFragment,
+                findNavController().navigate(R.id.action_administrationFragment_to_registerNewUsersFragment,
                     Bundle().apply {
                         //putParcelable(KEY_USER_FILTER_OPTIONS, viewModel.userFilterOptions)
                     }

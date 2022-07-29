@@ -12,10 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.cybergod.oyeetaxi.R
 import com.cybergod.oyeetaxi.api.futures.configuration.model.Configuracion
 import com.cybergod.oyeetaxi.ui.base.BaseFragment
-import com.cybergod.oyeetaxi.ui.preferences.dilogs.EmailConfigurationFragment
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.showInputTextMessage
 import com.cybergod.oyeetaxi.databinding.FragmentSuperAdminBinding
-import com.cybergod.oyeetaxi.ui.preferences.viewmodel.superAdmin.SuperAdminViewModel
+import com.cybergod.oyeetaxi.ui.preferences.viewmodel.administration.AdministrationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,7 +25,8 @@ class SuperAdminFragment : BaseFragment() {
     private var _binding: FragmentSuperAdminBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SuperAdminViewModel by activityViewModels()
+//    private val viewModel: SuperAdminViewModel by activityViewModels()
+    private val viewModel: AdministrationViewModel by activityViewModels()
 
 
 
@@ -105,6 +105,10 @@ class SuperAdminFragment : BaseFragment() {
     private fun setupOnClickListener() {
 
         with (binding) {
+
+            btnConfigCommunicationRate.setOnClickListener {
+                launchIntervalTimerConfiguracionFragment()
+            }
 
             btnConfigurarActualizaciones.setOnClickListener{
                 launchAppUpdateAdminFragment()
@@ -196,10 +200,12 @@ class SuperAdminFragment : BaseFragment() {
 
 
     private fun launchAppUpdateAdminFragment(){
-        //val dialog = EmailConfigurationFragment()
-
         findNavController().navigate(R.id.action_superAdminFragment_to_appUpdateAdminFragment)
-        //dialog.show(requireActivity().supportFragmentManager,"emailConfigurationFragment")
+    }
+
+
+    private fun launchIntervalTimerConfiguracionFragment(){
+        findNavController().navigate(R.id.action_superAdminFragment_to_intervalTimerConfiguracionFragment)
     }
 
 

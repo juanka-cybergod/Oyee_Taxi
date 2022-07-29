@@ -23,9 +23,9 @@
         />
 
 
-    <action android:id="@+id/action_go_to_registerNewUsersFragment"
-        app:destination="@id/registerNewUsersFragment"
-        />
+<!--    <action android:id="@+id/action_go_to_registerNewUsersFragment"-->
+<!--        app:destination="@id/registerNewUsersFragment"-->
+<!--        />-->
 
 
     <action android:id="@+id/action_go_to_searchFilterVehicleFragment"
@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_administrationFragment_to_vehiclesAdministrationFragment"
             app:destination="@id/vehiclesAdministrationFragment" />
+        <action
+            android:id="@+id/action_administrationFragment_to_registerNewUsersFragment"
+            app:destination="@id/registerNewUsersFragment" />
     </fragment>
     <fragment
         android:id="@+id/provincesAdministrationFragment"
@@ -125,6 +128,9 @@
         <action
             android:id="@+id/action_superAdminFragment_to_appUpdateAdminFragment"
             app:destination="@id/appUpdateAdminFragment" />
+        <action
+            android:id="@+id/action_superAdminFragment_to_intervalTimerConfiguracionFragment"
+            app:destination="@id/intervalTimerConfiguracionFragment" />
     </fragment>
     <fragment
         android:id="@+id/appUpdateAdminFragment"
@@ -143,6 +149,12 @@
         android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.RegisterNewUsersFragment"
         android:label="RegisterNewUsersFragment"
         tools:layout="@layout/dialog_admin_users_registration"
+        />
+    <dialog
+        android:id="@+id/intervalTimerConfiguracionFragment"
+        android:name="com.cybergod.oyeetaxi.ui.preferences.dilogs.IntervalTimerConfiguracionFragment"
+        android:label="IntervalTimerConfiguracionFragment"
+        tools:layout="@layout/dialog_interval_timer_configuration"
         />
 
 </navigation>

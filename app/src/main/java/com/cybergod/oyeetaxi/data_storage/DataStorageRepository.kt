@@ -4,6 +4,7 @@ package com.cybergod.oyeetaxi.data_storage
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
+import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.IntervalTimerConfiguracion
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
 import com.cybergod.oyeetaxi.utils.Constants.UNKNOWN_CLASS
 import com.cybergod.oyeetaxi.utils.UtilsGlobal.logGlobal
@@ -19,6 +20,44 @@ import javax.inject.Inject
 class DataStorageRepository @Inject constructor(private val preferenceDataStoreInstance : DataStore<Preferences>) {
 
     private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
+
+    suspend fun saveIntervalTimerConfiguracion(intervalTimerConfiguracion: IntervalTimerConfiguracion) {
+
+        logGlobal(
+            className = className,
+            metodo = object {}.javaClass.enclosingMethod!!,
+            intervalTimerConfiguracion.toString()
+        )
+
+        preferenceDataStoreInstance.edit { preference ->
+            intervalTimerConfiguracion.getAvailableVehicleInterval?.let {
+                preference[GET_AVAILABLE_VEHICLE_INTERVAL_KEY] = it
+            }
+            intervalTimerConfiguracion.setDriversLocationInterval?.let {
+                preference[SET_DRIVERS_LOCATION_INTERVAL_KEY] = it
+            }
+        }
+    }
+
+
+    val readIntervalTimerConfiguracionFromDataStore : Flow<IntervalTimerConfiguracion?> = preferenceDataStoreInstance.data
+        .catch {exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+
+        }
+        .map { preference ->
+            val intervalTimerConfiguracion =  IntervalTimerConfiguracion(
+                getAvailableVehicleInterval = preference[GET_AVAILABLE_VEHICLE_INTERVAL_KEY],
+                setDriversLocationInterval = preference[SET_DRIVERS_LOCATION_INTERVAL_KEY],
+            )
+            Log.d(className, "readIntervalTimerConfiguracionFromDataStore=$intervalTimerConfiguracion")
+            intervalTimerConfiguracion
+
+        }
 
 
     suspend fun saveMapStyle(mapStyle: TypeAndStyle.MapStyle) {
@@ -211,6 +250,10 @@ class DataStorageRepository @Inject constructor(private val preferenceDataStoreI
         val APP_REMEMBER_UPDATE_AFTER_DATE = stringPreferencesKey("APP_REMEMBER_UPDATE_AFTER_DATE")
 
         val MAP_STYLE_KEY = stringPreferencesKey("MAP_STYLE_KEY")
+
+        val GET_AVAILABLE_VEHICLE_INTERVAL_KEY = longPreferencesKey("GET_AVAILABLE_VEHICLE_INTERVAL_KEY")
+        val SET_DRIVERS_LOCATION_INTERVAL_KEY = longPreferencesKey("SET_DRIVERS_LOCATION_INTERVAL_KEY")
+
 
     }
 

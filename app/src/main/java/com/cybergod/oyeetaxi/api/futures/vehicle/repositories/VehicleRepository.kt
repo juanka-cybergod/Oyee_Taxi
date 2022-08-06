@@ -3,6 +3,7 @@ package com.cybergod.oyeetaxi.api.futures.vehicle.repositories
 import com.cybergod.oyeetaxi.api.interfaces.RetroServiceInterface
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.Vehiculo
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.DataResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
 import com.cybergod.oyeetaxi.api.utils.UtilsApi.handleRequest
@@ -20,7 +21,73 @@ class VehicleRepository @Inject constructor(private val retroServiceInterface: R
     private val className = this.javaClass.simpleName ?: UNKNOWN_CLASS
 
 
-        suspend fun searchVehiclesPaginatedWithFilter(page:Int=1, vehicleFilterOptions: VehicleFilterOptions?) : VehiculosPaginados?  {
+    suspend fun getData() :DataResponse?   {
+
+        handleRequest {
+            retroServiceInterface.getData()
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    isServerAvailable.postValue(true)
+                    response.body()
+                } else  null
+            } else null
+
+        }
+
+        isServerAvailable.postValue(false)
+        return null
+
+
+
+
+    }
+
+
+    suspend fun getAvailableVehicles() :List<VehiculoResponse>?   {
+
+        handleRequest {
+            retroServiceInterface.getAvailableVehicles()
+        }?.let { response ->
+
+            return if (response.isSuccessful) {
+
+                logResponse(
+                    className = className,
+                    metodo = object {}.javaClass.enclosingMethod!!,
+                    responseCode = response.code(),
+                    responseHeaders = response.headers().toString(),
+                    responseBody = response.body().toString()
+                )
+
+                if (response.code() == RESPONSE_CODE_OK) {
+                    isServerAvailable.postValue(true)
+                    response.body()?.toList()
+                } else  null
+            } else null
+
+        }
+
+        isServerAvailable.postValue(false)
+        return null
+
+
+
+
+    }
+
+
+   suspend fun searchVehiclesPaginatedWithFilter(page:Int=1, vehicleFilterOptions: VehicleFilterOptions?) : VehiculosPaginados?  {
 
         handleRequest {
             retroServiceInterface.searchVehiclesPaginatedWithFilter(
@@ -49,7 +116,6 @@ class VehicleRepository @Inject constructor(private val retroServiceInterface: R
 
         return null
     }
-
 
 
     suspend fun addVehicle(vehiculo: Vehiculo) : Boolean?  {
@@ -109,39 +175,6 @@ class VehicleRepository @Inject constructor(private val retroServiceInterface: R
     }
 
 
-    suspend fun getAvailableVehicles() :List<VehiculoResponse>?   {
-
-        handleRequest {
-            retroServiceInterface.getAvailableVehicles()
-        }?.let { response ->
-
-            return if (response.isSuccessful) {
-
-                logResponse(
-                    className = className,
-                    metodo = object {}.javaClass.enclosingMethod!!,
-                    responseCode = response.code(),
-                    responseHeaders = response.headers().toString(),
-                    responseBody = response.body().toString()
-                )
-
-                if (response.code() == RESPONSE_CODE_OK) {
-                    isServerAvailable.postValue(true)
-                    response.body()?.toList()
-                } else  null
-            } else null
-
-        }
-
-        isServerAvailable.postValue(false)
-        return null
-
-
-
-
-    }
-
-
     suspend fun updateVehicle(vehiculo: Vehiculo) :Boolean?  {
 
         handleRequest {
@@ -192,6 +225,7 @@ class VehicleRepository @Inject constructor(private val retroServiceInterface: R
 
         return null
     }
+
 
     suspend fun getAllVehiclesFromUserId(userId: String):List<VehiculoResponse>?  {
 

@@ -13,11 +13,10 @@ import com.cybergod.oyeetaxi.maps.Utils.getCircle
 import com.cybergod.oyeetaxi.maps.Utils.getIcoFromResource
 import com.cybergod.oyeetaxi.maps.Utils.toLatLng
 import com.cybergod.oyeetaxi.utils.Constants
-import com.cybergod.oyeetaxi.utils.Constants.DELAY_VEHICLES_UPDATE
 import com.cybergod.oyeetaxi.utils.Constants.LOCATION_UPDATE_INTERFAL_FASTEST
-import com.cybergod.oyeetaxi.utils.Constants.LOCATION_UPDATE_INTERVAL
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentVehicleActive
+import com.cybergod.oyeetaxi.utils.GlobalVariables.getAvailableVehicleInterval
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkers
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkersChangingPosition
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkersObservable
@@ -230,7 +229,8 @@ class MarkerControl {
         val handler = Handler()
         val start: Long = SystemClock.uptimeMillis()
         val interpolator: Interpolator = AccelerateDecelerateInterpolator()
-        val durationInMs = passed_durationInMs ?: (DELAY_VEHICLES_UPDATE.toFloat() - 500)
+        val durationInMs = passed_durationInMs ?: ((getAvailableVehicleInterval * 1000).toFloat() - 500)
+//        val durationInMs = passed_durationInMs ?: (DELAY_VEHICLES_UPDATE.toFloat() - 500)
         val hideMarker = false
 
         handler.post(object : Runnable {

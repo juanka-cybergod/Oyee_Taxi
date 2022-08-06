@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.cybergod.oyeetaxi.api.futures.user.model.Usuario
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculoResponse
 import com.cybergod.oyeetaxi.maps.TypeAndStyle
+import com.cybergod.oyeetaxi.utils.Constants.DEFAULT_GetAvailableVehicleInterval
+import com.cybergod.oyeetaxi.utils.Constants.DEFAULT_SetDriversLocationInterval
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.Marker
@@ -31,5 +33,10 @@ object GlobalVariables {
     var currentMapStyle: TypeAndStyle.MapStyle = TypeAndStyle.MapStyle.SILVER
 
     var hashMapMarkersChangingPosition: HashMap<Any?, Boolean> = HashMap()
+
+
+    var getAvailableVehicleInterval: Long = DEFAULT_GetAvailableVehicleInterval
+    var setDriversLocationInterval: Long = DEFAULT_SetDriversLocationInterval
+
 
 }

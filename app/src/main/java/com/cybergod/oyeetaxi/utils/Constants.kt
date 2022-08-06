@@ -62,12 +62,16 @@ object Constants {
     const val PERMISSION_BACKGROUND_LOCATION_REQUEST_CODE = 3
     const val PERMISSION_CALL_PHONE_REQUEST_CODE = 4
     const val PERMISSION_SEND_SMS_REQUEST_CODE = 5
-
     const val PERMISSION_WRITE_EXTERNAL_STORAGE = 6
 
 
+    //IntervalTimerConfiguracion
+//    const val DELAY_VEHICLES_UPDATE = 10000L
+    const val DEFAULT_GetAvailableVehicleInterval = 10L
+    const val DEFAULT_SetDriversLocationInterval = 5L
+
+
     //General
-    const val DELAY_VEHICLES_UPDATE = 10000L
     const val KEY_VEHICLE_ID = "KEY_VEHICLE_ID"
     const val KEY_VEHICLE_RESPONSE_PARCELABLE = "KEY_VEHICLE_RESPONSE_PARCELABLE"
     const val KEY_VEHICLE_PARCELABLE = "KEY_VEHICLE_PARCELABLE"

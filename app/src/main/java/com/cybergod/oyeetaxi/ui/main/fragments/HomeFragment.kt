@@ -27,7 +27,6 @@ import com.cybergod.oyeetaxi.ui.controlPanel.activity.UserControlPanelActivity
 import com.cybergod.oyeetaxi.ui.main.viewmodel.HomeViewModel
 import com.cybergod.oyeetaxi.ui.preferences.activity.PreferencesActivity
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.hideKeyboard
-import com.cybergod.oyeetaxi.utils.Constants.DELAY_VEHICLES_UPDATE
 import com.cybergod.oyeetaxi.utils.Constants.KEY_VEHICLE_ID
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentUserActive
 import com.cybergod.oyeetaxi.utils.GlobalVariables.hashMapMarkers
@@ -35,6 +34,8 @@ import com.cybergod.oyeetaxi.utils.GlobalVariables.map
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationMarker
 import com.cybergod.oyeetaxi.ui.utils.UtilsUI.loadImagePerfilFromURL
 import com.cybergod.oyeetaxi.utils.GlobalVariables.currentMapStyle
+import com.cybergod.oyeetaxi.utils.GlobalVariables.getAvailableVehicleInterval
+import com.cybergod.oyeetaxi.utils.GlobalVariables.setDriversLocationInterval
 import com.cybergod.oyeetaxi.utils.GlobalVariables.userLocationCircle
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.Marker
@@ -305,6 +306,14 @@ class HomeFragment : BaseFragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClic
                 homeViewModel.isVehiclesAviables.postValue(true)
 
             }
+
+        })
+
+        homeViewModel.intervalTimerConfiguracion.observe(viewLifecycleOwner, Observer { intervalTimerConfiguration ->
+
+            intervalTimerConfiguration?.getAvailableVehicleInterval?.let { getAvailableVehicleInterval = it }
+            intervalTimerConfiguration?.setDriversLocationInterval?.let { setDriversLocationInterval = it }
+
 
         })
 

@@ -28,6 +28,7 @@ import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_VIAJES
 import com.cybergod.oyeetaxi.api.futures.configuration.model.configuration.SmsProvider
 import com.cybergod.oyeetaxi.api.futures.share.model.Ubicacion
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.requestFilter.VehicleFilterOptions
+import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.DataResponse
 import com.cybergod.oyeetaxi.api.futures.vehicle.model.response.VehiculosPaginados
 import com.cybergod.oyeetaxi.utils.Constants.QUERRY_PAGE_SIZE
 import com.cybergod.oyeetaxi.utils.Constants.URL_BASE_ACTUALIZACION
@@ -98,6 +99,9 @@ interface RetroServiceInterface {
 
     @GET(URL_BASE_VEHICULOS + "getAvailableVehicles")
     suspend fun getAvailableVehicles(): Response<ArrayList<VehiculoResponse>>
+
+    @GET(URL_BASE_VEHICULOS + "getData")
+    suspend fun getData(): Response<DataResponse>
 
     @GET(URL_BASE_VEHICULOS + "getActiveVehicleByUserId={id}")
     suspend fun getActiveVehicleByUserId( @Path("id") id : String ): Response<VehiculoResponse>
